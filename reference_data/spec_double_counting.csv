@@ -1,0 +1,22 @@
+item_no,description,check_type,products_a,products_b,comparison
+1,Third-party exposures at subsidiaries that are reporting entities are reported for the consolidated entity and the subsidiary reporting entity,ENTITY,,,
+2,Collateral swaps are reported in both Inflows-Secured and Outflows-Secured,LINKED,I.S.4,O.S.4,ALL
+3,Collateral received via secured lending and pre-positioned at a central bank or GSE appears in I.S (Unencumbered = false) and I.A.2 Capacity,LINKED,"I.S.1,I.S.2,I.S.3,I.S.5,I.S.6,I.S.7,I.S.8",I.A.2,TAGGED
+4,Loans and leases are reported in I.U / I.S by counterparty and in the I.A table at market value,LINKED,"I.U.5,I.U.6,I.S.5,I.S.6,I.S.7,I.S.8","I.A.1,I.A.2,I.A.7",ALL
+5,"Encumbered assets are reported under I.A.7 and under the product they are encumbered to in O.W, O.S or S.DC (Collateral Value / Market Value)",LINKED,I.A.7,"O.W.1,O.W.2,O.W.3,O.W.4,O.W.5,O.W.6,O.W.7,O.S.1,O.S.2,O.S.3,O.S.4,O.S.5,O.S.6,O.S.11,S.DC.5,S.DC.8,S.DC.11,S.DC.12",ALL
+6,Unsecured derivative cash flows over the next 30 days are in I.O.1 / O.O.1 and in the I.O.7 / O.O.20 net,NET30,I.O.1,O.O.1,
+7,Derivative collateral flows over the next 30 days are in I.O.2 / O.O.2 and in the I.O.7 / O.O.20 net,NET30,I.O.2,O.O.2,
+8,FX transactions maturing over the next 30 days are in S.FX.1-3 and in the I.O.7 / O.O.20 net,NET30,"S.FX.1,S.FX.2,S.FX.3","S.FX.1,S.FX.2,S.FX.3",
+9,Forward purchases (I.A.6) and sales (O.S.8 Unsettled - Forward) over the next 30 days are in the I.O.7 / O.O.20 net,NET30,O.S.8,I.A.6,
+10,Debt maturing beyond 30 days where the firm is primary market maker is in O.W and in S.L.4 / S.L.5,LINKED,"S.L.4,S.L.5","O.W.11,O.W.12,O.W.14,O.W.15",ALL
+11,O.O.13-O.O.16 Total Collateral Required are cumulative: 1 notch <= 2 notch <= 3 notch <= change in financial condition,MONOTONIC,"O.O.13,O.O.14,O.O.15,O.O.16",,
+12,O.O.9-O.O.12 Loss of Rehypothecation Rights are cumulative: 1 notch <= 2 notch <= 3 notch <= change in financial condition,MONOTONIC,"O.O.9,O.O.10,O.O.11,O.O.12",,
+13,I.O.2 Collateral Called for Receipt with Maturity Bucket Open is also in the stock of S.DC.7 / S.DC.10,LINKED,I.O.2,"S.DC.7,S.DC.10",OPEN
+14,O.O.2 Collateral Called for Delivery with Maturity Bucket Open is also in the stock of S.DC.5 / S.DC.6 / S.DC.8 / S.DC.9,LINKED,O.O.2,"S.DC.5,S.DC.6,S.DC.8,S.DC.9",OPEN
+15,S.DC.14 Collateral Disputes Receivables is also reflected in I.O.2,LINKED,S.DC.14,I.O.2,ALL
+16,S.DC.13 Collateral Disputes Deliverables is also reflected in O.O.2,LINKED,S.DC.13,O.O.2,ALL
+17,S.DC.17 Sleeper Collateral Receivables is included in S.DC.5 / S.DC.6 / S.DC.8 / S.DC.9,SUBSET,S.DC.17,"S.DC.5,S.DC.6,S.DC.8,S.DC.9",
+18,S.DC.15 Sleeper Collateral Deliverables is included in S.DC.7 / S.DC.10,SUBSET,S.DC.15,"S.DC.7,S.DC.10",
+19,"S.L.1, S.L.2, S.L.7, S.L.8 and S.I.6 correspond to amounts reported elsewhere in the submission",LINKED,"S.L.1,S.L.2,S.L.7,S.L.8,S.I.6","I.A.1,I.A.2,I.A.3,O.D.1,O.D.2,O.D.3,O.D.4,O.D.5,O.D.6,O.W.9,O.W.11",ALL
+20,O.D.12 Other Product Sweep Accounts are also reported in the product the funds are swept into,LINKED,O.D.12,"O.D.1,O.D.2,O.D.3,O.D.4,O.D.5,O.D.6,O.D.9,O.D.10,O.D.11,O.W.8,O.W.16,O.W.19",ALL
+21,I.O.8 Principal Payments on Unencumbered Investment Securities: the securities are also in I.A.1 / I.A.2,LINKED,I.O.8,"I.A.1,I.A.2",ALL

@@ -1,0 +1,1807 @@
+{
+  "datasets": [
+    {
+      "name": "v_dates",
+      "displayName": "As-of dates",
+      "queryLines": [
+        "SELECT DISTINCT CAST(as_of_date AS STRING) AS as_of FROM reg_2052a.submission_files ORDER BY 1 DESC\n"
+      ]
+    },
+    {
+      "name": "v_lcr_entities",
+      "displayName": "LCR reporting entities",
+      "queryLines": [
+        "SELECT DISTINCT entity_id AS entity FROM reg_lcr.calculation_results ORDER BY 1\n"
+      ]
+    },
+    {
+      "name": "m_kpi",
+      "displayName": "LCR - the day",
+      "queryLines": [
+        "SELECT lcr_ratio, total_hqla * 1e6 AS hqla, total_outflows * 1e6 AS outflows, capped_inflows * 1e6 AS inflows, total_net_cash_outflows * 1e6 AS nco\n",
+        "FROM reg_lcr.calculation_results WHERE as_of_date = CAST(:as_of AS DATE) AND entity_id = :entity\n"
+      ],
+      "parameters": [
+        {
+          "displayName": "as_of",
+          "keyword": "as_of",
+          "dataType": "STRING",
+          "defaultSelection": {
+            "values": {
+              "dataType": "STRING",
+              "values": [
+                {
+                  "value": "2026-02-27"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "displayName": "entity",
+          "keyword": "entity",
+          "dataType": "STRING",
+          "defaultSelection": {
+            "values": {
+              "dataType": "STRING",
+              "values": [
+                {
+                  "value": "ENT001"
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "m_lcr_trend",
+      "displayName": "LCR - by day against the 100% minimum",
+      "queryLines": [
+        "SELECT as_of_date, 'LCR' AS series, lcr_ratio * 100 AS lcr_pct FROM reg_lcr.calculation_results WHERE entity_id = :entity\n",
+        "UNION ALL SELECT DISTINCT as_of_date, 'Regulatory minimum (100%)', 100.0 FROM reg_lcr.calculation_results ORDER BY 1\n"
+      ],
+      "parameters": [
+        {
+          "displayName": "entity",
+          "keyword": "entity",
+          "dataType": "STRING",
+          "defaultSelection": {
+            "values": {
+              "dataType": "STRING",
+              "values": [
+                {
+                  "value": "ENT001"
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "m_hqla_nco",
+      "displayName": "LCR - HQLA and total net cash outflows by day",
+      "queryLines": [
+        "SELECT as_of_date, measure, usd_bn FROM reg_lcr.calculation_results\n",
+        "LATERAL VIEW STACK(2, 'HQLA', CAST(total_hqla / 1000 AS DOUBLE), 'Net cash outflows (30 days)', CAST(total_net_cash_outflows / 1000 AS DOUBLE)) s AS measure, usd_bn\n",
+        "WHERE entity_id = :entity ORDER BY 1\n"
+      ],
+      "parameters": [
+        {
+          "displayName": "entity",
+          "keyword": "entity",
+          "dataType": "STRING",
+          "defaultSelection": {
+            "values": {
+              "dataType": "STRING",
+              "values": [
+                {
+                  "value": "ENT001"
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "m_hqla_days",
+      "displayName": "LCR - HQLA by level and day",
+      "queryLines": [
+        "SELECT as_of_date, component, usd_bn FROM reg_lcr.calculation_results\n",
+        "LATERAL VIEW STACK(3, 'Level 1', CAST(level1_hqla / 1000 AS DOUBLE), 'Level 2A (after 15% haircut)', CAST(level2a_hqla_adjusted / 1000 AS DOUBLE),\n",
+        "  'Level 2B (after 50% haircut)', CAST(level2b_hqla_adjusted / 1000 AS DOUBLE)) s AS component, usd_bn\n",
+        "WHERE entity_id = :entity ORDER BY 1\n"
+      ],
+      "parameters": [
+        {
+          "displayName": "entity",
+          "keyword": "entity",
+          "dataType": "STRING",
+          "defaultSelection": {
+            "values": {
+              "dataType": "STRING",
+              "values": [
+                {
+                  "value": "ENT001"
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "m_nco_days",
+      "displayName": "LCR - net cash outflows: cash outflows and cash inflows by day",
+      "queryLines": [
+        "SELECT as_of_date, measure, usd_bn FROM reg_lcr.calculation_results\n",
+        "LATERAL VIEW STACK(3, 'Cash outflows', CAST(total_outflows / 1000 AS DOUBLE), 'Less cash inflows counted', CAST(capped_inflows / 1000 AS DOUBLE),\n",
+        "  'Net cash outflows (30 days)', CAST(total_net_cash_outflows / 1000 AS DOUBLE)) s AS measure, usd_bn\n",
+        "WHERE entity_id = :entity ORDER BY 1\n"
+      ],
+      "parameters": [
+        {
+          "displayName": "entity",
+          "keyword": "entity",
+          "dataType": "STRING",
+          "defaultSelection": {
+            "values": {
+              "dataType": "STRING",
+              "values": [
+                {
+                  "value": "ENT001"
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "m_out_days",
+      "displayName": "LCR - cash outflows by category and day",
+      "queryLines": [
+        "SELECT as_of_date, component, usd_bn FROM reg_lcr.calculation_results\n",
+        "LATERAL VIEW STACK(6, 'Outflows - retail deposits', CAST(retail_deposit_outflows / 1000 AS DOUBLE), 'Outflows - unsecured wholesale', CAST(wholesale_unsecured_outflows / 1000 AS DOUBLE),\n",
+        "  'Outflows - secured funding', CAST(secured_funding_outflows / 1000 AS DOUBLE), 'Outflows - derivatives and collateral', CAST(derivative_outflows / 1000 AS DOUBLE),\n",
+        "  'Outflows - credit and liquidity facilities', CAST(commitment_outflows / 1000 AS DOUBLE), 'Outflows - other', CAST(other_outflows / 1000 AS DOUBLE)) s AS component, usd_bn\n",
+        "WHERE entity_id = :entity ORDER BY 1\n"
+      ],
+      "parameters": [
+        {
+          "displayName": "entity",
+          "keyword": "entity",
+          "dataType": "STRING",
+          "defaultSelection": {
+            "values": {
+              "dataType": "STRING",
+              "values": [
+                {
+                  "value": "ENT001"
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "m_in_days",
+      "displayName": "LCR - cash inflows by category and day",
+      "queryLines": [
+        "SELECT as_of_date, CASE WHEN rule_id IN ('LCR-I10','LCR-I11','LCR-I12','LCR-I13','LCR-I14','LCR-I15','LCR-I16') THEN 'Inflows - secured lending'\n",
+        "            WHEN rule_id = 'LCR-I02' THEN 'Inflows - retail' WHEN rule_id IN ('LCR-I01','LCR-I03','LCR-I04','LCR-I05','LCR-I06') THEN 'Inflows - unsecured wholesale'\n",
+        "            ELSE 'Inflows - other (derivatives, securities, other)' END AS component, CAST(SUM(weighted_amount_usd) / 1000 AS DOUBLE) AS usd_bn FROM reg_lcr.calculation_detail\n",
+        "WHERE entity_id = :entity AND flow_direction = 'INFLOW' GROUP BY 1, 2 ORDER BY 1\n"
+      ],
+      "parameters": [
+        {
+          "displayName": "entity",
+          "keyword": "entity",
+          "dataType": "STRING",
+          "defaultSelection": {
+            "values": {
+              "dataType": "STRING",
+              "values": [
+                {
+                  "value": "ENT001"
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "m_inputs",
+      "displayName": "LCR - the input data of the day",
+      "queryLines": [
+        "WITH d AS (SELECT d.*, CASE\n",
+        "             WHEN d.flow_direction = 'HQLA' THEN CONCAT('HQLA - ', d.hqla_level)\n",
+        "             WHEN d.flow_direction = 'HQLA_EXCLUDED' THEN 'HQLA - less: not transferable from subsidiaries'\n",
+        "             WHEN d.flow_direction = 'OUTFLOW' THEN CASE WHEN d.product_id LIKE 'O.D.%' AND f.counterparty_category = 'Retail' THEN 'Outflows - retail deposits'\n",
+        "                 WHEN d.product_id LIKE 'O.W.%' OR d.product_id LIKE 'O.D.%' THEN 'Outflows - unsecured wholesale'\n",
+        "                 WHEN d.product_id LIKE 'O.S.%' THEN 'Outflows - secured funding'\n",
+        "                 WHEN d.product_id IN ('O.O.1', 'O.O.2', 'O.O.8', 'O.O.20') THEN 'Outflows - derivatives and collateral'\n",
+        "                 WHEN d.product_id IN ('O.O.4', 'O.O.5', 'O.O.6') THEN 'Outflows - credit and liquidity facilities' ELSE 'Outflows - other' END\n",
+        "             ELSE CASE WHEN d.rule_id IN ('LCR-I10','LCR-I11','LCR-I12','LCR-I13','LCR-I14','LCR-I15','LCR-I16') THEN 'Inflows - secured lending'\n",
+        "            WHEN d.rule_id = 'LCR-I02' THEN 'Inflows - retail' WHEN d.rule_id IN ('LCR-I01','LCR-I03','LCR-I04','LCR-I05','LCR-I06') THEN 'Inflows - unsecured wholesale'\n",
+        "            ELSE 'Inflows - other (derivatives, securities, other)' END END AS component\n",
+        "           FROM reg_lcr.calculation_detail d\n",
+        "           LEFT JOIN conformed.fact_liquidity_position f ON f.as_of_date = d.as_of_date AND f.position_id = d.record_id\n",
+        "           WHERE d.as_of_date = CAST(:as_of AS DATE) AND d.entity_id = :entity),\n",
+        "g AS (SELECT component, COUNT(*) AS positions, SUM(amount_usd) AS balance, SUM(weighted_amount_usd) AS weighted FROM d GROUP BY 1),\n",
+        "r AS (SELECT * FROM reg_lcr.calculation_results WHERE as_of_date = CAST(:as_of AS DATE) AND entity_id = :entity),\n",
+        "t AS (SELECT CASE WHEN component LIKE 'HQLA%' THEN 'HQLA' WHEN component LIKE 'Outflows%' THEN 'OUT' ELSE 'IN' END AS grp,\n",
+        "             SUM(positions) AS positions, SUM(balance) AS balance FROM g\n",
+        "      WHERE component NOT LIKE '%not transferable%' GROUP BY 1),   -- HQLA balance: the eligible assets of the three levels\n",
+        "lines AS (\n",
+        "  SELECT CASE component WHEN 'HQLA - Level 1' THEN 2 WHEN 'HQLA - Level 2A' THEN 3 WHEN 'HQLA - Level 2B' THEN 4 ELSE 5 END AS seq, CONCAT('   ', component) AS component,\n",
+        "         positions, balance AS balance_usd_mm,\n",
+        "         CASE WHEN component = 'HQLA - Level 2A' THEN 0.85 WHEN component = 'HQLA - Level 2B' THEN 0.50 ELSE 1.0 END AS rate,\n",
+        "         CASE WHEN component = 'HQLA - Level 2A' THEN balance * 0.85 WHEN component = 'HQLA - Level 2B' THEN balance * 0.5\n",
+        "              WHEN component LIKE '%not transferable%' THEN -balance ELSE balance END AS weighted_usd_mm\n",
+        "  FROM g WHERE component LIKE 'HQLA%'\n",
+        "  UNION ALL SELECT 1, 'HQLA (after haircuts and caps)', t.positions, t.balance, r.total_hqla / t.balance, r.total_hqla FROM t, r WHERE t.grp = 'HQLA'\n",
+        "  UNION ALL SELECT 10, 'Cash outflows (30 days)', t.positions, t.balance, r.total_outflows / t.balance, r.total_outflows FROM t, r WHERE t.grp = 'OUT'\n",
+        "  UNION ALL SELECT 10 + ROW_NUMBER() OVER (ORDER BY weighted DESC), CONCAT('   ', component), positions, balance, weighted / NULLIF(balance, 0), weighted\n",
+        "            FROM g WHERE component LIKE 'Outflows%'\n",
+        "  UNION ALL SELECT 20, 'Cash inflows (30 days)', t.positions, t.balance, r.total_inflows / t.balance, r.total_inflows FROM t, r WHERE t.grp = 'IN'\n",
+        "  UNION ALL SELECT 20 + ROW_NUMBER() OVER (ORDER BY weighted DESC), CONCAT('   ', component), positions, balance, weighted / NULLIF(balance, 0), weighted\n",
+        "            FROM g WHERE component LIKE 'Inflows%'\n",
+        "  UNION ALL SELECT 30, 'Cash inflows counted (cap 75% of outflows)', NULL, NULL, NULL, r.capped_inflows FROM r\n",
+        "  UNION ALL SELECT 31, 'Maturity mismatch add-on', NULL, NULL, NULL, r.maturity_mismatch_add_on FROM r\n",
+        "  UNION ALL SELECT 32, 'Net cash outflows (30 days)', NULL, NULL, NULL, r.total_net_cash_outflows FROM r)\n",
+        "SELECT seq, component, COALESCE(FORMAT_NUMBER(positions, 0), '') AS positions, COALESCE(FORMAT_NUMBER(balance_usd_mm, 1), '') AS balance_usd_mm,\n",
+        "       COALESCE(CONCAT(FORMAT_NUMBER(rate * 100, 1), '%'), '') AS rate, COALESCE(FORMAT_NUMBER(weighted_usd_mm, 1), '') AS weighted_usd_mm\n",
+        "FROM lines ORDER BY seq\n"
+      ],
+      "parameters": [
+        {
+          "displayName": "as_of",
+          "keyword": "as_of",
+          "dataType": "STRING",
+          "defaultSelection": {
+            "values": {
+              "dataType": "STRING",
+              "values": [
+                {
+                  "value": "2026-02-27"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "displayName": "entity",
+          "keyword": "entity",
+          "dataType": "STRING",
+          "defaultSelection": {
+            "values": {
+              "dataType": "STRING",
+              "values": [
+                {
+                  "value": "ENT001"
+                }
+              ]
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "pages": [
+    {
+      "name": "lcr",
+      "displayName": "LCR",
+      "layout": [
+        {
+          "widget": {
+            "name": "lcr_title",
+            "multilineTextboxSpec": {
+              "lines": [
+                "## LCR\n",
+                "\n",
+                "The Liquidity Coverage Ratio (12 CFR 249) = HQLA / total net cash outflows over the next 30 days (cash outflows less cash inflows counted, capped at 75% of outflows, plus the maturity mismatch add-on). USD bn.\n"
+              ]
+            }
+          },
+          "position": {
+            "x": 0,
+            "y": 0,
+            "width": 6,
+            "height": 2
+          }
+        },
+        {
+          "widget": {
+            "name": "lcr_f_date",
+            "queries": [
+              {
+                "name": "lcr_f_date_values",
+                "query": {
+                  "datasetName": "v_dates",
+                  "fields": [
+                    {
+                      "name": "as_of",
+                      "expression": "`as_of`"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              },
+              {
+                "name": "lcr_f_date_m_kpi",
+                "query": {
+                  "datasetName": "m_kpi",
+                  "parameters": [
+                    {
+                      "name": "as_of",
+                      "keyword": "as_of"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              },
+              {
+                "name": "lcr_f_date_m_inputs",
+                "query": {
+                  "datasetName": "m_inputs",
+                  "parameters": [
+                    {
+                      "name": "as_of",
+                      "keyword": "as_of"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "version": 2,
+              "widgetType": "filter-single-select",
+              "encodings": {
+                "fields": [
+                  {
+                    "fieldName": "as_of",
+                    "displayName": "As-of date",
+                    "queryName": "lcr_f_date_values"
+                  },
+                  {
+                    "parameterName": "as_of",
+                    "queryName": "lcr_f_date_m_kpi"
+                  },
+                  {
+                    "parameterName": "as_of",
+                    "queryName": "lcr_f_date_m_inputs"
+                  }
+                ]
+              },
+              "frame": {
+                "showTitle": true,
+                "title": "As-of date"
+              }
+            }
+          },
+          "position": {
+            "x": 6,
+            "y": 0,
+            "width": 3,
+            "height": 2
+          }
+        },
+        {
+          "widget": {
+            "name": "lcr_f_entity",
+            "queries": [
+              {
+                "name": "lcr_f_entity_values",
+                "query": {
+                  "datasetName": "v_lcr_entities",
+                  "fields": [
+                    {
+                      "name": "entity",
+                      "expression": "`entity`"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              },
+              {
+                "name": "lcr_f_entity_m_kpi",
+                "query": {
+                  "datasetName": "m_kpi",
+                  "parameters": [
+                    {
+                      "name": "entity",
+                      "keyword": "entity"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              },
+              {
+                "name": "lcr_f_entity_m_lcr_trend",
+                "query": {
+                  "datasetName": "m_lcr_trend",
+                  "parameters": [
+                    {
+                      "name": "entity",
+                      "keyword": "entity"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              },
+              {
+                "name": "lcr_f_entity_m_hqla_nco",
+                "query": {
+                  "datasetName": "m_hqla_nco",
+                  "parameters": [
+                    {
+                      "name": "entity",
+                      "keyword": "entity"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              },
+              {
+                "name": "lcr_f_entity_m_hqla_days",
+                "query": {
+                  "datasetName": "m_hqla_days",
+                  "parameters": [
+                    {
+                      "name": "entity",
+                      "keyword": "entity"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              },
+              {
+                "name": "lcr_f_entity_m_nco_days",
+                "query": {
+                  "datasetName": "m_nco_days",
+                  "parameters": [
+                    {
+                      "name": "entity",
+                      "keyword": "entity"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              },
+              {
+                "name": "lcr_f_entity_m_out_days",
+                "query": {
+                  "datasetName": "m_out_days",
+                  "parameters": [
+                    {
+                      "name": "entity",
+                      "keyword": "entity"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              },
+              {
+                "name": "lcr_f_entity_m_in_days",
+                "query": {
+                  "datasetName": "m_in_days",
+                  "parameters": [
+                    {
+                      "name": "entity",
+                      "keyword": "entity"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              },
+              {
+                "name": "lcr_f_entity_m_inputs",
+                "query": {
+                  "datasetName": "m_inputs",
+                  "parameters": [
+                    {
+                      "name": "entity",
+                      "keyword": "entity"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "version": 2,
+              "widgetType": "filter-single-select",
+              "encodings": {
+                "fields": [
+                  {
+                    "fieldName": "entity",
+                    "displayName": "Reporting entity",
+                    "queryName": "lcr_f_entity_values"
+                  },
+                  {
+                    "parameterName": "entity",
+                    "queryName": "lcr_f_entity_m_kpi"
+                  },
+                  {
+                    "parameterName": "entity",
+                    "queryName": "lcr_f_entity_m_lcr_trend"
+                  },
+                  {
+                    "parameterName": "entity",
+                    "queryName": "lcr_f_entity_m_hqla_nco"
+                  },
+                  {
+                    "parameterName": "entity",
+                    "queryName": "lcr_f_entity_m_hqla_days"
+                  },
+                  {
+                    "parameterName": "entity",
+                    "queryName": "lcr_f_entity_m_nco_days"
+                  },
+                  {
+                    "parameterName": "entity",
+                    "queryName": "lcr_f_entity_m_out_days"
+                  },
+                  {
+                    "parameterName": "entity",
+                    "queryName": "lcr_f_entity_m_in_days"
+                  },
+                  {
+                    "parameterName": "entity",
+                    "queryName": "lcr_f_entity_m_inputs"
+                  }
+                ]
+              },
+              "frame": {
+                "showTitle": true,
+                "title": "Reporting entity"
+              }
+            }
+          },
+          "position": {
+            "x": 9,
+            "y": 0,
+            "width": 3,
+            "height": 2
+          }
+        },
+        {
+          "widget": {
+            "name": "m_c1",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "m_kpi",
+                  "fields": [
+                    {
+                      "name": "lcr_ratio",
+                      "expression": "`lcr_ratio`"
+                    }
+                  ],
+                  "disaggregated": true
+                }
+              }
+            ],
+            "spec": {
+              "version": 2,
+              "widgetType": "counter",
+              "encodings": {
+                "value": {
+                  "fieldName": "lcr_ratio",
+                  "displayName": "LCR (minimum 100%)",
+                  "format": {
+                    "type": "number-percent",
+                    "decimalPlaces": {
+                      "type": "exact",
+                      "places": 1
+                    }
+                  }
+                }
+              },
+              "frame": {
+                "showTitle": true,
+                "title": "LCR (minimum 100%)"
+              }
+            }
+          },
+          "position": {
+            "x": 0,
+            "y": 2,
+            "width": 4,
+            "height": 4
+          }
+        },
+        {
+          "widget": {
+            "name": "m_c2",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "m_kpi",
+                  "fields": [
+                    {
+                      "name": "hqla",
+                      "expression": "`hqla`"
+                    }
+                  ],
+                  "disaggregated": true
+                }
+              }
+            ],
+            "spec": {
+              "version": 2,
+              "widgetType": "counter",
+              "encodings": {
+                "value": {
+                  "fieldName": "hqla",
+                  "displayName": "HQLA",
+                  "format": {
+                    "type": "number-currency",
+                    "currencyCode": "USD",
+                    "abbreviation": "compact",
+                    "decimalPlaces": {
+                      "type": "exact",
+                      "places": 1
+                    }
+                  }
+                }
+              },
+              "frame": {
+                "showTitle": true,
+                "title": "HQLA"
+              }
+            }
+          },
+          "position": {
+            "x": 4,
+            "y": 2,
+            "width": 2,
+            "height": 4
+          }
+        },
+        {
+          "widget": {
+            "name": "m_c3",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "m_kpi",
+                  "fields": [
+                    {
+                      "name": "outflows",
+                      "expression": "`outflows`"
+                    }
+                  ],
+                  "disaggregated": true
+                }
+              }
+            ],
+            "spec": {
+              "version": 2,
+              "widgetType": "counter",
+              "encodings": {
+                "value": {
+                  "fieldName": "outflows",
+                  "displayName": "Cash outflows (30 days)",
+                  "format": {
+                    "type": "number-currency",
+                    "currencyCode": "USD",
+                    "abbreviation": "compact",
+                    "decimalPlaces": {
+                      "type": "exact",
+                      "places": 1
+                    }
+                  }
+                }
+              },
+              "frame": {
+                "showTitle": true,
+                "title": "Cash outflows (30 days)"
+              }
+            }
+          },
+          "position": {
+            "x": 6,
+            "y": 2,
+            "width": 2,
+            "height": 4
+          }
+        },
+        {
+          "widget": {
+            "name": "m_c4",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "m_kpi",
+                  "fields": [
+                    {
+                      "name": "inflows",
+                      "expression": "`inflows`"
+                    }
+                  ],
+                  "disaggregated": true
+                }
+              }
+            ],
+            "spec": {
+              "version": 2,
+              "widgetType": "counter",
+              "encodings": {
+                "value": {
+                  "fieldName": "inflows",
+                  "displayName": "Cash inflows counted (30 days)",
+                  "format": {
+                    "type": "number-currency",
+                    "currencyCode": "USD",
+                    "abbreviation": "compact",
+                    "decimalPlaces": {
+                      "type": "exact",
+                      "places": 1
+                    }
+                  }
+                }
+              },
+              "frame": {
+                "showTitle": true,
+                "title": "Cash inflows counted (30 days)"
+              }
+            }
+          },
+          "position": {
+            "x": 8,
+            "y": 2,
+            "width": 2,
+            "height": 4
+          }
+        },
+        {
+          "widget": {
+            "name": "m_c5",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "m_kpi",
+                  "fields": [
+                    {
+                      "name": "nco",
+                      "expression": "`nco`"
+                    }
+                  ],
+                  "disaggregated": true
+                }
+              }
+            ],
+            "spec": {
+              "version": 2,
+              "widgetType": "counter",
+              "encodings": {
+                "value": {
+                  "fieldName": "nco",
+                  "displayName": "Net cash outflows (30 days)",
+                  "format": {
+                    "type": "number-currency",
+                    "currencyCode": "USD",
+                    "abbreviation": "compact",
+                    "decimalPlaces": {
+                      "type": "exact",
+                      "places": 1
+                    }
+                  }
+                }
+              },
+              "frame": {
+                "showTitle": true,
+                "title": "Net cash outflows (30 days)"
+              }
+            }
+          },
+          "position": {
+            "x": 10,
+            "y": 2,
+            "width": 2,
+            "height": 4
+          }
+        },
+        {
+          "widget": {
+            "name": "m_lcr_chart",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "m_lcr_trend",
+                  "fields": [
+                    {
+                      "name": "as_of_date",
+                      "expression": "`as_of_date`"
+                    },
+                    {
+                      "name": "avg(lcr_pct)",
+                      "expression": "AVG(`lcr_pct`)"
+                    },
+                    {
+                      "name": "series",
+                      "expression": "`series`"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "version": 3,
+              "widgetType": "line",
+              "encodings": {
+                "x": {
+                  "fieldName": "as_of_date",
+                  "scale": {
+                    "type": "temporal"
+                  },
+                  "displayName": "as of date"
+                },
+                "y": {
+                  "fieldName": "avg(lcr_pct)",
+                  "scale": {
+                    "type": "quantitative"
+                  },
+                  "displayName": "LCR %"
+                },
+                "color": {
+                  "fieldName": "series",
+                  "scale": {
+                    "type": "categorical",
+                    "mappings": [
+                      {
+                        "value": "Outflows - retail deposits",
+                        "color": "#7A1F2B"
+                      },
+                      {
+                        "value": "Outflows - unsecured wholesale",
+                        "color": "#D1495B"
+                      },
+                      {
+                        "value": "Outflows - secured funding",
+                        "color": "#F2A541"
+                      },
+                      {
+                        "value": "Outflows - derivatives and collateral",
+                        "color": "#8E6C8A"
+                      },
+                      {
+                        "value": "Outflows - credit and liquidity facilities",
+                        "color": "#C8B273"
+                      },
+                      {
+                        "value": "Outflows - other",
+                        "color": "#A3B4C4"
+                      },
+                      {
+                        "value": "Inflows - secured lending",
+                        "color": "#2E7D5B"
+                      },
+                      {
+                        "value": "Inflows - unsecured wholesale",
+                        "color": "#5BB5A2"
+                      },
+                      {
+                        "value": "Inflows - retail",
+                        "color": "#9ED9C5"
+                      },
+                      {
+                        "value": "Inflows - other (derivatives, securities, other)",
+                        "color": "#C8E6DA"
+                      },
+                      {
+                        "value": "LCR",
+                        "color": "#0B2545"
+                      },
+                      {
+                        "value": "Regulatory minimum (100%)",
+                        "color": "#D1495B"
+                      },
+                      {
+                        "value": "HQLA",
+                        "color": "#0B2545"
+                      },
+                      {
+                        "value": "Net cash outflows (30 days)",
+                        "color": "#D1495B"
+                      },
+                      {
+                        "value": "Level 1",
+                        "color": "#0B2545"
+                      },
+                      {
+                        "value": "Level 2A (after 15% haircut)",
+                        "color": "#2F7FB8"
+                      },
+                      {
+                        "value": "Level 2B (after 50% haircut)",
+                        "color": "#8ACAFF"
+                      },
+                      {
+                        "value": "Cash outflows",
+                        "color": "#F2A541"
+                      },
+                      {
+                        "value": "Less cash inflows counted",
+                        "color": "#5BB5A2"
+                      }
+                    ]
+                  },
+                  "displayName": "series"
+                }
+              },
+              "frame": {
+                "showTitle": true,
+                "title": "LCR trend (%)"
+              }
+            }
+          },
+          "position": {
+            "x": 0,
+            "y": 6,
+            "width": 6,
+            "height": 7
+          }
+        },
+        {
+          "widget": {
+            "name": "m_hn_chart",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "m_hqla_nco",
+                  "fields": [
+                    {
+                      "name": "as_of_date",
+                      "expression": "`as_of_date`"
+                    },
+                    {
+                      "name": "sum(usd_bn)",
+                      "expression": "SUM(`usd_bn`)"
+                    },
+                    {
+                      "name": "measure",
+                      "expression": "`measure`"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "version": 3,
+              "widgetType": "line",
+              "encodings": {
+                "x": {
+                  "fieldName": "as_of_date",
+                  "scale": {
+                    "type": "temporal"
+                  },
+                  "displayName": "as of date"
+                },
+                "y": {
+                  "fieldName": "sum(usd_bn)",
+                  "scale": {
+                    "type": "quantitative"
+                  },
+                  "displayName": "USD bn"
+                },
+                "color": {
+                  "fieldName": "measure",
+                  "scale": {
+                    "type": "categorical",
+                    "mappings": [
+                      {
+                        "value": "Outflows - retail deposits",
+                        "color": "#7A1F2B"
+                      },
+                      {
+                        "value": "Outflows - unsecured wholesale",
+                        "color": "#D1495B"
+                      },
+                      {
+                        "value": "Outflows - secured funding",
+                        "color": "#F2A541"
+                      },
+                      {
+                        "value": "Outflows - derivatives and collateral",
+                        "color": "#8E6C8A"
+                      },
+                      {
+                        "value": "Outflows - credit and liquidity facilities",
+                        "color": "#C8B273"
+                      },
+                      {
+                        "value": "Outflows - other",
+                        "color": "#A3B4C4"
+                      },
+                      {
+                        "value": "Inflows - secured lending",
+                        "color": "#2E7D5B"
+                      },
+                      {
+                        "value": "Inflows - unsecured wholesale",
+                        "color": "#5BB5A2"
+                      },
+                      {
+                        "value": "Inflows - retail",
+                        "color": "#9ED9C5"
+                      },
+                      {
+                        "value": "Inflows - other (derivatives, securities, other)",
+                        "color": "#C8E6DA"
+                      },
+                      {
+                        "value": "LCR",
+                        "color": "#0B2545"
+                      },
+                      {
+                        "value": "Regulatory minimum (100%)",
+                        "color": "#D1495B"
+                      },
+                      {
+                        "value": "HQLA",
+                        "color": "#0B2545"
+                      },
+                      {
+                        "value": "Net cash outflows (30 days)",
+                        "color": "#D1495B"
+                      },
+                      {
+                        "value": "Level 1",
+                        "color": "#0B2545"
+                      },
+                      {
+                        "value": "Level 2A (after 15% haircut)",
+                        "color": "#2F7FB8"
+                      },
+                      {
+                        "value": "Level 2B (after 50% haircut)",
+                        "color": "#8ACAFF"
+                      },
+                      {
+                        "value": "Cash outflows",
+                        "color": "#F2A541"
+                      },
+                      {
+                        "value": "Less cash inflows counted",
+                        "color": "#5BB5A2"
+                      }
+                    ]
+                  },
+                  "displayName": "measure"
+                }
+              },
+              "frame": {
+                "showTitle": true,
+                "title": "HQLA and net cash outflows, day over day (USD bn)"
+              }
+            }
+          },
+          "position": {
+            "x": 6,
+            "y": 6,
+            "width": 6,
+            "height": 7
+          }
+        },
+        {
+          "widget": {
+            "name": "m_hqla_chart",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "m_hqla_days",
+                  "fields": [
+                    {
+                      "name": "as_of_date",
+                      "expression": "`as_of_date`"
+                    },
+                    {
+                      "name": "sum(usd_bn)",
+                      "expression": "SUM(`usd_bn`)"
+                    },
+                    {
+                      "name": "component",
+                      "expression": "`component`"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "version": 3,
+              "widgetType": "bar",
+              "encodings": {
+                "x": {
+                  "fieldName": "as_of_date",
+                  "scale": {
+                    "type": "temporal"
+                  },
+                  "displayName": "as of date"
+                },
+                "y": {
+                  "fieldName": "sum(usd_bn)",
+                  "scale": {
+                    "type": "quantitative"
+                  },
+                  "displayName": "USD bn"
+                },
+                "color": {
+                  "fieldName": "component",
+                  "scale": {
+                    "type": "categorical",
+                    "mappings": [
+                      {
+                        "value": "Outflows - retail deposits",
+                        "color": "#7A1F2B"
+                      },
+                      {
+                        "value": "Outflows - unsecured wholesale",
+                        "color": "#D1495B"
+                      },
+                      {
+                        "value": "Outflows - secured funding",
+                        "color": "#F2A541"
+                      },
+                      {
+                        "value": "Outflows - derivatives and collateral",
+                        "color": "#8E6C8A"
+                      },
+                      {
+                        "value": "Outflows - credit and liquidity facilities",
+                        "color": "#C8B273"
+                      },
+                      {
+                        "value": "Outflows - other",
+                        "color": "#A3B4C4"
+                      },
+                      {
+                        "value": "Inflows - secured lending",
+                        "color": "#2E7D5B"
+                      },
+                      {
+                        "value": "Inflows - unsecured wholesale",
+                        "color": "#5BB5A2"
+                      },
+                      {
+                        "value": "Inflows - retail",
+                        "color": "#9ED9C5"
+                      },
+                      {
+                        "value": "Inflows - other (derivatives, securities, other)",
+                        "color": "#C8E6DA"
+                      },
+                      {
+                        "value": "LCR",
+                        "color": "#0B2545"
+                      },
+                      {
+                        "value": "Regulatory minimum (100%)",
+                        "color": "#D1495B"
+                      },
+                      {
+                        "value": "HQLA",
+                        "color": "#0B2545"
+                      },
+                      {
+                        "value": "Net cash outflows (30 days)",
+                        "color": "#D1495B"
+                      },
+                      {
+                        "value": "Level 1",
+                        "color": "#0B2545"
+                      },
+                      {
+                        "value": "Level 2A (after 15% haircut)",
+                        "color": "#2F7FB8"
+                      },
+                      {
+                        "value": "Level 2B (after 50% haircut)",
+                        "color": "#8ACAFF"
+                      },
+                      {
+                        "value": "Cash outflows",
+                        "color": "#F2A541"
+                      },
+                      {
+                        "value": "Less cash inflows counted",
+                        "color": "#5BB5A2"
+                      }
+                    ]
+                  },
+                  "displayName": "component"
+                }
+              },
+              "frame": {
+                "showTitle": true,
+                "title": "HQLA trend by level - Level 1, 2A and 2B (USD bn, after haircuts)"
+              },
+              "mark": {
+                "layout": "stack"
+              }
+            }
+          },
+          "position": {
+            "x": 0,
+            "y": 13,
+            "width": 6,
+            "height": 7
+          }
+        },
+        {
+          "widget": {
+            "name": "m_nco_chart",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "m_nco_days",
+                  "fields": [
+                    {
+                      "name": "as_of_date",
+                      "expression": "`as_of_date`"
+                    },
+                    {
+                      "name": "sum(usd_bn)",
+                      "expression": "SUM(`usd_bn`)"
+                    },
+                    {
+                      "name": "measure",
+                      "expression": "`measure`"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "version": 3,
+              "widgetType": "bar",
+              "encodings": {
+                "x": {
+                  "fieldName": "as_of_date",
+                  "scale": {
+                    "type": "temporal"
+                  },
+                  "displayName": "as of date"
+                },
+                "y": {
+                  "fieldName": "sum(usd_bn)",
+                  "scale": {
+                    "type": "quantitative"
+                  },
+                  "displayName": "USD bn"
+                },
+                "color": {
+                  "fieldName": "measure",
+                  "scale": {
+                    "type": "categorical",
+                    "mappings": [
+                      {
+                        "value": "Outflows - retail deposits",
+                        "color": "#7A1F2B"
+                      },
+                      {
+                        "value": "Outflows - unsecured wholesale",
+                        "color": "#D1495B"
+                      },
+                      {
+                        "value": "Outflows - secured funding",
+                        "color": "#F2A541"
+                      },
+                      {
+                        "value": "Outflows - derivatives and collateral",
+                        "color": "#8E6C8A"
+                      },
+                      {
+                        "value": "Outflows - credit and liquidity facilities",
+                        "color": "#C8B273"
+                      },
+                      {
+                        "value": "Outflows - other",
+                        "color": "#A3B4C4"
+                      },
+                      {
+                        "value": "Inflows - secured lending",
+                        "color": "#2E7D5B"
+                      },
+                      {
+                        "value": "Inflows - unsecured wholesale",
+                        "color": "#5BB5A2"
+                      },
+                      {
+                        "value": "Inflows - retail",
+                        "color": "#9ED9C5"
+                      },
+                      {
+                        "value": "Inflows - other (derivatives, securities, other)",
+                        "color": "#C8E6DA"
+                      },
+                      {
+                        "value": "LCR",
+                        "color": "#0B2545"
+                      },
+                      {
+                        "value": "Regulatory minimum (100%)",
+                        "color": "#D1495B"
+                      },
+                      {
+                        "value": "HQLA",
+                        "color": "#0B2545"
+                      },
+                      {
+                        "value": "Net cash outflows (30 days)",
+                        "color": "#D1495B"
+                      },
+                      {
+                        "value": "Level 1",
+                        "color": "#0B2545"
+                      },
+                      {
+                        "value": "Level 2A (after 15% haircut)",
+                        "color": "#2F7FB8"
+                      },
+                      {
+                        "value": "Level 2B (after 50% haircut)",
+                        "color": "#8ACAFF"
+                      },
+                      {
+                        "value": "Cash outflows",
+                        "color": "#F2A541"
+                      },
+                      {
+                        "value": "Less cash inflows counted",
+                        "color": "#5BB5A2"
+                      }
+                    ]
+                  },
+                  "displayName": "measure"
+                }
+              },
+              "frame": {
+                "showTitle": true,
+                "title": "Net cash outflows trend - cash outflows, less cash inflows counted, = net (USD bn)"
+              },
+              "mark": {
+                "layout": "group"
+              }
+            }
+          },
+          "position": {
+            "x": 6,
+            "y": 13,
+            "width": 6,
+            "height": 7
+          }
+        },
+        {
+          "widget": {
+            "name": "m_out_chart",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "m_out_days",
+                  "fields": [
+                    {
+                      "name": "as_of_date",
+                      "expression": "`as_of_date`"
+                    },
+                    {
+                      "name": "sum(usd_bn)",
+                      "expression": "SUM(`usd_bn`)"
+                    },
+                    {
+                      "name": "component",
+                      "expression": "`component`"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "version": 3,
+              "widgetType": "bar",
+              "encodings": {
+                "x": {
+                  "fieldName": "as_of_date",
+                  "scale": {
+                    "type": "temporal"
+                  },
+                  "displayName": "as of date"
+                },
+                "y": {
+                  "fieldName": "sum(usd_bn)",
+                  "scale": {
+                    "type": "quantitative"
+                  },
+                  "displayName": "USD bn"
+                },
+                "color": {
+                  "fieldName": "component",
+                  "scale": {
+                    "type": "categorical",
+                    "mappings": [
+                      {
+                        "value": "Outflows - retail deposits",
+                        "color": "#7A1F2B"
+                      },
+                      {
+                        "value": "Outflows - unsecured wholesale",
+                        "color": "#D1495B"
+                      },
+                      {
+                        "value": "Outflows - secured funding",
+                        "color": "#F2A541"
+                      },
+                      {
+                        "value": "Outflows - derivatives and collateral",
+                        "color": "#8E6C8A"
+                      },
+                      {
+                        "value": "Outflows - credit and liquidity facilities",
+                        "color": "#C8B273"
+                      },
+                      {
+                        "value": "Outflows - other",
+                        "color": "#A3B4C4"
+                      },
+                      {
+                        "value": "Inflows - secured lending",
+                        "color": "#2E7D5B"
+                      },
+                      {
+                        "value": "Inflows - unsecured wholesale",
+                        "color": "#5BB5A2"
+                      },
+                      {
+                        "value": "Inflows - retail",
+                        "color": "#9ED9C5"
+                      },
+                      {
+                        "value": "Inflows - other (derivatives, securities, other)",
+                        "color": "#C8E6DA"
+                      },
+                      {
+                        "value": "LCR",
+                        "color": "#0B2545"
+                      },
+                      {
+                        "value": "Regulatory minimum (100%)",
+                        "color": "#D1495B"
+                      },
+                      {
+                        "value": "HQLA",
+                        "color": "#0B2545"
+                      },
+                      {
+                        "value": "Net cash outflows (30 days)",
+                        "color": "#D1495B"
+                      },
+                      {
+                        "value": "Level 1",
+                        "color": "#0B2545"
+                      },
+                      {
+                        "value": "Level 2A (after 15% haircut)",
+                        "color": "#2F7FB8"
+                      },
+                      {
+                        "value": "Level 2B (after 50% haircut)",
+                        "color": "#8ACAFF"
+                      },
+                      {
+                        "value": "Cash outflows",
+                        "color": "#F2A541"
+                      },
+                      {
+                        "value": "Less cash inflows counted",
+                        "color": "#5BB5A2"
+                      }
+                    ]
+                  },
+                  "displayName": "component"
+                }
+              },
+              "frame": {
+                "showTitle": true,
+                "title": "Cash outflows by category, day over day (USD bn, weighted)"
+              },
+              "mark": {
+                "layout": "stack"
+              }
+            }
+          },
+          "position": {
+            "x": 0,
+            "y": 20,
+            "width": 6,
+            "height": 7
+          }
+        },
+        {
+          "widget": {
+            "name": "m_in_chart",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "m_in_days",
+                  "fields": [
+                    {
+                      "name": "as_of_date",
+                      "expression": "`as_of_date`"
+                    },
+                    {
+                      "name": "sum(usd_bn)",
+                      "expression": "SUM(`usd_bn`)"
+                    },
+                    {
+                      "name": "component",
+                      "expression": "`component`"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "version": 3,
+              "widgetType": "bar",
+              "encodings": {
+                "x": {
+                  "fieldName": "as_of_date",
+                  "scale": {
+                    "type": "temporal"
+                  },
+                  "displayName": "as of date"
+                },
+                "y": {
+                  "fieldName": "sum(usd_bn)",
+                  "scale": {
+                    "type": "quantitative"
+                  },
+                  "displayName": "USD bn"
+                },
+                "color": {
+                  "fieldName": "component",
+                  "scale": {
+                    "type": "categorical",
+                    "mappings": [
+                      {
+                        "value": "Outflows - retail deposits",
+                        "color": "#7A1F2B"
+                      },
+                      {
+                        "value": "Outflows - unsecured wholesale",
+                        "color": "#D1495B"
+                      },
+                      {
+                        "value": "Outflows - secured funding",
+                        "color": "#F2A541"
+                      },
+                      {
+                        "value": "Outflows - derivatives and collateral",
+                        "color": "#8E6C8A"
+                      },
+                      {
+                        "value": "Outflows - credit and liquidity facilities",
+                        "color": "#C8B273"
+                      },
+                      {
+                        "value": "Outflows - other",
+                        "color": "#A3B4C4"
+                      },
+                      {
+                        "value": "Inflows - secured lending",
+                        "color": "#2E7D5B"
+                      },
+                      {
+                        "value": "Inflows - unsecured wholesale",
+                        "color": "#5BB5A2"
+                      },
+                      {
+                        "value": "Inflows - retail",
+                        "color": "#9ED9C5"
+                      },
+                      {
+                        "value": "Inflows - other (derivatives, securities, other)",
+                        "color": "#C8E6DA"
+                      },
+                      {
+                        "value": "LCR",
+                        "color": "#0B2545"
+                      },
+                      {
+                        "value": "Regulatory minimum (100%)",
+                        "color": "#D1495B"
+                      },
+                      {
+                        "value": "HQLA",
+                        "color": "#0B2545"
+                      },
+                      {
+                        "value": "Net cash outflows (30 days)",
+                        "color": "#D1495B"
+                      },
+                      {
+                        "value": "Level 1",
+                        "color": "#0B2545"
+                      },
+                      {
+                        "value": "Level 2A (after 15% haircut)",
+                        "color": "#2F7FB8"
+                      },
+                      {
+                        "value": "Level 2B (after 50% haircut)",
+                        "color": "#8ACAFF"
+                      },
+                      {
+                        "value": "Cash outflows",
+                        "color": "#F2A541"
+                      },
+                      {
+                        "value": "Less cash inflows counted",
+                        "color": "#5BB5A2"
+                      }
+                    ]
+                  },
+                  "displayName": "component"
+                }
+              },
+              "frame": {
+                "showTitle": true,
+                "title": "Cash inflows by category, day over day (USD bn, weighted, before the cap)"
+              },
+              "mark": {
+                "layout": "stack"
+              }
+            }
+          },
+          "position": {
+            "x": 6,
+            "y": 20,
+            "width": 6,
+            "height": 7
+          }
+        },
+        {
+          "widget": {
+            "name": "m_inputs_table",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "m_inputs",
+                  "fields": [
+                    {
+                      "name": "component",
+                      "expression": "`component`"
+                    },
+                    {
+                      "name": "positions",
+                      "expression": "`positions`"
+                    },
+                    {
+                      "name": "balance_usd_mm",
+                      "expression": "`balance_usd_mm`"
+                    },
+                    {
+                      "name": "rate",
+                      "expression": "`rate`"
+                    },
+                    {
+                      "name": "weighted_usd_mm",
+                      "expression": "`weighted_usd_mm`"
+                    }
+                  ],
+                  "disaggregated": true
+                }
+              }
+            ],
+            "spec": {
+              "version": 2,
+              "widgetType": "table",
+              "encodings": {
+                "columns": [
+                  {
+                    "fieldName": "component",
+                    "displayName": "Component"
+                  },
+                  {
+                    "fieldName": "positions",
+                    "displayName": "Positions",
+                    "alignContent": "right"
+                  },
+                  {
+                    "fieldName": "balance_usd_mm",
+                    "displayName": "Balance (USD mm, unweighted)",
+                    "alignContent": "right"
+                  },
+                  {
+                    "fieldName": "rate",
+                    "displayName": "Average rate (weighted / balance)",
+                    "alignContent": "right"
+                  },
+                  {
+                    "fieldName": "weighted_usd_mm",
+                    "displayName": "Weighted (USD mm)",
+                    "alignContent": "right"
+                  }
+                ]
+              },
+              "frame": {
+                "showTitle": true,
+                "title": "The input data of the day - from HQLA to net cash outflows: positions, balances, rates and weighted amounts",
+                "showDescription": true,
+                "description": "Balance is before the LCR rates and haircuts; weighted is after. Positions and balances are the FR 2052a positions each LCR rule applied to."
+              }
+            }
+          },
+          "position": {
+            "x": 0,
+            "y": 27,
+            "width": 12,
+            "height": 14
+          }
+        }
+      ],
+      "pageType": "PAGE_TYPE_CANVAS"
+    }
+  ],
+  "uiSettings": {
+    "theme": {
+      "canvasBackgroundColor": {
+        "light": "#F7F8FA",
+        "dark": "#1F272D"
+      },
+      "widgetBackgroundColor": {
+        "light": "#FFFFFF",
+        "dark": "#11171C"
+      },
+      "widgetBorderColor": {
+        "light": "#FFFFFF",
+        "dark": "#11171C"
+      },
+      "fontColor": {
+        "light": "#11171C",
+        "dark": "#E8ECF0"
+      },
+      "selectionColor": {
+        "light": "#2272B4",
+        "dark": "#8ACAFF"
+      },
+      "visualizationColors": [
+        "#0B2545",
+        "#2F7FB8",
+        "#5BB5A2",
+        "#F2A541",
+        "#D1495B",
+        "#8E6C8A",
+        "#A3B4C4",
+        "#4E5185",
+        "#C8B273"
+      ],
+      "widgetHeaderAlignment": "LEFT"
+    }
+  }
+}

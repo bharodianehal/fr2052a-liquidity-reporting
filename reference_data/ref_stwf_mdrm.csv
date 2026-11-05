@@ -1,0 +1,53 @@
+stwf_item,maturity_column,mdrm,description
+1.a,A,RISIY838,Item 1.a column A
+1.a,B,RISIY839,Item 1.a column B
+1.a,C,RISIY840,Item 1.a column C
+1.a,D,RISIY841,Item 1.a column D
+1.b,A,RISIY842,Item 1.b column A
+1.b,B,RISIY843,Item 1.b column B
+1.b,C,RISIY844,Item 1.b column C
+1.b,D,RISIY845,Item 1.b column D
+1.c,A,RISIY846,Item 1.c column A
+1.c,B,RISIY847,Item 1.c column B
+1.c,C,RISIY848,Item 1.c column C
+1.c,D,RISIY849,Item 1.c column D
+1.d,A,RISIY850,Item 1.d column A
+1.d,B,RISIY851,Item 1.d column B
+1.d,C,RISIY852,Item 1.d column C
+1.d,D,RISIY853,Item 1.d column D
+2.a,A,RISIY858,Item 2.a column A
+2.a,B,RISIY859,Item 2.a column B
+2.a,C,RISIY860,Item 2.a column C
+2.a,D,RISIY861,Item 2.a column D
+2.b,A,RISIY862,Item 2.b column A
+2.b,B,RISIY863,Item 2.b column B
+2.b,C,RISIY864,Item 2.b column C
+2.b,D,RISIY865,Item 2.b column D
+3.a,A,RISIY870,Item 3.a column A
+3.a,B,RISIY871,Item 3.a column B
+3.a,C,RISIY872,Item 3.a column C
+3.a,D,RISIY873,Item 3.a column D
+3.b,A,RISIY874,Item 3.b column A
+3.b,B,RISIY875,Item 3.b column B
+3.b,C,RISIY876,Item 3.b column C
+3.b,D,RISIY877,Item 3.b column D
+3.c,A,RISIY878,Item 3.c column A
+3.c,B,RISIY879,Item 3.c column B
+3.c,C,RISIY880,Item 3.c column C
+3.c,D,RISIY881,Item 3.c column D
+4,A,RISIY886,Item 4 column A
+4,B,RISIY887,Item 4 column B
+4,C,RISIY888,Item 4 column C
+4,D,RISIY889,Item 4 column D
+1 total,A,RISIY854,Tier 1 total column A
+1 total,B,RISIY855,Tier 1 total column B
+1 total,C,RISIY856,Tier 1 total column C
+1 total,D,RISIY857,Tier 1 total column D
+2 total,A,RISIY866,Tier 2 total column A
+2 total,B,RISIY867,Tier 2 total column B
+2 total,C,RISIY868,Tier 2 total column C
+2 total,D,RISIY869,Tier 2 total column D
+3 total,A,RISIY882,Tier 3 total column A
+3 total,B,RISIY883,Tier 3 total column B
+3 total,C,RISIY884,Tier 3 total column C
+3 total,D,RISIY885,Tier 3 total column D

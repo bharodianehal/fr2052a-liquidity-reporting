@@ -1,0 +1,15 @@
+resources:
+  pipelines:
+    fr2052a_bronze_ingest:
+      name: fr2052a-bronze-ingest
+      catalog: ${var.catalog}
+      schema: raw
+      serverless: true
+      continuous: false
+      channel: CURRENT
+      photon: true
+      configuration:
+        fr2052a.landing_path: /Volumes/${var.catalog}/raw/landing
+      libraries:
+        - file:
+            path: ../pipelines/bronze_ingest.py

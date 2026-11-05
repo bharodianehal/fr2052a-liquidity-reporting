@@ -1,0 +1,29 @@
+{
+  "name": "fr2052a-liquidity-risk",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "react": "^19.2.9",
+    "react-dom": "^19.2.9",
+    "react-router-dom": "^6.28.0",
+    "recharts": "^2.14.1",
+    "ag-grid-community": "^32.3.3",
+    "ag-grid-react": "^32.3.3",
+    "lucide-react": "^0.577.0"
+  },
+  "devDependencies": {
+    "vite": "^6.0.3",
+    "tailwindcss": "^4.3.3",
+    "postcss": "^8.4.49",
+    "@tailwindcss/postcss": "^4.3.3"
+  },
+  "overrides": {
+    "react-is": "^19.2.9"
+  }
+}

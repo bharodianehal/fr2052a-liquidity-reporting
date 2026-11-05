@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+	<xs:include schemaLocation="6GSchema.xsd"/>
+	<xs:element name="product" type="productTypes"/>
+	<xs:element name="reportScope" type="reportScope"/>
+	<xs:element name="subProduct" type="subProductTypes"/>
+  <xs:simpleType name="nonEmptyString">
+    <xs:restriction base="xs:string">
+      <xs:minLength value="1" />
+  	</xs:restriction>
+  </xs:simpleType>
+	<xs:element name="text" type="nonEmptyString"/>
+	<xs:element name="report">
+		<xs:complexType>
+			<xs:sequence minOccurs="0">
+				<xs:element ref="product" minOccurs="0" maxOccurs="1"/>
+				<xs:element ref="subProduct" minOccurs="0" maxOccurs="1"/>
+			</xs:sequence>
+			<xs:attribute name="type" use="required">
+				<xs:simpleType>
+					<xs:restriction base="reportTypes"/>
+				</xs:simpleType>
+			</xs:attribute>
+			<xs:attribute name="reportID">
+				<xs:simpleType>
+					<xs:restriction base="tenDigitPositiveIntegerType"/>
+				</xs:simpleType>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="comment">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="reportScope" minOccurs="0" maxOccurs="1"/>
+				<xs:element ref="report" minOccurs="0" maxOccurs="1"/>
+				<xs:element ref="text" minOccurs="1" maxOccurs="1"/>
+			</xs:sequence>
+			<xs:attribute name="reportingFrequency">
+				<xs:simpleType>
+					<xs:restriction base="reportingFrequency"/>
+				</xs:simpleType>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:simpleType name="productTypes">
+		<xs:union memberTypes="assetProduct balanceSheetSupProduct depositProduct derivativesAndCollateralSupProduct foreignExchangeProduct liquidityRiskMeasurementSupProduct otherInflowProduct otherOutflowProduct securedInflowProduct securedOutflowProduct supplementalInformationProduct unsecuredProduct wholesaleOutflowProduct"/>		
+	</xs:simpleType>
+	<xs:simpleType name="reportTypes">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="assetInflowReport"/>
+			<xs:enumeration value="unsecuredInflowReport"/>
+			<xs:enumeration value="securedInflowReport"/>
+			<xs:enumeration value="otherInflowReport"/>
+			<xs:enumeration value="depositsOutflowReport"/>
+			<xs:enumeration value="wholesaleOutflowReport"/>
+			<xs:enumeration value="securedOutflowReport"/>
+			<xs:enumeration value="otherOutflowReport"/>
+			<xs:enumeration value="foreignExchangeSupplementalReport"/>
+			<xs:enumeration value="informationalSupplementalReport"/>
+			<xs:enumeration value="derivativesAndCollateralSupReport"/>
+			<xs:enumeration value="liquidityRiskMeasurementSupReport"/>
+			<xs:enumeration value="balanceSheetSupReport"/>
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:simpleType name="subProductTypes">
+		<xs:union memberTypes="assetSource pledgeLevelAndLongHedging securedOutflowCounterpartyOrCoverage segregationCategory"/>
+	</xs:simpleType>
+	
+	<!--Comments Header and Its Elements-->
+	<xs:element name="commentsHeader">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="reporter" type="reporter" minOccurs="1" maxOccurs="1"/>
+				<xs:element name="reportingDate" type="xs:date"/>
+			</xs:sequence>
+			<xs:attribute name="version" type="xs:positiveInteger" use="required"/>
+		</xs:complexType>
+	</xs:element>	
+	<xs:element name="comments">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="comment" minOccurs="1" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="sixGComments">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="commentsHeader"/>
+				<xs:element ref="comments"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

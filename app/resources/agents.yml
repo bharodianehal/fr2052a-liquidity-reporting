@@ -1,0 +1,55 @@
+# The AI agents' serving side - deployed with the app, after the first build (each needs something the build creates):
+# - the Vector Search index the agents cite (needs reference.reg_text_chunks, loaded by the pipeline's regulatory_text task)
+# - the agents' serving endpoint (needs a registered version of <catalog>.ai_assist.fr2052a_agents - job fr2052a-register-agents)
+#   runs as the service principal fr2052a-agents (OAuth secret in scope fr2052a); a promotion (notebook 16) moves it to the new
+#   version right away - then set agents_model_version in the overrides, so the next deploy keeps it
+# - the Lakebase role of that service principal (notebook 07 grants it read on public / app_serving)
+resources:
+  vector_search_indexes:
+    reg_text_index:
+      name: ${var.catalog}.reference.reg_text_index
+      endpoint_name: fr2052a-vs
+      index_type: DELTA_SYNC
+      primary_key: chunk_id
+      delta_sync_index_spec:
+        source_table: ${var.catalog}.reference.reg_text_chunks
+        pipeline_type: TRIGGERED
+        embedding_source_columns:
+          - name: text
+            embedding_model_endpoint_name: databricks-gte-large-en
+
+  model_serving_endpoints:
+    agents_endpoint:
+      name: ${var.agents_endpoint}
+      tags:
+        - {key: project, value: fr2052a}
+      config:
+        served_entities:
+          - name: champion
+            entity_name: ${var.catalog}.ai_assist.fr2052a_agents
+            entity_version: ${var.agents_model_version}
+            workload_size: Small
+            scale_to_zero_enabled: true
+            environment_vars:
+              DATABRICKS_HOST: ${var.workspace_host}
+              DATABRICKS_CLIENT_ID: "{{secrets/fr2052a/agents-client-id}}"
+              DATABRICKS_CLIENT_SECRET: "{{secrets/fr2052a/agents-client-secret}}"
+              CATALOG: ${var.catalog}
+              DATABRICKS_WAREHOUSE_ID: ${var.warehouse_id}
+              MLFLOW_TRACING_SQL_WAREHOUSE_ID: ${var.warehouse_id}
+              LAKEBASE_ENDPOINT: projects/fr2052a/branches/production/endpoints/primary
+              LAKEBASE_HOST: ${var.lakebase_host}
+              LAKEBASE_DB: fr2052a
+              AI_MODEL: ${var.ai_model}
+              FR2052A_AGENTS_BATCH: "1"
+              FR2052A_TRACE: "1"
+              FR2052A_TRACE_USER: ${workspace.current_user.userName}
+              FR2052A_AGENTS_MODEL_VERSION: ${var.agents_model_version}
+
+  postgres_roles:
+    agents_lakebase_role:
+      parent: projects/fr2052a/branches/production
+      role_id: ${var.agents_lakebase_role_id}
+      postgres_role: ${var.agents_sp_client_id}
+      identity_type: SERVICE_PRINCIPAL
+      auth_method: LAKEBASE_OAUTH_V1

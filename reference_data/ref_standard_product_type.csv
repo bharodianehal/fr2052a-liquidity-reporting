@@ -1,0 +1,99 @@
+standard_product_type,source_system,description,requires_customer,requires_collateral,candidate_product_ids
+SEC-POS,STATESTREET_CUSTODY,Securities position in custody,false,true,"I.A.7,I.A.2,I.A.1"
+LOAN-POOL,STATESTREET_CUSTODY,Whole loans held as assets at market value,false,true,"I.A.7,I.A.2,I.A.1"
+CB-RES,STATESTREET_CUSTODY,Balances at central banks,false,true,"I.A.4,I.A.3"
+VAULT-CASH,STATESTREET_CUSTODY,Currency and coin,false,true,I.A.3
+SEC-PURCH,STATESTREET_CUSTODY,"Executed, unsettled security purchase",false,true,"I.A.5,I.A.6"
+MM-PLACE,ACBS_LOANS,Interbank money market placement,true,false,"I.U.1,I.U.2"
+NOSTRO,ACBS_LOANS,Balances held at other banks,true,false,"I.U.3,I.U.4"
+RCF-DRAW,ACBS_LOANS,Drawn revolving credit facility,true,false,"I.S.7,I.U.5"
+TERM-LOAN,ACBS_LOANS,Term loan / mortgage / consumer loan,true,false,"I.U.6,I.S.6,I.S.8"
+CIPC,ACBS_LOANS,Cash items in the process of collection,true,false,I.U.7
+ST-INV,ACBS_LOANS,"Short-term investment (CDs, time deposits placed)",true,false,I.U.8
+REVREPO,MUREX,Reverse repurchase agreement,true,true,I.S.1
+SECBORROW,MUREX,Securities borrowed,true,true,I.S.2
+DOLLAR-ROLL,MUREX,TBA dollar roll,true,true,"I.S.3,O.S.3"
+COLL-SWAP,MUREX,Collateral swap,true,true,"I.S.4,O.S.4"
+MARGIN-LOAN,MUREX,Customer margin loan,true,true,I.S.5
+SYNTH-CUST-LONG,MUREX,Synthetic customer long (total return swap),true,true,I.S.9
+SYNTH-FIRM-SRC,MUREX,Synthetic firm sourcing,true,true,I.S.10
+DERIV-CF,MUREX,Derivative contractual cash flow,true,false,"I.O.1,O.O.1"
+COLL-CALL,MUREX,Collateral call,true,true,"I.O.2,O.O.2"
+TBA,MUREX,To-be-announced MBS trade,true,true,"I.O.3,O.O.3"
+FAC-PURCH,MUREX,Committed facility purchased,true,false,I.O.4
+LOCKUP,MUREX,Lock-up balance,true,false,I.O.5
+INT-DIV,MUREX,Interest and dividends,false,false,"I.O.6,O.O.19"
+NET30,MUREX,Net 30-day derivative flows (Appendix V #6-9),false,false,"I.O.7,O.O.20"
+SEC-PRIN,MUREX,Principal due on investment securities,false,true,I.O.8
+OTHER-CF,MUREX,Other contractual cash flow,false,false,"I.O.9,O.O.22"
+COMMIT-CREDIT,MUREX,Undrawn credit facility,true,false,O.O.4
+COMMIT-LIQ,MUREX,Undrawn liquidity facility,true,false,O.O.5
+MORTG-COMMIT,MUREX,Retail mortgage commitment,true,false,O.O.6
+TRADE-FIN,MUREX,Trade finance instrument,true,false,O.O.7
+MTM-IMPACT,MUREX,Look-back MTM collateral outflow,false,false,O.O.8
+DOWNGRADE-REHYP,MUREX,Rehypothecation rights lost on downgrade,false,true,"O.O.9,O.O.10,O.O.11,O.O.12"
+DOWNGRADE-COLL,MUREX,Collateral required on downgrade,false,true,"O.O.13,O.O.14,O.O.15,O.O.16"
+EXCESS-MARGIN,MUREX,Customer excess margin,true,true,O.O.17
+UNFUNDED-MARGIN,MUREX,Unfunded term margin,true,false,O.O.18
+STRUCT-OTHER,MUREX,Other structured transaction outflow,false,false,O.O.21
+DDA,FISERV_DDA,Demand deposit account,true,false,"O.D.1,O.D.4,O.D.5,O.D.6"
+SAV,FISERV_DDA,Savings / money market deposit account,true,false,"O.D.2,O.D.3,O.D.6"
+TD,FISERV_DDA,Term deposit,true,false,"O.D.2,O.D.3,O.D.6"
+ESCROW,FISERV_DDA,Operational escrow account,true,false,O.D.7
+BROKERED,FISERV_DDA,Brokered deposit (non-reciprocal),true,false,O.D.8
+SWEEP-AFF,FISERV_DDA,Sweep from an affiliated broker-dealer,true,false,"O.D.9,O.D.10"
+SWEEP-NONAFF,FISERV_DDA,Sweep from a non-affiliated firm,true,false,O.D.11
+SWEEP-OTHER,FISERV_DDA,Sweep from other firm products,true,false,O.D.12
+RECIP,FISERV_DDA,Reciprocal deposit,true,false,O.D.13
+3P-DEP,FISERV_DDA,Other third-party deposit,true,false,O.D.14
+DEP-OTHER,FISERV_DDA,Other deposit account,true,false,O.D.15
+ABCP,QUANTUM_TREASURY,Asset-backed commercial paper,false,true,"O.W.1,O.W.2"
+CCP-PAPER,QUANTUM_TREASURY,Collateralized commercial paper,false,true,O.W.3
+ABS,QUANTUM_TREASURY,Asset-backed securities issued,false,true,O.W.4
+COVERED-BOND,QUANTUM_TREASURY,Covered bonds issued,false,true,O.W.5
+TOB,QUANTUM_TREASURY,Tender option bonds,false,true,O.W.6
+OTHER-ABF,QUANTUM_TREASURY,Other asset-backed financing,false,true,O.W.7
+CP,QUANTUM_TREASURY,Commercial paper issued,false,false,O.W.8
+MM-BORROW,QUANTUM_TREASURY,Interbank money market borrowing,true,false,"O.W.9,O.W.10"
+DEBT-ISS,QUANTUM_TREASURY,Debt securities issued,false,false,"O.W.11,O.W.12,O.W.13,O.W.14,O.W.15"
+WCD,QUANTUM_TREASURY,Wholesale certificate of deposit,true,false,O.W.16
+LINE-DRAW,QUANTUM_TREASURY,Draw on a committed line,true,false,O.W.17
+FREE-CREDIT,QUANTUM_TREASURY,Customer free credit balance,true,false,O.W.18
+UNSEC-OTHER,QUANTUM_TREASURY,Other unsecured financing,true,false,O.W.19
+REPO,MUREX,Repurchase agreement,true,true,O.S.1
+SECLEND,MUREX,Securities lent,true,true,O.S.2
+SEC-BORROWING,MUREX,Secured borrowing facility,true,true,"O.S.5,O.S.6,O.S.11"
+CUST-SHORT,MUREX,Customer short position,true,true,O.S.7
+FIRM-SHORT,MUREX,Firm short position,true,true,O.S.8
+SYNTH-CUST-SHORT,MUREX,Synthetic customer short,true,true,O.S.9
+SYNTH-FIRM-FIN,MUREX,Synthetic firm financing,true,true,O.S.10
+DERIV-MTM,ALGO_COLLATERAL,Gross derivative fair value,true,false,"S.DC.1,S.DC.2"
+DERIV-SETTLE,ALGO_COLLATERAL,Derivative settlement payment,true,true,"S.DC.3,S.DC.4"
+IM,ALGO_COLLATERAL,Initial margin,true,true,"S.DC.5,S.DC.6,S.DC.7"
+VM,ALGO_COLLATERAL,Variation margin,true,true,"S.DC.8,S.DC.9,S.DC.10"
+CCP-DF,ALGO_COLLATERAL,CCP default fund contribution,true,true,S.DC.11
+CCP-OTHER,ALGO_COLLATERAL,Other CCP pledges,true,true,S.DC.12
+COLL-DISPUTE,ALGO_COLLATERAL,Disputed collateral call,true,false,"S.DC.13,S.DC.14"
+SLEEPER,ALGO_COLLATERAL,Sleeper collateral,false,true,"S.DC.15,S.DC.17"
+REQ-COLL,ALGO_COLLATERAL,Required collateral deliverable,false,true,S.DC.16
+COLL-SUB,ALGO_COLLATERAL,Collateral substitution exposure,false,false,"S.DC.18,S.DC.19,S.DC.20,S.DC.21"
+SUB-LIQ,AXIOM_REGCALC,Subsidiary HQLA (LCR),false,true,"S.L.1,S.L.2"
+HEDGE-TERM,AXIOM_REGCALC,Early termination outflows on HQLA hedges,false,true,S.L.3
+PMM-DEBT,AXIOM_REGCALC,Own debt > 30 days where firm is primary market maker,false,false,"S.L.4,S.L.5"
+SUB-FUND,AXIOM_REGCALC,Subsidiary stable funding (NSFR),false,false,"S.L.7,S.L.8"
+OBS-REHYP,AXIOM_REGCALC,Off-balance sheet rehypothecated assets,false,true,S.L.9
+NSFR,AXIOM_REGCALC,Net stable funding ratio,false,false,S.L.10
+REG-CAP,ORACLE_GL,Regulatory capital element,false,false,S.B.1
+OTHER-LIAB,ORACLE_GL,Other liabilities,false,false,S.B.2
+NPA,ORACLE_GL,Non-performing assets,true,true,S.B.3
+OTHER-ASSET,ORACLE_GL,Other assets,false,true,S.B.4
+CPTY-NETTING,ORACLE_GL,Balance sheet counterparty netting,true,true,S.B.5
+CARRY-ADJ,ORACLE_GL,Carrying value adjustment,false,false,S.B.6
+CLIENT-LONG,BROKERAGE_BOOKS,Client long market value,false,true,S.I.1
+CLIENT-SHORT,BROKERAGE_BOOKS,Client short market value,false,true,S.I.2
+CLIENT-WIRE,BROKERAGE_BOOKS,Client wires,false,true,"S.I.3,S.I.4"
+FRB-23A,BROKERAGE_BOOKS,Section 23A capacity,false,false,S.I.5
+SUB-LIQ-NT,BROKERAGE_BOOKS,Subsidiary liquidity not transferable,false,true,S.I.6
+FX-SPOT,MUREX,FX spot,true,false,S.FX.1
+FX-FWD,MUREX,FX forward / future,true,false,S.FX.2
+FX-SWAP,MUREX,FX swap,true,false,S.FX.3

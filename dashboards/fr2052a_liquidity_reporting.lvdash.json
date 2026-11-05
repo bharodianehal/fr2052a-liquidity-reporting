@@ -1,0 +1,5042 @@
+{
+  "datasets": [
+    {
+      "name": "v_dates",
+      "displayName": "As-of dates",
+      "queryLines": [
+        "SELECT DISTINCT CAST(as_of_date AS STRING) AS as_of FROM reg_2052a.submission_files ORDER BY 1 DESC\n"
+      ]
+    },
+    {
+      "name": "v_entities",
+      "displayName": "Reporting entities",
+      "queryLines": [
+        "SELECT entity_id AS entity FROM reference.ref_reporting_entity ORDER BY 1\n"
+      ]
+    },
+    {
+      "name": "v_feeds",
+      "displayName": "Source feeds",
+      "queryLines": [
+        "SELECT feed FROM VALUES ('deposits'), ('loans'), ('securities'), ('derivatives'), ('funding'), ('finance') AS t(feed)\n"
+      ]
+    },
+    {
+      "name": "l_counts",
+      "displayName": "Source to report - counts per step",
+      "queryLines": [
+        "WITH b AS (SELECT record_id FROM conformed.v_source_files WHERE as_of_date = CAST(:as_of AS DATE) AND feed = :feed),\n",
+        "s AS (SELECT record_id FROM conformed.source_position WHERE as_of_date = CAST(:as_of AS DATE) AND source_feed = :feed),\n",
+        "f AS (SELECT p.position_id FROM conformed.fact_liquidity_position p JOIN s USING (record_id) WHERE p.as_of_date = CAST(:as_of AS DATE)),\n",
+        "e AS (SELECT e.position_id FROM conformed.entity_position e JOIN f USING (position_id) WHERE e.as_of_date = CAST(:as_of AS DATE)),\n",
+        "g AS (SELECT DISTINCT l.record_key FROM reg_2052a.record_lineage l JOIN f USING (position_id) WHERE l.as_of_date = CAST(:as_of AS DATE))\n",
+        "SELECT (SELECT COUNT(*) FROM b) AS bronze_records, (SELECT COUNT(*) FROM s) AS dq_passed,\n",
+        "       (SELECT COUNT(*) FROM dq.quarantine WHERE as_of_date = CAST(:as_of AS DATE) AND source_feed = :feed) AS quarantined,\n",
+        "       (SELECT COUNT(*) FROM f) AS silver_positions, (SELECT COUNT(*) FROM e) AS entity_positions, (SELECT COUNT(*) FROM g) AS filed_records\n"
+      ],
+      "parameters": [
+        {
+          "displayName": "as_of",
+          "keyword": "as_of",
+          "dataType": "STRING",
+          "defaultSelection": {
+            "values": {
+              "dataType": "STRING",
+              "values": [
+                {
+                  "value": "2026-02-27"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "displayName": "feed",
+          "keyword": "feed",
+          "dataType": "STRING",
+          "defaultSelection": {
+            "values": {
+              "dataType": "STRING",
+              "values": [
+                {
+                  "value": "deposits"
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "l_bronze",
+      "displayName": "Source to report - 1 source records as received",
+      "queryLines": [
+        "SELECT * EXCEPT (internal_rating, as_of_date) FROM (\n",
+        "  SELECT 'deposits' AS feed, * FROM raw.deposits UNION ALL SELECT 'loans', * FROM raw.loans\n",
+        "  UNION ALL SELECT 'securities', * FROM raw.securities UNION ALL SELECT 'derivatives', * FROM raw.derivatives\n",
+        "  UNION ALL SELECT 'funding', * FROM raw.funding UNION ALL SELECT 'finance', * FROM raw.finance)\n",
+        "WHERE as_of_date = CAST(:as_of AS DATE) AND feed = :feed ORDER BY record_id\n"
+      ],
+      "parameters": [
+        {
+          "displayName": "as_of",
+          "keyword": "as_of",
+          "dataType": "STRING",
+          "defaultSelection": {
+            "values": {
+              "dataType": "STRING",
+              "values": [
+                {
+                  "value": "2026-02-27"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "displayName": "feed",
+          "keyword": "feed",
+          "dataType": "STRING",
+          "defaultSelection": {
+            "values": {
+              "dataType": "STRING",
+              "values": [
+                {
+                  "value": "deposits"
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "l_dq",
+      "displayName": "Source to report - 2 data quality check",
+      "queryLines": [
+        "WITH r AS (SELECT record_id, ARRAY_JOIN(ARRAY_SORT(COLLECT_SET(rule_id)), ', ') AS rules_failed FROM dq.rule_failures\n",
+        "           WHERE as_of_date = CAST(:as_of AS DATE) AND source_feed = :feed GROUP BY 1)\n",
+        "SELECT b.record_id, CASE WHEN q.record_id IS NOT NULL THEN 'QUARANTINED' ELSE 'PASSED' END AS dq_result,\n",
+        "       COALESCE(q.failed_rules, r.rules_failed) AS rules_failed, b.landing_file, b.ingested_at,\n",
+        "       s.source_product_code, s.customer_id, s.currency, s.principal_amount, s.market_value, s.dq_timestamp\n",
+        "FROM conformed.v_source_files b\n",
+        "LEFT JOIN conformed.source_position s ON s.as_of_date = b.as_of_date AND s.record_id = b.record_id\n",
+        "LEFT JOIN dq.quarantine q ON q.as_of_date = b.as_of_date AND q.record_id = b.record_id\n",
+        "LEFT JOIN r ON r.record_id = b.record_id\n",
+        "WHERE b.as_of_date = CAST(:as_of AS DATE) AND b.feed = :feed ORDER BY dq_result DESC, b.record_id\n"
+      ],
+      "parameters": [
+        {
+          "displayName": "as_of",
+          "keyword": "as_of",
+          "dataType": "STRING",
+          "defaultSelection": {
+            "values": {
+              "dataType": "STRING",
+              "values": [
+                {
+                  "value": "2026-02-27"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "displayName": "feed",
+          "keyword": "feed",
+          "dataType": "STRING",
+          "defaultSelection": {
+            "values": {
+              "dataType": "STRING",
+              "values": [
+                {
+                  "value": "deposits"
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "l_silver",
+      "displayName": "Source to report - 3 enriched positions",
+      "queryLines": [
+        "SELECT p.record_id, p.position_id, p.part, p.booking_entity, p.source_product_code, p.standard_product_type, p.pid_rule_id, p.product_id,\n",
+        "       p.table_code, p.customer_id, p.counterparty, p.counterparty_category, p.gsib, p.collateral_class, p.collateral_basis,\n",
+        "       p.maturity_date, p.maturity_basis, p.maturity_bucket, p.insured, p.insured_basis, p.currency,\n",
+        "       COALESCE(p.principal_amount, p.market_value) AS amount, p.lendable_value, p.lendable_basis, p.risk_weight, p.business_line\n",
+        "FROM conformed.fact_liquidity_position p\n",
+        "JOIN conformed.source_position s ON s.as_of_date = p.as_of_date AND s.record_id = p.record_id\n",
+        "WHERE p.as_of_date = CAST(:as_of AS DATE) AND s.source_feed = :feed ORDER BY p.position_id\n"
+      ],
+      "parameters": [
+        {
+          "displayName": "as_of",
+          "keyword": "as_of",
+          "dataType": "STRING",
+          "defaultSelection": {
+            "values": {
+              "dataType": "STRING",
+              "values": [
+                {
+                  "value": "2026-02-27"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "displayName": "feed",
+          "keyword": "feed",
+          "dataType": "STRING",
+          "defaultSelection": {
+            "values": {
+              "dataType": "STRING",
+              "values": [
+                {
+                  "value": "deposits"
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "l_entity",
+      "displayName": "Source to report - 4 positions by reporting entity",
+      "queryLines": [
+        "SELECT e.reporting_entity, e.position_id, e.relationship, e.internal, e.internal_counterparty, p.product_id, COALESCE(p.principal_amount, p.market_value) AS amount\n",
+        "FROM conformed.entity_position e\n",
+        "JOIN conformed.fact_liquidity_position p ON p.as_of_date = e.as_of_date AND p.position_id = e.position_id\n",
+        "JOIN conformed.source_position s ON s.as_of_date = p.as_of_date AND s.record_id = p.record_id\n",
+        "WHERE e.as_of_date = CAST(:as_of AS DATE) AND s.source_feed = :feed ORDER BY e.position_id, e.reporting_entity\n"
+      ],
+      "parameters": [
+        {
+          "displayName": "as_of",
+          "keyword": "as_of",
+          "dataType": "STRING",
+          "defaultSelection": {
+            "values": {
+              "dataType": "STRING",
+              "values": [
+                {
+                  "value": "2026-02-27"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "displayName": "feed",
+          "keyword": "feed",
+          "dataType": "STRING",
+          "defaultSelection": {
+            "values": {
+              "dataType": "STRING",
+              "values": [
+                {
+                  "value": "deposits"
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "l_gold",
+      "displayName": "Source to report - 5 reported FR 2052a records",
+      "queryLines": [
+        "WITH pos AS (SELECT l.record_key, COUNT(*) AS positions_from_feed, SUM(l.amount) AS amount_from_feed\n",
+        "             FROM reg_2052a.record_lineage l\n",
+        "             JOIN conformed.fact_liquidity_position p ON p.as_of_date = l.as_of_date AND p.position_id = l.position_id\n",
+        "             JOIN conformed.source_position s ON s.as_of_date = p.as_of_date AND s.record_id = p.record_id\n",
+        "             WHERE l.as_of_date = CAST(:as_of AS DATE) AND s.source_feed = :feed GROUP BY 1)\n",
+        "SELECT v.reporting_entity, v.table_code, v.product_id, v.counterparty, v.collateral_class, v.maturity_bucket, v.currency, v.converted,\n",
+        "       v.reported_amount, v.record_count AS positions_in_record, pos.positions_from_feed, pos.amount_from_feed, v.record_key\n",
+        "FROM pos JOIN reg_2052a.v_filing_records v ON v.as_of_date = CAST(:as_of AS DATE) AND v.record_key = pos.record_key\n",
+        "ORDER BY v.reporting_entity, v.table_code, v.product_id\n"
+      ],
+      "parameters": [
+        {
+          "displayName": "as_of",
+          "keyword": "as_of",
+          "dataType": "STRING",
+          "defaultSelection": {
+            "values": {
+              "dataType": "STRING",
+              "values": [
+                {
+                  "value": "2026-02-27"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "displayName": "feed",
+          "keyword": "feed",
+          "dataType": "STRING",
+          "defaultSelection": {
+            "values": {
+              "dataType": "STRING",
+              "values": [
+                {
+                  "value": "deposits"
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "c_kpi",
+      "displayName": "Data - completeness and accuracy of the day",
+      "queryLines": [
+        "SELECT (SELECT COUNT_IF(status = 'PASS') FROM dq.feed_monitor WHERE as_of_date = CAST(:as_of AS DATE)) AS feeds_complete,\n",
+        "       (SELECT SUM(records) / SUM(expected_records) FROM dq.feed_monitor WHERE as_of_date = CAST(:as_of AS DATE)) AS volume_vs_expected,\n",
+        "       (SELECT COUNT(*) FROM dq.quarantine WHERE as_of_date = CAST(:as_of AS DATE)) AS records_rejected,\n",
+        "       (SELECT COUNT_IF(status <> 'PASS') FROM audit.gl_reconciliation WHERE as_of_date = CAST(:as_of AS DATE))\n",
+        "       + (SELECT COUNT_IF(status <> 'PASS') FROM audit.cross_metric_recon WHERE as_of_date = CAST(:as_of AS DATE)) AS recon_breaks\n"
+      ],
+      "parameters": [
+        {
+          "displayName": "as_of",
+          "keyword": "as_of",
+          "dataType": "STRING",
+          "defaultSelection": {
+            "values": {
+              "dataType": "STRING",
+              "values": [
+                {
+                  "value": "2026-02-27"
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "c_feeds",
+      "displayName": "Data - records received vs expected, per source feed",
+      "queryLines": [
+        "SELECT feed, measure, n AS records FROM dq.feed_monitor\n",
+        "LATERAL VIEW STACK(2, 'Received', CAST(records AS DOUBLE), 'Expected (5-day median)', CAST(expected_records AS DOUBLE)) s AS measure, n\n",
+        "WHERE as_of_date = CAST(:as_of AS DATE) ORDER BY feed\n"
+      ],
+      "parameters": [
+        {
+          "displayName": "as_of",
+          "keyword": "as_of",
+          "dataType": "STRING",
+          "defaultSelection": {
+            "values": {
+              "dataType": "STRING",
+              "values": [
+                {
+                  "value": "2026-02-27"
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "c_issues",
+      "displayName": "Data - issues to act on",
+      "queryLines": [
+        "SELECT 'Completeness' AS dimension, 'Source feed incomplete' AS issue, feed AS item, details AS detail, 'Chase the source system, then re-run' AS action\n",
+        "FROM dq.feed_monitor WHERE as_of_date = CAST(:as_of AS DATE) AND status <> 'PASS'\n",
+        "UNION ALL\n",
+        "SELECT 'Accuracy', 'Record rejected by a data quality rule', q.record_id, CONCAT(q.source_feed, ': ', q.failed_rules),\n",
+        "       COALESCE(CONCAT('Fixed in the app: ', x.fix), 'Fix, map or exclude it in step 2 Data quality')\n",
+        "FROM dq.quarantine q\n",
+        "LEFT JOIN (SELECT as_of_date, record_id, MAX_BY(CONCAT(field, ' -> ', new_value, ' (', status, ')'), created_at) AS fix FROM dq.record_fixes\n",
+        "           WHERE status <> 'WITHDRAWN' GROUP BY 1, 2) x ON x.as_of_date = q.as_of_date AND x.record_id = q.record_id\n",
+        "WHERE q.as_of_date = CAST(:as_of AS DATE)\n",
+        "UNION ALL\n",
+        "SELECT 'Accuracy', 'General ledger does not tie', recon_type, CONCAT('GL ', ROUND(gl_total, 1), ' vs filing ', ROUND(pipeline_total, 1), ' USD mm (', difference_pct, '%)'),\n",
+        "       'Explain or fix it in step 4 Validate (RECON-GL)'\n",
+        "FROM audit.gl_reconciliation WHERE as_of_date = CAST(:as_of AS DATE) AND status <> 'PASS'\n",
+        "UNION ALL\n",
+        "SELECT 'Accuracy', 'FR 2052a does not tie to the LCR', CONCAT(entity_id, ' ', metric_name), CONCAT('LCR ', reg_lcr_value, ' vs filing ', reg_2052a_value),\n",
+        "       'Blocks the filing - investigate'\n",
+        "FROM audit.cross_metric_recon WHERE as_of_date = CAST(:as_of AS DATE) AND status <> 'PASS'\n"
+      ],
+      "parameters": [
+        {
+          "displayName": "as_of",
+          "keyword": "as_of",
+          "dataType": "STRING",
+          "defaultSelection": {
+            "values": {
+              "dataType": "STRING",
+              "values": [
+                {
+                  "value": "2026-02-27"
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "r_kpi",
+      "displayName": "Rules - coverage of the day",
+      "queryLines": [
+        "SELECT s.derived / (s.positions + COALESCE(h.n, 0)) AS classified_pct, COALESCE(h.n, 0) AS without_rule, COALESCE(h.usd, 0) * 1e6 AS without_rule_usd,\n",
+        "       (SELECT COUNT(*) FROM ai_assist.suggestions WHERE status = 'PROPOSED' AND suggestion_type IN ('CUSTOMER_CLASSIFICATION', 'PRODUCT_MAPPING')\n",
+        "          AND as_of_date <= CAST(:as_of AS DATE)\n",
+        "          AND subject_key NOT IN (SELECT customer_id FROM reference.customer_master_approvals)\n",
+        "          AND subject_key NOT IN (SELECT source_product_code FROM reference.source_product_map_approvals)) AS awaiting_master_data\n",
+        "FROM audit.pid_derivation_summary s\n",
+        "LEFT JOIN (SELECT as_of_date, COUNT(*) AS n, SUM(amount_usd) AS usd FROM dq.pid_exceptions GROUP BY 1) h USING (as_of_date)\n",
+        "WHERE s.as_of_date = CAST(:as_of AS DATE)\n"
+      ],
+      "parameters": [
+        {
+          "displayName": "as_of",
+          "keyword": "as_of",
+          "dataType": "STRING",
+          "defaultSelection": {
+            "values": {
+              "dataType": "STRING",
+              "values": [
+                {
+                  "value": "2026-02-27"
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "r_by_table",
+      "displayName": "Rules - positions classified by a rule vs without one, per FR 2052a table",
+      "queryLines": [
+        "SELECT table_code, 'Classified by a PID rule' AS outcome, COUNT(*) AS positions FROM conformed.fact_liquidity_position WHERE as_of_date = CAST(:as_of AS DATE) GROUP BY 1, 2\n",
+        "UNION ALL\n",
+        "SELECT COALESCE(REGEXP_EXTRACT(provisional_product_id, '^([A-Z]+\\\\.[A-Z]+)', 1), 'unknown'), 'No rule / missing master data', COUNT(*)\n",
+        "FROM dq.pid_exceptions WHERE as_of_date = CAST(:as_of AS DATE) GROUP BY 1, 2\n"
+      ],
+      "parameters": [
+        {
+          "displayName": "as_of",
+          "keyword": "as_of",
+          "dataType": "STRING",
+          "defaultSelection": {
+            "values": {
+              "dataType": "STRING",
+              "values": [
+                {
+                  "value": "2026-02-27"
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "r_gaps",
+      "displayName": "Rules - records without a rule, and what is missing",
+      "queryLines": [
+        "SELECT e.record_id AS item, CASE e.exception_type WHEN 'CUSTOMER_PENDING' THEN 'Customer not classified yet' WHEN 'NO_RULE' THEN 'No PID rule matches'\n",
+        "       ELSE e.exception_type END AS gap, e.source_system, e.source_product_code, e.customer_id, e.provisional_product_id, e.amount_usd, e.reason,\n",
+        "       CASE WHEN e.exception_type = 'CUSTOMER_PENDING' AND a.approved_on IS NOT NULL\n",
+        "              THEN CONCAT('Approved from ', a.approved_on, ' - re-run this day to include it, or leave it out')\n",
+        "            WHEN e.exception_type = 'CUSTOMER_PENDING' THEN 'Approve the customer in step 3 PID enrichment' ELSE 'Add or extend a PID rule' END AS action\n",
+        "FROM dq.pid_exceptions e LEFT JOIN reference.customer_master_approvals a ON a.customer_id = e.customer_id\n",
+        "WHERE e.as_of_date = CAST(:as_of AS DATE)\n",
+        "UNION ALL\n",
+        "SELECT q.record_id, 'Bank product code not in the catalogue', get_json_object(q.record_json, '$.source_system'), q.source_product_code,\n",
+        "       get_json_object(q.record_json, '$.customer_id'), NULL, NULL, 'New product code - the record cannot be classified',\n",
+        "       CASE WHEN m.source_product_code IS NOT NULL THEN CONCAT('Mapped to ', m.standard_product_type, ' - re-run to classify') ELSE 'Map the code in step 2 Data quality' END\n",
+        "FROM dq.quarantine q LEFT JOIN reference.source_product_map_approvals m ON m.source_product_code = q.source_product_code\n",
+        "WHERE q.as_of_date = CAST(:as_of AS DATE) AND q.failed_rules LIKE '%DQ_006%'\n",
+        "UNION ALL\n",
+        "SELECT s.subject_key, CASE s.suggestion_type WHEN 'CUSTOMER_CLASSIFICATION' THEN 'New customer awaiting approval' ELSE 'New product code awaiting mapping' END,\n",
+        "       NULL, NULL, NULL, NULL, NULL, s.subject, 'Accept or edit the AI suggestion in step 3 PID enrichment'\n",
+        "FROM ai_assist.suggestions s WHERE s.status = 'PROPOSED' AND s.suggestion_type IN ('CUSTOMER_CLASSIFICATION', 'PRODUCT_MAPPING') AND s.as_of_date <= CAST(:as_of AS DATE)\n",
+        "  AND s.subject_key NOT IN (SELECT customer_id FROM reference.customer_master_approvals)\n",
+        "  AND s.subject_key NOT IN (SELECT source_product_code FROM reference.source_product_map_approvals)\n"
+      ],
+      "parameters": [
+        {
+          "displayName": "as_of",
+          "keyword": "as_of",
+          "dataType": "STRING",
+          "defaultSelection": {
+            "values": {
+              "dataType": "STRING",
+              "values": [
+                {
+                  "value": "2026-02-27"
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "x_kpi",
+      "displayName": "Validation - result of the day",
+      "queryLines": [
+        "WITH v AS (SELECT COUNT(*) AS checks, COUNT_IF(status IN ('PASS', 'NOT_APPLICABLE')) AS passed, COUNT_IF(status = 'FAIL') AS failed\n",
+        "           FROM reg_2052a.gold_validation WHERE as_of_date = CAST(:as_of AS DATE)),\n",
+        "items AS (SELECT DISTINCT d.rule_id, COALESCE(d.record_key, NULLIF(REGEXP_EXTRACT(d.failure_detail, '([A-Z]{3}-[0-9]{4}-[0-9]{2}-[0-9]{2}-[A-Z0-9]+#[A-Z0-9]+)', 1), ''),\n",
+        "                      CONCAT(d.table_code, '|', COALESCE(d.product_id, 'None'), '|', SUBSTR(COALESCE(d.failure_detail, ''), 1, 80))) AS item_key\n",
+        "          FROM reg_2052a.gold_validation_detail d JOIN reg_2052a.gold_validation g\n",
+        "            ON g.as_of_date = d.as_of_date AND g.rule_id = d.rule_id AND g.status = 'WARNING' WHERE d.as_of_date = CAST(:as_of AS DATE)),\n",
+        "open AS (SELECT COUNT(*) AS n FROM items i LEFT ANTI JOIN reg_2052a.validation_decisions x\n",
+        "         ON x.as_of_date = CAST(:as_of AS DATE) AND x.rule_id = i.rule_id AND x.item_key = i.item_key AND x.status <> 'WITHDRAWN'),\n",
+        "f AS (SELECT COUNT_IF(xsd_valid) / COUNT(*) AS xsd_valid FROM reg_2052a.submission_files\n",
+        "      WHERE as_of_date = CAST(:as_of AS DATE) AND run_number = (SELECT MAX(run_number) FROM reg_2052a.submission_files WHERE as_of_date = CAST(:as_of AS DATE)))\n",
+        "SELECT v.passed / v.checks AS passed_pct, v.failed, open.n AS warnings_open, f.xsd_valid FROM v, open, f\n"
+      ],
+      "parameters": [
+        {
+          "displayName": "as_of",
+          "keyword": "as_of",
+          "dataType": "STRING",
+          "defaultSelection": {
+            "values": {
+              "dataType": "STRING",
+              "values": [
+                {
+                  "value": "2026-02-27"
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "x_by_source",
+      "displayName": "Validation - checks by source and result",
+      "queryLines": [
+        "SELECT CASE rule_source WHEN 'Fed PSV' THEN 'Fed post-submission checks' WHEN 'Instructions' THEN 'FR 2052a Instructions'\n",
+        "            WHEN '6G BR' THEN 'Fed 6G business rules' WHEN '6G BR General' THEN 'Fed 6G file rules' WHEN '6G XSD' THEN 'Fed 6G schema (XSD)'\n",
+        "            ELSE rule_source END AS source,\n",
+        "       CASE WHEN status IN ('PASS', 'NOT_APPLICABLE') THEN 'Passed' WHEN status = 'WARNING' THEN 'Warning' ELSE 'Failed' END AS result, COUNT(*) AS checks\n",
+        "FROM reg_2052a.gold_validation WHERE as_of_date = CAST(:as_of AS DATE) GROUP BY ALL\n"
+      ],
+      "parameters": [
+        {
+          "displayName": "as_of",
+          "keyword": "as_of",
+          "dataType": "STRING",
+          "defaultSelection": {
+            "values": {
+              "dataType": "STRING",
+              "values": [
+                {
+                  "value": "2026-02-27"
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "x_issues",
+      "displayName": "Validation - checks not passing today and where each stands",
+      "queryLines": [
+        "WITH items AS (SELECT DISTINCT d.rule_id, COALESCE(d.record_key, NULLIF(REGEXP_EXTRACT(d.failure_detail, '([A-Z]{3}-[0-9]{4}-[0-9]{2}-[0-9]{2}-[A-Z0-9]+#[A-Z0-9]+)', 1), ''),\n",
+        "                      CONCAT(d.table_code, '|', COALESCE(d.product_id, 'None'), '|', SUBSTR(COALESCE(d.failure_detail, ''), 1, 80))) AS item_key FROM reg_2052a.gold_validation_detail d WHERE d.as_of_date = CAST(:as_of AS DATE)),\n",
+        "st AS (SELECT i.rule_id, COUNT(*) AS exceptions, COUNT(x.item_key) AS resolved\n",
+        "       FROM items i LEFT JOIN (SELECT DISTINCT rule_id, item_key FROM reg_2052a.validation_decisions WHERE as_of_date = CAST(:as_of AS DATE) AND status <> 'WITHDRAWN') x\n",
+        "         USING (rule_id, item_key) GROUP BY 1)\n",
+        "SELECT v.rule_id, v.rule_name, v.rule_source, v.severity, CASE v.status WHEN 'FAIL' THEN 'Failed' ELSE 'Warning' END AS result,\n",
+        "       COALESCE(st.exceptions, v.records_failed) AS exceptions, COALESCE(st.resolved, 0) AS resolved,\n",
+        "       COALESCE(st.exceptions, v.records_failed) - COALESCE(st.resolved, 0) AS still_open,\n",
+        "       CASE WHEN COALESCE(st.exceptions, v.records_failed) - COALESCE(st.resolved, 0) = 0 THEN 'Resolved - nothing to do'\n",
+        "            WHEN v.status = 'FAIL' THEN 'Blocks the filing - correct in step 4 Validate' ELSE 'Explain or fix in step 4 Validate' END AS action\n",
+        "FROM reg_2052a.gold_validation v LEFT JOIN st USING (rule_id)\n",
+        "WHERE v.as_of_date = CAST(:as_of AS DATE) AND v.status IN ('FAIL', 'WARNING') ORDER BY v.status, still_open DESC\n"
+      ],
+      "parameters": [
+        {
+          "displayName": "as_of",
+          "keyword": "as_of",
+          "dataType": "STRING",
+          "defaultSelection": {
+            "values": {
+              "dataType": "STRING",
+              "values": [
+                {
+                  "value": "2026-02-27"
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "p_tables",
+      "displayName": "Report - tables",
+      "queryLines": [
+        "SELECT t.section, v.table_code, t.table_name, COUNT(*) AS records, SUM(v.record_count) AS positions,\n",
+        "       SUM(CASE WHEN v.product_id IN ('S.L.6', 'S.L.10') THEN 0 ELSE v.reported_amount_usd END) AS usd_mm\n",
+        "FROM reg_2052a.v_filing_records v JOIN reference.spec_tables t USING (table_code)\n",
+        "WHERE v.as_of_date = CAST(:as_of AS DATE) AND v.reporting_entity = :entity GROUP BY ALL ORDER BY v.table_code\n"
+      ],
+      "parameters": [
+        {
+          "displayName": "as_of",
+          "keyword": "as_of",
+          "dataType": "STRING",
+          "defaultSelection": {
+            "values": {
+              "dataType": "STRING",
+              "values": [
+                {
+                  "value": "2026-02-27"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "displayName": "entity",
+          "keyword": "entity",
+          "dataType": "STRING",
+          "defaultSelection": {
+            "values": {
+              "dataType": "STRING",
+              "values": [
+                {
+                  "value": "ENT001"
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "p_records",
+      "displayName": "Report - reported records",
+      "queryLines": [
+        "SELECT t.section, v.table_code, v.product_id, pr.product_name, COALESCE(v.sub_product, '') AS sub_product, COALESCE(v.counterparty, '') AS counterparty,\n",
+        "       COALESCE(v.collateral_class, '') AS collateral_class, v.maturity_bucket, v.currency,\n",
+        "       v.converted, v.reported_amount, v.reported_amount_usd, v.record_count AS positions, v.validation_status, v.record_key\n",
+        "FROM reg_2052a.v_filing_records v JOIN reference.spec_tables t USING (table_code)\n",
+        "LEFT JOIN reference.ref_product pr ON pr.product_id = v.product_id\n",
+        "WHERE v.as_of_date = CAST(:as_of AS DATE) AND v.reporting_entity = :entity ORDER BY v.table_code, v.product_id, v.reported_amount_usd DESC\n"
+      ],
+      "parameters": [
+        {
+          "displayName": "as_of",
+          "keyword": "as_of",
+          "dataType": "STRING",
+          "defaultSelection": {
+            "values": {
+              "dataType": "STRING",
+              "values": [
+                {
+                  "value": "2026-02-27"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "displayName": "entity",
+          "keyword": "entity",
+          "dataType": "STRING",
+          "defaultSelection": {
+            "values": {
+              "dataType": "STRING",
+              "values": [
+                {
+                  "value": "ENT001"
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "p_positions",
+      "displayName": "Report - positions behind each record",
+      "queryLines": [
+        "SELECT t.section, l.table_code, p.product_id, l.record_key, l.position_id, p.record_id, p.source_system, p.source_product_code, p.booking_entity,\n",
+        "       COALESCE(p.customer_id, '') AS customer_id, COALESCE(p.counterparty, '') AS counterparty, COALESCE(p.collateral_class, '') AS collateral_class,\n",
+        "       p.maturity_date, p.maturity_bucket, p.currency, l.amount, p.pid_rule_id\n",
+        "FROM reg_2052a.record_lineage l JOIN reference.spec_tables t USING (table_code)\n",
+        "JOIN conformed.fact_liquidity_position p ON p.as_of_date = l.as_of_date AND p.position_id = l.position_id\n",
+        "WHERE l.as_of_date = CAST(:as_of AS DATE) AND l.reporting_entity = :entity ORDER BY l.table_code, p.product_id, l.record_key\n"
+      ],
+      "parameters": [
+        {
+          "displayName": "as_of",
+          "keyword": "as_of",
+          "dataType": "STRING",
+          "defaultSelection": {
+            "values": {
+              "dataType": "STRING",
+              "values": [
+                {
+                  "value": "2026-02-27"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "displayName": "entity",
+          "keyword": "entity",
+          "dataType": "STRING",
+          "defaultSelection": {
+            "values": {
+              "dataType": "STRING",
+              "values": [
+                {
+                  "value": "ENT001"
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "a_log",
+      "displayName": "Adjustments - audit trail",
+      "queryLines": [
+        "SELECT as_of_date, adjustment_type, subject, COALESCE(field, '') AS field, COALESCE(old_value, '') AS old_value, COALESCE(new_value, '') AS new_value,\n",
+        "       COALESCE(note, '') AS note, made_by, made_at, status FROM (\n",
+        "  SELECT as_of_date, 'Data quality fix' AS adjustment_type, record_id AS subject,\n",
+        "         CASE field WHEN '_map_code' THEN 'product code mapped' WHEN '_exclude' THEN 'record excluded' ELSE field END AS field,\n",
+        "         old_value, new_value, reason AS note, preparer AS made_by, created_at AS made_at, status FROM dq.record_fixes\n",
+        "  UNION ALL SELECT as_of_date, 'Position correction', position_id, field, old_value, new_value, reason, preparer, created_at, status FROM reg_2052a.position_corrections\n",
+        "  UNION ALL SELECT as_of_date, 'Reported amount adjustment', record_key, column_name, NULL, CAST(amount AS STRING), reason, preparer, created_at, status FROM reg_2052a.adjustments\n",
+        "  UNION ALL SELECT approved_on, 'New customer approved', customer_id, 'counterparty', NULL, counterparty, customer_name, approved_by, decided_at, 'APPROVED' FROM reference.customer_master_approvals\n",
+        "  UNION ALL SELECT approved_on, 'New product code mapped', source_product_code, 'standard product type', NULL, standard_product_type, description, approved_by, decided_at, 'APPROVED'\n",
+        "            FROM reference.source_product_map_approvals\n",
+        "  UNION ALL SELECT as_of_date, CASE WHEN suggestion_type IN ('COMMENT_DRAFT', 'VARIANCE_COMMENTARY') THEN 'Comment for the Fed' ELSE 'PID exception' END,\n",
+        "            subject_key, LOWER(REPLACE(suggestion_type, '_', ' ')), NULL, NULL, subject, decided_by, decided_at, status\n",
+        "            FROM ai_assist.suggestions WHERE status <> 'PROPOSED' AND suggestion_type IN ('COMMENT_DRAFT', 'VARIANCE_COMMENTARY', 'PID_EXCEPTION')\n",
+        "  UNION ALL SELECT as_of_date, CASE WHEN action = 'explain' THEN 'Validation exception explained' ELSE 'Validation exception corrected' END,\n",
+        "            item_key, rule_id, NULL, NULL, note, decided_by, decided_at, status FROM reg_2052a.validation_decisions\n",
+        "  UNION ALL SELECT as_of_date, 'Sign-off', CONCAT('run ', run_number, ' v', version), LOWER(REPLACE(action, '_', ' ')), NULL, status, note, actor, action_timestamp, status\n",
+        "            FROM reg_2052a.submission_review WHERE action <> 'GENERATED')\n",
+        "WHERE as_of_date = CAST(:as_of AS DATE) ORDER BY made_at DESC\n"
+      ],
+      "parameters": [
+        {
+          "displayName": "as_of",
+          "keyword": "as_of",
+          "dataType": "STRING",
+          "defaultSelection": {
+            "values": {
+              "dataType": "STRING",
+              "values": [
+                {
+                  "value": "2026-02-27"
+                }
+              ]
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "pages": [
+    {
+      "name": "data",
+      "displayName": "Source to Report",
+      "layout": [
+        {
+          "widget": {
+            "name": "data_title",
+            "multilineTextboxSpec": {
+              "lines": [
+                "## Source to Report\n",
+                "\n",
+                "Pick a day and a source feed: the exact records it sent, which passed the data quality check, the positions they became after enrichment, how each reporting entity reports them, and the FR 2052a records they end up in.\n"
+              ]
+            }
+          },
+          "position": {
+            "x": 0,
+            "y": 0,
+            "width": 6,
+            "height": 2
+          }
+        },
+        {
+          "widget": {
+            "name": "data_f_date",
+            "queries": [
+              {
+                "name": "data_f_date_values",
+                "query": {
+                  "datasetName": "v_dates",
+                  "fields": [
+                    {
+                      "name": "as_of",
+                      "expression": "`as_of`"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              },
+              {
+                "name": "data_f_date_l_counts",
+                "query": {
+                  "datasetName": "l_counts",
+                  "parameters": [
+                    {
+                      "name": "as_of",
+                      "keyword": "as_of"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              },
+              {
+                "name": "data_f_date_l_bronze",
+                "query": {
+                  "datasetName": "l_bronze",
+                  "parameters": [
+                    {
+                      "name": "as_of",
+                      "keyword": "as_of"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              },
+              {
+                "name": "data_f_date_l_dq",
+                "query": {
+                  "datasetName": "l_dq",
+                  "parameters": [
+                    {
+                      "name": "as_of",
+                      "keyword": "as_of"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              },
+              {
+                "name": "data_f_date_l_silver",
+                "query": {
+                  "datasetName": "l_silver",
+                  "parameters": [
+                    {
+                      "name": "as_of",
+                      "keyword": "as_of"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              },
+              {
+                "name": "data_f_date_l_entity",
+                "query": {
+                  "datasetName": "l_entity",
+                  "parameters": [
+                    {
+                      "name": "as_of",
+                      "keyword": "as_of"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              },
+              {
+                "name": "data_f_date_l_gold",
+                "query": {
+                  "datasetName": "l_gold",
+                  "parameters": [
+                    {
+                      "name": "as_of",
+                      "keyword": "as_of"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "version": 2,
+              "widgetType": "filter-single-select",
+              "encodings": {
+                "fields": [
+                  {
+                    "fieldName": "as_of",
+                    "displayName": "As-of date",
+                    "queryName": "data_f_date_values"
+                  },
+                  {
+                    "parameterName": "as_of",
+                    "queryName": "data_f_date_l_counts"
+                  },
+                  {
+                    "parameterName": "as_of",
+                    "queryName": "data_f_date_l_bronze"
+                  },
+                  {
+                    "parameterName": "as_of",
+                    "queryName": "data_f_date_l_dq"
+                  },
+                  {
+                    "parameterName": "as_of",
+                    "queryName": "data_f_date_l_silver"
+                  },
+                  {
+                    "parameterName": "as_of",
+                    "queryName": "data_f_date_l_entity"
+                  },
+                  {
+                    "parameterName": "as_of",
+                    "queryName": "data_f_date_l_gold"
+                  }
+                ]
+              },
+              "frame": {
+                "showTitle": true,
+                "title": "As-of date"
+              }
+            }
+          },
+          "position": {
+            "x": 6,
+            "y": 0,
+            "width": 3,
+            "height": 2
+          }
+        },
+        {
+          "widget": {
+            "name": "data_f_feed",
+            "queries": [
+              {
+                "name": "data_f_feed_values",
+                "query": {
+                  "datasetName": "v_feeds",
+                  "fields": [
+                    {
+                      "name": "feed",
+                      "expression": "`feed`"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              },
+              {
+                "name": "data_f_feed_l_counts",
+                "query": {
+                  "datasetName": "l_counts",
+                  "parameters": [
+                    {
+                      "name": "feed",
+                      "keyword": "feed"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              },
+              {
+                "name": "data_f_feed_l_bronze",
+                "query": {
+                  "datasetName": "l_bronze",
+                  "parameters": [
+                    {
+                      "name": "feed",
+                      "keyword": "feed"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              },
+              {
+                "name": "data_f_feed_l_dq",
+                "query": {
+                  "datasetName": "l_dq",
+                  "parameters": [
+                    {
+                      "name": "feed",
+                      "keyword": "feed"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              },
+              {
+                "name": "data_f_feed_l_silver",
+                "query": {
+                  "datasetName": "l_silver",
+                  "parameters": [
+                    {
+                      "name": "feed",
+                      "keyword": "feed"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              },
+              {
+                "name": "data_f_feed_l_entity",
+                "query": {
+                  "datasetName": "l_entity",
+                  "parameters": [
+                    {
+                      "name": "feed",
+                      "keyword": "feed"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              },
+              {
+                "name": "data_f_feed_l_gold",
+                "query": {
+                  "datasetName": "l_gold",
+                  "parameters": [
+                    {
+                      "name": "feed",
+                      "keyword": "feed"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "version": 2,
+              "widgetType": "filter-single-select",
+              "encodings": {
+                "fields": [
+                  {
+                    "fieldName": "feed",
+                    "displayName": "Source feed",
+                    "queryName": "data_f_feed_values"
+                  },
+                  {
+                    "parameterName": "feed",
+                    "queryName": "data_f_feed_l_counts"
+                  },
+                  {
+                    "parameterName": "feed",
+                    "queryName": "data_f_feed_l_bronze"
+                  },
+                  {
+                    "parameterName": "feed",
+                    "queryName": "data_f_feed_l_dq"
+                  },
+                  {
+                    "parameterName": "feed",
+                    "queryName": "data_f_feed_l_silver"
+                  },
+                  {
+                    "parameterName": "feed",
+                    "queryName": "data_f_feed_l_entity"
+                  },
+                  {
+                    "parameterName": "feed",
+                    "queryName": "data_f_feed_l_gold"
+                  }
+                ]
+              },
+              "frame": {
+                "showTitle": true,
+                "title": "Source feed"
+              }
+            }
+          },
+          "position": {
+            "x": 9,
+            "y": 0,
+            "width": 3,
+            "height": 2
+          }
+        },
+        {
+          "widget": {
+            "name": "l_n_bronze",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "l_counts",
+                  "fields": [
+                    {
+                      "name": "bronze_records",
+                      "expression": "`bronze_records`"
+                    }
+                  ],
+                  "disaggregated": true
+                }
+              }
+            ],
+            "spec": {
+              "version": 2,
+              "widgetType": "counter",
+              "encodings": {
+                "value": {
+                  "fieldName": "bronze_records",
+                  "displayName": "1 Source records",
+                  "format": {
+                    "type": "number-plain",
+                    "abbreviation": "compact"
+                  }
+                }
+              },
+              "frame": {
+                "showTitle": true,
+                "title": "1 Source records"
+              }
+            }
+          },
+          "position": {
+            "x": 0,
+            "y": 2,
+            "width": 2,
+            "height": 3
+          }
+        },
+        {
+          "widget": {
+            "name": "l_n_pass",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "l_counts",
+                  "fields": [
+                    {
+                      "name": "dq_passed",
+                      "expression": "`dq_passed`"
+                    }
+                  ],
+                  "disaggregated": true
+                }
+              }
+            ],
+            "spec": {
+              "version": 2,
+              "widgetType": "counter",
+              "encodings": {
+                "value": {
+                  "fieldName": "dq_passed",
+                  "displayName": "2 Passed quality check",
+                  "format": {
+                    "type": "number-plain",
+                    "abbreviation": "compact"
+                  }
+                }
+              },
+              "frame": {
+                "showTitle": true,
+                "title": "2 Passed quality check"
+              }
+            }
+          },
+          "position": {
+            "x": 2,
+            "y": 2,
+            "width": 2,
+            "height": 3
+          }
+        },
+        {
+          "widget": {
+            "name": "l_n_quar",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "l_counts",
+                  "fields": [
+                    {
+                      "name": "quarantined",
+                      "expression": "`quarantined`"
+                    }
+                  ],
+                  "disaggregated": true
+                }
+              }
+            ],
+            "spec": {
+              "version": 2,
+              "widgetType": "counter",
+              "encodings": {
+                "value": {
+                  "fieldName": "quarantined",
+                  "displayName": "2 Held back",
+                  "format": {
+                    "type": "number-plain",
+                    "abbreviation": "compact"
+                  }
+                }
+              },
+              "frame": {
+                "showTitle": true,
+                "title": "2 Held back"
+              }
+            }
+          },
+          "position": {
+            "x": 4,
+            "y": 2,
+            "width": 2,
+            "height": 3
+          }
+        },
+        {
+          "widget": {
+            "name": "l_n_silver",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "l_counts",
+                  "fields": [
+                    {
+                      "name": "silver_positions",
+                      "expression": "`silver_positions`"
+                    }
+                  ],
+                  "disaggregated": true
+                }
+              }
+            ],
+            "spec": {
+              "version": 2,
+              "widgetType": "counter",
+              "encodings": {
+                "value": {
+                  "fieldName": "silver_positions",
+                  "displayName": "3 Enriched positions",
+                  "format": {
+                    "type": "number-plain",
+                    "abbreviation": "compact"
+                  }
+                }
+              },
+              "frame": {
+                "showTitle": true,
+                "title": "3 Enriched positions"
+              }
+            }
+          },
+          "position": {
+            "x": 6,
+            "y": 2,
+            "width": 2,
+            "height": 3
+          }
+        },
+        {
+          "widget": {
+            "name": "l_n_entity",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "l_counts",
+                  "fields": [
+                    {
+                      "name": "entity_positions",
+                      "expression": "`entity_positions`"
+                    }
+                  ],
+                  "disaggregated": true
+                }
+              }
+            ],
+            "spec": {
+              "version": 2,
+              "widgetType": "counter",
+              "encodings": {
+                "value": {
+                  "fieldName": "entity_positions",
+                  "displayName": "4 By reporting entity",
+                  "format": {
+                    "type": "number-plain",
+                    "abbreviation": "compact"
+                  }
+                }
+              },
+              "frame": {
+                "showTitle": true,
+                "title": "4 By reporting entity"
+              }
+            }
+          },
+          "position": {
+            "x": 8,
+            "y": 2,
+            "width": 2,
+            "height": 3
+          }
+        },
+        {
+          "widget": {
+            "name": "l_n_gold",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "l_counts",
+                  "fields": [
+                    {
+                      "name": "filed_records",
+                      "expression": "`filed_records`"
+                    }
+                  ],
+                  "disaggregated": true
+                }
+              }
+            ],
+            "spec": {
+              "version": 2,
+              "widgetType": "counter",
+              "encodings": {
+                "value": {
+                  "fieldName": "filed_records",
+                  "displayName": "5 Reported records",
+                  "format": {
+                    "type": "number-plain",
+                    "abbreviation": "compact"
+                  }
+                }
+              },
+              "frame": {
+                "showTitle": true,
+                "title": "5 Reported records"
+              }
+            }
+          },
+          "position": {
+            "x": 10,
+            "y": 2,
+            "width": 2,
+            "height": 3
+          }
+        },
+        {
+          "widget": {
+            "name": "l_t1",
+            "multilineTextboxSpec": {
+              "lines": [
+                "### 1. Source records - exactly as the source system sent them\n"
+              ]
+            }
+          },
+          "position": {
+            "x": 0,
+            "y": 5,
+            "width": 12,
+            "height": 1
+          }
+        },
+        {
+          "widget": {
+            "name": "l_bronze_table",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "l_bronze",
+                  "fields": [
+                    {
+                      "name": "feed",
+                      "expression": "`feed`"
+                    },
+                    {
+                      "name": "record_id",
+                      "expression": "`record_id`"
+                    },
+                    {
+                      "name": "booking_entity",
+                      "expression": "`booking_entity`"
+                    },
+                    {
+                      "name": "report_for_entity",
+                      "expression": "`report_for_entity`"
+                    },
+                    {
+                      "name": "source_system",
+                      "expression": "`source_system`"
+                    },
+                    {
+                      "name": "instrument_type",
+                      "expression": "`instrument_type`"
+                    },
+                    {
+                      "name": "source_product_code",
+                      "expression": "`source_product_code`"
+                    },
+                    {
+                      "name": "product_subtype",
+                      "expression": "`product_subtype`"
+                    },
+                    {
+                      "name": "flow_direction",
+                      "expression": "`flow_direction`"
+                    },
+                    {
+                      "name": "customer_id",
+                      "expression": "`customer_id`"
+                    },
+                    {
+                      "name": "collateral_id",
+                      "expression": "`collateral_id`"
+                    },
+                    {
+                      "name": "subsidiary_entity",
+                      "expression": "`subsidiary_entity`"
+                    },
+                    {
+                      "name": "sub_product",
+                      "expression": "`sub_product`"
+                    },
+                    {
+                      "name": "sub_product_2",
+                      "expression": "`sub_product_2`"
+                    },
+                    {
+                      "name": "currency",
+                      "expression": "`currency`"
+                    },
+                    {
+                      "name": "currency_2",
+                      "expression": "`currency_2`"
+                    },
+                    {
+                      "name": "maturity_type",
+                      "expression": "`maturity_type`"
+                    },
+                    {
+                      "name": "maturity_date",
+                      "expression": "`maturity_date`"
+                    },
+                    {
+                      "name": "forward_start_date",
+                      "expression": "`forward_start_date`"
+                    },
+                    {
+                      "name": "effective_maturity_date",
+                      "expression": "`effective_maturity_date`"
+                    },
+                    {
+                      "name": "option_type",
+                      "expression": "`option_type`"
+                    },
+                    {
+                      "name": "option_date",
+                      "expression": "`option_date`"
+                    },
+                    {
+                      "name": "notice_days",
+                      "expression": "`notice_days`"
+                    },
+                    {
+                      "name": "funding_start_date",
+                      "expression": "`funding_start_date`"
+                    },
+                    {
+                      "name": "funding_end_date",
+                      "expression": "`funding_end_date`"
+                    },
+                    {
+                      "name": "draw_notice_days",
+                      "expression": "`draw_notice_days`"
+                    },
+                    {
+                      "name": "reserve_requirement",
+                      "expression": "`reserve_requirement`"
+                    },
+                    {
+                      "name": "service_type",
+                      "expression": "`service_type`"
+                    },
+                    {
+                      "name": "operational_requirement",
+                      "expression": "`operational_requirement`"
+                    },
+                    {
+                      "name": "depositor_count",
+                      "expression": "`depositor_count`"
+                    },
+                    {
+                      "name": "insurance_scheme",
+                      "expression": "`insurance_scheme`"
+                    },
+                    {
+                      "name": "principal_amount",
+                      "expression": "`principal_amount`"
+                    },
+                    {
+                      "name": "principal_amount_2",
+                      "expression": "`principal_amount_2`"
+                    },
+                    {
+                      "name": "forward_start_amount",
+                      "expression": "`forward_start_amount`"
+                    },
+                    {
+                      "name": "forward_start_amount_2",
+                      "expression": "`forward_start_amount_2`"
+                    },
+                    {
+                      "name": "market_value",
+                      "expression": "`market_value`"
+                    },
+                    {
+                      "name": "lendable_value",
+                      "expression": "`lendable_value`"
+                    },
+                    {
+                      "name": "collateral_value",
+                      "expression": "`collateral_value`"
+                    },
+                    {
+                      "name": "collateral_level",
+                      "expression": "`collateral_level`"
+                    },
+                    {
+                      "name": "encumbrance_type",
+                      "expression": "`encumbrance_type`"
+                    },
+                    {
+                      "name": "generic_issuer_type",
+                      "expression": "`generic_issuer_type`"
+                    },
+                    {
+                      "name": "generic_product",
+                      "expression": "`generic_product`"
+                    },
+                    {
+                      "name": "risk_weight",
+                      "expression": "`risk_weight`"
+                    },
+                    {
+                      "name": "accounting_designation",
+                      "expression": "`accounting_designation`"
+                    },
+                    {
+                      "name": "insured",
+                      "expression": "`insured`"
+                    },
+                    {
+                      "name": "trigger_flag",
+                      "expression": "`trigger_flag`"
+                    },
+                    {
+                      "name": "rehypothecated",
+                      "expression": "`rehypothecated`"
+                    },
+                    {
+                      "name": "unencumbered",
+                      "expression": "`unencumbered`"
+                    },
+                    {
+                      "name": "treasury_control",
+                      "expression": "`treasury_control`"
+                    },
+                    {
+                      "name": "settlement",
+                      "expression": "`settlement`"
+                    },
+                    {
+                      "name": "netting_eligible",
+                      "expression": "`netting_eligible`"
+                    },
+                    {
+                      "name": "loss_absorbency",
+                      "expression": "`loss_absorbency`"
+                    },
+                    {
+                      "name": "fx_option_direction",
+                      "expression": "`fx_option_direction`"
+                    },
+                    {
+                      "name": "collection_reference",
+                      "expression": "`collection_reference`"
+                    },
+                    {
+                      "name": "product_reference",
+                      "expression": "`product_reference`"
+                    },
+                    {
+                      "name": "sub_product_reference",
+                      "expression": "`sub_product_reference`"
+                    },
+                    {
+                      "name": "business_line",
+                      "expression": "`business_line`"
+                    },
+                    {
+                      "name": "interest_rate",
+                      "expression": "`interest_rate`"
+                    },
+                    {
+                      "name": "link_id",
+                      "expression": "`link_id`"
+                    },
+                    {
+                      "name": "load_timestamp",
+                      "expression": "`load_timestamp`"
+                    },
+                    {
+                      "name": "_source_file",
+                      "expression": "`_source_file`"
+                    },
+                    {
+                      "name": "_ingested_at",
+                      "expression": "`_ingested_at`"
+                    }
+                  ],
+                  "disaggregated": true
+                }
+              }
+            ],
+            "spec": {
+              "version": 2,
+              "widgetType": "table",
+              "encodings": {
+                "columns": [
+                  {
+                    "fieldName": "feed",
+                    "displayName": "Feed"
+                  },
+                  {
+                    "fieldName": "record_id",
+                    "displayName": "Record"
+                  },
+                  {
+                    "fieldName": "booking_entity",
+                    "displayName": "Booking entity"
+                  },
+                  {
+                    "fieldName": "report_for_entity",
+                    "displayName": "Report for entity"
+                  },
+                  {
+                    "fieldName": "source_system",
+                    "displayName": "Source system"
+                  },
+                  {
+                    "fieldName": "instrument_type",
+                    "displayName": "Instrument type"
+                  },
+                  {
+                    "fieldName": "source_product_code",
+                    "displayName": "Bank product code"
+                  },
+                  {
+                    "fieldName": "product_subtype",
+                    "displayName": "Product subtype"
+                  },
+                  {
+                    "fieldName": "flow_direction",
+                    "displayName": "Flow direction"
+                  },
+                  {
+                    "fieldName": "customer_id",
+                    "displayName": "Customer"
+                  },
+                  {
+                    "fieldName": "collateral_id",
+                    "displayName": "Collateral id"
+                  },
+                  {
+                    "fieldName": "subsidiary_entity",
+                    "displayName": "Subsidiary entity"
+                  },
+                  {
+                    "fieldName": "sub_product",
+                    "displayName": "Sub product"
+                  },
+                  {
+                    "fieldName": "sub_product_2",
+                    "displayName": "Sub product 2"
+                  },
+                  {
+                    "fieldName": "currency",
+                    "displayName": "Currency"
+                  },
+                  {
+                    "fieldName": "currency_2",
+                    "displayName": "Currency 2"
+                  },
+                  {
+                    "fieldName": "maturity_type",
+                    "displayName": "Maturity type"
+                  },
+                  {
+                    "fieldName": "maturity_date",
+                    "displayName": "Maturity date"
+                  },
+                  {
+                    "fieldName": "forward_start_date",
+                    "displayName": "Forward start date"
+                  },
+                  {
+                    "fieldName": "effective_maturity_date",
+                    "displayName": "Effective maturity date"
+                  },
+                  {
+                    "fieldName": "option_type",
+                    "displayName": "Option type"
+                  },
+                  {
+                    "fieldName": "option_date",
+                    "displayName": "Option date"
+                  },
+                  {
+                    "fieldName": "notice_days",
+                    "displayName": "Notice days"
+                  },
+                  {
+                    "fieldName": "funding_start_date",
+                    "displayName": "Funding start date"
+                  },
+                  {
+                    "fieldName": "funding_end_date",
+                    "displayName": "Funding end date"
+                  },
+                  {
+                    "fieldName": "draw_notice_days",
+                    "displayName": "Draw notice days"
+                  },
+                  {
+                    "fieldName": "reserve_requirement",
+                    "displayName": "Reserve requirement"
+                  },
+                  {
+                    "fieldName": "service_type",
+                    "displayName": "Service type"
+                  },
+                  {
+                    "fieldName": "operational_requirement",
+                    "displayName": "Operational requirement"
+                  },
+                  {
+                    "fieldName": "depositor_count",
+                    "displayName": "Depositor count"
+                  },
+                  {
+                    "fieldName": "insurance_scheme",
+                    "displayName": "Insurance scheme"
+                  },
+                  {
+                    "fieldName": "principal_amount",
+                    "displayName": "Principal"
+                  },
+                  {
+                    "fieldName": "principal_amount_2",
+                    "displayName": "Principal amount 2"
+                  },
+                  {
+                    "fieldName": "forward_start_amount",
+                    "displayName": "Forward start amount"
+                  },
+                  {
+                    "fieldName": "forward_start_amount_2",
+                    "displayName": "Forward start amount 2"
+                  },
+                  {
+                    "fieldName": "market_value",
+                    "displayName": "Market value"
+                  },
+                  {
+                    "fieldName": "lendable_value",
+                    "displayName": "Lendable value"
+                  },
+                  {
+                    "fieldName": "collateral_value",
+                    "displayName": "Collateral value"
+                  },
+                  {
+                    "fieldName": "collateral_level",
+                    "displayName": "Collateral level"
+                  },
+                  {
+                    "fieldName": "encumbrance_type",
+                    "displayName": "Encumbrance type"
+                  },
+                  {
+                    "fieldName": "generic_issuer_type",
+                    "displayName": "Generic issuer type"
+                  },
+                  {
+                    "fieldName": "generic_product",
+                    "displayName": "Generic product"
+                  },
+                  {
+                    "fieldName": "risk_weight",
+                    "displayName": "Risk weight %"
+                  },
+                  {
+                    "fieldName": "accounting_designation",
+                    "displayName": "Accounting designation"
+                  },
+                  {
+                    "fieldName": "insured",
+                    "displayName": "Insured"
+                  },
+                  {
+                    "fieldName": "trigger_flag",
+                    "displayName": "Trigger flag"
+                  },
+                  {
+                    "fieldName": "rehypothecated",
+                    "displayName": "Rehypothecated"
+                  },
+                  {
+                    "fieldName": "unencumbered",
+                    "displayName": "Unencumbered"
+                  },
+                  {
+                    "fieldName": "treasury_control",
+                    "displayName": "Treasury control"
+                  },
+                  {
+                    "fieldName": "settlement",
+                    "displayName": "Settlement"
+                  },
+                  {
+                    "fieldName": "netting_eligible",
+                    "displayName": "Netting eligible"
+                  },
+                  {
+                    "fieldName": "loss_absorbency",
+                    "displayName": "Loss absorbency"
+                  },
+                  {
+                    "fieldName": "fx_option_direction",
+                    "displayName": "Fx option direction"
+                  },
+                  {
+                    "fieldName": "collection_reference",
+                    "displayName": "Collection reference"
+                  },
+                  {
+                    "fieldName": "product_reference",
+                    "displayName": "Product reference"
+                  },
+                  {
+                    "fieldName": "sub_product_reference",
+                    "displayName": "Sub product reference"
+                  },
+                  {
+                    "fieldName": "business_line",
+                    "displayName": "Business line"
+                  },
+                  {
+                    "fieldName": "interest_rate",
+                    "displayName": "Interest rate"
+                  },
+                  {
+                    "fieldName": "link_id",
+                    "displayName": "Collateral link"
+                  },
+                  {
+                    "fieldName": "load_timestamp",
+                    "displayName": "Extracted at"
+                  },
+                  {
+                    "fieldName": "_source_file",
+                    "displayName": "Source file"
+                  },
+                  {
+                    "fieldName": "_ingested_at",
+                    "displayName": "Received at"
+                  }
+                ]
+              },
+              "frame": {
+                "showTitle": true,
+                "title": "Every record of the feed, every field, with the file it arrived in and when it was received"
+              }
+            }
+          },
+          "position": {
+            "x": 0,
+            "y": 6,
+            "width": 12,
+            "height": 9
+          }
+        },
+        {
+          "widget": {
+            "name": "l_t2",
+            "multilineTextboxSpec": {
+              "lines": [
+                "### 2. Data quality check - which records passed, which were held back and by which rule\n"
+              ]
+            }
+          },
+          "position": {
+            "x": 0,
+            "y": 15,
+            "width": 12,
+            "height": 1
+          }
+        },
+        {
+          "widget": {
+            "name": "l_dq_table",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "l_dq",
+                  "fields": [
+                    {
+                      "name": "record_id",
+                      "expression": "`record_id`"
+                    },
+                    {
+                      "name": "dq_result",
+                      "expression": "`dq_result`"
+                    },
+                    {
+                      "name": "rules_failed",
+                      "expression": "`rules_failed`"
+                    },
+                    {
+                      "name": "source_product_code",
+                      "expression": "`source_product_code`"
+                    },
+                    {
+                      "name": "customer_id",
+                      "expression": "`customer_id`"
+                    },
+                    {
+                      "name": "currency",
+                      "expression": "`currency`"
+                    },
+                    {
+                      "name": "principal_amount",
+                      "expression": "`principal_amount`"
+                    },
+                    {
+                      "name": "market_value",
+                      "expression": "`market_value`"
+                    },
+                    {
+                      "name": "landing_file",
+                      "expression": "`landing_file`"
+                    },
+                    {
+                      "name": "ingested_at",
+                      "expression": "`ingested_at`"
+                    },
+                    {
+                      "name": "dq_timestamp",
+                      "expression": "`dq_timestamp`"
+                    }
+                  ],
+                  "disaggregated": true
+                }
+              }
+            ],
+            "spec": {
+              "version": 2,
+              "widgetType": "table",
+              "encodings": {
+                "columns": [
+                  {
+                    "fieldName": "record_id",
+                    "displayName": "Record"
+                  },
+                  {
+                    "fieldName": "dq_result",
+                    "displayName": "Quality check"
+                  },
+                  {
+                    "fieldName": "rules_failed",
+                    "displayName": "Rules failed"
+                  },
+                  {
+                    "fieldName": "source_product_code",
+                    "displayName": "Code"
+                  },
+                  {
+                    "fieldName": "customer_id",
+                    "displayName": "Customer"
+                  },
+                  {
+                    "fieldName": "currency",
+                    "displayName": "Ccy"
+                  },
+                  {
+                    "fieldName": "principal_amount",
+                    "displayName": "Principal"
+                  },
+                  {
+                    "fieldName": "market_value",
+                    "displayName": "Market value"
+                  },
+                  {
+                    "fieldName": "landing_file",
+                    "displayName": "Source file"
+                  },
+                  {
+                    "fieldName": "ingested_at",
+                    "displayName": "Received at"
+                  },
+                  {
+                    "fieldName": "dq_timestamp",
+                    "displayName": "Checked at"
+                  }
+                ]
+              },
+              "frame": {
+                "showTitle": true,
+                "title": "Quality check result per record"
+              }
+            }
+          },
+          "position": {
+            "x": 0,
+            "y": 16,
+            "width": 12,
+            "height": 8
+          }
+        },
+        {
+          "widget": {
+            "name": "l_t3",
+            "multilineTextboxSpec": {
+              "lines": [
+                "### 3. Enriched positions - each record split into its FR 2052a parts (e.g. insured / uninsured), with counterparty, collateral, maturity and its FR 2052a product (PID)\n"
+              ]
+            }
+          },
+          "position": {
+            "x": 0,
+            "y": 24,
+            "width": 12,
+            "height": 1
+          }
+        },
+        {
+          "widget": {
+            "name": "l_silver_table",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "l_silver",
+                  "fields": [
+                    {
+                      "name": "record_id",
+                      "expression": "`record_id`"
+                    },
+                    {
+                      "name": "position_id",
+                      "expression": "`position_id`"
+                    },
+                    {
+                      "name": "part",
+                      "expression": "`part`"
+                    },
+                    {
+                      "name": "booking_entity",
+                      "expression": "`booking_entity`"
+                    },
+                    {
+                      "name": "source_product_code",
+                      "expression": "`source_product_code`"
+                    },
+                    {
+                      "name": "standard_product_type",
+                      "expression": "`standard_product_type`"
+                    },
+                    {
+                      "name": "pid_rule_id",
+                      "expression": "`pid_rule_id`"
+                    },
+                    {
+                      "name": "product_id",
+                      "expression": "`product_id`"
+                    },
+                    {
+                      "name": "table_code",
+                      "expression": "`table_code`"
+                    },
+                    {
+                      "name": "customer_id",
+                      "expression": "`customer_id`"
+                    },
+                    {
+                      "name": "counterparty",
+                      "expression": "`counterparty`"
+                    },
+                    {
+                      "name": "gsib",
+                      "expression": "`gsib`"
+                    },
+                    {
+                      "name": "collateral_class",
+                      "expression": "`collateral_class`"
+                    },
+                    {
+                      "name": "collateral_basis",
+                      "expression": "`collateral_basis`"
+                    },
+                    {
+                      "name": "maturity_date",
+                      "expression": "`maturity_date`"
+                    },
+                    {
+                      "name": "maturity_basis",
+                      "expression": "`maturity_basis`"
+                    },
+                    {
+                      "name": "maturity_bucket",
+                      "expression": "`maturity_bucket`"
+                    },
+                    {
+                      "name": "insured",
+                      "expression": "`insured`"
+                    },
+                    {
+                      "name": "insured_basis",
+                      "expression": "`insured_basis`"
+                    },
+                    {
+                      "name": "currency",
+                      "expression": "`currency`"
+                    },
+                    {
+                      "name": "amount",
+                      "expression": "`amount`"
+                    },
+                    {
+                      "name": "lendable_value",
+                      "expression": "`lendable_value`"
+                    },
+                    {
+                      "name": "risk_weight",
+                      "expression": "`risk_weight`"
+                    },
+                    {
+                      "name": "business_line",
+                      "expression": "`business_line`"
+                    }
+                  ],
+                  "disaggregated": true
+                }
+              }
+            ],
+            "spec": {
+              "version": 2,
+              "widgetType": "table",
+              "encodings": {
+                "columns": [
+                  {
+                    "fieldName": "record_id",
+                    "displayName": "Record"
+                  },
+                  {
+                    "fieldName": "position_id",
+                    "displayName": "Position"
+                  },
+                  {
+                    "fieldName": "part",
+                    "displayName": "Part"
+                  },
+                  {
+                    "fieldName": "booking_entity",
+                    "displayName": "Booked at"
+                  },
+                  {
+                    "fieldName": "source_product_code",
+                    "displayName": "Code"
+                  },
+                  {
+                    "fieldName": "standard_product_type",
+                    "displayName": "Product type"
+                  },
+                  {
+                    "fieldName": "pid_rule_id",
+                    "displayName": "Classification rule"
+                  },
+                  {
+                    "fieldName": "product_id",
+                    "displayName": "FR 2052a product (PID)"
+                  },
+                  {
+                    "fieldName": "table_code",
+                    "displayName": "Table"
+                  },
+                  {
+                    "fieldName": "customer_id",
+                    "displayName": "Customer"
+                  },
+                  {
+                    "fieldName": "counterparty",
+                    "displayName": "Counterparty"
+                  },
+                  {
+                    "fieldName": "gsib",
+                    "displayName": "G-SIB"
+                  },
+                  {
+                    "fieldName": "collateral_class",
+                    "displayName": "Collateral"
+                  },
+                  {
+                    "fieldName": "collateral_basis",
+                    "displayName": "Collateral basis"
+                  },
+                  {
+                    "fieldName": "maturity_date",
+                    "displayName": "Maturity"
+                  },
+                  {
+                    "fieldName": "maturity_basis",
+                    "displayName": "Maturity basis"
+                  },
+                  {
+                    "fieldName": "maturity_bucket",
+                    "displayName": "Bucket"
+                  },
+                  {
+                    "fieldName": "insured",
+                    "displayName": "Insured"
+                  },
+                  {
+                    "fieldName": "insured_basis",
+                    "displayName": "Insured basis"
+                  },
+                  {
+                    "fieldName": "currency",
+                    "displayName": "Ccy"
+                  },
+                  {
+                    "fieldName": "amount",
+                    "displayName": "Amount"
+                  },
+                  {
+                    "fieldName": "lendable_value",
+                    "displayName": "Lendable"
+                  },
+                  {
+                    "fieldName": "risk_weight",
+                    "displayName": "Risk weight"
+                  },
+                  {
+                    "fieldName": "business_line",
+                    "displayName": "Business line"
+                  }
+                ]
+              },
+              "frame": {
+                "showTitle": true,
+                "title": "Positions after enrichment and classification"
+              }
+            }
+          },
+          "position": {
+            "x": 0,
+            "y": 25,
+            "width": 12,
+            "height": 9
+          }
+        },
+        {
+          "widget": {
+            "name": "l_t4",
+            "multilineTextboxSpec": {
+              "lines": [
+                "### 4. Positions by reporting entity - each position in every reporting entity that owns the booking entity (consolidated, bank, broker-dealer)\n"
+              ]
+            }
+          },
+          "position": {
+            "x": 0,
+            "y": 34,
+            "width": 12,
+            "height": 1
+          }
+        },
+        {
+          "widget": {
+            "name": "l_entity_table",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "l_entity",
+                  "fields": [
+                    {
+                      "name": "reporting_entity",
+                      "expression": "`reporting_entity`"
+                    },
+                    {
+                      "name": "position_id",
+                      "expression": "`position_id`"
+                    },
+                    {
+                      "name": "relationship",
+                      "expression": "`relationship`"
+                    },
+                    {
+                      "name": "internal",
+                      "expression": "`internal`"
+                    },
+                    {
+                      "name": "internal_counterparty",
+                      "expression": "`internal_counterparty`"
+                    },
+                    {
+                      "name": "product_id",
+                      "expression": "`product_id`"
+                    },
+                    {
+                      "name": "amount",
+                      "expression": "`amount`"
+                    }
+                  ],
+                  "disaggregated": true
+                }
+              }
+            ],
+            "spec": {
+              "version": 2,
+              "widgetType": "table",
+              "encodings": {
+                "columns": [
+                  {
+                    "fieldName": "reporting_entity",
+                    "displayName": "Entity"
+                  },
+                  {
+                    "fieldName": "position_id",
+                    "displayName": "Position"
+                  },
+                  {
+                    "fieldName": "relationship",
+                    "displayName": "Relationship"
+                  },
+                  {
+                    "fieldName": "internal",
+                    "displayName": "Internal"
+                  },
+                  {
+                    "fieldName": "internal_counterparty",
+                    "displayName": "Internal counterparty"
+                  },
+                  {
+                    "fieldName": "product_id",
+                    "displayName": "PID"
+                  },
+                  {
+                    "fieldName": "amount",
+                    "displayName": "Amount"
+                  }
+                ]
+              },
+              "frame": {
+                "showTitle": true,
+                "title": "Reported by"
+              }
+            }
+          },
+          "position": {
+            "x": 0,
+            "y": 35,
+            "width": 12,
+            "height": 7
+          }
+        },
+        {
+          "widget": {
+            "name": "l_t5",
+            "multilineTextboxSpec": {
+              "lines": [
+                "### 5. Reported FR 2052a records - positions with the same reporting fields are added up into one record of the 6G file\n"
+              ]
+            }
+          },
+          "position": {
+            "x": 0,
+            "y": 42,
+            "width": 12,
+            "height": 1
+          }
+        },
+        {
+          "widget": {
+            "name": "l_gold_table",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "l_gold",
+                  "fields": [
+                    {
+                      "name": "reporting_entity",
+                      "expression": "`reporting_entity`"
+                    },
+                    {
+                      "name": "table_code",
+                      "expression": "`table_code`"
+                    },
+                    {
+                      "name": "product_id",
+                      "expression": "`product_id`"
+                    },
+                    {
+                      "name": "counterparty",
+                      "expression": "`counterparty`"
+                    },
+                    {
+                      "name": "collateral_class",
+                      "expression": "`collateral_class`"
+                    },
+                    {
+                      "name": "maturity_bucket",
+                      "expression": "`maturity_bucket`"
+                    },
+                    {
+                      "name": "currency",
+                      "expression": "`currency`"
+                    },
+                    {
+                      "name": "converted",
+                      "expression": "`converted`"
+                    },
+                    {
+                      "name": "reported_amount",
+                      "expression": "`reported_amount`"
+                    },
+                    {
+                      "name": "positions_in_record",
+                      "expression": "`positions_in_record`"
+                    },
+                    {
+                      "name": "positions_from_feed",
+                      "expression": "`positions_from_feed`"
+                    },
+                    {
+                      "name": "amount_from_feed",
+                      "expression": "`amount_from_feed`"
+                    },
+                    {
+                      "name": "record_key",
+                      "expression": "`record_key`"
+                    }
+                  ],
+                  "disaggregated": true
+                }
+              }
+            ],
+            "spec": {
+              "version": 2,
+              "widgetType": "table",
+              "encodings": {
+                "columns": [
+                  {
+                    "fieldName": "reporting_entity",
+                    "displayName": "Entity"
+                  },
+                  {
+                    "fieldName": "table_code",
+                    "displayName": "Table"
+                  },
+                  {
+                    "fieldName": "product_id",
+                    "displayName": "PID"
+                  },
+                  {
+                    "fieldName": "counterparty",
+                    "displayName": "Counterparty"
+                  },
+                  {
+                    "fieldName": "collateral_class",
+                    "displayName": "Collateral"
+                  },
+                  {
+                    "fieldName": "maturity_bucket",
+                    "displayName": "Bucket"
+                  },
+                  {
+                    "fieldName": "currency",
+                    "displayName": "Ccy"
+                  },
+                  {
+                    "fieldName": "converted",
+                    "displayName": "Converted"
+                  },
+                  {
+                    "fieldName": "reported_amount",
+                    "displayName": "Reported amount"
+                  },
+                  {
+                    "fieldName": "positions_in_record",
+                    "displayName": "Positions in record"
+                  },
+                  {
+                    "fieldName": "positions_from_feed",
+                    "displayName": "From this feed"
+                  },
+                  {
+                    "fieldName": "amount_from_feed",
+                    "displayName": "Amount from this feed"
+                  },
+                  {
+                    "fieldName": "record_key",
+                    "displayName": "Record key"
+                  }
+                ]
+              },
+              "frame": {
+                "showTitle": true,
+                "title": "FR 2052a records containing this feed's positions",
+                "showDescription": true,
+                "description": "A record can also hold positions from other feeds; paste its record key in the app's Lineage page to trace it."
+              }
+            }
+          },
+          "position": {
+            "x": 0,
+            "y": 43,
+            "width": 12,
+            "height": 8
+          }
+        }
+      ],
+      "pageType": "PAGE_TYPE_CANVAS"
+    },
+    {
+      "name": "quality",
+      "displayName": "Data quality",
+      "layout": [
+        {
+          "widget": {
+            "name": "quality_title",
+            "multilineTextboxSpec": {
+              "lines": [
+                "## Data quality\n",
+                "\n",
+                "Do I have all the data, and is it right? Completeness: every source feed and record received. Accuracy: every record passes the data quality rules and the filing ties to the general ledger and the LCR (BCBS 239 principles 3 and 4).\n"
+              ]
+            }
+          },
+          "position": {
+            "x": 0,
+            "y": 0,
+            "width": 9,
+            "height": 2
+          }
+        },
+        {
+          "widget": {
+            "name": "quality_f_date",
+            "queries": [
+              {
+                "name": "quality_f_date_values",
+                "query": {
+                  "datasetName": "v_dates",
+                  "fields": [
+                    {
+                      "name": "as_of",
+                      "expression": "`as_of`"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              },
+              {
+                "name": "quality_f_date_c_kpi",
+                "query": {
+                  "datasetName": "c_kpi",
+                  "parameters": [
+                    {
+                      "name": "as_of",
+                      "keyword": "as_of"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              },
+              {
+                "name": "quality_f_date_c_feeds",
+                "query": {
+                  "datasetName": "c_feeds",
+                  "parameters": [
+                    {
+                      "name": "as_of",
+                      "keyword": "as_of"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              },
+              {
+                "name": "quality_f_date_c_issues",
+                "query": {
+                  "datasetName": "c_issues",
+                  "parameters": [
+                    {
+                      "name": "as_of",
+                      "keyword": "as_of"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "version": 2,
+              "widgetType": "filter-single-select",
+              "encodings": {
+                "fields": [
+                  {
+                    "fieldName": "as_of",
+                    "displayName": "As-of date",
+                    "queryName": "quality_f_date_values"
+                  },
+                  {
+                    "parameterName": "as_of",
+                    "queryName": "quality_f_date_c_kpi"
+                  },
+                  {
+                    "parameterName": "as_of",
+                    "queryName": "quality_f_date_c_feeds"
+                  },
+                  {
+                    "parameterName": "as_of",
+                    "queryName": "quality_f_date_c_issues"
+                  }
+                ]
+              },
+              "frame": {
+                "showTitle": true,
+                "title": "As-of date"
+              }
+            }
+          },
+          "position": {
+            "x": 9,
+            "y": 0,
+            "width": 3,
+            "height": 2
+          }
+        },
+        {
+          "widget": {
+            "name": "c_c1",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "c_kpi",
+                  "fields": [
+                    {
+                      "name": "feeds_complete",
+                      "expression": "`feeds_complete`"
+                    }
+                  ],
+                  "disaggregated": true
+                }
+              }
+            ],
+            "spec": {
+              "version": 2,
+              "widgetType": "counter",
+              "encodings": {
+                "value": {
+                  "fieldName": "feeds_complete",
+                  "displayName": "Source feeds complete (of 10)",
+                  "format": {
+                    "type": "number-plain",
+                    "abbreviation": "compact"
+                  }
+                }
+              },
+              "frame": {
+                "showTitle": true,
+                "title": "Source feeds complete (of 10)"
+              }
+            }
+          },
+          "position": {
+            "x": 0,
+            "y": 2,
+            "width": 3,
+            "height": 3
+          }
+        },
+        {
+          "widget": {
+            "name": "c_c2",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "c_kpi",
+                  "fields": [
+                    {
+                      "name": "volume_vs_expected",
+                      "expression": "`volume_vs_expected`"
+                    }
+                  ],
+                  "disaggregated": true
+                }
+              }
+            ],
+            "spec": {
+              "version": 2,
+              "widgetType": "counter",
+              "encodings": {
+                "value": {
+                  "fieldName": "volume_vs_expected",
+                  "displayName": "Records received vs expected",
+                  "format": {
+                    "type": "number-percent",
+                    "decimalPlaces": {
+                      "type": "max",
+                      "places": 1
+                    }
+                  }
+                }
+              },
+              "frame": {
+                "showTitle": true,
+                "title": "Records received vs expected"
+              }
+            }
+          },
+          "position": {
+            "x": 3,
+            "y": 2,
+            "width": 3,
+            "height": 3
+          }
+        },
+        {
+          "widget": {
+            "name": "c_c3",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "c_kpi",
+                  "fields": [
+                    {
+                      "name": "records_rejected",
+                      "expression": "`records_rejected`"
+                    }
+                  ],
+                  "disaggregated": true
+                }
+              }
+            ],
+            "spec": {
+              "version": 2,
+              "widgetType": "counter",
+              "encodings": {
+                "value": {
+                  "fieldName": "records_rejected",
+                  "displayName": "Records rejected by data quality",
+                  "format": {
+                    "type": "number-plain",
+                    "abbreviation": "compact"
+                  }
+                }
+              },
+              "frame": {
+                "showTitle": true,
+                "title": "Records rejected by data quality"
+              }
+            }
+          },
+          "position": {
+            "x": 6,
+            "y": 2,
+            "width": 3,
+            "height": 3
+          }
+        },
+        {
+          "widget": {
+            "name": "c_c4",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "c_kpi",
+                  "fields": [
+                    {
+                      "name": "recon_breaks",
+                      "expression": "`recon_breaks`"
+                    }
+                  ],
+                  "disaggregated": true
+                }
+              }
+            ],
+            "spec": {
+              "version": 2,
+              "widgetType": "counter",
+              "encodings": {
+                "value": {
+                  "fieldName": "recon_breaks",
+                  "displayName": "Reconciliation breaks (GL, LCR)",
+                  "format": {
+                    "type": "number-plain",
+                    "abbreviation": "compact"
+                  }
+                }
+              },
+              "frame": {
+                "showTitle": true,
+                "title": "Reconciliation breaks (GL, LCR)"
+              }
+            }
+          },
+          "position": {
+            "x": 9,
+            "y": 2,
+            "width": 3,
+            "height": 3
+          }
+        },
+        {
+          "widget": {
+            "name": "c_feed_chart",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "c_feeds",
+                  "fields": [
+                    {
+                      "name": "feed",
+                      "expression": "`feed`"
+                    },
+                    {
+                      "name": "sum(records)",
+                      "expression": "SUM(`records`)"
+                    },
+                    {
+                      "name": "measure",
+                      "expression": "`measure`"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "version": 3,
+              "widgetType": "bar",
+              "encodings": {
+                "x": {
+                  "fieldName": "feed",
+                  "scale": {
+                    "type": "categorical"
+                  },
+                  "displayName": "feed"
+                },
+                "y": {
+                  "fieldName": "sum(records)",
+                  "scale": {
+                    "type": "quantitative"
+                  },
+                  "displayName": "records"
+                },
+                "color": {
+                  "fieldName": "measure",
+                  "scale": {
+                    "type": "categorical"
+                  },
+                  "displayName": "measure"
+                }
+              },
+              "frame": {
+                "showTitle": true,
+                "title": "Records received vs expected (5-day median), per source feed"
+              },
+              "mark": {
+                "layout": "group"
+              }
+            }
+          },
+          "position": {
+            "x": 0,
+            "y": 5,
+            "width": 12,
+            "height": 6
+          }
+        },
+        {
+          "widget": {
+            "name": "c_issue_table",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "c_issues",
+                  "fields": [
+                    {
+                      "name": "dimension",
+                      "expression": "`dimension`"
+                    },
+                    {
+                      "name": "issue",
+                      "expression": "`issue`"
+                    },
+                    {
+                      "name": "item",
+                      "expression": "`item`"
+                    },
+                    {
+                      "name": "detail",
+                      "expression": "`detail`"
+                    },
+                    {
+                      "name": "action",
+                      "expression": "`action`"
+                    }
+                  ],
+                  "disaggregated": true
+                }
+              }
+            ],
+            "spec": {
+              "version": 2,
+              "widgetType": "table",
+              "encodings": {
+                "columns": [
+                  {
+                    "fieldName": "dimension",
+                    "displayName": "BCBS 239"
+                  },
+                  {
+                    "fieldName": "issue",
+                    "displayName": "Issue"
+                  },
+                  {
+                    "fieldName": "item",
+                    "displayName": "Item"
+                  },
+                  {
+                    "fieldName": "detail",
+                    "displayName": "Detail"
+                  },
+                  {
+                    "fieldName": "action",
+                    "displayName": "What to do"
+                  }
+                ]
+              },
+              "frame": {
+                "showTitle": true,
+                "title": "Issues to act on - empty when the data is complete and accurate"
+              }
+            }
+          },
+          "position": {
+            "x": 0,
+            "y": 11,
+            "width": 12,
+            "height": 6
+          }
+        }
+      ],
+      "pageType": "PAGE_TYPE_CANVAS"
+    },
+    {
+      "name": "rules",
+      "displayName": "Rule coverage and validation",
+      "layout": [
+        {
+          "widget": {
+            "name": "rules_title",
+            "multilineTextboxSpec": {
+              "lines": [
+                "## Rule coverage and validation\n",
+                "\n",
+                "Did every record get its FR 2052a product (PID) from a rule, and did today's report pass every check - the FR 2052a Instructions, the Fed's 6G business rules and schema, the Fed's post-submission checks and the reconciliations?\n"
+              ]
+            }
+          },
+          "position": {
+            "x": 0,
+            "y": 0,
+            "width": 9,
+            "height": 2
+          }
+        },
+        {
+          "widget": {
+            "name": "rules_f_date",
+            "queries": [
+              {
+                "name": "rules_f_date_values",
+                "query": {
+                  "datasetName": "v_dates",
+                  "fields": [
+                    {
+                      "name": "as_of",
+                      "expression": "`as_of`"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              },
+              {
+                "name": "rules_f_date_r_kpi",
+                "query": {
+                  "datasetName": "r_kpi",
+                  "parameters": [
+                    {
+                      "name": "as_of",
+                      "keyword": "as_of"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              },
+              {
+                "name": "rules_f_date_r_by_table",
+                "query": {
+                  "datasetName": "r_by_table",
+                  "parameters": [
+                    {
+                      "name": "as_of",
+                      "keyword": "as_of"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              },
+              {
+                "name": "rules_f_date_r_gaps",
+                "query": {
+                  "datasetName": "r_gaps",
+                  "parameters": [
+                    {
+                      "name": "as_of",
+                      "keyword": "as_of"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              },
+              {
+                "name": "rules_f_date_x_kpi",
+                "query": {
+                  "datasetName": "x_kpi",
+                  "parameters": [
+                    {
+                      "name": "as_of",
+                      "keyword": "as_of"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              },
+              {
+                "name": "rules_f_date_x_by_source",
+                "query": {
+                  "datasetName": "x_by_source",
+                  "parameters": [
+                    {
+                      "name": "as_of",
+                      "keyword": "as_of"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              },
+              {
+                "name": "rules_f_date_x_issues",
+                "query": {
+                  "datasetName": "x_issues",
+                  "parameters": [
+                    {
+                      "name": "as_of",
+                      "keyword": "as_of"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "version": 2,
+              "widgetType": "filter-single-select",
+              "encodings": {
+                "fields": [
+                  {
+                    "fieldName": "as_of",
+                    "displayName": "As-of date",
+                    "queryName": "rules_f_date_values"
+                  },
+                  {
+                    "parameterName": "as_of",
+                    "queryName": "rules_f_date_r_kpi"
+                  },
+                  {
+                    "parameterName": "as_of",
+                    "queryName": "rules_f_date_r_by_table"
+                  },
+                  {
+                    "parameterName": "as_of",
+                    "queryName": "rules_f_date_r_gaps"
+                  },
+                  {
+                    "parameterName": "as_of",
+                    "queryName": "rules_f_date_x_kpi"
+                  },
+                  {
+                    "parameterName": "as_of",
+                    "queryName": "rules_f_date_x_by_source"
+                  },
+                  {
+                    "parameterName": "as_of",
+                    "queryName": "rules_f_date_x_issues"
+                  }
+                ]
+              },
+              "frame": {
+                "showTitle": true,
+                "title": "As-of date"
+              }
+            }
+          },
+          "position": {
+            "x": 9,
+            "y": 0,
+            "width": 3,
+            "height": 2
+          }
+        },
+        {
+          "widget": {
+            "name": "r_t1",
+            "multilineTextboxSpec": {
+              "lines": [
+                "### Rule coverage - what has no rule (a new product code, a customer not classified yet, a combination no rule covers) and what to do\n"
+              ]
+            }
+          },
+          "position": {
+            "x": 0,
+            "y": 2,
+            "width": 12,
+            "height": 1
+          }
+        },
+        {
+          "widget": {
+            "name": "r_c1",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "r_kpi",
+                  "fields": [
+                    {
+                      "name": "classified_pct",
+                      "expression": "`classified_pct`"
+                    }
+                  ],
+                  "disaggregated": true
+                }
+              }
+            ],
+            "spec": {
+              "version": 2,
+              "widgetType": "counter",
+              "encodings": {
+                "value": {
+                  "fieldName": "classified_pct",
+                  "displayName": "Positions classified by a PID rule",
+                  "format": {
+                    "type": "number-percent",
+                    "decimalPlaces": {
+                      "type": "max",
+                      "places": 1
+                    }
+                  }
+                }
+              },
+              "frame": {
+                "showTitle": true,
+                "title": "Positions classified by a PID rule"
+              }
+            }
+          },
+          "position": {
+            "x": 0,
+            "y": 3,
+            "width": 3,
+            "height": 3
+          }
+        },
+        {
+          "widget": {
+            "name": "r_c2",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "r_kpi",
+                  "fields": [
+                    {
+                      "name": "without_rule",
+                      "expression": "`without_rule`"
+                    }
+                  ],
+                  "disaggregated": true
+                }
+              }
+            ],
+            "spec": {
+              "version": 2,
+              "widgetType": "counter",
+              "encodings": {
+                "value": {
+                  "fieldName": "without_rule",
+                  "displayName": "Positions without a rule",
+                  "format": {
+                    "type": "number-plain",
+                    "abbreviation": "compact"
+                  }
+                }
+              },
+              "frame": {
+                "showTitle": true,
+                "title": "Positions without a rule"
+              }
+            }
+          },
+          "position": {
+            "x": 3,
+            "y": 3,
+            "width": 3,
+            "height": 3
+          }
+        },
+        {
+          "widget": {
+            "name": "r_c3",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "r_kpi",
+                  "fields": [
+                    {
+                      "name": "without_rule_usd",
+                      "expression": "`without_rule_usd`"
+                    }
+                  ],
+                  "disaggregated": true
+                }
+              }
+            ],
+            "spec": {
+              "version": 2,
+              "widgetType": "counter",
+              "encodings": {
+                "value": {
+                  "fieldName": "without_rule_usd",
+                  "displayName": "Amount without a rule",
+                  "format": {
+                    "type": "number-currency",
+                    "currencyCode": "USD",
+                    "abbreviation": "compact",
+                    "decimalPlaces": {
+                      "type": "exact",
+                      "places": 1
+                    }
+                  }
+                }
+              },
+              "frame": {
+                "showTitle": true,
+                "title": "Amount without a rule"
+              }
+            }
+          },
+          "position": {
+            "x": 6,
+            "y": 3,
+            "width": 3,
+            "height": 3
+          }
+        },
+        {
+          "widget": {
+            "name": "r_c4",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "r_kpi",
+                  "fields": [
+                    {
+                      "name": "awaiting_master_data",
+                      "expression": "`awaiting_master_data`"
+                    }
+                  ],
+                  "disaggregated": true
+                }
+              }
+            ],
+            "spec": {
+              "version": 2,
+              "widgetType": "counter",
+              "encodings": {
+                "value": {
+                  "fieldName": "awaiting_master_data",
+                  "displayName": "New customers / codes awaiting a decision",
+                  "format": {
+                    "type": "number-plain",
+                    "abbreviation": "compact"
+                  }
+                }
+              },
+              "frame": {
+                "showTitle": true,
+                "title": "New customers / codes awaiting a decision"
+              }
+            }
+          },
+          "position": {
+            "x": 9,
+            "y": 3,
+            "width": 3,
+            "height": 3
+          }
+        },
+        {
+          "widget": {
+            "name": "r_tab_chart",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "r_by_table",
+                  "fields": [
+                    {
+                      "name": "table_code",
+                      "expression": "`table_code`"
+                    },
+                    {
+                      "name": "sum(positions)",
+                      "expression": "SUM(`positions`)"
+                    },
+                    {
+                      "name": "outcome",
+                      "expression": "`outcome`"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "version": 3,
+              "widgetType": "bar",
+              "encodings": {
+                "x": {
+                  "fieldName": "table_code",
+                  "scale": {
+                    "type": "categorical"
+                  },
+                  "displayName": "table code"
+                },
+                "y": {
+                  "fieldName": "sum(positions)",
+                  "scale": {
+                    "type": "quantitative"
+                  },
+                  "displayName": "positions"
+                },
+                "color": {
+                  "fieldName": "outcome",
+                  "scale": {
+                    "type": "categorical"
+                  },
+                  "displayName": "outcome"
+                }
+              },
+              "frame": {
+                "showTitle": true,
+                "title": "Positions per FR 2052a table: classified by a rule vs without one"
+              },
+              "mark": {
+                "layout": "stack"
+              }
+            }
+          },
+          "position": {
+            "x": 0,
+            "y": 6,
+            "width": 12,
+            "height": 6
+          }
+        },
+        {
+          "widget": {
+            "name": "r_gap_table",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "r_gaps",
+                  "fields": [
+                    {
+                      "name": "item",
+                      "expression": "`item`"
+                    },
+                    {
+                      "name": "gap",
+                      "expression": "`gap`"
+                    },
+                    {
+                      "name": "source_system",
+                      "expression": "`source_system`"
+                    },
+                    {
+                      "name": "source_product_code",
+                      "expression": "`source_product_code`"
+                    },
+                    {
+                      "name": "customer_id",
+                      "expression": "`customer_id`"
+                    },
+                    {
+                      "name": "provisional_product_id",
+                      "expression": "`provisional_product_id`"
+                    },
+                    {
+                      "name": "amount_usd",
+                      "expression": "`amount_usd`"
+                    },
+                    {
+                      "name": "reason",
+                      "expression": "`reason`"
+                    },
+                    {
+                      "name": "action",
+                      "expression": "`action`"
+                    }
+                  ],
+                  "disaggregated": true
+                }
+              }
+            ],
+            "spec": {
+              "version": 2,
+              "widgetType": "table",
+              "encodings": {
+                "columns": [
+                  {
+                    "fieldName": "item",
+                    "displayName": "Record / customer / code"
+                  },
+                  {
+                    "fieldName": "gap",
+                    "displayName": "What is missing"
+                  },
+                  {
+                    "fieldName": "source_system",
+                    "displayName": "System"
+                  },
+                  {
+                    "fieldName": "source_product_code",
+                    "displayName": "Bank product code"
+                  },
+                  {
+                    "fieldName": "customer_id",
+                    "displayName": "Customer"
+                  },
+                  {
+                    "fieldName": "provisional_product_id",
+                    "displayName": "Likely PID"
+                  },
+                  {
+                    "fieldName": "amount_usd",
+                    "displayName": "USD mm"
+                  },
+                  {
+                    "fieldName": "reason",
+                    "displayName": "Why"
+                  },
+                  {
+                    "fieldName": "action",
+                    "displayName": "What to do"
+                  }
+                ]
+              },
+              "frame": {
+                "showTitle": true,
+                "title": "Records without a rule - empty when every record is classified"
+              }
+            }
+          },
+          "position": {
+            "x": 0,
+            "y": 12,
+            "width": 12,
+            "height": 6
+          }
+        },
+        {
+          "widget": {
+            "name": "x_t1",
+            "multilineTextboxSpec": {
+              "lines": [
+                "### Validation - did the report pass every check, and is every warning explained\n"
+              ]
+            }
+          },
+          "position": {
+            "x": 0,
+            "y": 18,
+            "width": 12,
+            "height": 1
+          }
+        },
+        {
+          "widget": {
+            "name": "x_c1",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "x_kpi",
+                  "fields": [
+                    {
+                      "name": "passed_pct",
+                      "expression": "`passed_pct`"
+                    }
+                  ],
+                  "disaggregated": true
+                }
+              }
+            ],
+            "spec": {
+              "version": 2,
+              "widgetType": "counter",
+              "encodings": {
+                "value": {
+                  "fieldName": "passed_pct",
+                  "displayName": "Checks passed",
+                  "format": {
+                    "type": "number-percent",
+                    "decimalPlaces": {
+                      "type": "max",
+                      "places": 1
+                    }
+                  }
+                }
+              },
+              "frame": {
+                "showTitle": true,
+                "title": "Checks passed"
+              }
+            }
+          },
+          "position": {
+            "x": 0,
+            "y": 19,
+            "width": 3,
+            "height": 3
+          }
+        },
+        {
+          "widget": {
+            "name": "x_c2",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "x_kpi",
+                  "fields": [
+                    {
+                      "name": "failed",
+                      "expression": "`failed`"
+                    }
+                  ],
+                  "disaggregated": true
+                }
+              }
+            ],
+            "spec": {
+              "version": 2,
+              "widgetType": "counter",
+              "encodings": {
+                "value": {
+                  "fieldName": "failed",
+                  "displayName": "Blocking failures",
+                  "format": {
+                    "type": "number-plain",
+                    "abbreviation": "compact"
+                  }
+                }
+              },
+              "frame": {
+                "showTitle": true,
+                "title": "Blocking failures"
+              }
+            }
+          },
+          "position": {
+            "x": 3,
+            "y": 19,
+            "width": 3,
+            "height": 3
+          }
+        },
+        {
+          "widget": {
+            "name": "x_c3",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "x_kpi",
+                  "fields": [
+                    {
+                      "name": "warnings_open",
+                      "expression": "`warnings_open`"
+                    }
+                  ],
+                  "disaggregated": true
+                }
+              }
+            ],
+            "spec": {
+              "version": 2,
+              "widgetType": "counter",
+              "encodings": {
+                "value": {
+                  "fieldName": "warnings_open",
+                  "displayName": "Warnings not yet explained",
+                  "format": {
+                    "type": "number-plain",
+                    "abbreviation": "compact"
+                  }
+                }
+              },
+              "frame": {
+                "showTitle": true,
+                "title": "Warnings not yet explained"
+              }
+            }
+          },
+          "position": {
+            "x": 6,
+            "y": 19,
+            "width": 3,
+            "height": 3
+          }
+        },
+        {
+          "widget": {
+            "name": "x_c4",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "x_kpi",
+                  "fields": [
+                    {
+                      "name": "xsd_valid",
+                      "expression": "`xsd_valid`"
+                    }
+                  ],
+                  "disaggregated": true
+                }
+              }
+            ],
+            "spec": {
+              "version": 2,
+              "widgetType": "counter",
+              "encodings": {
+                "value": {
+                  "fieldName": "xsd_valid",
+                  "displayName": "6G files valid against the XSD",
+                  "format": {
+                    "type": "number-percent",
+                    "decimalPlaces": {
+                      "type": "max",
+                      "places": 1
+                    }
+                  }
+                }
+              },
+              "frame": {
+                "showTitle": true,
+                "title": "6G files valid against the XSD"
+              }
+            }
+          },
+          "position": {
+            "x": 9,
+            "y": 19,
+            "width": 3,
+            "height": 3
+          }
+        },
+        {
+          "widget": {
+            "name": "x_src_chart",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "x_by_source",
+                  "fields": [
+                    {
+                      "name": "source",
+                      "expression": "`source`"
+                    },
+                    {
+                      "name": "sum(checks)",
+                      "expression": "SUM(`checks`)"
+                    },
+                    {
+                      "name": "result",
+                      "expression": "`result`"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "version": 3,
+              "widgetType": "bar",
+              "encodings": {
+                "x": {
+                  "fieldName": "source",
+                  "scale": {
+                    "type": "categorical"
+                  },
+                  "displayName": "source"
+                },
+                "y": {
+                  "fieldName": "sum(checks)",
+                  "scale": {
+                    "type": "quantitative"
+                  },
+                  "displayName": "checks"
+                },
+                "color": {
+                  "fieldName": "result",
+                  "scale": {
+                    "type": "categorical"
+                  },
+                  "displayName": "result"
+                }
+              },
+              "frame": {
+                "showTitle": true,
+                "title": "Checks by source and result"
+              },
+              "mark": {
+                "layout": "stack"
+              }
+            }
+          },
+          "position": {
+            "x": 0,
+            "y": 22,
+            "width": 12,
+            "height": 6
+          }
+        },
+        {
+          "widget": {
+            "name": "x_issue_table",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "x_issues",
+                  "fields": [
+                    {
+                      "name": "rule_id",
+                      "expression": "`rule_id`"
+                    },
+                    {
+                      "name": "rule_name",
+                      "expression": "`rule_name`"
+                    },
+                    {
+                      "name": "rule_source",
+                      "expression": "`rule_source`"
+                    },
+                    {
+                      "name": "result",
+                      "expression": "`result`"
+                    },
+                    {
+                      "name": "exceptions",
+                      "expression": "`exceptions`"
+                    },
+                    {
+                      "name": "resolved",
+                      "expression": "`resolved`"
+                    },
+                    {
+                      "name": "still_open",
+                      "expression": "`still_open`"
+                    },
+                    {
+                      "name": "action",
+                      "expression": "`action`"
+                    }
+                  ],
+                  "disaggregated": true
+                }
+              }
+            ],
+            "spec": {
+              "version": 2,
+              "widgetType": "table",
+              "encodings": {
+                "columns": [
+                  {
+                    "fieldName": "rule_id",
+                    "displayName": "Check"
+                  },
+                  {
+                    "fieldName": "rule_name",
+                    "displayName": "What it checks"
+                  },
+                  {
+                    "fieldName": "rule_source",
+                    "displayName": "Source"
+                  },
+                  {
+                    "fieldName": "result",
+                    "displayName": "Result"
+                  },
+                  {
+                    "fieldName": "exceptions",
+                    "displayName": "Exceptions"
+                  },
+                  {
+                    "fieldName": "resolved",
+                    "displayName": "Resolved"
+                  },
+                  {
+                    "fieldName": "still_open",
+                    "displayName": "Still open"
+                  },
+                  {
+                    "fieldName": "action",
+                    "displayName": "What to do"
+                  }
+                ]
+              },
+              "frame": {
+                "showTitle": true,
+                "title": "Checks not passing today and where each stands"
+              }
+            }
+          },
+          "position": {
+            "x": 0,
+            "y": 28,
+            "width": 12,
+            "height": 6
+          }
+        }
+      ],
+      "pageType": "PAGE_TYPE_CANVAS"
+    },
+    {
+      "name": "report",
+      "displayName": "FR 2052a tables",
+      "layout": [
+        {
+          "widget": {
+            "name": "report_title",
+            "multilineTextboxSpec": {
+              "lines": [
+                "## FR 2052a tables\n",
+                "\n",
+                "The report as the Federal Reserve prescribes it: Inflows, Outflows and Supplemental, each table, product (PID) and reported record, down to the positions behind it. Narrow it with the filters.\n"
+              ]
+            }
+          },
+          "position": {
+            "x": 0,
+            "y": 0,
+            "width": 6,
+            "height": 2
+          }
+        },
+        {
+          "widget": {
+            "name": "report_f_date",
+            "queries": [
+              {
+                "name": "report_f_date_values",
+                "query": {
+                  "datasetName": "v_dates",
+                  "fields": [
+                    {
+                      "name": "as_of",
+                      "expression": "`as_of`"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              },
+              {
+                "name": "report_f_date_p_tables",
+                "query": {
+                  "datasetName": "p_tables",
+                  "parameters": [
+                    {
+                      "name": "as_of",
+                      "keyword": "as_of"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              },
+              {
+                "name": "report_f_date_p_records",
+                "query": {
+                  "datasetName": "p_records",
+                  "parameters": [
+                    {
+                      "name": "as_of",
+                      "keyword": "as_of"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              },
+              {
+                "name": "report_f_date_p_positions",
+                "query": {
+                  "datasetName": "p_positions",
+                  "parameters": [
+                    {
+                      "name": "as_of",
+                      "keyword": "as_of"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "version": 2,
+              "widgetType": "filter-single-select",
+              "encodings": {
+                "fields": [
+                  {
+                    "fieldName": "as_of",
+                    "displayName": "As-of date",
+                    "queryName": "report_f_date_values"
+                  },
+                  {
+                    "parameterName": "as_of",
+                    "queryName": "report_f_date_p_tables"
+                  },
+                  {
+                    "parameterName": "as_of",
+                    "queryName": "report_f_date_p_records"
+                  },
+                  {
+                    "parameterName": "as_of",
+                    "queryName": "report_f_date_p_positions"
+                  }
+                ]
+              },
+              "frame": {
+                "showTitle": true,
+                "title": "As-of date"
+              }
+            }
+          },
+          "position": {
+            "x": 6,
+            "y": 0,
+            "width": 3,
+            "height": 2
+          }
+        },
+        {
+          "widget": {
+            "name": "report_f_entity",
+            "queries": [
+              {
+                "name": "report_f_entity_values",
+                "query": {
+                  "datasetName": "v_entities",
+                  "fields": [
+                    {
+                      "name": "entity",
+                      "expression": "`entity`"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              },
+              {
+                "name": "report_f_entity_p_tables",
+                "query": {
+                  "datasetName": "p_tables",
+                  "parameters": [
+                    {
+                      "name": "entity",
+                      "keyword": "entity"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              },
+              {
+                "name": "report_f_entity_p_records",
+                "query": {
+                  "datasetName": "p_records",
+                  "parameters": [
+                    {
+                      "name": "entity",
+                      "keyword": "entity"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              },
+              {
+                "name": "report_f_entity_p_positions",
+                "query": {
+                  "datasetName": "p_positions",
+                  "parameters": [
+                    {
+                      "name": "entity",
+                      "keyword": "entity"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "version": 2,
+              "widgetType": "filter-single-select",
+              "encodings": {
+                "fields": [
+                  {
+                    "fieldName": "entity",
+                    "displayName": "Reporting entity",
+                    "queryName": "report_f_entity_values"
+                  },
+                  {
+                    "parameterName": "entity",
+                    "queryName": "report_f_entity_p_tables"
+                  },
+                  {
+                    "parameterName": "entity",
+                    "queryName": "report_f_entity_p_records"
+                  },
+                  {
+                    "parameterName": "entity",
+                    "queryName": "report_f_entity_p_positions"
+                  }
+                ]
+              },
+              "frame": {
+                "showTitle": true,
+                "title": "Reporting entity"
+              }
+            }
+          },
+          "position": {
+            "x": 9,
+            "y": 0,
+            "width": 3,
+            "height": 2
+          }
+        },
+        {
+          "widget": {
+            "name": "p_f_sec",
+            "queries": [
+              {
+                "name": "p_f_sec_p_tables",
+                "query": {
+                  "datasetName": "p_tables",
+                  "fields": [
+                    {
+                      "name": "section",
+                      "expression": "`section`"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              },
+              {
+                "name": "p_f_sec_p_records",
+                "query": {
+                  "datasetName": "p_records",
+                  "fields": [
+                    {
+                      "name": "section",
+                      "expression": "`section`"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              },
+              {
+                "name": "p_f_sec_p_positions",
+                "query": {
+                  "datasetName": "p_positions",
+                  "fields": [
+                    {
+                      "name": "section",
+                      "expression": "`section`"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "version": 2,
+              "widgetType": "filter-multi-select",
+              "encodings": {
+                "fields": [
+                  {
+                    "fieldName": "section",
+                    "displayName": "Section",
+                    "queryName": "p_f_sec_p_tables"
+                  },
+                  {
+                    "fieldName": "section",
+                    "displayName": "Section",
+                    "queryName": "p_f_sec_p_records"
+                  },
+                  {
+                    "fieldName": "section",
+                    "displayName": "Section",
+                    "queryName": "p_f_sec_p_positions"
+                  }
+                ]
+              },
+              "frame": {
+                "showTitle": true,
+                "title": "Section"
+              }
+            }
+          },
+          "position": {
+            "x": 0,
+            "y": 2,
+            "width": 3,
+            "height": 2
+          }
+        },
+        {
+          "widget": {
+            "name": "p_f_tab",
+            "queries": [
+              {
+                "name": "p_f_tab_p_tables",
+                "query": {
+                  "datasetName": "p_tables",
+                  "fields": [
+                    {
+                      "name": "table_code",
+                      "expression": "`table_code`"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              },
+              {
+                "name": "p_f_tab_p_records",
+                "query": {
+                  "datasetName": "p_records",
+                  "fields": [
+                    {
+                      "name": "table_code",
+                      "expression": "`table_code`"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              },
+              {
+                "name": "p_f_tab_p_positions",
+                "query": {
+                  "datasetName": "p_positions",
+                  "fields": [
+                    {
+                      "name": "table_code",
+                      "expression": "`table_code`"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "version": 2,
+              "widgetType": "filter-multi-select",
+              "encodings": {
+                "fields": [
+                  {
+                    "fieldName": "table_code",
+                    "displayName": "Table",
+                    "queryName": "p_f_tab_p_tables"
+                  },
+                  {
+                    "fieldName": "table_code",
+                    "displayName": "Table",
+                    "queryName": "p_f_tab_p_records"
+                  },
+                  {
+                    "fieldName": "table_code",
+                    "displayName": "Table",
+                    "queryName": "p_f_tab_p_positions"
+                  }
+                ]
+              },
+              "frame": {
+                "showTitle": true,
+                "title": "Table"
+              }
+            }
+          },
+          "position": {
+            "x": 3,
+            "y": 2,
+            "width": 3,
+            "height": 2
+          }
+        },
+        {
+          "widget": {
+            "name": "p_f_pid",
+            "queries": [
+              {
+                "name": "p_f_pid_p_records",
+                "query": {
+                  "datasetName": "p_records",
+                  "fields": [
+                    {
+                      "name": "product_id",
+                      "expression": "`product_id`"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              },
+              {
+                "name": "p_f_pid_p_positions",
+                "query": {
+                  "datasetName": "p_positions",
+                  "fields": [
+                    {
+                      "name": "product_id",
+                      "expression": "`product_id`"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "version": 2,
+              "widgetType": "filter-multi-select",
+              "encodings": {
+                "fields": [
+                  {
+                    "fieldName": "product_id",
+                    "displayName": "Product (PID)",
+                    "queryName": "p_f_pid_p_records"
+                  },
+                  {
+                    "fieldName": "product_id",
+                    "displayName": "Product (PID)",
+                    "queryName": "p_f_pid_p_positions"
+                  }
+                ]
+              },
+              "frame": {
+                "showTitle": true,
+                "title": "Product (PID)"
+              }
+            }
+          },
+          "position": {
+            "x": 6,
+            "y": 2,
+            "width": 3,
+            "height": 2
+          }
+        },
+        {
+          "widget": {
+            "name": "p_f_rec",
+            "queries": [
+              {
+                "name": "p_f_rec_p_records",
+                "query": {
+                  "datasetName": "p_records",
+                  "fields": [
+                    {
+                      "name": "record_key",
+                      "expression": "`record_key`"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              },
+              {
+                "name": "p_f_rec_p_positions",
+                "query": {
+                  "datasetName": "p_positions",
+                  "fields": [
+                    {
+                      "name": "record_key",
+                      "expression": "`record_key`"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "version": 2,
+              "widgetType": "filter-multi-select",
+              "encodings": {
+                "fields": [
+                  {
+                    "fieldName": "record_key",
+                    "displayName": "Reported record",
+                    "queryName": "p_f_rec_p_records"
+                  },
+                  {
+                    "fieldName": "record_key",
+                    "displayName": "Reported record",
+                    "queryName": "p_f_rec_p_positions"
+                  }
+                ]
+              },
+              "frame": {
+                "showTitle": true,
+                "title": "Reported record"
+              }
+            }
+          },
+          "position": {
+            "x": 9,
+            "y": 2,
+            "width": 3,
+            "height": 2
+          }
+        },
+        {
+          "widget": {
+            "name": "p_tab_table",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "p_tables",
+                  "fields": [
+                    {
+                      "name": "section",
+                      "expression": "`section`"
+                    },
+                    {
+                      "name": "table_code",
+                      "expression": "`table_code`"
+                    },
+                    {
+                      "name": "table_name",
+                      "expression": "`table_name`"
+                    },
+                    {
+                      "name": "records",
+                      "expression": "`records`"
+                    },
+                    {
+                      "name": "positions",
+                      "expression": "`positions`"
+                    },
+                    {
+                      "name": "usd_mm",
+                      "expression": "`usd_mm`"
+                    }
+                  ],
+                  "disaggregated": true
+                }
+              }
+            ],
+            "spec": {
+              "version": 2,
+              "widgetType": "table",
+              "encodings": {
+                "columns": [
+                  {
+                    "fieldName": "section",
+                    "displayName": "Section"
+                  },
+                  {
+                    "fieldName": "table_code",
+                    "displayName": "Table"
+                  },
+                  {
+                    "fieldName": "table_name",
+                    "displayName": "Name"
+                  },
+                  {
+                    "fieldName": "records",
+                    "displayName": "Records"
+                  },
+                  {
+                    "fieldName": "positions",
+                    "displayName": "Positions"
+                  },
+                  {
+                    "fieldName": "usd_mm",
+                    "displayName": "USD mm"
+                  }
+                ]
+              },
+              "frame": {
+                "showTitle": true,
+                "title": "Tables"
+              }
+            }
+          },
+          "position": {
+            "x": 0,
+            "y": 4,
+            "width": 12,
+            "height": 6
+          }
+        },
+        {
+          "widget": {
+            "name": "p_rec_table",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "p_records",
+                  "fields": [
+                    {
+                      "name": "table_code",
+                      "expression": "`table_code`"
+                    },
+                    {
+                      "name": "product_id",
+                      "expression": "`product_id`"
+                    },
+                    {
+                      "name": "product_name",
+                      "expression": "`product_name`"
+                    },
+                    {
+                      "name": "sub_product",
+                      "expression": "`sub_product`"
+                    },
+                    {
+                      "name": "counterparty",
+                      "expression": "`counterparty`"
+                    },
+                    {
+                      "name": "collateral_class",
+                      "expression": "`collateral_class`"
+                    },
+                    {
+                      "name": "maturity_bucket",
+                      "expression": "`maturity_bucket`"
+                    },
+                    {
+                      "name": "currency",
+                      "expression": "`currency`"
+                    },
+                    {
+                      "name": "converted",
+                      "expression": "`converted`"
+                    },
+                    {
+                      "name": "reported_amount",
+                      "expression": "`reported_amount`"
+                    },
+                    {
+                      "name": "reported_amount_usd",
+                      "expression": "`reported_amount_usd`"
+                    },
+                    {
+                      "name": "positions",
+                      "expression": "`positions`"
+                    },
+                    {
+                      "name": "validation_status",
+                      "expression": "`validation_status`"
+                    },
+                    {
+                      "name": "record_key",
+                      "expression": "`record_key`"
+                    }
+                  ],
+                  "disaggregated": true
+                }
+              }
+            ],
+            "spec": {
+              "version": 2,
+              "widgetType": "table",
+              "encodings": {
+                "columns": [
+                  {
+                    "fieldName": "table_code",
+                    "displayName": "Table"
+                  },
+                  {
+                    "fieldName": "product_id",
+                    "displayName": "PID"
+                  },
+                  {
+                    "fieldName": "product_name",
+                    "displayName": "Product"
+                  },
+                  {
+                    "fieldName": "sub_product",
+                    "displayName": "Sub-product"
+                  },
+                  {
+                    "fieldName": "counterparty",
+                    "displayName": "Counterparty"
+                  },
+                  {
+                    "fieldName": "collateral_class",
+                    "displayName": "Collateral"
+                  },
+                  {
+                    "fieldName": "maturity_bucket",
+                    "displayName": "Maturity"
+                  },
+                  {
+                    "fieldName": "currency",
+                    "displayName": "Ccy"
+                  },
+                  {
+                    "fieldName": "converted",
+                    "displayName": "Converted"
+                  },
+                  {
+                    "fieldName": "reported_amount",
+                    "displayName": "Amount"
+                  },
+                  {
+                    "fieldName": "reported_amount_usd",
+                    "displayName": "USD mm"
+                  },
+                  {
+                    "fieldName": "positions",
+                    "displayName": "Positions"
+                  },
+                  {
+                    "fieldName": "validation_status",
+                    "displayName": "Checks"
+                  },
+                  {
+                    "fieldName": "record_key",
+                    "displayName": "Record"
+                  }
+                ]
+              },
+              "frame": {
+                "showTitle": true,
+                "title": "Reported records - as filed in the 6G file"
+              }
+            }
+          },
+          "position": {
+            "x": 0,
+            "y": 10,
+            "width": 12,
+            "height": 9
+          }
+        },
+        {
+          "widget": {
+            "name": "p_pos_table",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "p_positions",
+                  "fields": [
+                    {
+                      "name": "table_code",
+                      "expression": "`table_code`"
+                    },
+                    {
+                      "name": "product_id",
+                      "expression": "`product_id`"
+                    },
+                    {
+                      "name": "record_key",
+                      "expression": "`record_key`"
+                    },
+                    {
+                      "name": "position_id",
+                      "expression": "`position_id`"
+                    },
+                    {
+                      "name": "record_id",
+                      "expression": "`record_id`"
+                    },
+                    {
+                      "name": "source_system",
+                      "expression": "`source_system`"
+                    },
+                    {
+                      "name": "source_product_code",
+                      "expression": "`source_product_code`"
+                    },
+                    {
+                      "name": "booking_entity",
+                      "expression": "`booking_entity`"
+                    },
+                    {
+                      "name": "customer_id",
+                      "expression": "`customer_id`"
+                    },
+                    {
+                      "name": "counterparty",
+                      "expression": "`counterparty`"
+                    },
+                    {
+                      "name": "collateral_class",
+                      "expression": "`collateral_class`"
+                    },
+                    {
+                      "name": "maturity_date",
+                      "expression": "`maturity_date`"
+                    },
+                    {
+                      "name": "maturity_bucket",
+                      "expression": "`maturity_bucket`"
+                    },
+                    {
+                      "name": "currency",
+                      "expression": "`currency`"
+                    },
+                    {
+                      "name": "amount",
+                      "expression": "`amount`"
+                    },
+                    {
+                      "name": "pid_rule_id",
+                      "expression": "`pid_rule_id`"
+                    }
+                  ],
+                  "disaggregated": true
+                }
+              }
+            ],
+            "spec": {
+              "version": 2,
+              "widgetType": "table",
+              "encodings": {
+                "columns": [
+                  {
+                    "fieldName": "table_code",
+                    "displayName": "Table"
+                  },
+                  {
+                    "fieldName": "product_id",
+                    "displayName": "PID"
+                  },
+                  {
+                    "fieldName": "record_key",
+                    "displayName": "Record"
+                  },
+                  {
+                    "fieldName": "position_id",
+                    "displayName": "Position"
+                  },
+                  {
+                    "fieldName": "record_id",
+                    "displayName": "Source record"
+                  },
+                  {
+                    "fieldName": "source_system",
+                    "displayName": "System"
+                  },
+                  {
+                    "fieldName": "source_product_code",
+                    "displayName": "Bank product code"
+                  },
+                  {
+                    "fieldName": "booking_entity",
+                    "displayName": "Booked at"
+                  },
+                  {
+                    "fieldName": "customer_id",
+                    "displayName": "Customer"
+                  },
+                  {
+                    "fieldName": "counterparty",
+                    "displayName": "Counterparty"
+                  },
+                  {
+                    "fieldName": "collateral_class",
+                    "displayName": "Collateral"
+                  },
+                  {
+                    "fieldName": "maturity_date",
+                    "displayName": "Maturity date"
+                  },
+                  {
+                    "fieldName": "maturity_bucket",
+                    "displayName": "Bucket"
+                  },
+                  {
+                    "fieldName": "currency",
+                    "displayName": "Ccy"
+                  },
+                  {
+                    "fieldName": "amount",
+                    "displayName": "Amount"
+                  },
+                  {
+                    "fieldName": "pid_rule_id",
+                    "displayName": "PID rule"
+                  }
+                ]
+              },
+              "frame": {
+                "showTitle": true,
+                "title": "Positions behind the records - the most granular data",
+                "showDescription": true,
+                "description": "Pick a record in the filter above (or a table / PID) to see exactly which positions it adds up."
+              }
+            }
+          },
+          "position": {
+            "x": 0,
+            "y": 19,
+            "width": 12,
+            "height": 10
+          }
+        }
+      ],
+      "pageType": "PAGE_TYPE_CANVAS"
+    },
+    {
+      "name": "adjustments",
+      "displayName": "Adjustments",
+      "layout": [
+        {
+          "widget": {
+            "name": "adjustments_title",
+            "multilineTextboxSpec": {
+              "lines": [
+                "## Adjustments\n",
+                "\n",
+                "Every change made in the app for the day - what changed, from and to, why, by whom and when - as of the last pipeline run (changes made since then are in the app, and appear here after the next run).\n"
+              ]
+            }
+          },
+          "position": {
+            "x": 0,
+            "y": 0,
+            "width": 9,
+            "height": 2
+          }
+        },
+        {
+          "widget": {
+            "name": "adjustments_f_date",
+            "queries": [
+              {
+                "name": "adjustments_f_date_values",
+                "query": {
+                  "datasetName": "v_dates",
+                  "fields": [
+                    {
+                      "name": "as_of",
+                      "expression": "`as_of`"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              },
+              {
+                "name": "adjustments_f_date_a_log",
+                "query": {
+                  "datasetName": "a_log",
+                  "parameters": [
+                    {
+                      "name": "as_of",
+                      "keyword": "as_of"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "version": 2,
+              "widgetType": "filter-single-select",
+              "encodings": {
+                "fields": [
+                  {
+                    "fieldName": "as_of",
+                    "displayName": "As-of date",
+                    "queryName": "adjustments_f_date_values"
+                  },
+                  {
+                    "parameterName": "as_of",
+                    "queryName": "adjustments_f_date_a_log"
+                  }
+                ]
+              },
+              "frame": {
+                "showTitle": true,
+                "title": "As-of date"
+              }
+            }
+          },
+          "position": {
+            "x": 9,
+            "y": 0,
+            "width": 3,
+            "height": 2
+          }
+        },
+        {
+          "widget": {
+            "name": "a_type_chart",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "a_log",
+                  "fields": [
+                    {
+                      "name": "adjustment_type",
+                      "expression": "`adjustment_type`"
+                    },
+                    {
+                      "name": "count(subject)",
+                      "expression": "COUNT(`subject`)"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "version": 3,
+              "widgetType": "bar",
+              "encodings": {
+                "x": {
+                  "fieldName": "adjustment_type",
+                  "scale": {
+                    "type": "categorical"
+                  },
+                  "displayName": "adjustment type"
+                },
+                "y": {
+                  "fieldName": "count(subject)",
+                  "scale": {
+                    "type": "quantitative"
+                  },
+                  "displayName": "adjustments"
+                }
+              },
+              "frame": {
+                "showTitle": true,
+                "title": "Adjustments by type"
+              }
+            }
+          },
+          "position": {
+            "x": 0,
+            "y": 2,
+            "width": 12,
+            "height": 5
+          }
+        },
+        {
+          "widget": {
+            "name": "a_log_table",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "a_log",
+                  "fields": [
+                    {
+                      "name": "made_at",
+                      "expression": "`made_at`"
+                    },
+                    {
+                      "name": "adjustment_type",
+                      "expression": "`adjustment_type`"
+                    },
+                    {
+                      "name": "subject",
+                      "expression": "`subject`"
+                    },
+                    {
+                      "name": "field",
+                      "expression": "`field`"
+                    },
+                    {
+                      "name": "old_value",
+                      "expression": "`old_value`"
+                    },
+                    {
+                      "name": "new_value",
+                      "expression": "`new_value`"
+                    },
+                    {
+                      "name": "note",
+                      "expression": "`note`"
+                    },
+                    {
+                      "name": "made_by",
+                      "expression": "`made_by`"
+                    },
+                    {
+                      "name": "status",
+                      "expression": "`status`"
+                    }
+                  ],
+                  "disaggregated": true
+                }
+              }
+            ],
+            "spec": {
+              "version": 2,
+              "widgetType": "table",
+              "encodings": {
+                "columns": [
+                  {
+                    "fieldName": "made_at",
+                    "displayName": "When"
+                  },
+                  {
+                    "fieldName": "adjustment_type",
+                    "displayName": "Adjustment"
+                  },
+                  {
+                    "fieldName": "subject",
+                    "displayName": "Record / position / item"
+                  },
+                  {
+                    "fieldName": "field",
+                    "displayName": "Field"
+                  },
+                  {
+                    "fieldName": "old_value",
+                    "displayName": "From"
+                  },
+                  {
+                    "fieldName": "new_value",
+                    "displayName": "To"
+                  },
+                  {
+                    "fieldName": "note",
+                    "displayName": "Reason"
+                  },
+                  {
+                    "fieldName": "made_by",
+                    "displayName": "By"
+                  },
+                  {
+                    "fieldName": "status",
+                    "displayName": "Status"
+                  }
+                ]
+              },
+              "frame": {
+                "showTitle": true,
+                "title": "Audit trail"
+              }
+            }
+          },
+          "position": {
+            "x": 0,
+            "y": 7,
+            "width": 12,
+            "height": 10
+          }
+        }
+      ],
+      "pageType": "PAGE_TYPE_CANVAS"
+    }
+  ],
+  "uiSettings": {
+    "theme": {
+      "canvasBackgroundColor": {
+        "light": "#F7F8FA",
+        "dark": "#1F272D"
+      },
+      "widgetBackgroundColor": {
+        "light": "#FFFFFF",
+        "dark": "#11171C"
+      },
+      "widgetBorderColor": {
+        "light": "#FFFFFF",
+        "dark": "#11171C"
+      },
+      "fontColor": {
+        "light": "#11171C",
+        "dark": "#E8ECF0"
+      },
+      "selectionColor": {
+        "light": "#2272B4",
+        "dark": "#8ACAFF"
+      },
+      "visualizationColors": [
+        "#0B2545",
+        "#2F7FB8",
+        "#5BB5A2",
+        "#F2A541",
+        "#D1495B",
+        "#8E6C8A",
+        "#A3B4C4",
+        "#4E5185",
+        "#C8B273"
+      ],
+      "widgetHeaderAlignment": "LEFT"
+    }
+  }
+}

@@ -1,0 +1,15 @@
+pledge_venue,asset_key,haircut
+ANY,CASH,0.0
+Federal Reserve Bank,Level 1,0.01
+Federal Reserve Bank,Level 2A,0.03
+Federal Reserve Bank,Level 2B,0.08
+Federal Reserve Bank,L-,0.28
+Federal Reserve Bank,Non-HQLA,0.15
+Federal Home Loan Bank,L-1,0.2
+Federal Home Loan Bank,L-,0.3
+Federal Home Loan Bank,Level 1,0.02
+Federal Home Loan Bank,Level 2A,0.05
+NONE,Level 1,0.02
+NONE,Level 2A,0.05
+NONE,Level 2B,0.15
+NONE,Non-HQLA,0.3

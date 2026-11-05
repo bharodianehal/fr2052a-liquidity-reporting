@@ -1,0 +1,2 @@
+report_code,template_version,schema_files,business_requirements_version,activated_on,retired_on,notes
+FR 2052a,6G,6GSchema.xsd|6GCommentSchema.xsd|<firm>IncludesSchema.xsd,2021-12-28,2026-01-01,,Activation is this firm's configuration date; confirm the Fed effective date for 6G with the supervisory team

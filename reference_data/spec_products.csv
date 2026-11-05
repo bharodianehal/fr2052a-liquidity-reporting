@@ -1,0 +1,148 @@
+product_id,table_code,section_code,product_number,product_name,instructions_name,table_name,definition_page
+I.A.1,I.A,I,1,Unencumbered Assets,Unencumbered Assets,Inflows-Assets,33
+I.A.2,I.A,I,2,Capacity,Capacity,Inflows-Assets,33
+I.A.3,I.A,I,3,Unrestricted Reserve Balances,Unrestricted Reserve Balances,Inflows-Assets,34
+I.A.4,I.A,I,4,Restricted Reserve Balances,Restricted Reserve Balances,Inflows-Assets,35
+I.A.5,I.A,I,5,Unsettled Asset Purchases,Unsettled Asset Purchases,Inflows-Assets,35
+I.A.6,I.A,I,6,Forward Asset Purchases,Forward Asset Purchases,Inflows-Assets,35
+I.A.7,I.A,I,7,Encumbered Assets,Encumbered Assets,Inflows-Assets,36
+I.U.1,I.U,I,1,Onshore Placements,Onshore Placements,Inflows-Unsecured,37
+I.U.2,I.U,I,2,Offshore Placements,Offshore Placements,Inflows-Unsecured,37
+I.U.3,I.U,I,3,Required Operational Balances,Required Operational Balances,Inflows-Unsecured,37
+I.U.4,I.U,I,4,Excess Operational Balances,Excess Operational Balances,Inflows-Unsecured,37
+I.U.5,I.U,I,5,Outstanding Draws on Unsecured Revolving Facilities,Outstanding Draws on Unsecured Revolving Facilities,Inflows-Unsecured,37
+I.U.6,I.U,I,6,Other Loans,Other Loans,Inflows-Unsecured,37
+I.U.7,I.U,I,7,Cash Items in the Process of Collection,Cash Items in the Process of Collection,Inflows-Unsecured,38
+I.U.8,I.U,I,8,Short-Term Investments,Short-Term Investments,Inflows-Unsecured,38
+I.S.1,I.S,I,1,Reverse Repo,Reverse Repo,Inflows-Secured,39
+I.S.2,I.S,I,2,Securities Borrowing,Securities Borrowing,Inflows-Secured,39
+I.S.3,I.S,I,3,Dollar Rolls,Dollar Rolls,Inflows-Secured,39
+I.S.4,I.S,I,4,Collateral Swaps,Collateral Swaps,Inflows-Secured,39
+I.S.5,I.S,I,5,Margin Loans,Margin Loans,Inflows-Secured,40
+I.S.6,I.S,I,6,Other Secured Loans - Rehypothecatable,Other Secured Loans - Rehypothecatable,Inflows-Secured,40
+I.S.7,I.S,I,7,Outstanding Draws on Secured Revolving Facilities,Outstanding Draws on Secured Revolving Facilities,Inflows-Secured,40
+I.S.8,I.S,I,8,Other Secured Loans - Non-Rehypothecatable,Other Secured Loans - Non-Rehypothecatable,Inflows-Secured,41
+I.S.9,I.S,I,9,Synthetic Customer Longs,Synthetic Customer Longs,Inflows-Secured,41
+I.S.10,I.S,I,10,Synthetic Firm Sourcing,Synthetic Firm Sourcing,Inflows-Secured,41
+I.O.1,I.O,I,1,Derivative Receivables,Derivative Receivables,Inflows-Other,42
+I.O.2,I.O,I,2,Collateral Called for Receipt,Collateral Called for Receipt,Inflows-Other,42
+I.O.3,I.O,I,3,TBA Sales,TBA Sales,Inflows-Other,43
+I.O.4,I.O,I,4,Undrawn Committed Facilities Purchased,Undrawn Committed Facilities Purchased,Inflows-Other,43
+I.O.5,I.O,I,5,Lock-up Balance,Lock-up Balance,Inflows-Other,43
+I.O.6,I.O,I,6,Interest and Dividends Receivable,Interest and Dividends Receivable,Inflows-Other,43
+I.O.7,I.O,I,7,Net 30-Day Derivative Receivables,Net 30-Day Derivative Receivables,Inflows-Other,43
+I.O.8,I.O,I,8,Principal Payments Receivable on Unencumbered Investment Securities,Principal Payments Receivable on Unencumbered Investment Securities,Inflows-Other,44
+I.O.9,I.O,I,9,Other Cash Inflows,Other Cash Inflows,Inflows-Other,44
+O.D.1,O.D,O,1,Transactional Accounts,Transactional Accounts,Outflows-Deposits,55
+O.D.2,O.D,O,2,Non-Transactional Relationship Accounts,Non-Transactional Relationship Accounts,Outflows-Deposits,55
+O.D.3,O.D,O,3,Non-Transactional Non-Relationship Accounts,Non-Transactional Non-Relationship Accounts,Outflows-Deposits,56
+O.D.4,O.D,O,4,Operational Account Balances,Operational Account Balances,Outflows-Deposits,56
+O.D.5,O.D,O,5,Excess Balances in Operational Accounts,Excess Balances in Operational Accounts,Outflows-Deposits,56
+O.D.6,O.D,O,6,Non-Operational Account Balances,Non-Operational Account Balances,Outflows-Deposits,56
+O.D.7,O.D,O,7,Operational Escrow Accounts,Operational Escrow Accounts,Outflows-Deposits,56
+O.D.8,O.D,O,8,Non-Reciprocal Brokered Deposits,Non-Reciprocal Brokered Accounts,Outflows-Deposits,57
+O.D.9,O.D,O,9,Stable Affiliated Sweep Account Balances,Stable Affiliated Sweep Account Balances,Outflows-Deposits,57
+O.D.10,O.D,O,10,Less Stable Affiliated Sweep Account Balances,Less Stable Affiliated Sweep Account Balances,Outflows-Deposits,57
+O.D.11,O.D,O,11,Non-Affiliated Sweep Accounts,Non-Affiliated Sweep Accounts,Outflows-Deposits,57
+O.D.12,O.D,O,12,Other Product Sweep Accounts,Other Product Sweep Accounts,Outflows-Deposits,58
+O.D.13,O.D,O,13,Reciprocal Accounts,Reciprocal Accounts,Outflows-Deposits,58
+O.D.14,O.D,O,14,Other Third-Party Deposits,Other Third-Party Deposits,Outflows-Deposits,58
+O.D.15,O.D,O,15,Other Accounts,Other Accounts,Outflows-Deposits,58
+O.W.1,O.W,O,1,Asset-Backed Commercial Paper: Single-Seller,Asset-Backed Commercial Paper (ABCP) Single-Seller,Outflows-Wholesale,46
+O.W.2,O.W,O,2,Asset-Backed Commercial Paper: Multi-Seller,Asset-Backed Commercial Paper (ABCP) Multi-Seller,Outflows-Wholesale,46
+O.W.3,O.W,O,3,Collateralized Commercial Paper,Collateralized Commercial Paper,Outflows-Wholesale,46
+O.W.4,O.W,O,4,Asset-Backed Securities,Asset-Backed Securities (ABS),Outflows-Wholesale,46
+O.W.5,O.W,O,5,Covered Bonds,Covered Bonds,Outflows-Wholesale,46
+O.W.6,O.W,O,6,Tender Option Bonds,Tender Option Bonds,Outflows-Wholesale,46
+O.W.7,O.W,O,7,Other Asset-Backed Financing,Other Asset-Backed Financing,Outflows-Wholesale,46
+O.W.8,O.W,O,8,Commercial Paper,Commercial Paper,Outflows-Wholesale,46
+O.W.9,O.W,O,9,Onshore Borrowing,Onshore Borrowing,Outflows-Wholesale,46
+O.W.10,O.W,O,10,Offshore Borrowing,Offshore Borrowing,Outflows-Wholesale,47
+O.W.11,O.W,O,11,Unstructured Long Term Debt,Unstructured Long Term Debt,Outflows-Wholesale,47
+O.W.12,O.W,O,12,Structured Long Term Debt,Structured Long Term Debt,Outflows-Wholesale,47
+O.W.13,O.W,O,13,Government Supported Debt,Government Supported Debt,Outflows-Wholesale,47
+O.W.14,O.W,O,14,Unsecured Notes,Unsecured Notes,Outflows-Wholesale,47
+O.W.15,O.W,O,15,Structured Notes,Structured Notes,Outflows-Wholesale,47
+O.W.16,O.W,O,16,Wholesale CDs,Wholesale CDs,Outflows-Wholesale,48
+O.W.17,O.W,O,17,Draws on Committed Lines,Draws on Committed Lines,Outflows-Wholesale,48
+O.W.18,O.W,O,18,Free Credits,Free Credits,Outflows-Wholesale,48
+O.W.19,O.W,O,19,Other Unsecured Financing,Other Unsecured Financing,Outflows-Wholesale,48
+O.S.1,O.S,O,1,Repo,Repo,Outflows-Secured,49
+O.S.2,O.S,O,2,Securities Lending,Securities Lending,Outflows-Secured,49
+O.S.3,O.S,O,3,Dollar Rolls,Dollar Rolls,Outflows-Secured,49
+O.S.4,O.S,O,4,Collateral Swaps,Collateral Swaps,Outflows-Secured,49
+O.S.5,O.S,O,5,FHLB Advances,FHLB Advances,Outflows-Secured,50
+O.S.6,O.S,O,6,Exceptional Central Bank Operations,Exceptional Central Bank Operations,Outflows-Secured,50
+O.S.7,O.S,O,7,Customer Shorts,Customer Shorts,Outflows-Secured,51
+O.S.8,O.S,O,8,Firm Shorts,Firm Shorts,Outflows-Secured,52
+O.S.9,O.S,O,9,Synthetic Customer Shorts,Synthetic Customer Shorts,Outflows-Secured,53
+O.S.10,O.S,O,10,Synthetic Firm Financing,Synthetic Firm Financing,Outflows-Secured,53
+O.S.11,O.S,O,11,Other Secured Financing Transactions,Other Secured Financing Transactions,Outflows-Secured,54
+O.O.1,O.O,O,1,Derivative Payables,Derivative Payables,Outflows-Other,59
+O.O.2,O.O,O,2,Collateral Called for Delivery,Collateral Called for Delivery,Outflows-Other,59
+O.O.3,O.O,O,3,TBA Purchases,TBA Purchases,Outflows-Other,59
+O.O.4,O.O,O,4,Credit Facilities,Credit Facilities,Outflows-Other,59
+O.O.5,O.O,O,5,Liquidity Facilities,Liquidity Facilities,Outflows-Other,60
+O.O.6,O.O,O,6,Retail Mortgage Commitments,Retail Mortgage Commitments,Outflows-Other,61
+O.O.7,O.O,O,7,Trade Finance Instruments,Trade Finance Instruments,Outflows-Other,61
+O.O.8,O.O,O,8,MTM Impact on Derivative Positions,MTM Impact on Derivative Positions,Outflows-Other,61
+O.O.9,O.O,O,9,Loss of Rehypothecation Rights Due to a 1 Notch Downgrade,Loss of Rehypothecation Rights Due to a 1 Notch Downgrade,Outflows-Other,62
+O.O.10,O.O,O,10,Loss of Rehypothecation Rights Due to a 2 Notch Downgrade,Loss of Rehypothecation Rights Due to a 2 Notch Downgrade,Outflows-Other,62
+O.O.11,O.O,O,11,Loss of Rehypothecation Rights Due to a 3 Notch Downgrade,Loss of Rehypothecation Rights Due to a 3 Notch Downgrade,Outflows-Other,62
+O.O.12,O.O,O,12,Loss of Rehypothecation Rights Due to a Change in Financial Condition,Loss of Rehypothecation Rights Due to a Change in Financial Condition,Outflows-Other,62
+O.O.13,O.O,O,13,Total Collateral Required Due to a 1 Notch Downgrade,Total Collateral Required Due to a 1 Notch Downgrade,Outflows-Other,62
+O.O.14,O.O,O,14,Total Collateral Required Due to a 2 Notch Downgrade,Total Collateral Required Due to a 2 Notch Downgrade,Outflows-Other,62
+O.O.15,O.O,O,15,Total Collateral Required Due to a 3 Notch Downgrade,Total Collateral Required Due to a 3 Notch Downgrade,Outflows-Other,62
+O.O.16,O.O,O,16,Total Collateral Required Due to a Change in Financial Condition,Total Collateral Required Due to a Change in Financial Condition,Outflows-Other,63
+O.O.17,O.O,O,17,Excess Margin,Excess Margin,Outflows-Other,63
+O.O.18,O.O,O,18,Unfunded Term Margin,Unfunded Term Margin,Outflows-Other,63
+O.O.19,O.O,O,19,Interest and Dividends Payable,Interest & Dividends Payable,Outflows-Other,63
+O.O.20,O.O,O,20,Net 30-Day Derivative Payables,Net 30-Day Derivative Payables,Outflows-Other,63
+O.O.21,O.O,O,21,Other Outflows Related to Structured Transactions,Other Outflows Related to Structured Transactions,Outflows-Other,63
+O.O.22,O.O,O,22,Other Cash Outflows,Other Cash Outflows,Outflows-Other,64
+S.DC.1,S.DC,S,1,Gross Derivative Asset Values,Gross Derivative Asset Values,Supplemental-Derivatives & Collateral,65
+S.DC.2,S.DC,S,2,Gross Derivative Liability Values,Gross Derivative Liability Values,Supplemental-Derivatives & Collateral,66
+S.DC.3,S.DC,S,3,Derivative Settlement Payments Delivered,Derivative Settlement Payments Delivered,Supplemental-Derivatives & Collateral,66
+S.DC.4,S.DC,S,4,Derivative Settlement Payments Received,Derivative Settlement Payments Received,Supplemental-Derivatives & Collateral,66
+S.DC.5,S.DC,S,5,Initial Margin Posted - House,Initial Margin Posted - House,Supplemental-Derivatives & Collateral,66
+S.DC.6,S.DC,S,6,Initial Margin Posted - Customer,Initial Margin Posted - Customer,Supplemental-Derivatives & Collateral,66
+S.DC.7,S.DC,S,7,Initial Margin Received,Initial Margin Received,Supplemental-Derivatives & Collateral,66
+S.DC.8,S.DC,S,8,Variation Margin Posted - House,Variation Margin Posted - House,Supplemental-Derivatives & Collateral,67
+S.DC.9,S.DC,S,9,Variation Margin Posted - Customer,Variation Margin Posted - Customer,Supplemental-Derivatives & Collateral,67
+S.DC.10,S.DC,S,10,Variation Margin Received,Variation Margin Received,Supplemental-Derivatives & Collateral,67
+S.DC.11,S.DC,S,11,Derivative CCP Default Fund Contribution,Derivative CCP Default Fund Contribution,Supplemental-Derivatives & Collateral,67
+S.DC.12,S.DC,S,12,Other CCP Pledges and Contributions,Other CCP Pledges and Contributions,Supplemental-Derivatives & Collateral,67
+S.DC.13,S.DC,S,13,Collateral Disputes Deliverables,Collateral Disputes Deliverables,Supplemental-Derivatives & Collateral,67
+S.DC.14,S.DC,S,14,Collateral Disputes Receivables,Collateral Disputes Receivables,Supplemental-Derivatives & Collateral,68
+S.DC.15,S.DC,S,15,Sleeper Collateral Deliverables,Sleeper Collateral Deliverables,Supplemental-Derivatives & Collateral,68
+S.DC.16,S.DC,S,16,Required Collateral Deliverables,Required Collateral Deliverables,Supplemental-Derivatives & Collateral,68
+S.DC.17,S.DC,S,17,Sleeper Collateral Receivables,Sleeper Collateral Receivables,Supplemental-Derivatives & Collateral,68
+S.DC.18,S.DC,S,18,Derivative Collateral Substitution Risk,Derivative Collateral Substitution Risk,Supplemental-Derivatives & Collateral,68
+S.DC.19,S.DC,S,19,Derivative Collateral Substitution Capacity,Derivative Collateral Substitution Capacity,Supplemental-Derivatives & Collateral,69
+S.DC.20,S.DC,S,20,Other Collateral Substitution Risk,Other Collateral Substitution Risk,Supplemental-Derivatives & Collateral,69
+S.DC.21,S.DC,S,21,Other Collateral Substitution Capacity,Other Collateral Substitution Capacity,Supplemental-Derivatives & Collateral,69
+S.L.1,S.L,S,1,Subsidiary Liquidity That Cannot be Transferred,Subsidiary Liquidity That Cannot Be Transferred,Supplemental-Liquidity Risk Measurement,70
+S.L.2,S.L,S,2,Subsidiary Liquidity Available for Transfer,Subsidiary Liquidity Available for Transfer,Supplemental-Liquidity Risk Measurement,70
+S.L.3,S.L,S,3,Unencumbered Asset Hedges - Early Termination Outflows,Unencumbered Asset Hedges - Early Termination Outflows,Supplemental-Liquidity Risk Measurement,71
+S.L.4,S.L,S,4,Non-Structured Debt Maturing in Greater than 30-days - Primary Market Maker,Non-Structured Debt Maturing in Greater than 30-days - Primary Market Maker,Supplemental-Liquidity Risk Measurement,71
+S.L.5,S.L,S,5,Structured Debt Maturing in Greater than 30-days - Primary Market Maker,Structured Debt Maturing in Greater than 30-days - Primary Market Maker,Supplemental-Liquidity Risk Measurement,71
+S.L.6,S.L,S,6,Liquidity Coverage Ratio,Liquidity Coverage Ratio,Supplemental-Liquidity Risk Measurement,71
+S.L.7,S.L,S,7,Subsidiary Funding That Cannot be Transferred,Subsidiary Funding That Cannot Be Transferred,Supplemental-Liquidity Risk Measurement,71
+S.L.8,S.L,S,8,Subsidiary Funding Available for Transfer,Subsidiary Funding Available for Transfer,Supplemental-Liquidity Risk Measurement,71
+S.L.9,S.L,S,9,Additional Funding Requirement for Off-Balance Sheet Rehypothecated Assets,Additional Funding Requirement for Off-Balance Sheet Rehypothecated Assets,Supplemental-Liquidity Risk Measurement,72
+S.L.10,S.L,S,10,Net Stable Funding Ratio,Net Stable Funding Ratio,Supplemental-Liquidity Risk Measurement,72
+S.B.1,S.B,S,1,Regulatory Capital Element,Regulatory Capital Element,Supplemental-Balance Sheet,73
+S.B.2,S.B,S,2,Other Liabilities,Other Liabilities,Supplemental-Balance Sheet,73
+S.B.3,S.B,S,3,Non-Performing Assets,Non-Performing Assets,Supplemental-Balance Sheet,73
+S.B.4,S.B,S,4,Other Assets,Other Assets,Supplemental-Balance Sheet,73
+S.B.5,S.B,S,5,Counterparty Netting,Counterparty Netting,Supplemental-Balance Sheet,73
+S.B.6,S.B,S,6,Carrying Value Adjustment,Carrying Value Adjustment,Supplemental-Balance Sheet,73
+S.I.1,S.I,S,1,Long Market Value Client Assets,Long Market Value Client Assets,Supplemental-Informational,74
+S.I.2,S.I,S,2,Short Market Value Client Assets,Short Market Value Client Assets,Supplemental-Informational,74
+S.I.3,S.I,S,3,Gross Client Wires Received,Gross Client Wires Received,Supplemental-Informational,74
+S.I.4,S.I,S,4,Gross Client Wires Paid,Gross Client Wires Paid,Supplemental-Informational,74
+S.I.5,S.I,S,5,FRB 23A Capacity,FRB 23A Capacity,Supplemental-Informational,74
+S.I.6,S.I,S,6,Subsidiary Liquidity Not Transferrable,Subsidiary Liquidity Not Transferrable,Supplemental-Informational,75
+S.FX.1,S.FX,S,1,Spot,Spot,Supplemental-Foreign Exchange,78
+S.FX.2,S.FX,S,2,Forwards and Futures,Forwards and Futures,Supplemental-Foreign Exchange,78
+S.FX.3,S.FX,S,3,Swaps,Swaps,Supplemental-Foreign Exchange,78

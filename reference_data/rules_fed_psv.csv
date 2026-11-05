@@ -1,0 +1,15 @@
+check_no,check_id,check_name,description,approach,severity
+1,PSV-01,Weekend maturities,Cash flows are not reported on weekend dates: the daily buckets reflect the date the flow is actually observed,Data Quality,WARNING
+2,PSV-02,Internal transactions reported on consolidated reporting entity,The consolidated reporting entity does not report records with Internal = true (intercompany is eliminated),Data Quality,ERROR
+3,PSV-03,Internal transactions reported without internal counterparty,Records with Internal = true also report the Internal Counterparty,Data Quality,ERROR
+4,PSV-04,Lendable value in excess of market value,Lendable Value does not exceed Market Value,Data Quality,ERROR
+5,PSV-05,Third-party reporting entity exposures versus consolidated,Third-party exposures of the first-tier reporting entities plus those booked in non-reporting entities equal the consolidated third-party exposures,Data Transformation,WARNING
+6,PSV-06,Symmetry of intercompany transactions,Internal inflows of one reporting entity with another match that entity's internal outflows for the same product grouping,Data Transformation,WARNING
+7,PSV-07,Large haircuts on secured transactions,Absolute haircut |1 - Collateral Value / Maturity Amount| above 50% on secured records flags a Maturity Amount or Collateral Class error,Data Quality,WARNING
+8,PSV-08,Mismatched currency reporting,Currency attributes match the value fields they describe (one currency per record outside S.FX; converted values in USD),Design,ERROR
+9,PSV-09,Missing required products by entity type,Products generally expected for the reporting entity's type are reported,Data Transformation,WARNING
+10,PSV-10,Improper intra-entity consolidation,For Internal = true the Reporting Entity and the Internal Counterparty are not the same entity,Data Quality,ERROR
+11,PSV-11,Duplicate records,Numeric values are aggregated across all unique combinations of the text fields (no duplicate report keys),Data Quality,ERROR
+12,PSV-12,Invalid or missing counterparty field,Counterparty is reported where required and is a valid value for the product,Data Quality,ERROR
+13,PSV-13,Missing or not applicable collateral class,Collateral Class is reported where required and not reported where it is not applicable to the product,Data Quality,WARNING
+14,PSV-14,Large other product or counterparty balance,No legal entity reports 1bn USD or more under an Other product or with Counterparty = Other,Data Transformation,WARNING

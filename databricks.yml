@@ -1,0 +1,47 @@
+# Databricks Asset Bundle - the FR 2052a data platform: Lakeflow pipeline, jobs, Lakebase project, AI/BI dashboards.
+# The app is its own bundle (app/databricks.yml), deployed once the data, the Genie space and the agents' endpoint exist.
+# Workspace values are variables (values per target in a gitignored file, or --var); nothing workspace-specific is in the repo.
+#
+#   databricks bundle validate -t <target>
+#   databricks bundle deploy   -t <target>
+bundle:
+  name: fr2052a
+
+include:
+  - resources/*.yml
+
+variables:
+  catalog:
+    description: Unity Catalog catalog for all schemas (must exist)
+  warehouse_id:
+    description: SQL warehouse (pipeline SQL, AI/BI dashboards, Genie, AI Functions)
+  notify_email:
+    description: Address for job failure notifications
+  app_sp_client_id:
+    description: The app's service principal (client id) - granted read on Lakebase and Delta; empty until the app exists
+    default: ""
+  agents_sp_client_id:
+    description: The agents' service principal fr2052a-agents (client id, printed by job fr2052a-register-agents) - granted read on Delta and Lakebase; empty until it exists
+    default: ""
+  lakebase_owner_role:
+    description: "Your Lakebase role id on the production branch (owner of the database fr2052a), e.g. first-last: databricks postgres list-roles projects/fr2052a/branches/production"
+  lakebase_database_id:
+    description: Id of the Lakebase database fr2052a (a new workspace can keep the default)
+    default: fr2052a
+  lakebase_max_cu:
+    description: Max CU of the Lakebase endpoint - 4 for the first full load of the synced tables, then 1
+    default: 1
+
+sync:
+  include:
+    - schema_6g/*.xsd        # the Fed's 6G XSDs (6GSchema.xsd + 6GCommentSchema.xsd from the 6G package), used by notebook 06
+  exclude:
+    - app/frontend/**
+    - evidence/**
+
+targets:
+  # The values of the variables are NOT in the repo: per target they are read from the gitignored file
+  # .databricks/bundle/<target>/variable-overrides.json (see variable-overrides.example.json); the workspace is the CLI profile:
+  #   databricks bundle deploy -t dev -p <profile>
+  dev:
+    default: true

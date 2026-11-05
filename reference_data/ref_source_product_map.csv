@@ -1,0 +1,118 @@
+source_system,source_product_code,standard_product_type,description
+STATESTREET_CUSTODY,SST-SEC-POS,SEC-POS,Securities position in custody
+STATESTREET_CUSTODY,SST-AFS,SEC-POS,Available-for-sale securities
+STATESTREET_CUSTODY,SST-HTM,SEC-POS,Held-to-maturity securities
+STATESTREET_CUSTODY,SST-TRD,SEC-POS,Trading securities
+STATESTREET_CUSTODY,SST-LOAN-POOL,LOAN-POOL,Whole loans held as assets at market value
+STATESTREET_CUSTODY,SST-CB-RES,CB-RES,Balances at central banks
+STATESTREET_CUSTODY,SST-VAULT-CASH,VAULT-CASH,Currency and coin
+STATESTREET_CUSTODY,SST-SEC-PURCH,SEC-PURCH,"Executed, unsettled security purchase"
+ACBS_LOANS,ACB-MM-PLACE,MM-PLACE,Interbank money market placement
+ACBS_LOANS,ACB-NOSTRO,NOSTRO,Balances held at other banks
+ACBS_LOANS,ACB-RCF-DRAW,RCF-DRAW,Drawn revolving credit facility
+ACBS_LOANS,ACB-TERM-LOAN,TERM-LOAN,Term loan / mortgage / consumer loan
+ACBS_LOANS,ACB-CRE-TERM,TERM-LOAN,Commercial real estate term loan
+ACBS_LOANS,ACB-MORT-RES,TERM-LOAN,Residential mortgage
+ACBS_LOANS,ACB-AUTO,TERM-LOAN,Auto loan
+ACBS_LOANS,ACB-CIPC,CIPC,Cash items in the process of collection
+ACBS_LOANS,ACB-ST-INV,ST-INV,"Short-term investment (CDs, time deposits placed)"
+MUREX,MX-REVREPO,REVREPO,Reverse repurchase agreement
+MUREX,MX-RREPO-TRI,REVREPO,Tri-party reverse repo
+MUREX,MX-RREPO-BIL,REVREPO,Bilateral reverse repo
+MUREX,MX-SECBORROW,SECBORROW,Securities borrowed
+MUREX,MX-DOLLAR-ROLL,DOLLAR-ROLL,TBA dollar roll
+MUREX,MX-COLL-SWAP,COLL-SWAP,Collateral swap
+MUREX,MX-MARGIN-LOAN,MARGIN-LOAN,Customer margin loan
+MUREX,MX-SYNTH-CUST-LONG,SYNTH-CUST-LONG,Synthetic customer long (total return swap)
+MUREX,MX-SYNTH-FIRM-SRC,SYNTH-FIRM-SRC,Synthetic firm sourcing
+MUREX,MX-DERIV-CF,DERIV-CF,Derivative contractual cash flow
+MUREX,MX-IRS-CF,DERIV-CF,Interest rate swap cash flow
+MUREX,MX-CDS-CF,DERIV-CF,Credit default swap cash flow
+MUREX,MX-COLL-CALL,COLL-CALL,Collateral call
+MUREX,MX-TBA,TBA,To-be-announced MBS trade
+MUREX,MX-FAC-PURCH,FAC-PURCH,Committed facility purchased
+MUREX,MX-LOCKUP,LOCKUP,Lock-up balance
+MUREX,MX-INT-DIV,INT-DIV,Interest and dividends
+MUREX,MX-NET30,NET30,Net 30-day derivative flows (Appendix V #6-9)
+MUREX,MX-SEC-PRIN,SEC-PRIN,Principal due on investment securities
+MUREX,MX-OTHER-CF,OTHER-CF,Other contractual cash flow
+MUREX,MX-COMMIT-CREDIT,COMMIT-CREDIT,Undrawn credit facility
+MUREX,MX-COMMIT-LIQ,COMMIT-LIQ,Undrawn liquidity facility
+MUREX,MX-MORTG-COMMIT,MORTG-COMMIT,Retail mortgage commitment
+MUREX,MX-TRADE-FIN,TRADE-FIN,Trade finance instrument
+MUREX,MX-MTM-IMPACT,MTM-IMPACT,Look-back MTM collateral outflow
+MUREX,MX-DOWNGRADE-REHYP,DOWNGRADE-REHYP,Rehypothecation rights lost on downgrade
+MUREX,MX-DOWNGRADE-COLL,DOWNGRADE-COLL,Collateral required on downgrade
+MUREX,MX-EXCESS-MARGIN,EXCESS-MARGIN,Customer excess margin
+MUREX,MX-UNFUNDED-MARGIN,UNFUNDED-MARGIN,Unfunded term margin
+MUREX,MX-STRUCT-OTHER,STRUCT-OTHER,Other structured transaction outflow
+FISERV_DDA,FIS-DDA,DDA,Demand deposit account
+FISERV_DDA,FIS-CHK-PERS,DDA,Personal checking
+FISERV_DDA,FIS-CHK-BUS,DDA,Business checking
+FISERV_DDA,FIS-ANLYS,DDA,Commercial analysis checking
+FISERV_DDA,FIS-SAV,SAV,Savings / money market deposit account
+FISERV_DDA,FIS-MMDA,SAV,Money market deposit account
+FISERV_DDA,FIS-STMT-SAV,SAV,Statement savings
+FISERV_DDA,FIS-TD,TD,Term deposit
+FISERV_DDA,FIS-CD-RET,TD,Retail certificate of deposit
+FISERV_DDA,FIS-CD-JUMBO,TD,Jumbo certificate of deposit
+FISERV_DDA,FIS-ESCROW,ESCROW,Operational escrow account
+FISERV_DDA,FIS-BROKERED,BROKERED,Brokered deposit (non-reciprocal)
+FISERV_DDA,FIS-SWEEP-AFF,SWEEP-AFF,Sweep from an affiliated broker-dealer
+FISERV_DDA,FIS-SWEEP-NONAFF,SWEEP-NONAFF,Sweep from a non-affiliated firm
+FISERV_DDA,FIS-SWEEP-OTHER,SWEEP-OTHER,Sweep from other firm products
+FISERV_DDA,FIS-RECIP,RECIP,Reciprocal deposit
+FISERV_DDA,FIS-3P-DEP,3P-DEP,Other third-party deposit
+FISERV_DDA,FIS-DEP-OTHER,DEP-OTHER,Other deposit account
+QUANTUM_TREASURY,QTM-ABCP,ABCP,Asset-backed commercial paper
+QUANTUM_TREASURY,QTM-CCP-PAPER,CCP-PAPER,Collateralized commercial paper
+QUANTUM_TREASURY,QTM-ABS,ABS,Asset-backed securities issued
+QUANTUM_TREASURY,QTM-COVERED-BOND,COVERED-BOND,Covered bonds issued
+QUANTUM_TREASURY,QTM-TOB,TOB,Tender option bonds
+QUANTUM_TREASURY,QTM-OTHER-ABF,OTHER-ABF,Other asset-backed financing
+QUANTUM_TREASURY,QTM-CP,CP,Commercial paper issued
+QUANTUM_TREASURY,QTM-MM-BORROW,MM-BORROW,Interbank money market borrowing
+QUANTUM_TREASURY,QTM-DEBT-ISS,DEBT-ISS,Debt securities issued
+QUANTUM_TREASURY,QTM-WCD,WCD,Wholesale certificate of deposit
+QUANTUM_TREASURY,QTM-LINE-DRAW,LINE-DRAW,Draw on a committed line
+QUANTUM_TREASURY,QTM-FREE-CREDIT,FREE-CREDIT,Customer free credit balance
+QUANTUM_TREASURY,QTM-UNSEC-OTHER,UNSEC-OTHER,Other unsecured financing
+MUREX,MX-REPO,REPO,Repurchase agreement
+MUREX,MX-REPO-TRI,REPO,Tri-party repo
+MUREX,MX-REPO-BIL,REPO,Bilateral repo
+MUREX,MX-SECLEND,SECLEND,Securities lent
+MUREX,MX-SEC-BORROWING,SEC-BORROWING,Secured borrowing facility
+MUREX,MX-CUST-SHORT,CUST-SHORT,Customer short position
+MUREX,MX-FIRM-SHORT,FIRM-SHORT,Firm short position
+MUREX,MX-SYNTH-CUST-SHORT,SYNTH-CUST-SHORT,Synthetic customer short
+MUREX,MX-SYNTH-FIRM-FIN,SYNTH-FIRM-FIN,Synthetic firm financing
+ALGO_COLLATERAL,ALG-DERIV-MTM,DERIV-MTM,Gross derivative fair value
+ALGO_COLLATERAL,ALG-DERIV-SETTLE,DERIV-SETTLE,Derivative settlement payment
+ALGO_COLLATERAL,ALG-IM,IM,Initial margin
+ALGO_COLLATERAL,ALG-VM,VM,Variation margin
+ALGO_COLLATERAL,ALG-CCP-DF,CCP-DF,CCP default fund contribution
+ALGO_COLLATERAL,ALG-CCP-OTHER,CCP-OTHER,Other CCP pledges
+ALGO_COLLATERAL,ALG-COLL-DISPUTE,COLL-DISPUTE,Disputed collateral call
+ALGO_COLLATERAL,ALG-SLEEPER,SLEEPER,Sleeper collateral
+ALGO_COLLATERAL,ALG-REQ-COLL,REQ-COLL,Required collateral deliverable
+ALGO_COLLATERAL,ALG-COLL-SUB,COLL-SUB,Collateral substitution exposure
+AXIOM_REGCALC,AXR-SUB-LIQ,SUB-LIQ,Subsidiary HQLA (LCR)
+AXIOM_REGCALC,AXR-HEDGE-TERM,HEDGE-TERM,Early termination outflows on HQLA hedges
+AXIOM_REGCALC,AXR-PMM-DEBT,PMM-DEBT,Own debt > 30 days where firm is primary market maker
+AXIOM_REGCALC,AXR-SUB-FUND,SUB-FUND,Subsidiary stable funding (NSFR)
+AXIOM_REGCALC,AXR-OBS-REHYP,OBS-REHYP,Off-balance sheet rehypothecated assets
+AXIOM_REGCALC,AXR-NSFR,NSFR,Net stable funding ratio
+ORACLE_GL,OGL-REG-CAP,REG-CAP,Regulatory capital element
+ORACLE_GL,OGL-OTHER-LIAB,OTHER-LIAB,Other liabilities
+ORACLE_GL,OGL-NPA,NPA,Non-performing assets
+ORACLE_GL,OGL-OTHER-ASSET,OTHER-ASSET,Other assets
+ORACLE_GL,OGL-CPTY-NETTING,CPTY-NETTING,Balance sheet counterparty netting
+ORACLE_GL,OGL-CARRY-ADJ,CARRY-ADJ,Carrying value adjustment
+BROKERAGE_BOOKS,BRK-CLIENT-LONG,CLIENT-LONG,Client long market value
+BROKERAGE_BOOKS,BRK-CLIENT-SHORT,CLIENT-SHORT,Client short market value
+BROKERAGE_BOOKS,BRK-CLIENT-WIRE,CLIENT-WIRE,Client wires
+BROKERAGE_BOOKS,BRK-FRB-23A,FRB-23A,Section 23A capacity
+BROKERAGE_BOOKS,BRK-SUB-LIQ-NT,SUB-LIQ-NT,Subsidiary liquidity not transferable
+MUREX,MX-FX-SPOT,FX-SPOT,FX spot
+MUREX,MX-FX-FWD,FX-FWD,FX forward / future
+MUREX,MX-FX-SWAP,FX-SWAP,FX swap

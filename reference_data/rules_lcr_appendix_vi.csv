@@ -1,0 +1,75 @@
+rule_id,rule_section,rule_name,rule_description,flow_direction,applicable_product_ids,sub_product_condition,counterparty_condition,counterparty_category_condition,collateral_hqla_condition,insured_condition,maturity_condition,other_condition,amount_basis,outflow_rate,inflow_rate,rule_priority
+LCR-H01,"20, 22",Unencumbered HQLA securities,I.A.1 HQLA under treasury control,HQLA,I.A.1,,,,HQLA,,,f.treasury_control,market_value,,1.0,10
+LCR-H02,22(b),"Pre-positioned, unused capacity",I.A.2 collateral pledged to a central bank / FHLB but not drawn,HQLA,I.A.2,,,,HQLA,,,f.treasury_control,market_value,,1.0,10
+LCR-H03,20(a)(1),Reserve Bank balances,I.A.3 unrestricted reserve balances and currency,HQLA,I.A.3,,,,Level 1,,,,market_value,,1.0,10
+LCR-H04,22(a),"Collateral received, unencumbered",I.S collateral held unencumbered under treasury control,HQLA,"I.S.1,I.S.2,I.S.3,I.S.5,I.S.6,I.S.8,I.S.9",,,,HQLA,,,f.unencumbered AND f.treasury_control,collateral_value,,1.0,10
+LCR-H05,22(b)(3),Subsidiary liquidity not transferable,S.L.1 excess subsidiary HQLA that cannot be transferred,HQLA_EXCLUDED,S.L.1,,,,HQLA,,,,market_value,,1.0,10
+LCR-O01,32(a)(1),Stable retail deposits,Fully insured transactional / relationship retail,OUTFLOW,"O.D.1,O.D.2",,,Retail,,FDIC,<=30,,maturity_amount,0.03,,10
+LCR-O02,32(a)(2),Other retail deposits,All other retail and small business deposits,OUTFLOW,"O.D.1,O.D.2,O.D.3,O.D.7,O.D.14,O.D.15",,,Retail,,,<=30,,maturity_amount,0.10,,50
+LCR-O03,32(a)(3),Brokered deposits - reciprocal / insured,Insured brokered and reciprocal deposits,OUTFLOW,"O.D.8,O.D.13",,,,,FDIC,<=30,,maturity_amount,0.10,,10
+LCR-O04,32(a)(4),Brokered deposits - other,Uninsured brokered and reciprocal deposits,OUTFLOW,"O.D.8,O.D.13",,,,,,<=30,,maturity_amount,0.40,,50
+LCR-O05,32(a)(5),Affiliated sweep - stable,Stable affiliated sweep account balances,OUTFLOW,O.D.9,,,,,,<=30,,maturity_amount,0.10,,10
+LCR-O06,32(a)(5),Affiliated sweep - less stable,Less stable affiliated sweep account balances,OUTFLOW,O.D.10,,,,,,<=30,,maturity_amount,0.25,,10
+LCR-O07,32(a)(5),Non-affiliated sweep,Non-affiliated sweep accounts,OUTFLOW,O.D.11,,,,,,<=30,,maturity_amount,0.40,,10
+LCR-O08,Appendix V #20,Other product sweep (double count),O.D.12 balances are already reported in the product swept into,OUTFLOW,O.D.12,,,,,,ANY,,maturity_amount,0.00,,5
+LCR-O10,32(h)(3),Operational deposits - insured,Fully insured operational deposits,OUTFLOW,O.D.4,,,,,FDIC,<=30,,maturity_amount,0.05,,10
+LCR-O11,32(h)(3),Operational deposits,Operational account balances,OUTFLOW,"O.D.4,O.D.7",,,,,,<=30,,maturity_amount,0.25,,50
+LCR-O12,32(h)(1),Non-operational wholesale - insured,Insured non-financial non-operational deposits,OUTFLOW,"O.D.5,O.D.6,O.D.14,O.D.15",,,Wholesale Non-Financial,,FDIC,<=30,,maturity_amount,0.20,,10
+LCR-O13,32(h)(1),Non-operational wholesale - non-financial,Non-financial non-operational deposits,OUTFLOW,"O.D.5,O.D.6,O.D.14,O.D.15",,,"Wholesale Non-Financial,Other",,,<=30,,maturity_amount,0.40,,50
+LCR-O14,32(h)(2),Non-operational wholesale - financial,Financial-sector non-operational deposits,OUTFLOW,"O.D.5,O.D.6,O.D.14,O.D.15",,,Financial,,,<=30,,maturity_amount,1.00,,60
+LCR-O20,32(h)(5),Asset-backed / structured funding,"ABCP, ABS, covered bonds, TOBs and other asset-backed financing maturing <= 30 days",OUTFLOW,"O.W.1,O.W.2,O.W.3,O.W.4,O.W.5,O.W.6,O.W.7",,,,,,<=30,,maturity_amount,1.00,,50
+LCR-O21,32(h)(5),Commercial paper and debt securities,"CP, LTD, notes and CDs maturing <= 30 days",OUTFLOW,"O.W.8,O.W.11,O.W.12,O.W.13,O.W.14,O.W.15,O.W.16,O.W.17,O.W.19",,,,,,<=30,,maturity_amount,1.00,,50
+LCR-O22,32(h)(1),Unsecured borrowing - non-financial,Onshore / offshore borrowing from non-financial counterparties,OUTFLOW,"O.W.9,O.W.10",,,"Wholesale Non-Financial,Other",,,<=30,,maturity_amount,0.40,,10
+LCR-O23,32(h)(2),Unsecured borrowing - financial,Onshore / offshore borrowing from financial counterparties,OUTFLOW,"O.W.9,O.W.10",,,,,,<=30,,maturity_amount,1.00,,50
+LCR-O24,32(g),Free credits - retail,Free credit balances of retail customers,OUTFLOW,O.W.18,,,Retail,,,<=30,,maturity_amount,0.10,,10
+LCR-O25,32(g),Free credits - other,Free credit balances of non-retail customers,OUTFLOW,O.W.18,,,,,,<=30,,maturity_amount,1.00,,50
+LCR-O30,32(j)(1)(i),Secured funding - Level 1,Secured by Level 1 HQLA,OUTFLOW,"O.S.1,O.S.2,O.S.3,O.S.11,O.S.5",,,,Level 1,,<=30,,maturity_amount,0.00,,10
+LCR-O31,32(j)(1)(ii),Secured funding - Level 2A,Secured by Level 2A HQLA,OUTFLOW,"O.S.1,O.S.2,O.S.3,O.S.11,O.S.5",,,,Level 2A,,<=30,,maturity_amount,0.15,,10
+LCR-O32,32(j)(1)(iv),Secured funding - Level 2B,Secured by Level 2B HQLA,OUTFLOW,"O.S.1,O.S.2,O.S.3,O.S.11",,,,Level 2B,,<=30,,maturity_amount,0.50,,10
+LCR-O33,32(j)(1)(iii),Secured funding - FHLB / sovereign non-HQLA,"Non-HQLA collateral with a GSE, sovereign, PSE or MDB",OUTFLOW,"O.S.1,O.S.2,O.S.3,O.S.11,O.S.5",,"Government Sponsored Entity,Sovereign,Public Sector Entity,Multilateral Development Bank",,"Level 2B,Non-HQLA",,<=30,,maturity_amount,0.25,,20
+LCR-O34,32(j)(1)(vi),Secured funding - non-HQLA,Secured by non-HQLA with other counterparties,OUTFLOW,"O.S.1,O.S.2,O.S.3,O.S.11",,,,Non-HQLA,,<=30,,maturity_amount,1.00,,50
+LCR-O35,32(j)(1),Exceptional central bank operations,Secured funding from a central bank,OUTFLOW,O.S.6,,,,,,<=30,,maturity_amount,0.00,,10
+LCR-O36,32(j)(3),"Collateral swaps - L2A pledged, L1 received",Collateral swap where the firm pledges Level 2A and receives Level 1,OUTFLOW,O.S.4,Level 1 Received,,,Level 2A,,<=30,,maturity_amount,0.15,,10
+LCR-O37,32(j)(3),Collateral swaps - other,Other collateral swaps,OUTFLOW,O.S.4,,,,,,<=30,,maturity_amount,0.00,,50
+LCR-O38,32(j)(1)(vii),Customer shorts,Customer short positions covered by other customers' collateral,OUTFLOW,O.S.7,,,,,,<=30,,maturity_amount,0.50,,10
+LCR-O39,33(f)(1),Firm shorts and synthetics,"Firm shorts, synthetic customer shorts and firm financing (forward sales are in O.O.20)",OUTFLOW,"O.S.8,O.S.9,O.S.10",,,,,,<=30,,maturity_amount,0.00,,10
+LCR-O40,Appendix V #6,Derivative payables (in net),O.O.1 flows are captured in O.O.20,OUTFLOW,"O.O.1,O.O.3",,,,,,ANY,,maturity_amount,0.00,,5
+LCR-O41,32(f)(5),Collateral called for delivery,Collateral called within 30 days,OUTFLOW,O.O.2,,,,,,<=30,,maturity_amount,1.00,,10
+LCR-O42,32(e)(1)(i),Credit / liquidity facilities - retail,Undrawn commitments to retail and small business,OUTFLOW,"O.O.4,O.O.5",,,Retail,,,ANY,,maturity_amount,0.05,,10
+LCR-O43,32(e)(1)(ii),Credit facilities - non-financial,Undrawn credit facilities to non-financial wholesale,OUTFLOW,O.O.4,,,"Wholesale Non-Financial,Other",,,ANY,,maturity_amount,0.10,,20
+LCR-O44,32(e)(1)(iv),Liquidity facilities - non-financial,Undrawn liquidity facilities to non-financial wholesale and VRDN municipalities,OUTFLOW,O.O.5,,,"Wholesale Non-Financial,Other",,,ANY,,maturity_amount,0.30,,20
+LCR-O45,32(e)(1)(v),Credit facilities - banks,Undrawn credit facilities to banks,OUTFLOW,O.O.4,,Bank,,,,ANY,,maturity_amount,0.40,,20
+LCR-O46,32(e)(1)(vi),Liquidity facilities - banks,Undrawn liquidity facilities to banks,OUTFLOW,O.O.5,,Bank,,,,ANY,,maturity_amount,0.50,,20
+LCR-O47,32(e)(1)(viii),Facilities - debt issuing SPEs,Undrawn credit and liquidity facilities to debt issuing SPEs,OUTFLOW,"O.O.4,O.O.5",,Debt Issuing Special Purpose Entity,,,,ANY,,maturity_amount,1.00,,15
+LCR-O48,32(e)(1)(vii),Facilities - other financial,Undrawn credit (40%) facilities to other financial entities,OUTFLOW,O.O.4,,,Financial,,,ANY,,maturity_amount,0.40,,50
+LCR-O49,32(e)(1)(vii),Liquidity facilities - other financial,Undrawn liquidity facilities to other financial entities,OUTFLOW,O.O.5,,,Financial,,,ANY,,maturity_amount,1.00,,50
+LCR-O50,32(d),Retail mortgage commitments,Commitments to fund retail mortgages within 30 days,OUTFLOW,O.O.6,,,,,,<=30,,maturity_amount,0.10,,10
+LCR-O51,n/a,Trade finance,Trade finance instruments are not an LCR outflow category,OUTFLOW,O.O.7,,,,,,ANY,,maturity_amount,0.00,,10
+LCR-O52,32(c),Net derivative cash outflow,O.O.20 net 30-day derivative payables,OUTFLOW,O.O.20,,,,,,ANY,,maturity_amount,1.00,,10
+LCR-O53,32(f)(3),Derivative valuation changes,O.O.8 largest 30-day net collateral flow (24-month lookback),OUTFLOW,O.O.8,,,,,,ANY,,maturity_amount,1.00,,10
+LCR-O54,32(f)(1),Downgrade - 3 notches (cumulative),Loss of rehypothecation and collateral required for a 3-notch downgrade; 1-2 notch amounts are cumulative subsets (Appendix V #11-12),OUTFLOW,"O.O.11,O.O.15",,,,,,ANY,,maturity_amount,1.00,,10
+LCR-O55,Appendix V #11-12,Downgrade - cumulative subsets,1-2 notch and change-in-condition amounts are not added again,OUTFLOW,"O.O.9,O.O.10,O.O.12,O.O.13,O.O.14,O.O.16",,,,,,ANY,,maturity_amount,0.00,,10
+LCR-O56,32(f)(4)-(6),Excess and unfunded term margin,Excess margin and unfunded term margin,OUTFLOW,"O.O.17,O.O.18",,,,,,<=30,,maturity_amount,1.00,,10
+LCR-O57,32(l),Other contractual outflows,"Interest payable, structured transaction and other cash outflows within 30 days",OUTFLOW,"O.O.19,O.O.21,O.O.22",,,,,,<=30,,maturity_amount,1.00,,10
+LCR-O58,21(c),Hedge early termination,S.L.3 outflows from early termination of HQLA hedges,OUTFLOW,S.L.3,,,,,,ANY,,market_value,1.00,,10
+LCR-O59,32(i)(1),Debt buyback - non-structured,S.L.4 primary market maker buyback (3%),OUTFLOW,S.L.4,,,,,,ANY,,market_value,0.03,,10
+LCR-O60,32(i)(2),Debt buyback - structured,S.L.5 primary market maker buyback (5%),OUTFLOW,S.L.5,,,,,,ANY,,market_value,0.05,,10
+LCR-I01,33(c),Unsecured lending - central banks,Placements with central banks,INFLOW,"I.U.1,I.U.2,I.U.5,I.U.6,I.U.8",,Central Bank,,,,<=30,,maturity_amount,,1.00,10
+LCR-I02,33(c),Unsecured lending - retail,Retail and small business loan cash flows (50%),INFLOW,"I.U.1,I.U.2,I.U.5,I.U.6,I.U.8",,,Retail,,,<=30,,maturity_amount,,0.50,20
+LCR-I03,33(d)(1),Unsecured lending - non-financial,Non-financial wholesale cash flows (50%),INFLOW,"I.U.1,I.U.2,I.U.5,I.U.6,I.U.8",,,"Wholesale Non-Financial,Other",,,<=30,,maturity_amount,,0.50,20
+LCR-I04,33(d)(2),Unsecured lending - financial,Financial-sector cash flows (100%),INFLOW,"I.U.1,I.U.2,I.U.5,I.U.6,I.U.8",,,Financial,,,<=30,,maturity_amount,,1.00,50
+LCR-I05,33(d)(3),Operational balances,Required operational balances at other banks,INFLOW,"I.U.3,I.U.7",,,,,,<=30,,maturity_amount,,0.00,10
+LCR-I06,33(d)(2),Excess operational balances,Excess operational balances at other banks,INFLOW,I.U.4,,,,,,<=30,,maturity_amount,,1.00,10
+LCR-I10,33(f)(1)(i),Secured lending - Level 1,Collateral is Level 1 HQLA,INFLOW,"I.S.1,I.S.2,I.S.3,I.S.5,I.S.6,I.S.8",,,,Level 1,,<=30,,maturity_amount,,0.00,10
+LCR-I11,33(f)(1)(ii),Secured lending - Level 2A,Collateral is Level 2A HQLA,INFLOW,"I.S.1,I.S.2,I.S.3,I.S.5,I.S.6,I.S.8",,,,Level 2A,,<=30,,maturity_amount,,0.15,10
+LCR-I12,33(f)(1)(iii),Secured lending - Level 2B,Collateral is Level 2B HQLA,INFLOW,"I.S.1,I.S.2,I.S.3,I.S.5,I.S.6,I.S.8",,,,Level 2B,,<=30,,maturity_amount,,0.50,10
+LCR-I13,33(f)(1)(iv),Margin loans - non-HQLA,Margin loans secured by non-HQLA,INFLOW,I.S.5,,,,Non-HQLA,,<=30,,maturity_amount,,0.50,5
+LCR-I14,33(f)(1)(v),Secured lending - non-HQLA,Collateral is non-HQLA,INFLOW,"I.S.1,I.S.2,I.S.3,I.S.5,I.S.6,I.S.8",,,,Non-HQLA,,<=30,,maturity_amount,,1.00,50
+LCR-I15,33(f)(1)(vi),Secured revolving draws,Outstanding draws on secured revolving facilities,INFLOW,I.S.7,,,,,,<=30,,maturity_amount,,0.50,10
+LCR-I16,33(f)(2),Collateral swaps and synthetics,No inflow is recognised,INFLOW,"I.S.4,I.S.9,I.S.10",,,,,,<=30,,maturity_amount,,0.00,10
+LCR-I20,Appendix V #6,Derivative receivables (in net),I.O.1 flows are captured in I.O.7,INFLOW,"I.O.1,I.O.2,I.O.3",,,,,,ANY,,maturity_amount,,0.00,5
+LCR-I21,33(b),Undrawn facilities and lock-ups,Facilities purchased and lock-up balances are not inflows,INFLOW,"I.O.4,I.O.5,I.O.9",,,,,,ANY,,maturity_amount,,0.00,10
+LCR-I22,33(e),Interest and dividends receivable,Contractual interest and dividends within 30 days,INFLOW,I.O.6,,,,,,<=30,,maturity_amount,,1.00,10
+LCR-I23,33(b),Net derivative cash inflow,I.O.7 net 30-day derivative receivables,INFLOW,I.O.7,,,,,,ANY,,maturity_amount,,1.00,10
+LCR-I24,33(e),Principal on non-HQLA securities,Principal payments on non-HQLA securities,INFLOW,I.O.8,,,,Non-HQLA,,<=30,,maturity_amount,,1.00,20
+LCR-I25,33(e),Principal on HQLA securities,Already counted in HQLA,INFLOW,I.O.8,,,,HQLA,,<=30,,maturity_amount,,0.00,10

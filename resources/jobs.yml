@@ -1,0 +1,479 @@
+resources:
+  jobs:
+    fr2052a_daily:
+      name: fr2052a-daily
+      description: 'FR 2052a + LCR daily pipeline for one as_of_date: app decisions -> Lakeflow ingest (unless ingest=false) -> DQ gate -> PID
+        derivation & enrichment -> LCR engine -> (FR 2052a) report build -> validation, Fed post-submission checks & 6G files -> AI Assist (Databricks
+        AI Functions) -> Lakebase sync. scope = both | 2052a | lcr'
+      email_notifications:
+        on_failure:
+        - ${var.notify_email}
+        no_alert_for_skipped_runs: true
+      max_concurrent_runs: 5
+      queue:
+        enabled: true
+      parameters:
+      - name: as_of_date
+        default: '2026-02-27'
+      - name: catalog
+        default: ${var.catalog}
+      - name: scope
+        default: both
+      - name: ingest
+        default: 'true'
+      - name: requested_by
+        default: scheduler
+      - name: app_sp_client_id
+        default: ${var.app_sp_client_id}
+      - name: agents_sp_client_id
+        default: ${var.agents_sp_client_id}
+      - name: ai_steps
+        default: customers,products,pid,rules,variance
+      - name: resend_feed
+        default: ''
+      - name: warehouse_id
+        default: ${var.warehouse_id}
+      tasks:
+      - task_key: app_decisions
+        notebook_task:
+          notebook_path: ../notebooks/00_App_Decisions.py
+      - task_key: run_ingest
+        condition_task:
+          op: NOT_EQUAL
+          left: '{{job.parameters.ingest}}'
+          right: 'false'
+        depends_on:
+        - task_key: app_decisions
+      - task_key: ingest
+        pipeline_task:
+          pipeline_id: ${resources.pipelines.fr2052a_bronze_ingest.id}
+          full_refresh: false
+        depends_on:
+        - task_key: run_ingest
+          outcome: 'true'
+        max_retries: 3
+        min_retry_interval_millis: 60000
+      - task_key: dq_gate
+        depends_on:
+        - task_key: run_ingest
+          outcome: 'false'
+        - task_key: ingest
+        notebook_task:
+          notebook_path: ../notebooks/02_Data_Quality_Gate.py
+        max_retries: 1
+        min_retry_interval_millis: 15000
+        run_if: AT_LEAST_ONE_SUCCESS
+      - task_key: pid_derivation
+        depends_on:
+        - task_key: dq_gate
+        notebook_task:
+          notebook_path: ../notebooks/03_PID_Derivation_and_Enrichment.py
+        max_retries: 1
+        min_retry_interval_millis: 15000
+      - task_key: lcr_engine
+        depends_on:
+        - task_key: pid_derivation
+        notebook_task:
+          notebook_path: ../notebooks/04_LCR_Calculation_Engine.py
+        max_retries: 1
+        min_retry_interval_millis: 15000
+      - task_key: run_2052a
+        depends_on:
+        - task_key: lcr_engine
+        condition_task:
+          op: NOT_EQUAL
+          left: '{{job.parameters.scope}}'
+          right: lcr
+      - task_key: report_build
+        depends_on:
+        - task_key: run_2052a
+          outcome: 'true'
+        notebook_task:
+          notebook_path: ../notebooks/05_FR2052a_Report_Build.py
+        max_retries: 1
+        min_retry_interval_millis: 15000
+      - task_key: validation_submission
+        depends_on:
+        - task_key: report_build
+        notebook_task:
+          notebook_path: ../notebooks/06_FR2052a_Validation_and_Submission.py
+        max_retries: 1
+        min_retry_interval_millis: 15000
+      - task_key: ai_assist
+        depends_on:
+        - task_key: validation_submission
+        notebook_task:
+          notebook_path: ../notebooks/09_AI_Assist.py
+          base_parameters:
+            steps: '{{job.parameters.ai_steps}}'
+      - task_key: lakebase_sync
+        depends_on:
+        - task_key: lcr_engine
+        - task_key: validation_submission
+        - task_key: ai_assist
+        notebook_task:
+          notebook_path: ../notebooks/07_Lakebase_Sync.py
+        max_retries: 1
+        min_retry_interval_millis: 15000
+        run_if: NONE_FAILED
+      - task_key: run_agents
+        depends_on:
+        - task_key: lakebase_sync
+        notebook_task:
+          notebook_path: ../notebooks/15_Run_Agents.py
+        max_retries: 1
+        min_retry_interval_millis: 15000
+        description: The AI agents (the maker) propose a fix for every open item of the day, with evidence - stored in Lakebase for the checker
+    fr2052a_demo_reset:
+      name: fr2052a-demo-reset
+      description: 'Demo environment only: put the demo dates back to ''nothing worked yet'' (notebook 17 removes the app decisions, the agents''
+        register and the re-sent feed files of those dates - incl. audit-trail rows), then re-run each day (fr2052a-daily, no re-ingest) and the
+        Feb 27 variance commentary, so Collect, Data quality, PID enrichment and Validate all have work.'
+      email_notifications:
+        on_failure:
+        - ${var.notify_email}
+        no_alert_for_skipped_runs: true
+      parameters:
+      - name: catalog
+        default: ${var.catalog}
+      - name: app_sp_client_id
+        default: ${var.app_sp_client_id}
+      - name: agents_sp_client_id
+        default: ${var.agents_sp_client_id}
+      - name: dates
+        default: '["2026-02-23", "2026-02-24", "2026-02-25", "2026-02-26", "2026-02-27"]'
+      - name: variance_dates
+        default: '["2026-02-27"]'
+      - name: warehouse_id
+        default: ${var.warehouse_id}
+      tasks:
+      - task_key: reset
+        notebook_task:
+          notebook_path: ../notebooks/17_Demo_Reset.py
+          base_parameters:
+            catalog: '{{job.parameters.catalog}}'
+            dates: '{{job.parameters.dates}}'
+      - task_key: daily_all_dates
+        depends_on:
+        - task_key: reset
+        for_each_task:
+          inputs: '{{job.parameters.dates}}'
+          concurrency: 5
+          task:
+            task_key: daily_one_date
+            run_job_task:
+              job_id: ${resources.jobs.fr2052a_daily.id}
+              job_parameters:
+                as_of_date: '{{input}}'
+                catalog: '{{job.parameters.catalog}}'
+                scope: both
+                requested_by: fr2052a-demo-reset
+                ingest: 'false'
+                ai_steps: customers,products,pid,rules
+                warehouse_id: '{{job.parameters.warehouse_id}}'
+      - task_key: ai_variance_latest
+        depends_on:
+        - task_key: daily_all_dates
+        for_each_task:
+          inputs: '{{job.parameters.variance_dates}}'
+          concurrency: 1
+          task:
+            task_key: ai_variance_one_date
+            notebook_task:
+              notebook_path: ../notebooks/12_AI_Refresh.py
+              base_parameters:
+                as_of_date: '{{input}}'
+                catalog: '{{job.parameters.catalog}}'
+                steps: variance
+                app_sp_client_id: '{{job.parameters.app_sp_client_id}}'
+                agents_sp_client_id: '{{job.parameters.agents_sp_client_id}}'
+      queue:
+        enabled: true
+    fr2052a_generate:
+      description: 'Generate the 6G files for release (a person, from step 5): app decisions -> corrections -> LCR -> report -> validation + 6G
+        XML -> Lakebase'
+      email_notifications:
+        on_failure:
+        - ${var.notify_email}
+        no_alert_for_skipped_runs: true
+        on_success:
+        - ${var.notify_email}
+      max_concurrent_runs: 3
+      queue:
+        enabled: true
+      name: fr2052a-generate
+      parameters:
+      - name: as_of_date
+        default: '2026-02-27'
+      - name: catalog
+        default: ${var.catalog}
+      - name: requested_by
+        default: app
+      - name: app_sp_client_id
+        default: ${var.app_sp_client_id}
+      - name: agents_sp_client_id
+        default: ${var.agents_sp_client_id}
+      - name: released_by
+        default: ''
+      - name: warehouse_id
+        default: ${var.warehouse_id}
+      tasks:
+      - task_key: app_decisions
+        notebook_task:
+          notebook_path: ../notebooks/00_App_Decisions.py
+      - task_key: apply_corrections
+        notebook_task:
+          notebook_path: ../notebooks/14_Apply_Corrections.py
+        depends_on:
+        - task_key: app_decisions
+      - task_key: lcr_engine
+        notebook_task:
+          notebook_path: ../notebooks/04_LCR_Calculation_Engine.py
+        depends_on:
+        - task_key: apply_corrections
+      - task_key: report_build
+        notebook_task:
+          notebook_path: ../notebooks/05_FR2052a_Report_Build.py
+        depends_on:
+        - task_key: lcr_engine
+      - task_key: validation_submission
+        notebook_task:
+          notebook_path: ../notebooks/06_FR2052a_Validation_and_Submission.py
+        depends_on:
+        - task_key: report_build
+      - task_key: lakebase_sync
+        notebook_task:
+          notebook_path: ../notebooks/07_Lakebase_Sync.py
+        depends_on:
+        - task_key: validation_submission
+    fr2052a_pipeline:
+      name: fr2052a-pipeline
+      description: 'Full FR 2052a build: schemas + reference data + landed source extracts, Lakeflow full-refresh ingest, fr2052a-daily for the
+        demo dates (5 business days) (AI Assist without variance), then variance + commentary for the latest 5 days in order, the agent tools
+        (UC functions), AI evaluation and UC governance'
+      email_notifications:
+        on_failure:
+        - ${var.notify_email}
+        no_alert_for_skipped_runs: true
+      parameters:
+      - name: catalog
+        default: ${var.catalog}
+      - name: app_sp_client_id
+        default: ${var.app_sp_client_id}
+      - name: agents_sp_client_id
+        default: ${var.agents_sp_client_id}
+      - name: dates
+        default: '["2026-02-23", "2026-02-24", "2026-02-25", "2026-02-26", "2026-02-27"]'
+      - name: variance_dates
+        default: '["2026-02-27"]'
+      - name: warehouse_id
+        default: ${var.warehouse_id}
+      tasks:
+      - task_key: setup
+        notebook_task:
+          notebook_path: ../notebooks/01_Setup_Schema_and_Reference_Data.py
+      - task_key: ingest_full_refresh
+        depends_on:
+        - task_key: setup
+        pipeline_task:
+          pipeline_id: ${resources.pipelines.fr2052a_bronze_ingest.id}
+          full_refresh: true
+      - task_key: lakebase_tables
+        description: Create the Lakebase synced tables that are missing (new workspace); notebook 07 refreshes them per date
+        depends_on:
+        - task_key: setup
+        spark_python_task:
+          python_file: ../deploy/lakebase_synced_tables.py
+          parameters:
+          - --catalog
+          - '{{job.parameters.catalog}}'
+          - --warehouse
+          - '{{job.parameters.warehouse_id}}'
+        environment_key: default
+      - task_key: regulatory_text
+        description: The FR 2052a Instructions and 12 CFR 249 in passages (reference_data/regtext) -> reference.reg_text_chunks; syncs the Vector Search index the agents cite
+        depends_on:
+        - task_key: setup
+        spark_python_task:
+          python_file: ../deploy/regulatory_text_index.py
+          parameters:
+          - --catalog
+          - '{{job.parameters.catalog}}'
+          - --warehouse
+          - '{{job.parameters.warehouse_id}}'
+          - --root
+          - ${workspace.file_path}
+        environment_key: default
+      - task_key: genie_skills
+        description: The Genie One skills (genie/skills) -> the job owner's skills folder
+        depends_on:
+        - task_key: setup
+        spark_python_task:
+          python_file: ../deploy/deploy_genie_skills.py
+          parameters:
+          - --catalog
+          - '{{job.parameters.catalog}}'
+          - --root
+          - ${workspace.file_path}
+        environment_key: default
+      - task_key: daily_all_dates
+        depends_on:
+        - task_key: ingest_full_refresh
+        - task_key: lakebase_tables
+        for_each_task:
+          inputs: '{{job.parameters.dates}}'
+          concurrency: 5
+          task:
+            task_key: daily_one_date
+            run_job_task:
+              job_id: ${resources.jobs.fr2052a_daily.id}
+              job_parameters:
+                as_of_date: '{{input}}'
+                catalog: '{{job.parameters.catalog}}'
+                scope: both
+                requested_by: fr2052a-pipeline
+                ingest: 'false'
+                ai_steps: customers,products,pid,rules
+                warehouse_id: '{{job.parameters.warehouse_id}}'
+      - task_key: ai_variance_latest
+        depends_on:
+        - task_key: daily_all_dates
+        for_each_task:
+          inputs: '{{job.parameters.variance_dates}}'
+          concurrency: 1
+          task:
+            task_key: ai_variance_one_date
+            notebook_task:
+              notebook_path: ../notebooks/12_AI_Refresh.py
+              base_parameters:
+                as_of_date: '{{input}}'
+                catalog: '{{job.parameters.catalog}}'
+                steps: variance
+                app_sp_client_id: '{{job.parameters.app_sp_client_id}}'
+                agents_sp_client_id: '{{job.parameters.agents_sp_client_id}}'
+      - task_key: ai_tools
+        depends_on:
+        - task_key: ai_variance_latest
+        notebook_task:
+          notebook_path: ../notebooks/11_AI_Tools_UC_Functions.py
+      - task_key: ai_evaluation
+        depends_on:
+        - task_key: ai_variance_latest
+        notebook_task:
+          notebook_path: ../notebooks/10_AI_Evaluation.py
+      - task_key: governance
+        depends_on:
+        - task_key: metric_views
+        - task_key: ai_evaluation
+        notebook_task:
+          notebook_path: ../notebooks/08_Governance.py
+      - task_key: metric_views
+        depends_on:
+        - task_key: ai_tools
+        notebook_task:
+          notebook_path: ../notebooks/13_Metric_Views.py
+      environments:
+      - environment_key: default
+        spec:
+          client: '2'
+          dependencies:
+          - databricks-sdk>=0.40
+    fr2052a_register_agents:
+      name: fr2052a-register-agents
+      description: 'Register the AI agents (app/agents_model.py + the app code) as a new version of <catalog>.ai_assist.fr2052a_agents (notebook
+        16). promote=true moves champion and the serving endpoint fr2052a-agents. Run it as this job, not as a one-time submit: the job gets the
+        pipeline''s serverless Python (3.12).'
+      email_notifications:
+        on_failure:
+        - ${var.notify_email}
+        no_alert_for_skipped_runs: true
+      parameters:
+      - name: promote
+        default: 'false'
+      - name: catalog
+        default: ${var.catalog}
+      - name: warehouse_id
+        default: ${var.warehouse_id}
+      tasks:
+      - task_key: agents_identity
+        description: Service principal fr2052a-agents + OAuth secret in scope fr2052a + CAN_USE on the warehouse (idempotent; service principals are not a bundle resource)
+        spark_python_task:
+          python_file: ../deploy/agents_identity.py
+          parameters:
+          - --warehouse
+          - '{{job.parameters.warehouse_id}}'
+        environment_key: default
+      - task_key: register
+        depends_on:
+        - task_key: agents_identity
+        notebook_task:
+          notebook_path: ../notebooks/16_Register_Agents_Model.py
+      queue:
+        enabled: true
+      environments:
+      - environment_key: default
+        spec:
+          client: '2'
+          dependencies:
+          - databricks-sdk>=0.60
+    fr2052a_revalidate:
+      name: fr2052a-revalidate
+      description: 'Re-validate one as-of date after analyst corrections: 14 apply corrections -> 04 LCR -> 05 report build -> 06 validation and
+        6G files -> 09 AI explanations -> 07 Lakebase sync. Triggered from the app (step 4, Re-run validation).'
+      email_notifications:
+        on_failure:
+        - ${var.notify_email}
+        no_alert_for_skipped_runs: true
+      max_concurrent_runs: 3
+      queue:
+        enabled: true
+      parameters:
+      - name: as_of_date
+        default: '2026-02-27'
+      - name: catalog
+        default: ${var.catalog}
+      - name: requested_by
+        default: app
+      - name: app_sp_client_id
+        default: ${var.app_sp_client_id}
+      - name: agents_sp_client_id
+        default: ${var.agents_sp_client_id}
+      - name: warehouse_id
+        default: ${var.warehouse_id}
+      tasks:
+      - task_key: apply_corrections
+        notebook_task:
+          notebook_path: ../notebooks/14_Apply_Corrections.py
+      - task_key: lcr_engine
+        notebook_task:
+          notebook_path: ../notebooks/04_LCR_Calculation_Engine.py
+        depends_on:
+        - task_key: apply_corrections
+      - task_key: report_build
+        notebook_task:
+          notebook_path: ../notebooks/05_FR2052a_Report_Build.py
+        depends_on:
+        - task_key: lcr_engine
+      - task_key: validation_submission
+        notebook_task:
+          notebook_path: ../notebooks/06_FR2052a_Validation_and_Submission.py
+        depends_on:
+        - task_key: report_build
+      - task_key: ai_explanations
+        notebook_task:
+          notebook_path: ../notebooks/09_AI_Assist.py
+          base_parameters:
+            steps: rules
+        depends_on:
+        - task_key: validation_submission
+      - task_key: lakebase_sync
+        notebook_task:
+          notebook_path: ../notebooks/07_Lakebase_Sync.py
+        depends_on:
+        - task_key: ai_explanations
+      - task_key: run_agents
+        notebook_task:
+          notebook_path: ../notebooks/15_Run_Agents.py
+        depends_on:
+        - task_key: lakebase_sync
+        description: The AI agents (the maker) propose a fix for every open item of the day, with evidence - stored in Lakebase for the checker

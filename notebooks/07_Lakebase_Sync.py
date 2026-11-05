@@ -1,0 +1,147 @@
+# Databricks notebook source
+# MAGIC %md
+# MAGIC # Lakebase Sync - Publish to the Application (v10, synced tables)
+# MAGIC ## Owned by: Platform Engineering
+# MAGIC
+# MAGIC The app reads Lakebase (PostgreSQL) only. Delta is the system of record:
+# MAGIC
+# MAGIC | Delta | Lakebase | How |
+# MAGIC |---|---|---|
+# MAGIC | every table the app reads (reference, the 14 FR 2052a tables, validation, 6G files, LCR, DQ, PID, audit, Silver positions, lineage) | `app_serving.*` | **synced tables** (Databricks-managed, one-way, SNAPSHOT, one pipeline) - set up by `deploy/lakebase_synced_tables.py`; this notebook refreshes the pipeline |
+# MAGIC | `reg_2052a.submission_review` | `public.submission_review` | pipeline rows (`GENERATED`) for the as-of date; the app writes the sign-off actions there, which notebook 06 reads back |
+# MAGIC | app-owned decisions (`ai_decisions`, breaks, proposals, fixes, corrections, approvals, ...) | `public.*` | created if missing, never overwritten; notebooks 00 / 05 / 06 read them back into Delta (custom until Lakebase change data feed is GA) |
+
+# COMMAND ----------
+
+# MAGIC %pip install -q psycopg2-binary
+
+# COMMAND ----------
+
+dbutils.widgets.text("as_of_date", "2026-02-27")
+dbutils.widgets.text("catalog", "")
+dbutils.widgets.text("lakebase_endpoint", "projects/fr2052a/branches/production/endpoints/primary")
+dbutils.widgets.text("lakebase_db", "fr2052a")
+dbutils.widgets.text("app_sp_client_id", "")
+dbutils.widgets.text("agents_sp_client_id", "")
+AS_OF = dbutils.widgets.get("as_of_date")
+CATALOG = dbutils.widgets.get("catalog")
+ENDPOINT_PATH = dbutils.widgets.get("lakebase_endpoint")
+LAKEBASE_DB = dbutils.widgets.get("lakebase_db")
+APP_SP = dbutils.widgets.get("app_sp_client_id").strip()
+AGENTS_SP = dbutils.widgets.get("agents_sp_client_id").strip()   # its Postgres role is in the app bundle
+spark.sql(f"USE CATALOG {CATALOG}")
+
+import psycopg2
+from psycopg2.extras import execute_values
+from databricks.sdk import WorkspaceClient
+
+w = WorkspaceClient()
+host = w.api_client.do("GET", f"/api/2.0/postgres/{ENDPOINT_PATH}")["status"]["hosts"]["host"]
+token = w.api_client.do("POST", "/api/2.0/postgres/credentials", body={"endpoint": ENDPOINT_PATH})["token"]
+conn = psycopg2.connect(host=host, port=5432, database=LAKEBASE_DB, user=w.current_user.me().user_name, password=token, sslmode="require")
+print(f"Lakebase {LAKEBASE_DB} @ {host} - sync for {AS_OF}")
+
+# COMMAND ----------
+
+# Written by the app (the people's decisions); never overwritten here - notebooks 00, 05 and 06 read them back into Delta
+APP_TABLES = {
+    "ai_decisions": "suggestion_id TEXT PRIMARY KEY, decision TEXT, decided_by TEXT, decided_at TIMESTAMP, note TEXT",
+    "customer_master_approvals": """customer_id TEXT PRIMARY KEY, customer_name TEXT, counterparty TEXT, gsib_parent TEXT,
+        affiliate_legal_entity_id TEXT, has_relationship BOOLEAN, approved_on DATE, approved_by TEXT, suggestion_id TEXT, decided_at TIMESTAMP""",
+    "source_product_map_approvals": """source_product_code TEXT PRIMARY KEY, source_system TEXT, standard_product_type TEXT, description TEXT,
+        approved_on DATE, approved_by TEXT, suggestion_id TEXT, decided_at TIMESTAMP""",
+    "breaks": "break_id TEXT PRIMARY KEY, as_of_date DATE, break_type TEXT, table_code TEXT, amount_usd NUMERIC, title TEXT, detail TEXT, owner_role TEXT, due_at TIMESTAMP, status TEXT, source_kind TEXT, source_ref TEXT, run_id TEXT, created_at TIMESTAMP, updated_at TIMESTAMP",
+    "proposals": "proposal_id TEXT PRIMARY KEY, break_id TEXT, version INT, agent TEXT, model TEXT, confidence NUMERIC, summary TEXT, fields JSONB, rule_check JSONB, impact JSONB, sources JSONB, trace JSONB, source_fix JSONB, action JSONB, created_at TIMESTAMP",
+    "break_decisions": "decision_id TEXT PRIMARY KEY, break_id TEXT, proposal_id TEXT, action TEXT, reason_code TEXT, note TEXT, edits JSONB, decided_by TEXT, decided_at TIMESTAMP",
+    "release_memos": "as_of_date DATE, run_number INT, memo TEXT, facts JSONB, made_by TEXT, created_at TIMESTAMP, PRIMARY KEY (as_of_date, run_number)",
+    "agent_events": "event_id TEXT PRIMARY KEY, as_of_date DATE, ts TIMESTAMP, actor_type TEXT, actor TEXT, action TEXT, subject TEXT, why TEXT, evidence TEXT, version TEXT",
+    "agent_runs": "run_id TEXT PRIMARY KEY, as_of_date DATE, started_at TIMESTAMP, finished_at TIMESTAMP, status TEXT, summary JSONB, started_by TEXT",
+    "lcr_disclosure_sections": """draft_id TEXT, entity_id TEXT, period_start DATE, period_end DATE, section TEXT, ai_text TEXT, final_text TEXT,
+        status TEXT, created_by TEXT, created_at TIMESTAMP, edited_by TEXT, edited_at TIMESTAMP, approved_by TEXT, approved_at TIMESTAMP, model TEXT,
+        PRIMARY KEY (draft_id, section)""",
+    "validation_decisions": """decision_id TEXT PRIMARY KEY, as_of_date DATE, rule_id TEXT, item_key TEXT, action TEXT, note TEXT, decided_by TEXT,
+        decided_at TIMESTAMP, status TEXT""",
+        "dq_fixes": """fix_id TEXT PRIMARY KEY, as_of_date DATE, record_id TEXT, source_feed TEXT, field TEXT, old_value TEXT, new_value TEXT,
+        reason TEXT, preparer TEXT, created_at TIMESTAMP, status TEXT""",
+        "position_corrections": """correction_id TEXT PRIMARY KEY, as_of_date DATE, position_id TEXT, record_key TEXT, table_code TEXT, field TEXT,
+        old_value TEXT, new_value TEXT, reason TEXT, preparer TEXT, created_at TIMESTAMP, status TEXT, applied_at TIMESTAMP""",
+        "adjustments": """adjustment_id TEXT PRIMARY KEY, as_of_date DATE, reporting_entity TEXT, table_code TEXT, record_key TEXT, column_name TEXT,
+        amount NUMERIC, reason TEXT, preparer TEXT, approver TEXT, status TEXT, created_at TIMESTAMP, decided_at TIMESTAMP""",
+}
+
+# The synced tables (app_serving.*) are refreshed by ONE pipeline. Parallel runs for several dates share it: wait for an update in
+# flight, then start ours (it reads the source views at that moment, so it includes this date) and wait for it to finish.
+import time
+probe = w.api_client.do("GET", f"/api/2.0/postgres/synced_tables/{CATALOG}.app_serving.ref_product")
+PIPELINE = probe["status"]["pipeline_id"]
+ACTIVE = ("CREATED", "WAITING_FOR_RESOURCES", "INITIALIZING", "RESETTING", "SETTING_UP_TABLES", "RUNNING", "STOPPING", "QUEUED")
+
+def latest():
+    ups = w.api_client.do("GET", f"/api/2.0/pipelines/{PIPELINE}/updates", query={"max_results": 1}).get("updates", [])
+    return ups[0] if ups else {}
+
+def wait(update_id=None):
+    while True:
+        u = (w.api_client.do("GET", f"/api/2.0/pipelines/{PIPELINE}/updates/{update_id}")["update"] if update_id else latest())
+        if u.get("state") not in ACTIVE:
+            return u
+        time.sleep(15)
+
+for attempt in range(20):
+    wait()
+    try:
+        update_id = w.api_client.do("POST", f"/api/2.0/pipelines/{PIPELINE}/updates", body={})["update_id"]
+        break
+    except Exception as e:   # another date started an update in between: wait for it and try again
+        print("pipeline busy -", str(e)[:120])
+        time.sleep(20)
+else:
+    raise RuntimeError("could not start the synced-table refresh")
+done = wait(update_id)
+if done.get("state") != "COMPLETED":
+    raise RuntimeError(f"synced-table refresh {update_id} ended {done.get('state')}")
+print(f"synced tables refreshed by pipeline {PIPELINE} update {update_id}")
+
+def py(v):
+    if v is None or isinstance(v, (bool, int, float, str)):
+        return v
+    if hasattr(v, "isoformat"):
+        return v.isoformat()
+    return float(v) if hasattr(v, "as_integer_ratio") else str(v)
+
+# indexes the app's queries use (allowed on synced tables; re-created if a refresh rebuilt a table)
+INDEXES = {"fact_liquidity_position": ["as_of_date, table_code, product_id", "as_of_date, position_id"], "source_position": ["as_of_date, record_id"],
+           "entity_position": ["as_of_date, position_id"], "record_lineage": ["as_of_date, record_key", "as_of_date, position_id"],
+           "filing_records": ["as_of_date, reporting_entity, table_code"], "gold_validation": ["as_of_date, status"],
+           "gold_validation_detail": ["as_of_date, rule_id"], "calculation_detail": ["as_of_date, entity_id"]}
+
+with conn.cursor() as cur:
+    for t, cols in APP_TABLES.items():
+        cur.execute(f"CREATE TABLE IF NOT EXISTS public.{t} ({cols})")
+    for t, idx in INDEXES.items():
+        for i, cols in enumerate(idx):
+            cur.execute(f"CREATE INDEX IF NOT EXISTS ix_{t}_{i} ON app_serving.{t} ({cols})")
+conn.commit()
+
+# Review log: every generation is a new reporting run with its own sign-off trail. The pipeline's GENERATED row of a run
+# replaces itself on a re-sync; the app's actions (keyed by run_number) are never touched.
+review = spark.table(f"{CATALOG}.reg_2052a.submission_review").where(f"as_of_date = '{AS_OF}'")
+with conn.cursor() as cur:
+    cur.execute("""CREATE TABLE IF NOT EXISTS public.submission_review (as_of_date DATE, run_number INTEGER, version INTEGER, action TEXT,
+                   status TEXT, actor TEXT, note TEXT, action_timestamp TIMESTAMP)""")
+    for r in review.where("action = 'GENERATED'").collect():
+        cur.execute("DELETE FROM public.submission_review WHERE as_of_date = %s AND run_number = %s AND action = 'GENERATED'", (AS_OF, r.run_number))
+        cur.execute(f"INSERT INTO public.submission_review ({', '.join(review.columns)}) VALUES ({', '.join(['%s'] * len(review.columns))})",
+                    tuple(py(v) for v in r))
+    if APP_SP:
+        cur.execute(f'GRANT USAGE ON SCHEMA public, app_serving TO "{APP_SP}"')
+        cur.execute(f'GRANT SELECT ON ALL TABLES IN SCHEMA public, app_serving TO "{APP_SP}"')
+        cur.execute(f'GRANT INSERT, UPDATE, DELETE ON public.submission_review, {", ".join("public." + t for t in APP_TABLES)} TO "{APP_SP}"')
+        cur.execute(f'REVOKE UPDATE, DELETE ON public.agent_events, public.break_decisions, public.ai_decisions FROM "{APP_SP}"')   # the audit trail is append-only for the app
+    cur.execute("SELECT 1 FROM pg_roles WHERE rolname = %s", (AGENTS_SP,))
+    if AGENTS_SP and cur.fetchone():   # the serving endpoint (agents) reads the day; the app stores what it returns
+        cur.execute(f'GRANT USAGE ON SCHEMA public, app_serving TO "{AGENTS_SP}"')
+        cur.execute(f'GRANT SELECT ON ALL TABLES IN SCHEMA public, app_serving TO "{AGENTS_SP}"')
+conn.commit()
+conn.close()
+print(f"app tables ready; submission_review GENERATED rows for {AS_OF}: {review.where('action = ' + chr(39) + 'GENERATED' + chr(39)).count()}")

@@ -1,0 +1,8 @@
+{
+  "catalog": "<catalog>",
+  "warehouse_id": "<sql warehouse id>",
+  "notify_email": "<email for job failures>",
+  "lakebase_owner_role": "<your Lakebase role id - databricks postgres list-roles projects/fr2052a/branches/production>",
+  "app_sp_client_id": "<the app's service principal client id - empty until the app exists>",
+  "agents_sp_client_id": "<fr2052a-agents client id - empty until job fr2052a-register-agents has run>"
+}

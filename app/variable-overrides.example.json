@@ -1,0 +1,10 @@
+{
+  "catalog": "<catalog>",
+  "warehouse_id": "<sql warehouse id>",
+  "lakebase_host": "<host of projects/fr2052a/branches/production/endpoints/primary>",
+  "agents_sp_client_id": "<fr2052a-agents client id - printed by job fr2052a-register-agents>",
+  "agents_model_version": "<the champion version of <catalog>.ai_assist.fr2052a_agents>",
+  "dashboard_id": "<dashboard id of FR 2052a Liquidity Reporting - databricks bundle summary of the platform bundle>",
+  "lcr_dashboard_id": "<dashboard id of FR 2052a LCR>",
+  "workspace_host": "https://<workspace>.cloud.databricks.com"
+}

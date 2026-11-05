@@ -1,0 +1,901 @@
+rule_id,report_type,schedule_code,seq_num,business_field,xml_element,xml_child_element,required_by_schema,xml_data_type,validation_rule,enumeration_ref,rule_category,enforced_by,severity,reg_version
+BR-IA-001,assetInflowReport,I.A,1,Reporting Entity,reportScope,,Y,reportScope,Check if attribute is not Empty [populated],,NOT_EMPTY,XSD,ERROR,6G
+BR-IA-002,assetInflowReport,I.A,2,Reporting Entity,reportScope,,Y,reportScope,Enumeration list validation,"""reportScope"" from Firm specific Schema include XSD",ENUMERATION,XSD,ERROR,6G
+BR-IA-003,assetInflowReport,I.A,3,N/A,comment,,N,string,Checks if Comment Text characters are valid,,COMMENT_CHARS,FRS,WARNING,6G
+BR-IA-004,assetInflowReport,I.A,4,N/A,reportID,,Y,tenDigitPositiveIntegerType,Check if attribute is not Empty [populated],,NOT_EMPTY,XSD,ERROR,6G
+BR-IA-005,assetInflowReport,I.A,5,N/A,reportID,,Y,tenDigitPositiveIntegerType,Check if attribute is Positive,,POSITIVE,XSD,ERROR,6G
+BR-IA-006,assetInflowReport,I.A,6,N/A,reportID,,Y,tenDigitPositiveIntegerType,Checks if the number not exceeding max length allowed (10 digits),,MAX_LENGTH,XSD,ERROR,6G
+BR-IA-007,assetInflowReport,I.A,7,N/A,reportID,,Y,tenDigitPositiveIntegerType,Checks if reportID is unique for specific Report type,,UNIQUE_ID,FRS,ERROR,6G
+BR-IA-008,assetInflowReport,I.A,8,Product,assetProduct,,Y,assetProduct,Check if attribute is not Empty [populated],,NOT_EMPTY,XSD,ERROR,6G
+BR-IA-009,assetInflowReport,I.A,9,Product,assetProduct,,Y,assetProduct,"Validation needs to be performed to make sure that expected Product is used with every Report type.
+If unexpected value is used, File must be rejected with corresponding Error handling",See Enumerations Tab,ENUMERATION,XSD,ERROR,6G
+BR-IA-010,assetInflowReport,I.A,10,Sub-Product,assetSource,,N,assetSource,"Validation needs to be performed to make sure that expected Sub-Product is used with corresponding Report type.
+If unexpected value is used, File must be rejected with corresponding Error handling",See Enumerations Tab,ENUMERATION,XSD,ERROR,6G
+BR-IA-011,assetInflowReport,I.A,11,Sub-Product,assetSource,,N,assetSource,"For listed Table [Report type] and Product combination:
+If Sub-Product is provided, then Sub-Product should be from the list of expected values, otherwise File must be rejected with corresponding Error handling",Prod-SubProd-SubProd2,SUBPRODUCT_COMBINATION,FRS,ERROR,6G
+BR-IA-012,assetInflowReport,I.A,12,Market Value,marketValue,,Y,valueType,Check if attribute is not Empty [populated],,NOT_EMPTY,XSD,ERROR,6G
+BR-IA-013,assetInflowReport,I.A,13,Market Value,marketValue,,Y,valueType,Check if attribute is not Negative [Values can be = ZERO or > ZERO],,NON_NEGATIVE,XSD,ERROR,6G
+BR-IA-014,assetInflowReport,I.A,14,Market Value,marketValue,,Y,valueType,"Check if Amount reported exceeds Max value allowed [99,999,999,999,999]'",,MAX_AMOUNT,FRS,WARNING,6G
+BR-IA-015,assetInflowReport,I.A,15,Market Value,marketValue,converted,Y,valueType,Check if attribute is not Empty [populated],,NOT_EMPTY,XSD,ERROR,6G
+BR-IA-016,assetInflowReport,I.A,16,Market Value,marketValue,converted,Y,valueType,Checks if attribute is a boolean value,,BOOLEAN,XSD,ERROR,6G
+BR-IA-017,assetInflowReport,I.A,17,Market Value,marketValue,unit,Y,valueType,Check if attribute is not Empty [populated],,NOT_EMPTY,XSD,ERROR,6G
+BR-IA-018,assetInflowReport,I.A,18,Market Value,marketValue,unit,Y,valueType,Enumeration list validation,See Enumerations Tab,ENUMERATION,XSD,ERROR,6G
+BR-IA-019,assetInflowReport,I.A,19,Market Value,marketValue,unit,Y,valueType,"Checks if Converted is true, unit is USD",,CONVERTED_USD,FRS,WARNING,6G
+BR-IA-020,assetInflowReport,I.A,20,Market Value,marketValue,unitMultiplier,Y,valueType,Check if attribute is not Empty [populated],,NOT_EMPTY,XSD,ERROR,6G
+BR-IA-021,assetInflowReport,I.A,21,Market Value,marketValue,unitMultiplier,Y,valueType,Check if value = 6,,UNIT_MULTIPLIER,XSD,ERROR,6G
+BR-IA-022,assetInflowReport,I.A,22,Lendable Value,lendableValue,,Y,valueType,Check if attribute is not Empty [populated],,NOT_EMPTY,XSD,ERROR,6G
+BR-IA-023,assetInflowReport,I.A,23,Lendable Value,lendableValue,,Y,valueType,Check if attribute is not Negative [Values can be = ZERO or > ZERO],,NON_NEGATIVE,XSD,ERROR,6G
+BR-IA-024,assetInflowReport,I.A,24,Lendable Value,lendableValue,,Y,valueType,"Check if Amount reported exceeds Max value allowed [99,999,999,999,999]'",,MAX_AMOUNT,FRS,WARNING,6G
+BR-IA-025,assetInflowReport,I.A,25,Lendable Value,lendableValue,converted,Y,valueType,Check if attribute is not Empty [populated],,NOT_EMPTY,XSD,ERROR,6G
+BR-IA-026,assetInflowReport,I.A,26,Lendable Value,lendableValue,converted,Y,valueType,Checks if attribute is a boolean value,,BOOLEAN,XSD,ERROR,6G
+BR-IA-027,assetInflowReport,I.A,27,Lendable Value,lendableValue,unit,Y,valueType,Check if attribute is not Empty [populated],,NOT_EMPTY,XSD,ERROR,6G
+BR-IA-028,assetInflowReport,I.A,28,Lendable Value,lendableValue,unit,Y,valueType,Enumeration list validation,See Enumerations Tab,ENUMERATION,XSD,ERROR,6G
+BR-IA-029,assetInflowReport,I.A,29,Lendable Value,lendableValue,unit,Y,valueType,"Checks if Converted is true, unit is USD",,CONVERTED_USD,FRS,WARNING,6G
+BR-IA-030,assetInflowReport,I.A,30,Lendable Value,lendableValue,unitMultiplier,Y,valueType,Check if attribute is not Empty [populated],,NOT_EMPTY,XSD,ERROR,6G
+BR-IA-031,assetInflowReport,I.A,31,Lendable Value,lendableValue,unitMultiplier,Y,valueType,Check if value = 6,,UNIT_MULTIPLIER,XSD,ERROR,6G
+BR-IA-032,assetInflowReport,I.A,32,Maturity Bucket,maturityBucket,maturityStart,Y,maturityBucket,Enumeration list validation,Maturity bucket values,ENUMERATION,XSD,ERROR,6G
+BR-IA-033,assetInflowReport,I.A,33,Maturity Bucket,maturityBucket,maturityEnd,Y,maturityBucket,Enumeration list validation - see comment,Maturity bucket values,ENUMERATION,XSD,ERROR,6G
+BR-IA-034,assetInflowReport,I.A,34,Maturity Bucket,maturityBucket,,Y,maturityBucket,Check if Maturity Bucket Range combination is valid,Maturity bucket values,MATURITY_RANGE,FRS,ERROR,6G
+BR-IA-035,assetInflowReport,I.A,35,Forward Start Amount,forwardStartValue,,N,valueType,Check if attribute is not Negative [Values can be = ZERO or > ZERO],,NON_NEGATIVE,XSD,ERROR,6G
+BR-IA-036,assetInflowReport,I.A,36,Forward Start Amount,forwardStartValue,,N,valueType,"Check if Amount reported exceeds Max value allowed [99,999,999,999,999]'",,MAX_AMOUNT,FRS,WARNING,6G
+BR-IA-037,assetInflowReport,I.A,37,Forward Start Amount,forwardStartValue,converted,N,valueType,Checks if attribute is a boolean value,,BOOLEAN,XSD,ERROR,6G
+BR-IA-038,assetInflowReport,I.A,38,Forward Start Amount,forwardStartValue,unit,N,valueType,Enumeration list validation,See Enumerations Tab,ENUMERATION,XSD,ERROR,6G
+BR-IA-039,assetInflowReport,I.A,39,Forward Start Amount,forwardStartValue,unit,N,valueType,"Checks if Converted is true, unit is USD",,CONVERTED_USD,FRS,WARNING,6G
+BR-IA-040,assetInflowReport,I.A,40,Forward Start Amount,forwardStartValue,unitMultiplier,N,valueType,Check if value = 6,,UNIT_MULTIPLIER,XSD,ERROR,6G
+BR-IA-041,assetInflowReport,I.A,41,Forward Start Bucket,forwardStartBucket,maturityStart,N,maturityBucket,Enumeration list validation,Maturity bucket values,ENUMERATION,XSD,ERROR,6G
+BR-IA-042,assetInflowReport,I.A,42,Forward Start Bucket,forwardStartBucket,maturityEnd,N,maturityBucket,Enumeration list validation - see comment,Maturity bucket values,ENUMERATION,XSD,ERROR,6G
+BR-IA-043,assetInflowReport,I.A,43,Forward Start Bucket,forwardStartBucket,,N,maturityBucket,Check if Maturity Bucket Range combination is valid,Maturity bucket values,MATURITY_RANGE,FRS,ERROR,6G
+BR-IA-044,assetInflowReport,I.A,44,"Forward Start Bucket
+Maturity Bucket",,,N/A,,"Check if:
+forwardStartBucket / maturityStart Less or Equal 
+maturityBucket / maturityStart",,FORWARD_MATURITY,FRS,ERROR,6G
+BR-IA-045,assetInflowReport,I.A,45,Collateral Class,collateralClass,,Y,collateralClass,Check if attribute is not Empty [populated],,NOT_EMPTY,XSD,ERROR,6G
+BR-IA-046,assetInflowReport,I.A,46,Collateral Class,collateralClass,,Y,collateralClass,Enumeration list validation,See Enumerations Tab,ENUMERATION,XSD,ERROR,6G
+BR-IA-047,assetInflowReport,I.A,47,Collateral Class,collateralClass,,Y,collateralClass,"For Report type and Product combinations listed in FR 2052a Instructions, Appendix II‐c:
+1. For Required indicator - Collateral class must be provided.
+2. If Collateral class is not provided, File will be rejected with corresponding Error handling",Collateral Class Required,COLLATERAL_REQUIRED,FRS,ERROR,6G
+BR-IA-048,assetInflowReport,I.A,48,Treasury Control,treasuryControl,,Y,boolean,Check if attribute is not Empty [populated],,NOT_EMPTY,XSD,ERROR,6G
+BR-IA-049,assetInflowReport,I.A,49,Treasury Control,treasuryControl,,Y,boolean,Checks if attribute is a boolean value,,BOOLEAN,XSD,ERROR,6G
+BR-IA-050,assetInflowReport,I.A,50,Accounting Designation,accountingDesignation,,Y,accountingDesignation,Enumeration list validation,See Enumerations Tab,ENUMERATION,XSD,ERROR,6G
+BR-IA-051,assetInflowReport,I.A,51,Effective Maturity Bucket,effectiveMaturityBucket,maturityStart,N,maturityBucket,Enumeration list validation,Maturity bucket values,ENUMERATION,XSD,ERROR,6G
+BR-IA-052,assetInflowReport,I.A,52,Effective Maturity Bucket,effectiveMaturityBucket,maturityEnd,N,maturityBucket,Enumeration list validation - see comment,Maturity bucket values,ENUMERATION,XSD,ERROR,6G
+BR-IA-053,assetInflowReport,I.A,53,Effective Maturity Bucket,effectiveMaturityBucket,,N,maturityBucket,Check if Maturity Bucket Range combination is valid,Maturity bucket values,MATURITY_RANGE,FRS,ERROR,6G
+BR-IA-054,assetInflowReport,I.A,54,Encumbrance Type,encumbranceType,,N,encumbranceType,Enumeration list validation,See Enumerations Tab,ENUMERATION,XSD,ERROR,6G
+BR-IA-055,assetInflowReport,I.A,55,Internal Counterparty,internalCounterparty,,N,internalCounterparty,Enumeration list validation,"""internalCounterparty"" from Firm specific Schema include XSD",ENUMERATION,XSD,ERROR,6G
+BR-IA-056,assetInflowReport,I.A,56,Business Line,businessLine,,N,businessLine,"This field is mandatory for Category 1 Firms only.
+'Business Line', if provided, must be one of the  Enumeration values from the Firm specific Schema include file.","""businessLine"" from Firm specific Schema include XSD",BUSINESS_LINE,FRS,WARNING,6G
+BR-IA-057,assetInflowReport,I.A,57,"Lendable Value
+Market Value",,,N/A,,"If 'Lendable Value' = 'Market Value' = ZERO, File must be rejected with corresponding Error message",,ZERO_REJECTION,FRS,ERROR,6G
+BR-IU-001,unsecuredInflowReport,I.U,1,Reporting Entity,reportScope,,Y,reportScope,Check if attribute is not Empty [populated],,NOT_EMPTY,XSD,ERROR,6G
+BR-IU-002,unsecuredInflowReport,I.U,2,Reporting Entity,reportScope,,Y,reportScope,Enumeration list validation,"""reportScope"" from Firm specific Schema include XSD",ENUMERATION,XSD,ERROR,6G
+BR-IU-003,unsecuredInflowReport,I.U,3,N/A,comment,,N,string,Checks if Comment Text characters are valid,,COMMENT_CHARS,FRS,WARNING,6G
+BR-IU-004,unsecuredInflowReport,I.U,4,N/A,reportID,,Y,tenDigitPositiveIntegerType,Check if attribute is not Empty [populated],,NOT_EMPTY,XSD,ERROR,6G
+BR-IU-005,unsecuredInflowReport,I.U,5,N/A,reportID,,Y,tenDigitPositiveIntegerType,Check if attribute is Positive,,POSITIVE,XSD,ERROR,6G
+BR-IU-006,unsecuredInflowReport,I.U,6,N/A,reportID,,Y,tenDigitPositiveIntegerType,Checks if the number not exceeding max length allowed (10 digits),,MAX_LENGTH,XSD,ERROR,6G
+BR-IU-007,unsecuredInflowReport,I.U,7,N/A,reportID,,Y,tenDigitPositiveIntegerType,Checks if reportID is unique for specific Report type,,UNIQUE_ID,FRS,ERROR,6G
+BR-IU-008,unsecuredInflowReport,I.U,8,Product,unsecuredProduct,,Y,unsecuredProduct,Check if attribute is not Empty [populated],,NOT_EMPTY,XSD,ERROR,6G
+BR-IU-009,unsecuredInflowReport,I.U,9,Product,unsecuredProduct,,Y,unsecuredProduct,"Validation needs to be performed to make sure that expected Product is used with every Report type.
+If unexpected value is used, File must be rejected with corresponding Error handling",See Enumerations Tab,ENUMERATION,XSD,ERROR,6G
+BR-IU-010,unsecuredInflowReport,I.U,10,Counterparty,counterpartySector,,N,counterpartySectorWithRetail,"counterpartySectorWithRetail: Union of 
+ - counterpartySectorBase
+ - counterpartySectorRetail
+Enumeration list validation:
+ - counterpartySectorBase
+ - counterpartySectorRetail
+If unexpected Counterparty value is used, File will be rejected with corresponding Error handling",See Enumerations Tab,ENUMERATION,XSD,ERROR,6G
+BR-IU-011,unsecuredInflowReport,I.U,11,Counterparty,counterpartySector,,N,counterpartySectorWithRetail,"For Report type and Product combinations listed in the 'Counterparty Required' Tab:
+Counterparty value must be provided, otherwise File will be rejected",Counterparty Required,COUNTERPARTY_REQUIRED,FRS,ERROR,6G
+BR-IU-012,unsecuredInflowReport,I.U,12,G-SIB,gsib,,N,string,"If G-SIB value is provided, Counterparty value must be populated. Otherwise, reject the File with correspondiong Error message",,GSIB_WITH_COUNTERPARTY,FRS,ERROR,6G
+BR-IU-013,unsecuredInflowReport,I.U,13,G-SIB,gsib,,N,string,"1. Enumeration list validation
+2. Enumeration list will be periodically updated
+ - Enumeration list is based on Financial Stability Board (FSB) documentation 
+ - 2020 Enumeration list is used for 6G Implementation and located ==> https://www.fsb.org/wp-content/uploads/P111120.pdf
+ - update is expected once a year",See Enumerations Tab,GSIB_LIST,FRS,WARNING,6G
+BR-IU-014,unsecuredInflowReport,I.U,14,Maturity Amount,maturityValue,,Y,valueType,Check if attribute is not Empty [populated],,NOT_EMPTY,XSD,ERROR,6G
+BR-IU-015,unsecuredInflowReport,I.U,15,Maturity Amount,maturityValue,,Y,valueType,Check if attribute is not Negative [Values can be = ZERO or > ZERO],,NON_NEGATIVE,XSD,ERROR,6G
+BR-IU-016,unsecuredInflowReport,I.U,16,Maturity Amount,maturityValue,,Y,valueType,"Check if Amount reported exceeds Max value allowed [99,999,999,999,999]'",,MAX_AMOUNT,FRS,WARNING,6G
+BR-IU-017,unsecuredInflowReport,I.U,17,Maturity Amount,maturityValue,converted,Y,valueType,Check if attribute is not Empty [populated],,NOT_EMPTY,XSD,ERROR,6G
+BR-IU-018,unsecuredInflowReport,I.U,18,Maturity Amount,maturityValue,converted,Y,valueType,Checks if attribute is a boolean value,,BOOLEAN,XSD,ERROR,6G
+BR-IU-019,unsecuredInflowReport,I.U,19,Maturity Amount,maturityValue,unit,Y,valueType,Check if attribute is not Empty [populated],,NOT_EMPTY,XSD,ERROR,6G
+BR-IU-020,unsecuredInflowReport,I.U,20,Maturity Amount,maturityValue,unit,Y,valueType,Enumeration list validation,See Enumerations Tab,ENUMERATION,XSD,ERROR,6G
+BR-IU-021,unsecuredInflowReport,I.U,21,Maturity Amount,maturityValue,unit,Y,valueType,"Checks if Converted is true, unit is USD",,CONVERTED_USD,FRS,WARNING,6G
+BR-IU-022,unsecuredInflowReport,I.U,22,Maturity Amount,maturityValue,unitMultiplier,Y,valueType,Check if attribute is not Empty [populated],,NOT_EMPTY,XSD,ERROR,6G
+BR-IU-023,unsecuredInflowReport,I.U,23,Maturity Amount,maturityValue,unitMultiplier,Y,valueType,Check if value = 6,,UNIT_MULTIPLIER,XSD,ERROR,6G
+BR-IU-024,unsecuredInflowReport,I.U,24,Maturity Bucket,maturityBucket,maturityStart,Y,maturityBucket,Enumeration list validation,Maturity bucket values,ENUMERATION,XSD,ERROR,6G
+BR-IU-025,unsecuredInflowReport,I.U,25,Maturity Bucket,maturityBucket,maturityEnd,Y,maturityBucket,Enumeration list validation - see comment,Maturity bucket values,ENUMERATION,XSD,ERROR,6G
+BR-IU-026,unsecuredInflowReport,I.U,26,Maturity Bucket,maturityBucket,,Y,maturityBucket,Check if Maturity Bucket Range combination is valid,Maturity bucket values,MATURITY_RANGE,FRS,ERROR,6G
+BR-IU-027,unsecuredInflowReport,I.U,27,Maturity Optionality,maturityOptionality,,N,maturityOptionality,Enumeration list validation,See Enumerations Tab,ENUMERATION,XSD,ERROR,6G
+BR-IU-028,unsecuredInflowReport,I.U,28,Effective Maturity Bucket,effectiveMaturityBucket,maturityStart,N,maturityBucket,Enumeration list validation,See Enumerations Tab,ENUMERATION,XSD,ERROR,6G
+BR-IU-029,unsecuredInflowReport,I.U,29,Effective Maturity Bucket,effectiveMaturityBucket,maturityEnd,N,maturityBucket,Enumeration list validation - see comment,Maturity bucket values,ENUMERATION,XSD,ERROR,6G
+BR-IU-030,unsecuredInflowReport,I.U,30,Effective Maturity Bucket,effectiveMaturityBucket,,N,maturityBucket,Check if Maturity Bucket Range combination is valid,Maturity bucket values,MATURITY_RANGE,FRS,ERROR,6G
+BR-IU-031,unsecuredInflowReport,I.U,31,Encumbrance Type,encumbranceType,,N,encumbranceType,Enumeration list validation,See Enumerations Tab,ENUMERATION,XSD,ERROR,6G
+BR-IU-032,unsecuredInflowReport,I.U,32,Forward Start Amount,forwardStartValue,,N,valueType,Check if attribute is not Negative [Values can be = ZERO or > ZERO],,NON_NEGATIVE,XSD,ERROR,6G
+BR-IU-033,unsecuredInflowReport,I.U,33,Forward Start Amount,forwardStartValue,,N,valueType,"Check if Amount reported exceeds Max value allowed [99,999,999,999,999]'",,MAX_AMOUNT,FRS,WARNING,6G
+BR-IU-034,unsecuredInflowReport,I.U,34,Forward Start Amount,forwardStartValue,converted,N,valueType,Checks if attribute is a boolean value,,BOOLEAN,XSD,ERROR,6G
+BR-IU-035,unsecuredInflowReport,I.U,35,Forward Start Amount,forwardStartValue,unit,N,valueType,Enumeration list validation,See Enumerations Tab,ENUMERATION,XSD,ERROR,6G
+BR-IU-036,unsecuredInflowReport,I.U,36,Forward Start Amount,forwardStartValue,unit,N,valueType,"Checks if Converted is true, unit is USD",,CONVERTED_USD,FRS,WARNING,6G
+BR-IU-037,unsecuredInflowReport,I.U,37,Forward Start Amount,forwardStartValue,unitMultiplier,N,valueType,Check if value = 6,,UNIT_MULTIPLIER,XSD,ERROR,6G
+BR-IU-038,unsecuredInflowReport,I.U,38,Forward Start Bucket,forwardStartBucket,maturityStart,N,maturityBucket,Enumeration list validation,Maturity bucket values,ENUMERATION,XSD,ERROR,6G
+BR-IU-039,unsecuredInflowReport,I.U,39,Forward Start Bucket,forwardStartBucket,maturityEnd,N,maturityBucket,Enumeration list validation - see comment,Maturity bucket values,ENUMERATION,XSD,ERROR,6G
+BR-IU-040,unsecuredInflowReport,I.U,40,Forward Start Bucket,forwardStartBucket,,N,maturityBucket,Check if Maturity Bucket Range combination is valid,Maturity bucket values,MATURITY_RANGE,FRS,ERROR,6G
+BR-IU-041,unsecuredInflowReport,I.U,41,"Forward Start Bucket
+Maturity Bucket",,,N/A,,"Check if:
+forwardStartBucket / maturityStart Less or Equal 
+maturityBucket / maturityStart",,FORWARD_MATURITY,FRS,ERROR,6G
+BR-IU-042,unsecuredInflowReport,I.U,42,Internal,internal,,Y,boolean,Check if attribute is not Empty [populated],,NOT_EMPTY,XSD,ERROR,6G
+BR-IU-043,unsecuredInflowReport,I.U,43,Internal,internal,,Y,boolean,Checks if attribute is a boolean value,See Enumerations Tab,BOOLEAN,XSD,ERROR,6G
+BR-IU-044,unsecuredInflowReport,I.U,44,Internal Counterparty,internalCounterparty,,N,internalCounterparty,Enumeration list validation,"""internalCounterparty"" from Firm specific Schema include XSD",ENUMERATION,XSD,ERROR,6G
+BR-IU-045,unsecuredInflowReport,I.U,45,Risk Weight,riskWeight,,N,decimalValue,"If value is provided, value must be decimal.
+Validate if 'Risk Weight' value > = 0 and  < = 12.50
+If value provided is outside of the range validated, File must be rejected with corresponding Error message",,RISK_WEIGHT,FRS,ERROR,6G
+BR-IU-046,assetInflowReport,I.U,46,Business Line,businessLine,,N,businessLine,"This field is mandatory for Category 1 Firms only.
+'Business Line', if provided, must be one of the  Enumeration values from the Firm specific Schema include file.","""businessLine"" from Firm specific Schema include XSD",BUSINESS_LINE,FRS,WARNING,6G
+BR-IU-047,unsecuredInflowReport,I.U,47,Maturity Amount,,,N/A,,"If 'Maturity Amount' = ZERO, File must be rejected with corresponding Error message.
+Note: 'Maturity Amount' is the only Required amount field for this Report type.",,ZERO_REJECTION,FRS,ERROR,6G
+BR-IS-001,securedInflowReport,I.S,1,Reporting Entity,reportScope,,Y,reportScope,Check if attribute is not Empty [populated],,NOT_EMPTY,XSD,ERROR,6G
+BR-IS-002,securedInflowReport,I.S,2,Reporting Entity,reportScope,,Y,reportScope,Enumeration list validation,"""reportScope"" from Firm specific Schema include XSD",ENUMERATION,XSD,ERROR,6G
+BR-IS-003,securedInflowReport,I.S,3,N/A,comment,,N,string,Checks if Comment Text characters are valid,,COMMENT_CHARS,FRS,WARNING,6G
+BR-IS-004,securedInflowReport,I.S,4,N/A,reportID,,Y,tenDigitPositiveIntegerType,Check if attribute is not Empty [populated],,NOT_EMPTY,XSD,ERROR,6G
+BR-IS-005,securedInflowReport,I.S,5,N/A,reportID,,Y,tenDigitPositiveIntegerType,Check if attribute is Positive,,POSITIVE,XSD,ERROR,6G
+BR-IS-006,securedInflowReport,I.S,6,N/A,reportID,,Y,tenDigitPositiveIntegerType,Checks if the number not exceeding max length allowed (10 digits),,MAX_LENGTH,XSD,ERROR,6G
+BR-IS-007,securedInflowReport,I.S,7,N/A,reportID,,Y,tenDigitPositiveIntegerType,Checks if reportID is unique for specific Report type,,UNIQUE_ID,FRS,ERROR,6G
+BR-IS-008,securedInflowReport,I.S,8,Product,securedInflowProduct,,Y,securedInflowProduct,Check if attribute is not Empty [populated],,NOT_EMPTY,XSD,ERROR,6G
+BR-IS-009,securedInflowReport,I.S,9,Product,securedInflowProduct,,Y,securedInflowProduct,"Validation needs to be performed to make sure that expected Product is used with every Report type.
+If unexpected value is used, File must be rejected with corresponding Error handling",See Enumerations Tab,ENUMERATION,XSD,ERROR,6G
+BR-IS-010,securedInflowReport,I.S,10,Sub-Product,pledgeLevelAndLongHedging,,N,pledgeLevelAndLongHedging,"Validation needs to be performed to make sure that expected Sub-Product is used with corresponding Report type.
+If unexpected value is used, File must be rejected with corresponding Error handling",See Enumerations Tab,ENUMERATION,XSD,ERROR,6G
+BR-IS-011,securedInflowReport,I.S,11,Sub-Product,pledgeLevelAndLongHedging,,N,pledgeLevelAndLongHedging,"For listed Table [Report type] and Product combination:
+If Sub-Product is provided, then Sub-Product should be from the list of expected values, otherwise File must be rejected with corresponding Error handling",Prod-SubProd-SubProd2,SUBPRODUCT_COMBINATION,FRS,ERROR,6G
+BR-IS-012,securedInflowReport,I.S,12,Maturity Amount,maturityValue,,Y,valueType,Check if attribute is not Empty [populated],,NOT_EMPTY,XSD,ERROR,6G
+BR-IS-013,securedInflowReport,I.S,13,Maturity Amount,maturityValue,,Y,valueType,Check if attribute is not Negative [Values can be = ZERO or > ZERO],,NON_NEGATIVE,XSD,ERROR,6G
+BR-IS-014,securedInflowReport,I.S,14,Maturity Amount,maturityValue,,Y,valueType,"Check if Amount reported exceeds Max value allowed [99,999,999,999,999]'",,MAX_AMOUNT,FRS,WARNING,6G
+BR-IS-015,securedInflowReport,I.S,15,Maturity Amount,maturityValue,converted,Y,valueType,Check if attribute is not Empty [populated],,NOT_EMPTY,XSD,ERROR,6G
+BR-IS-016,securedInflowReport,I.S,16,Maturity Amount,maturityValue,converted,Y,valueType,Checks if attribute is a boolean value,,BOOLEAN,XSD,ERROR,6G
+BR-IS-017,securedInflowReport,I.S,17,Maturity Amount,maturityValue,unit,Y,valueType,Check if attribute is not Empty [populated],,NOT_EMPTY,XSD,ERROR,6G
+BR-IS-018,securedInflowReport,I.S,18,Maturity Amount,maturityValue,unit,Y,valueType,Enumeration list validation,See Enumerations Tab,ENUMERATION,XSD,ERROR,6G
+BR-IS-019,securedInflowReport,I.S,19,Maturity Amount,maturityValue,unit,Y,valueType,"Checks if Converted is true, unit is USD",,CONVERTED_USD,FRS,WARNING,6G
+BR-IS-020,securedInflowReport,I.S,20,Maturity Amount,maturityValue,unitMultiplier,Y,valueType,Check if attribute is not Empty [populated],,NOT_EMPTY,XSD,ERROR,6G
+BR-IS-021,securedInflowReport,I.S,21,Maturity Amount,maturityValue,unitMultiplier,Y,valueType,Check if value = 6,,UNIT_MULTIPLIER,XSD,ERROR,6G
+BR-IS-022,securedInflowReport,I.S,22,Maturity Bucket,maturityBucket,maturityStart,Y,maturityBucket,Enumeration list validation,Maturity bucket values,ENUMERATION,XSD,ERROR,6G
+BR-IS-023,securedInflowReport,I.S,23,Maturity Bucket,maturityBucket,maturityEnd,Y,maturityBucket,Enumeration list validation - see comment,Maturity bucket values,ENUMERATION,XSD,ERROR,6G
+BR-IS-024,securedInflowReport,I.S,24,Maturity Bucket,maturityBucket,,Y,maturityBucket,Check if Maturity Bucket Range combination is valid,Maturity bucket values,MATURITY_RANGE,FRS,ERROR,6G
+BR-IS-025,securedInflowReport,I.S,25,Maturity Optionality,maturityOptionality,,N,maturityOptionality,Enumeration list validation,See Enumerations Tab,ENUMERATION,XSD,ERROR,6G
+BR-IS-026,securedInflowReport,I.S,26,Effective Maturity Bucket,effectiveMaturityBucket,maturityStart,N,maturityBucket,Enumeration list validation,Maturity bucket values,ENUMERATION,XSD,ERROR,6G
+BR-IS-027,securedInflowReport,I.S,27,Effective Maturity Bucket,effectiveMaturityBucket,maturityEnd,N,maturityBucket,Enumeration list validation - see comment,Maturity bucket values,ENUMERATION,XSD,ERROR,6G
+BR-IS-028,securedInflowReport,I.S,28,Effective Maturity Bucket,effectiveMaturityBucket,,N,maturityBucket,Check if Maturity Bucket Range combination is valid,Maturity bucket values,MATURITY_RANGE,FRS,ERROR,6G
+BR-IS-029,securedInflowReport,I.S,29,Encumbrance Type,encumbranceType,,N,encumbranceType,Enumeration list validation,See Enumerations Tab,ENUMERATION,XSD,ERROR,6G
+BR-IS-030,securedInflowReport,I.S,30,Forward Start Amount,forwardStartValue,,N,valueType,Check if attribute is not Negative [Values can be = ZERO or > ZERO],,NON_NEGATIVE,XSD,ERROR,6G
+BR-IS-031,securedInflowReport,I.S,31,Forward Start Amount,forwardStartValue,,N,valueType,"Check if Amount reported exceeds Max value allowed [99,999,999,999,999]'",,MAX_AMOUNT,FRS,WARNING,6G
+BR-IS-032,securedInflowReport,I.S,32,Forward Start Amount,forwardStartValue,converted,N,valueType,Checks if attribute is a boolean value,,BOOLEAN,XSD,ERROR,6G
+BR-IS-033,securedInflowReport,I.S,33,Forward Start Amount,forwardStartValue,unit,N,valueType,Enumeration list validation,See Enumerations Tab,ENUMERATION,XSD,ERROR,6G
+BR-IS-034,securedInflowReport,I.S,34,Forward Start Amount,forwardStartValue,unit,N,valueType,"Checks if Converted is true, unit is USD",,CONVERTED_USD,FRS,WARNING,6G
+BR-IS-035,securedInflowReport,I.S,35,Forward Start Amount,forwardStartValue,unitMultiplier,N,valueType,Check if value = 6,,UNIT_MULTIPLIER,XSD,ERROR,6G
+BR-IS-036,securedInflowReport,I.S,36,Forward Start Bucket,forwardStartBucket,maturityStart,N,maturityBucket,Enumeration list validation,Maturity bucket values,ENUMERATION,XSD,ERROR,6G
+BR-IS-037,securedInflowReport,I.S,37,Forward Start Bucket,forwardStartBucket,maturityEnd,N,maturityBucket,Enumeration list validation - see comment,Maturity bucket values,ENUMERATION,XSD,ERROR,6G
+BR-IS-038,securedInflowReport,I.S,38,Forward Start Bucket,forwardStartBucket,,N,maturityBucket,Check if Maturity Bucket Range combination is valid,Maturity bucket values,MATURITY_RANGE,FRS,ERROR,6G
+BR-IS-039,securedInflowReport,I.S,39,"Forward Start Bucket
+Maturity Bucket",,,N/A,,"Check if:
+forwardStartBucket / maturityStart Less or Equal 
+maturityBucket / maturityStart",,FORWARD_MATURITY,FRS,ERROR,6G
+BR-IS-040,securedInflowReport,I.S,40,Collateral Class,collateralClass,,Y,collateralClass,Check if attribute is not Empty [populated],,NOT_EMPTY,XSD,ERROR,6G
+BR-IS-041,securedInflowReport,I.S,41,Collateral Class,collateralClass,,Y,collateralClass,Enumeration list validation,See Enumerations Tab,ENUMERATION,XSD,ERROR,6G
+BR-IS-042,securedInflowReport,I.S,42,Collateral Class,collateralClass,,Y,collateralClass,"For Report type and Product combinations listed in FR 2052a Instructions, Appendix II‐c:
+1. For Required indicator - Collateral class must be provided.
+2. If Collateral class is not provided, File will be rejected with corresponding Error handling",Collateral Class Required,COLLATERAL_REQUIRED,FRS,ERROR,6G
+BR-IS-043,securedInflowReport,I.S,43,Collateral Value,collateralValue,,Y,valueType,Check if attribute is not Empty [populated],,NOT_EMPTY,XSD,ERROR,6G
+BR-IS-044,securedInflowReport,I.S,44,Collateral Value,collateralValue,,Y,valueType,Check if attribute is not Negative [Values can be = ZERO or > ZERO],,NON_NEGATIVE,XSD,ERROR,6G
+BR-IS-045,securedInflowReport,I.S,45,Collateral Value,collateralValue,,Y,valueType,"Check if Amount reported exceeds Max value allowed [99,999,999,999,999]'",,MAX_AMOUNT,FRS,WARNING,6G
+BR-IS-046,securedInflowReport,I.S,46,Collateral Value,collateralValue,converted,Y,valueType,Check if attribute is not Empty [populated],,NOT_EMPTY,XSD,ERROR,6G
+BR-IS-047,securedInflowReport,I.S,47,Collateral Value,collateralValue,converted,Y,valueType,Checks if attribute is a boolean value,,BOOLEAN,XSD,ERROR,6G
+BR-IS-048,securedInflowReport,I.S,48,Collateral Value,collateralValue,unit,Y,valueType,Check if attribute is not Empty [populated],,NOT_EMPTY,XSD,ERROR,6G
+BR-IS-049,securedInflowReport,I.S,49,Collateral Value,collateralValue,unit,Y,valueType,Enumeration list validation,See Enumerations Tab,ENUMERATION,XSD,ERROR,6G
+BR-IS-050,securedInflowReport,I.S,50,Collateral Value,collateralValue,unit,Y,valueType,"Checks if Converted is true, unit is USD",,CONVERTED_USD,FRS,WARNING,6G
+BR-IS-051,securedInflowReport,I.S,51,Collateral Value,collateralValue,unitMultiplier,Y,valueType,Check if attribute is not Empty [populated],,NOT_EMPTY,XSD,ERROR,6G
+BR-IS-052,securedInflowReport,I.S,52,Collateral Value,collateralValue,unitMultiplier,Y,valueType,Check if value = 6,,UNIT_MULTIPLIER,XSD,ERROR,6G
+BR-IS-053,securedInflowReport,I.S,53,Unencumbered,unencumbered,,Y,boolean,Check if attribute is not Empty [populated],,NOT_EMPTY,XSD,ERROR,6G
+BR-IS-054,securedInflowReport,I.S,54,Unencumbered,unencumbered,,Y,boolean,Checks if attribute is a boolean value,See Enumerations Tab,BOOLEAN,XSD,ERROR,6G
+BR-IS-055,securedInflowReport,I.S,55,Treasury Control,treasuryControl,,Y,boolean,Check if attribute is not Empty [populated],,NOT_EMPTY,XSD,ERROR,6G
+BR-IS-056,securedInflowReport,I.S,56,Treasury Control,treasuryControl,,Y,boolean,Checks if attribute is a boolean value,See Enumerations Tab,BOOLEAN,XSD,ERROR,6G
+BR-IS-057,securedInflowReport,I.S,57,Internal,internal,,Y,boolean,Check if attribute is not Empty [populated],,NOT_EMPTY,XSD,ERROR,6G
+BR-IS-058,securedInflowReport,I.S,58,Internal,internal,,Y,boolean,Checks if attribute is a boolean value,See Enumerations Tab,BOOLEAN,XSD,ERROR,6G
+BR-IS-059,securedInflowReport,I.S,59,Internal Counterparty,internalCounterparty,,N,internalCounterparty,Enumeration list validation,"""internalCounterparty"" from Firm specific Schema include XSD",ENUMERATION,XSD,ERROR,6G
+BR-IS-060,securedInflowReport,I.S,60,Risk Weight,riskWeight,,N,decimalValue,"If value is provided, value must be decimal.
+Validate if 'Risk Weight' value > = 0 and  < = 12.50
+If value provided is outside of the range validated, File must be rejected with corresponding Error message",,RISK_WEIGHT,FRS,ERROR,6G
+BR-IS-061,securedInflowReport,I.S,61,Business Line,businessLine,,N,businessLine,"This field is mandatory for Category 1 Firms only.
+'Business Line', if provided, must be one of the  Enumeration values from the Firm specific Schema include file.","""businessLine"" from Firm specific Schema include XSD",BUSINESS_LINE,FRS,WARNING,6G
+BR-IS-062,securedInflowReport,I.S,62,Settlement,settlementMechanism,,Y,securedSettlementMechanism,Enumeration list validation,See Enumerations Tab,ENUMERATION,XSD,ERROR,6G
+BR-IS-063,securedInflowReport,I.S,63,Counterparty,counterpartySector,,Y,counterpartySectorWithRetail,"counterpartySectorWithRetail: Union of 
+ - counterpartySectorBase
+ - counterpartySectorRetail
+Enumeration list validation:
+ - counterpartySectorBase
+ - counterpartySectorRetail
+If unexpected Counterparty value is used, File will be rejected with corresponding Error handling",See Enumerations Tab,ENUMERATION,XSD,ERROR,6G
+BR-IS-064,securedInflowReport,I.S,64,Counterparty,counterpartySector,,Y,counterpartySectorWithRetail,"For Report type and Product combinations listed in the 'Counterparty Required' Tab:
+Counterparty value must be provided, otherwise File will be rejected",Counterparty Required,COUNTERPARTY_REQUIRED,FRS,ERROR,6G
+BR-IS-065,securedInflowReport,I.S,65,G-SIB,gsib,,N,string,"If G-SIB value is provided, Counterparty value must be populated. Otherwise, reject the File with correspondiong Error message",,GSIB_WITH_COUNTERPARTY,FRS,ERROR,6G
+BR-IS-066,securedInflowReport,I.S,66,G-SIB,gsib,,N,string,"1. Enumeration list validation
+2. Enumeration list will be periodically updated
+ - Enumeration list is based on Financial Stability Board (FSB) documentation 
+ - 2020 Enumeration list is used for 6G Implementation and located ==> https://www.fsb.org/wp-content/uploads/P111120.pdf
+ - update is expected once a year",See Enumerations Tab,GSIB_LIST,FRS,WARNING,6G
+BR-IS-067,securedInflowReport,I.S,67,'Maturity Amount' 'Collateral Value',,,N/A,,"If 'Maturity Amount' = 'Collateral Value' = ZERO, File must be rejected with corresponding Error message.",,ZERO_REJECTION,FRS,ERROR,6G
+BR-IO-001,otherInflowReport,I.O,1,Reporting Entity,reportScope,,Y,reportScope,Check if attribute is not Empty [populated],,NOT_EMPTY,XSD,ERROR,6G
+BR-IO-002,otherInflowReport,I.O,2,Reporting Entity,reportScope,,Y,reportScope,Enumeration list validation,"""reportScope"" from Firm specific Schema include XSD",ENUMERATION,XSD,ERROR,6G
+BR-IO-003,otherInflowReport,I.O,3,N/A,comment,,N,string,Checks if Comment Text characters are valid,,COMMENT_CHARS,FRS,WARNING,6G
+BR-IO-004,otherInflowReport,I.O,4,N/A,reportID,,Y,tenDigitPositiveIntegerType,Check if attribute is not Empty [populated],,NOT_EMPTY,XSD,ERROR,6G
+BR-IO-005,otherInflowReport,I.O,5,N/A,reportID,,Y,tenDigitPositiveIntegerType,Check if attribute is Positive,,POSITIVE,XSD,ERROR,6G
+BR-IO-006,otherInflowReport,I.O,6,N/A,reportID,,Y,tenDigitPositiveIntegerType,Checks if the number not exceeding max length allowed (10 digits),,MAX_LENGTH,XSD,ERROR,6G
+BR-IO-007,otherInflowReport,I.O,7,N/A,reportID,,Y,tenDigitPositiveIntegerType,Checks if reportID is unique for specific Report type,,UNIQUE_ID,FRS,ERROR,6G
+BR-IO-008,otherInflowReport,I.O,8,Product,otherInflowProduct,,Y,otherInflowProduct,Check if attribute is not Empty [populated],,NOT_EMPTY,XSD,ERROR,6G
+BR-IO-009,otherInflowReport,I.O,9,Product,otherInflowProduct,,Y,otherInflowProduct,"Validation needs to be performed to make sure that expected Product is used with every Report type.
+If unexpected value is used, File must be rejected with corresponding Error handling",See Enumerations Tab,ENUMERATION,XSD,ERROR,6G
+BR-IO-010,otherInflowReport,I.O,10,Maturity Amount,maturityValue,,Y,valueType,Check if attribute is not Empty [populated],,NOT_EMPTY,XSD,ERROR,6G
+BR-IO-011,otherInflowReport,I.O,11,Maturity Amount,maturityValue,,Y,valueType,Check if attribute is not Negative [Values can be = ZERO or > ZERO],,NON_NEGATIVE,XSD,ERROR,6G
+BR-IO-012,otherInflowReport,I.O,12,Maturity Amount,maturityValue,,Y,valueType,"Check if Amount reported exceeds Max value allowed [99,999,999,999,999]'",,MAX_AMOUNT,FRS,WARNING,6G
+BR-IO-013,otherInflowReport,I.O,13,Maturity Amount,maturityValue,converted,Y,valueType,Check if attribute is not Empty [populated],,NOT_EMPTY,XSD,ERROR,6G
+BR-IO-014,otherInflowReport,I.O,14,Maturity Amount,maturityValue,converted,Y,valueType,Checks if attribute is a boolean value,,BOOLEAN,XSD,ERROR,6G
+BR-IO-015,otherInflowReport,I.O,15,Maturity Amount,maturityValue,unit,Y,valueType,Check if attribute is not Empty [populated],,NOT_EMPTY,XSD,ERROR,6G
+BR-IO-016,otherInflowReport,I.O,16,Maturity Amount,maturityValue,unit,Y,valueType,Enumeration list validation,See Enumerations Tab,ENUMERATION,XSD,ERROR,6G
+BR-IO-017,otherInflowReport,I.O,17,Maturity Amount,maturityValue,unit,Y,valueType,"Checks if Converted is true, unit is USD",,CONVERTED_USD,FRS,WARNING,6G
+BR-IO-018,otherInflowReport,I.O,18,Maturity Amount,maturityValue,unitMultiplier,Y,valueType,Check if attribute is not Empty [populated],,NOT_EMPTY,XSD,ERROR,6G
+BR-IO-019,otherInflowReport,I.O,19,Maturity Amount,maturityValue,unitMultiplier,Y,valueType,Check if value = 6,,UNIT_MULTIPLIER,XSD,ERROR,6G
+BR-IO-020,otherInflowReport,I.O,20,Maturity Bucket,maturityBucket,maturityStart,Y,maturityBucket,Enumeration list validation,Maturity bucket values,ENUMERATION,XSD,ERROR,6G
+BR-IO-021,otherInflowReport,I.O,21,Maturity Bucket,maturityBucket,maturityEnd,Y,maturityBucket,Enumeration list validation - see comment,Maturity bucket values,ENUMERATION,XSD,ERROR,6G
+BR-IO-022,otherInflowReport,I.O,22,Maturity Bucket,maturityBucket,,Y,maturityBucket,Check if Maturity Bucket Range combination is valid,Maturity bucket values,MATURITY_RANGE,FRS,ERROR,6G
+BR-IO-023,otherInflowReport,I.O,23,Forward Start Amount,forwardStartValue,,N,valueType,Check if attribute is not Negative [Values can be = ZERO or > ZERO],,NON_NEGATIVE,XSD,ERROR,6G
+BR-IO-024,otherInflowReport,I.O,24,Forward Start Amount,forwardStartValue,,N,valueType,"Check if Amount reported exceeds Max value allowed [99,999,999,999,999]'",,MAX_AMOUNT,FRS,WARNING,6G
+BR-IO-025,otherInflowReport,I.O,25,Forward Start Amount,forwardStartValue,converted,N,valueType,Checks if attribute is a boolean value,,BOOLEAN,XSD,ERROR,6G
+BR-IO-026,otherInflowReport,I.O,26,Forward Start Amount,forwardStartValue,unit,N,valueType,Enumeration list validation,See Enumerations Tab,ENUMERATION,XSD,ERROR,6G
+BR-IO-027,otherInflowReport,I.O,27,Forward Start Amount,forwardStartValue,unit,N,valueType,"Checks if Converted is true, unit is USD",,CONVERTED_USD,FRS,WARNING,6G
+BR-IO-028,otherInflowReport,I.O,28,Forward Start Amount,forwardStartValue,unitMultiplier,N,valueType,Check if value = 6,,UNIT_MULTIPLIER,XSD,ERROR,6G
+BR-IO-029,otherInflowReport,I.O,29,Forward Start Bucket,forwardStartBucket,maturityStart,N,maturityBucket,Enumeration list validation,Maturity bucket values,ENUMERATION,XSD,ERROR,6G
+BR-IO-030,otherInflowReport,I.O,30,Forward Start Bucket,forwardStartBucket,maturityEnd,N,maturityBucket,Enumeration list validation - see comment,Maturity bucket values,ENUMERATION,XSD,ERROR,6G
+BR-IO-031,otherInflowReport,I.O,31,Forward Start Bucket,forwardStartBucket,,N,maturityBucket,Check if Maturity Bucket Range combination is valid,Maturity bucket values,MATURITY_RANGE,FRS,ERROR,6G
+BR-IO-032,otherInflowReport,I.O,32,"Forward Start Bucket
+Maturity Bucket",,,N/A,,"Check if:
+forwardStartBucket / maturityStart Less or Equal 
+maturityBucket / maturityStart",,FORWARD_MATURITY,FRS,ERROR,6G
+BR-IO-033,otherInflowReport,I.O,33,Collateral Class,collateralClass,,N,collateralClass,Enumeration list validation,See Enumerations Tab,ENUMERATION,XSD,ERROR,6G
+BR-IO-034,otherInflowReport,I.O,34,Collateral Class,collateralClass,,N,collateralClass,"For Report type and Product combinations listed in FR 2052a Instructions, Appendix II‐c:
+1. For Required indicator - Collateral class must be provided.
+2. If Collateral class is not provided, File will be rejected with corresponding Error handling",Collateral Class Required,COLLATERAL_REQUIRED,FRS,ERROR,6G
+BR-IO-035,otherInflowReport,I.O,35,Collateral Value,collateralValue,,N,valueType,Check if attribute is not Negative [Values can be = ZERO or > ZERO],,NON_NEGATIVE,XSD,ERROR,6G
+BR-IO-036,otherInflowReport,I.O,36,Collateral Value,collateralValue,,N,valueType,"Check if Amount reported exceeds Max value allowed [99,999,999,999,999]'",,MAX_AMOUNT,FRS,WARNING,6G
+BR-IO-037,otherInflowReport,I.O,37,Collateral Value,collateralValue,converted,N,valueType,Checks if attribute is a boolean value,,BOOLEAN,XSD,ERROR,6G
+BR-IO-038,otherInflowReport,I.O,38,Collateral Value,collateralValue,unit,N,valueType,Enumeration list validation,See Enumerations Tab,ENUMERATION,XSD,ERROR,6G
+BR-IO-039,otherInflowReport,I.O,39,Collateral Value,collateralValue,unit,N,valueType,"Checks if Converted is true, unit is USD",,CONVERTED_USD,FRS,WARNING,6G
+BR-IO-040,otherInflowReport,I.O,40,Collateral Value,collateralValue,unitMultiplier,N,valueType,Check if value = 6,,UNIT_MULTIPLIER,XSD,ERROR,6G
+BR-IO-041,otherInflowReport,I.O,41,Treasury Control,treasuryControl,,Y,boolean,Check if attribute is not Empty [populated],,NOT_EMPTY,XSD,ERROR,6G
+BR-IO-042,otherInflowReport,I.O,42,Treasury Control,treasuryControl,,Y,boolean,Checks if attribute is a boolean value,,BOOLEAN,XSD,ERROR,6G
+BR-IO-043,otherInflowReport,I.O,43,Counterparty,counterpartySector,,N,counterpartySectorWithRetail,"counterpartySectorWithRetail: Union of 
+ - counterpartySectorBase
+ - counterpartySectorRetail
+Enumeration list validation:
+ - counterpartySectorBase
+ - counterpartySectorRetail
+If unexpected Counterparty value is used, File will be rejected with corresponding Error handling",See Enumerations Tab,ENUMERATION,XSD,ERROR,6G
+BR-IO-044,otherInflowReport,I.O,44,Counterparty,counterpartySector,,N,counterpartySectorWithRetail,"For Report type and Product combinations listed in the 'Counterparty Required' Tab:
+Counterparty value must be provided, otherwise File will be rejected",Counterparty Required,COUNTERPARTY_REQUIRED,FRS,ERROR,6G
+BR-IO-045,otherInflowReport,I.O,45,G-SIB,gsib,,N,string,"If G-SIB value is provided, Counterparty value must be populated. Otherwise, reject the File with correspondiong Error message",,GSIB_WITH_COUNTERPARTY,FRS,ERROR,6G
+BR-IO-046,otherInflowReport,I.O,46,G-SIB,gsib,,N,string,"1. Enumeration list validation
+2. Enumeration list will be periodically updated
+ - Enumeration list is based on Financial Stability Board (FSB) documentation 
+ - 2020 Enumeration list is used for 6G Implementation and located ==> https://www.fsb.org/wp-content/uploads/P111120.pdf
+ - update is expected once a year",See Enumerations Tab,GSIB_LIST,FRS,WARNING,6G
+BR-IO-047,otherInflowReport,I.O,47,Internal,internal,,Y,boolean,Check if attribute is not Empty [populated],,NOT_EMPTY,XSD,ERROR,6G
+BR-IO-048,otherInflowReport,I.O,48,Internal,internal,,Y,boolean,Checks if attribute is a boolean value,See Enumerations Tab,BOOLEAN,XSD,ERROR,6G
+BR-IO-049,otherInflowReport,I.O,49,Internal Counterparty,internalCounterparty,,N,internalCounterparty,Enumeration list validation,"""internalCounterparty"" from Firm specific Schema include XSD",ENUMERATION,XSD,ERROR,6G
+BR-IO-050,otherInflowReport,I.O,50,Business Line,businessLine,,N,businessLine,"This field is mandatory for Category 1 Firms only.
+'Business Line', if provided, must be one of the  Enumeration values from the Firm specific Schema include file.","""businessLine"" from Firm specific Schema include XSD",BUSINESS_LINE,FRS,WARNING,6G
+BR-IO-051,otherInflowReport,I.O,51,Maturity Amount,,,N/A,,"If 'Maturity Amount' = ZERO, File must be rejected with corresponding Error message. 
+Note: 'Maturity Amount' is the only Required amount field for this Report type.",,ZERO_REJECTION,FRS,ERROR,6G
+BR-OD-001,depositsOutflowReport,O.D,1,Reporting Entity,reportScope,,Y,reportScope,Check if attribute is not Empty [populated],,NOT_EMPTY,XSD,ERROR,6G
+BR-OD-002,depositsOutflowReport,O.D,2,Reporting Entity,reportScope,,Y,reportScope,Enumeration list validation,"""reportScope"" from Firm specific Schema include XSD",ENUMERATION,XSD,ERROR,6G
+BR-OD-003,depositsOutflowReport,O.D,3,N/A,comment,,N,string,Checks if Comment Text characters are valid,,COMMENT_CHARS,FRS,WARNING,6G
+BR-OD-004,depositsOutflowReport,O.D,4,N/A,reportID,,Y,tenDigitPositiveIntegerType,Check if attribute is not Empty [populated],,NOT_EMPTY,XSD,ERROR,6G
+BR-OD-005,depositsOutflowReport,O.D,5,N/A,reportID,,Y,tenDigitPositiveIntegerType,Check if attribute is Positive,,POSITIVE,XSD,ERROR,6G
+BR-OD-006,depositsOutflowReport,O.D,6,N/A,reportID,,Y,tenDigitPositiveIntegerType,Checks if the number not exceeding max length allowed (10 digits),,MAX_LENGTH,XSD,ERROR,6G
+BR-OD-007,depositsOutflowReport,O.D,7,N/A,reportID,,Y,tenDigitPositiveIntegerType,Checks if reportID is unique for specific Report type,,UNIQUE_ID,FRS,ERROR,6G
+BR-OD-008,depositsOutflowReport,O.D,8,Product,depositsProduct,,Y,depositProduct,Check if attribute is not Empty [populated],,NOT_EMPTY,XSD,ERROR,6G
+BR-OD-009,depositsOutflowReport,O.D,9,Product,depositsProduct,,Y,depositProduct,"Validation needs to be performed to make sure that expected Product is used with every Report type.
+If unexpected value is used, File must be rejected with corresponding Error handling",See Enumerations Tab,ENUMERATION,XSD,ERROR,6G
+BR-OD-010,depositsOutflowReport,O.D,10,Counterparty,counterpartySector,,Y,counterpartySectorWithRetail,"counterpartySectorWithRetail: Union of 
+ - counterpartySectorBase
+ - counterpartySectorRetail
+Enumeration list validation:
+ - counterpartySectorBase
+ - counterpartySectorRetail
+If unexpected Counterparty value is used, File will be rejected with corresponding Error handling",See Enumerations Tab,ENUMERATION,XSD,ERROR,6G
+BR-OD-011,depositsOutflowReport,O.D,11,Counterparty,counterpartySector,,Y,counterpartySectorWithRetail,"For Report type and Product combinations listed in the 'Counterparty Required' Tab:
+Counterparty value must be provided, otherwise File will be rejected",Counterparty Required,COUNTERPARTY_REQUIRED,FRS,ERROR,6G
+BR-OD-012,depositsOutflowReport,O.D,12,G-SIB,gsib,,N,string,"If G-SIB value is provided, Counterparty value must be populated. Otherwise, reject the File with correspondiong Error message",,GSIB_WITH_COUNTERPARTY,FRS,ERROR,6G
+BR-OD-013,depositsOutflowReport,O.D,13,G-SIB,gsib,,N,string,"1. Enumeration list validation
+2. Enumeration list will be periodically updated
+ - Enumeration list is based on Financial Stability Board (FSB) documentation 
+ - 2020 Enumeration list is used for 6G Implementation and located ==> https://www.fsb.org/wp-content/uploads/P111120.pdf
+ - update is expected once a year",See Enumerations Tab,GSIB_LIST,FRS,WARNING,6G
+BR-OD-014,depositsOutflowReport,O.D,14,Maturity Amount,maturityValue,,Y,valueType,Check if attribute is not Empty [populated],,NOT_EMPTY,XSD,ERROR,6G
+BR-OD-015,depositsOutflowReport,O.D,15,Maturity Amount,maturityValue,,Y,valueType,Check if attribute is not Negative [Values can be = ZERO or > ZERO],,NON_NEGATIVE,XSD,ERROR,6G
+BR-OD-016,depositsOutflowReport,O.D,16,Maturity Amount,maturityValue,,Y,valueType,"Check if Amount reported exceeds Max value allowed [99,999,999,999,999]'",,MAX_AMOUNT,FRS,WARNING,6G
+BR-OD-017,depositsOutflowReport,O.D,17,Maturity Amount,maturityValue,converted,Y,valueType,Check if attribute is not Empty [populated],,NOT_EMPTY,XSD,ERROR,6G
+BR-OD-018,depositsOutflowReport,O.D,18,Maturity Amount,maturityValue,converted,Y,valueType,Checks if attribute is a boolean value,,BOOLEAN,XSD,ERROR,6G
+BR-OD-019,depositsOutflowReport,O.D,19,Maturity Amount,maturityValue,unit,Y,valueType,Check if attribute is not Empty [populated],,NOT_EMPTY,XSD,ERROR,6G
+BR-OD-020,depositsOutflowReport,O.D,20,Maturity Amount,maturityValue,unit,Y,valueType,Enumeration list validation,See Enumerations Tab,ENUMERATION,XSD,ERROR,6G
+BR-OD-021,depositsOutflowReport,O.D,21,Maturity Amount,maturityValue,unit,Y,valueType,"Checks if Converted is true, unit is USD",,CONVERTED_USD,FRS,WARNING,6G
+BR-OD-022,depositsOutflowReport,O.D,22,Maturity Amount,maturityValue,unitMultiplier,Y,valueType,Check if attribute is not Empty [populated],,NOT_EMPTY,XSD,ERROR,6G
+BR-OD-023,depositsOutflowReport,O.D,23,Maturity Amount,maturityValue,unitMultiplier,Y,valueType,Check if value = 6,,UNIT_MULTIPLIER,XSD,ERROR,6G
+BR-OD-024,depositsOutflowReport,O.D,24,Maturity Bucket,maturityBucket,maturityStart,Y,maturityBucket,Enumeration list validation,Maturity bucket values,ENUMERATION,XSD,ERROR,6G
+BR-OD-025,depositsOutflowReport,O.D,25,Maturity Bucket,maturityBucket,maturityEnd,Y,maturityBucket,Enumeration list validation - see comment,Maturity bucket values,ENUMERATION,XSD,ERROR,6G
+BR-OD-026,depositsOutflowReport,O.D,26,Maturity Bucket,maturityBucket,,Y,maturityBucket,Check if Maturity Bucket Range combination is valid,Maturity bucket values,MATURITY_RANGE,FRS,ERROR,6G
+BR-OD-027,depositsOutflowReport,O.D,27,Maturity Optionality,maturityOptionality,,N,maturityOptionality,Enumeration list validation,See Enumerations Tab,ENUMERATION,XSD,ERROR,6G
+BR-OD-028,depositsOutflowReport,O.D,28,Collateral Class,collateralClass,,N,collateralClass,Enumeration list validation,See Enumerations Tab,ENUMERATION,XSD,ERROR,6G
+BR-OD-029,depositsOutflowReport,O.D,29,Collateral Class,collateralClass,,N,collateralClass,"For Report type and Product combinations listed in FR 2052a Instructions, Appendix II‐c:
+1. For Required indicator - Collateral class must be provided.
+2. If Collateral class is not provided, File will be rejected with corresponding Error handling",Collateral Class Required,COLLATERAL_REQUIRED,FRS,ERROR,6G
+BR-OD-030,depositsOutflowReport,O.D,30,Collateral Value,collateralValue,,N,valueType,Check if attribute is not Negative [Values can be = ZERO or > ZERO],,NON_NEGATIVE,XSD,ERROR,6G
+BR-OD-031,depositsOutflowReport,O.D,31,Collateral Value,collateralValue,,N,valueType,"Check if Amount reported exceeds Max value allowed [99,999,999,999,999]'",,MAX_AMOUNT,FRS,WARNING,6G
+BR-OD-032,depositsOutflowReport,O.D,32,Collateral Value,collateralValue,converted,N,valueType,Checks if attribute is a boolean value,,BOOLEAN,XSD,ERROR,6G
+BR-OD-033,depositsOutflowReport,O.D,33,Collateral Value,collateralValue,unit,N,valueType,Enumeration list validation,See Enumerations Tab,ENUMERATION,XSD,ERROR,6G
+BR-OD-034,depositsOutflowReport,O.D,34,Collateral Value,collateralValue,unit,N,valueType,"Checks if Converted is true, unit is USD",,CONVERTED_USD,FRS,WARNING,6G
+BR-OD-035,depositsOutflowReport,O.D,35,Collateral Value,collateralValue,unitMultiplier,N,valueType,Check if value = 6,,UNIT_MULTIPLIER,XSD,ERROR,6G
+BR-OD-036,depositsOutflowReport,O.D,36,Insured,insured,,Y,insuredType,Check if attribute is not Empty [populated],,NOT_EMPTY,XSD,ERROR,6G
+BR-OD-037,depositsOutflowReport,O.D,37,Insured,insured,,Y,insuredType,Enumeration list validation,See Enumerations Tab,ENUMERATION,XSD,ERROR,6G
+BR-OD-038,depositsOutflowReport,O.D,38,Trigger,trigger,,Y,boolean,Check if attribute is not Empty [populated],,NOT_EMPTY,XSD,ERROR,6G
+BR-OD-039,depositsOutflowReport,O.D,39,Trigger,trigger,,Y,boolean,Checks if attribute is a boolean value,See Enumerations Tab,BOOLEAN,XSD,ERROR,6G
+BR-OD-040,depositsOutflowReport,O.D,40,Rehypothecated,rehypothecated,,N,boolean,Check if attribute is not Empty [populated],,NOT_EMPTY,XSD,ERROR,6G
+BR-OD-041,depositsOutflowReport,O.D,41,Rehypothecated,rehypothecated,,N,boolean,Checks if attribute is a boolean value,See Enumerations Tab,BOOLEAN,XSD,ERROR,6G
+BR-OD-042,depositsOutflowReport,O.D,42,Business Line,businessLine,,N,businessLine,"This field is mandatory for Category 1 Firms only.
+'Business Line', if provided, must be one of the  Enumeration values from the Firm specific Schema include file.","""businessLine"" from Firm specific Schema include XSD",BUSINESS_LINE,FRS,WARNING,6G
+BR-OD-043,depositsOutflowReport,O.D,43,Internal,internal,,Y,boolean,Check if attribute is not Empty [populated],,NOT_EMPTY,XSD,ERROR,6G
+BR-OD-044,depositsOutflowReport,O.D,44,Internal,internal,,Y,boolean,Checks if attribute is a boolean value,See Enumerations Tab,BOOLEAN,XSD,ERROR,6G
+BR-OD-045,depositsOutflowReport,O.D,45,Internal Counterparty,internalCounterparty,,N,internalCounterparty,Enumeration list validation,"""internalCounterparty"" from Firm specific Schema include XSD",ENUMERATION,XSD,ERROR,6G
+BR-OD-046,otherInflowReport,O.D,46,Maturity Amount,,,N/A,,"If 'Maturity Amount' = ZERO, File must be rejected with corresponding Error message. 
+Note: 'Maturity Amount' is the only Required amount field for this Report type.",,ZERO_REJECTION,FRS,ERROR,6G
+BR-OW-001,wholesaleOutflowReport,O.W,1,Reporting Entity,reportScope,,Y,reportScope,Check if attribute is not Empty [populated],,NOT_EMPTY,XSD,ERROR,6G
+BR-OW-002,wholesaleOutflowReport,O.W,2,Reporting Entity,reportScope,,Y,reportScope,Enumeration list validation,"""reportScope"" from Firm specific Schema include XSD",ENUMERATION,XSD,ERROR,6G
+BR-OW-003,wholesaleOutflowReport,O.W,3,N/A,comment,,N,string,Checks if Comment Text characters are valid,,COMMENT_CHARS,FRS,WARNING,6G
+BR-OW-004,wholesaleOutflowReport,O.W,4,N/A,reportID,,Y,tenDigitPositiveIntegerType,Check if attribute is not Empty [populated],,NOT_EMPTY,XSD,ERROR,6G
+BR-OW-005,wholesaleOutflowReport,O.W,5,N/A,reportID,,Y,tenDigitPositiveIntegerType,Check if attribute is Positive,,POSITIVE,XSD,ERROR,6G
+BR-OW-006,wholesaleOutflowReport,O.W,6,N/A,reportID,,Y,tenDigitPositiveIntegerType,Checks if the number not exceeding max length allowed (10 digits),,MAX_LENGTH,XSD,ERROR,6G
+BR-OW-007,wholesaleOutflowReport,O.W,7,N/A,reportID,,Y,tenDigitPositiveIntegerType,Checks if reportID is unique for specific Report type,,UNIQUE_ID,FRS,ERROR,6G
+BR-OW-008,wholesaleOutflowReport,O.W,8,Product,wholesaleOutflowProduct,,Y,wholesaleOutflowProduct,Check if attribute is not Empty [populated],,NOT_EMPTY,XSD,ERROR,6G
+BR-OW-009,wholesaleOutflowReport,O.W,9,Product,wholesaleOutflowProduct,,Y,wholesaleOutflowProduct,"Validation needs to be performed to make sure that expected Product is used with every Report type.
+If unexpected value is used, File must be rejected with corresponding Error handling",See Enumerations Tab,ENUMERATION,XSD,ERROR,6G
+BR-OW-010,wholesaleOutflowReport,O.W,10,Counterparty,counterpartySector,,N,counterpartySectorWithRetail,"counterpartySectorWithRetail: Union of 
+ - counterpartySectorBase
+ - counterpartySectorRetail
+Enumeration list validation:
+ - counterpartySectorBase
+ - counterpartySectorRetail
+If unexpected Counterparty value is used, File will be rejected with corresponding Error handling",See Enumerations Tab,ENUMERATION,XSD,ERROR,6G
+BR-OW-011,wholesaleOutflowReport,O.W,11,Counterparty,counterpartySector,,N,counterpartySectorWithRetail,"For Report type and Product combinations listed in the 'Counterparty Required' Tab:
+Counterparty value must be provided, otherwise File will be rejected",Counterparty Required,COUNTERPARTY_REQUIRED,FRS,ERROR,6G
+BR-OW-012,wholesaleOutflowReport,O.W,12,G-SIB,gsib,,N,string,"If G-SIB value is provided, Counterparty value must be populated. Otherwise, reject the File with correspondiong Error message",,GSIB_WITH_COUNTERPARTY,FRS,ERROR,6G
+BR-OW-013,wholesaleOutflowReport,O.W,13,G-SIB,gsib,,N,string,"1. Enumeration list validation
+2. Enumeration list will be periodically updated
+ - Enumeration list is based on Financial Stability Board (FSB) documentation 
+ - 2020 Enumeration list is used for 6G Implementation and located ==> https://www.fsb.org/wp-content/uploads/P111120.pdf
+ - update is expected once a year",See Enumerations Tab,GSIB_LIST,FRS,WARNING,6G
+BR-OW-014,wholesaleOutflowReport,O.W,14,Maturity Amount,maturityValue,,Y,valueType,Check if attribute is not Empty [populated],,NOT_EMPTY,XSD,ERROR,6G
+BR-OW-015,wholesaleOutflowReport,O.W,15,Maturity Amount,maturityValue,,Y,valueType,Check if attribute is not Negative [Values can be = ZERO or > ZERO],,NON_NEGATIVE,XSD,ERROR,6G
+BR-OW-016,wholesaleOutflowReport,O.W,16,Maturity Amount,maturityValue,,Y,valueType,"Check if Amount reported exceeds Max value allowed [99,999,999,999,999]'",,MAX_AMOUNT,FRS,WARNING,6G
+BR-OW-017,wholesaleOutflowReport,O.W,17,Maturity Amount,maturityValue,converted,Y,valueType,Check if attribute is not Empty [populated],,NOT_EMPTY,XSD,ERROR,6G
+BR-OW-018,wholesaleOutflowReport,O.W,18,Maturity Amount,maturityValue,converted,Y,valueType,Checks if attribute is a boolean value,,BOOLEAN,XSD,ERROR,6G
+BR-OW-019,wholesaleOutflowReport,O.W,19,Maturity Amount,maturityValue,unit,Y,valueType,Check if attribute is not Empty [populated],,NOT_EMPTY,XSD,ERROR,6G
+BR-OW-020,wholesaleOutflowReport,O.W,20,Maturity Amount,maturityValue,unit,Y,valueType,Enumeration list validation,See Enumerations Tab,ENUMERATION,XSD,ERROR,6G
+BR-OW-021,wholesaleOutflowReport,O.W,21,Maturity Amount,maturityValue,unit,Y,valueType,"Checks if Converted is true, unit is USD",,CONVERTED_USD,FRS,WARNING,6G
+BR-OW-022,wholesaleOutflowReport,O.W,22,Maturity Amount,maturityValue,unitMultiplier,Y,valueType,Check if attribute is not Empty [populated],,NOT_EMPTY,XSD,ERROR,6G
+BR-OW-023,wholesaleOutflowReport,O.W,23,Maturity Amount,maturityValue,unitMultiplier,Y,valueType,Check if value = 6,,UNIT_MULTIPLIER,XSD,ERROR,6G
+BR-OW-024,wholesaleOutflowReport,O.W,24,Maturity Bucket,maturityBucket,maturityStart,Y,maturityBucket,Enumeration list validation,Maturity bucket values,ENUMERATION,XSD,ERROR,6G
+BR-OW-025,wholesaleOutflowReport,O.W,25,Maturity Bucket,maturityBucket,maturityEnd,Y,maturityBucket,Enumeration list validation - see comment,Maturity bucket values,ENUMERATION,XSD,ERROR,6G
+BR-OW-026,wholesaleOutflowReport,O.W,26,Maturity Bucket,maturityBucket,,Y,maturityBucket,Check if Maturity Bucket Range combination is valid,Maturity bucket values,MATURITY_RANGE,FRS,ERROR,6G
+BR-OW-027,wholesaleOutflowReport,O.W,27,Maturity Optionality,maturityOptionality,,N,maturityOptionality,Enumeration list validation,See Enumerations Tab,ENUMERATION,XSD,ERROR,6G
+BR-OW-028,wholesaleOutflowReport,O.W,28,Collateral Class,collateralClass,,N,collateralClass,Enumeration list validation,See Enumerations Tab,ENUMERATION,XSD,ERROR,6G
+BR-OW-029,wholesaleOutflowReport,O.W,29,Collateral Class,collateralClass,,N,collateralClass,"For Report type and Product combinations listed in FR 2052a Instructions, Appendix II‐c:
+1. For Required indicator - Collateral class must be provided.
+2. If Collateral class is not provided, File will be rejected with corresponding Error handling",Collateral Class Required,COLLATERAL_REQUIRED,FRS,ERROR,6G
+BR-OW-030,wholesaleOutflowReport,O.W,30,Collateral Value,collateralValue,,N,valueType,Check if attribute is not Negative [Values can be = ZERO or > ZERO],,NON_NEGATIVE,XSD,ERROR,6G
+BR-OW-031,wholesaleOutflowReport,O.W,31,Collateral Value,collateralValue,,N,valueType,"Check if Amount reported exceeds Max value allowed [99,999,999,999,999]'",,MAX_AMOUNT,FRS,WARNING,6G
+BR-OW-032,wholesaleOutflowReport,O.W,32,Collateral Value,collateralValue,converted,N,valueType,Checks if attribute is a boolean value,,BOOLEAN,XSD,ERROR,6G
+BR-OW-033,wholesaleOutflowReport,O.W,33,Collateral Value,collateralValue,unit,N,valueType,Enumeration list validation,See Enumerations Tab,ENUMERATION,XSD,ERROR,6G
+BR-OW-034,wholesaleOutflowReport,O.W,34,Collateral Value,collateralValue,unit,N,valueType,"Checks if Converted is true, unit is USD",,CONVERTED_USD,FRS,WARNING,6G
+BR-OW-035,wholesaleOutflowReport,O.W,35,Collateral Value,collateralValue,unitMultiplier,N,valueType,Check if value = 6,,UNIT_MULTIPLIER,XSD,ERROR,6G
+BR-OW-036,wholesaleOutflowReport,O.W,36,Forward Start Amount,forwardStartValue,,N,valueType,Check if attribute is not Negative [Values can be = ZERO or > ZERO],,NON_NEGATIVE,XSD,ERROR,6G
+BR-OW-037,wholesaleOutflowReport,O.W,37,Forward Start Amount,forwardStartValue,,N,valueType,"Check if Amount reported exceeds Max value allowed [99,999,999,999,999]'",,MAX_AMOUNT,FRS,WARNING,6G
+BR-OW-038,wholesaleOutflowReport,O.W,38,Forward Start Amount,forwardStartValue,converted,N,valueType,Checks if attribute is a boolean value,,BOOLEAN,XSD,ERROR,6G
+BR-OW-039,wholesaleOutflowReport,O.W,39,Forward Start Amount,forwardStartValue,unit,N,valueType,Enumeration list validation,See Enumerations Tab,ENUMERATION,XSD,ERROR,6G
+BR-OW-040,wholesaleOutflowReport,O.W,40,Forward Start Amount,forwardStartValue,unit,N,valueType,"Checks if Converted is true, unit is USD",,CONVERTED_USD,FRS,WARNING,6G
+BR-OW-041,wholesaleOutflowReport,O.W,41,Forward Start Amount,forwardStartValue,unitMultiplier,N,valueType,Check if value = 6,,UNIT_MULTIPLIER,XSD,ERROR,6G
+BR-OW-042,wholesaleOutflowReport,O.W,42,Forward Start Bucket,forwardStartBucket,maturityStart,N,maturityBucket,Enumeration list validation,Maturity bucket values,ENUMERATION,XSD,ERROR,6G
+BR-OW-043,wholesaleOutflowReport,O.W,43,Forward Start Bucket,forwardStartBucket,maturityEnd,N,maturityBucket,Enumeration list validation - see comment,Maturity bucket values,ENUMERATION,XSD,ERROR,6G
+BR-OW-044,wholesaleOutflowReport,O.W,44,Forward Start Bucket,forwardStartBucket,,N,maturityBucket,Check if Maturity Bucket Range combination is valid,Maturity bucket values,MATURITY_RANGE,FRS,ERROR,6G
+BR-OW-045,wholesaleOutflowReport,O.W,45,"Forward Start Bucket
+Maturity Bucket",,,N/A,,"Check if:
+forwardStartBucket / maturityStart Less or Equal 
+maturityBucket / maturityStart",,FORWARD_MATURITY,FRS,ERROR,6G
+BR-OW-046,wholesaleOutflowReport,O.W,46,Internal,internal,,Y,boolean,Check if attribute is not Empty [populated],,NOT_EMPTY,XSD,ERROR,6G
+BR-OW-047,wholesaleOutflowReport,O.W,47,Internal,internal,,Y,boolean,Checks if attribute is a boolean value,See Enumerations Tab,BOOLEAN,XSD,ERROR,6G
+BR-OW-048,wholesaleOutflowReport,O.W,48,Internal Counterparty,internalCounterparty,,N,internalCounterparty,Enumeration list validation,"""internalCounterparty"" from Firm specific Schema include XSD",ENUMERATION,XSD,ERROR,6G
+BR-OW-049,wholesaleOutflowReport,O.W,49,Loss Absorbency,lossAbsorbency,,N,lossAbsorbency,Enumeration list validation,See Enumerations Tab,ENUMERATION,XSD,ERROR,6G
+BR-OW-050,wholesaleOutflowReport,O.W,50,Business Line,businessLine,,N,businessLine,"This field is mandatory for Category 1 Firms only.
+'Business Line', if provided, must be one of the  Enumeration values from the Firm specific Schema include file.","""businessLine"" from Firm specific Schema include XSD",BUSINESS_LINE,FRS,WARNING,6G
+BR-OW-051,wholesaleOutflowReport,O.W,51,Maturity Amount,,,N/A,,"If 'Maturity Amount' = ZERO, File must be rejected with corresponding Error message. 
+Note: 'Maturity Amount' is the only Required amount field for this Report type.",,ZERO_REJECTION,FRS,ERROR,6G
+BR-OS-001,securedOutflowReport,O.S,1,Reporting Entity,reportScope,,Y,reportScope,Check if attribute is not Empty [populated],,NOT_EMPTY,XSD,ERROR,6G
+BR-OS-002,securedOutflowReport,O.S,2,Reporting Entity,reportScope,,Y,reportScope,Enumeration list validation,"""reportScope"" from Firm specific Schema include XSD",ENUMERATION,XSD,ERROR,6G
+BR-OS-003,securedOutflowReport,O.S,3,N/A,comment,,N,string,Checks if Comment Text characters are valid,,COMMENT_CHARS,FRS,WARNING,6G
+BR-OS-004,securedOutflowReport,O.S,4,N/A,reportID,,Y,tenDigitPositiveIntegerType,Check if attribute is not Empty [populated],,NOT_EMPTY,XSD,ERROR,6G
+BR-OS-005,securedOutflowReport,O.S,5,N/A,reportID,,Y,tenDigitPositiveIntegerType,Check if attribute is Positive,,POSITIVE,XSD,ERROR,6G
+BR-OS-006,securedOutflowReport,O.S,6,N/A,reportID,,Y,tenDigitPositiveIntegerType,Checks if the number not exceeding max length allowed (10 digits),,MAX_LENGTH,XSD,ERROR,6G
+BR-OS-007,securedOutflowReport,O.S,7,N/A,reportID,,Y,tenDigitPositiveIntegerType,Checks if reportID is unique for specific Report type,,UNIQUE_ID,FRS,ERROR,6G
+BR-OS-008,securedOutflowReport,O.S,8,Product,securedOutflowProduct,,Y,securedOutflowProduct,Check if attribute is not Empty [populated],,NOT_EMPTY,XSD,ERROR,6G
+BR-OS-009,securedOutflowReport,O.S,9,Product,securedOutflowProduct,,Y,securedOutflowProduct,"Validation needs to be performed to make sure that expected Product is used with every Report type.
+If unexpected value is used, File must be rejected with corresponding Error handling",See Enumerations Tab,ENUMERATION,XSD,ERROR,6G
+BR-OS-010,securedOutflowReport,O.S,10,Sub-Product,securedOutflowCounterpartyOrCoverage,,N,securedOutflowCounterpartyOrCoverage,"Validation needs to be performed to make sure that expected Sub-Product is used with corresponding Report type.
+If unexpected value is used, File must be rejected with corresponding Error handling",See Enumerations Tab,ENUMERATION,XSD,ERROR,6G
+BR-OS-011,securedOutflowReport,O.S,11,Sub-Product,securedOutflowCounterpartyOrCoverage,,N,securedOutflowCounterpartyOrCoverage,"For listed Table [Report type] and Product combination:
+If Sub-Product is provided, then Sub-Product should be from the list of expected values, otherwise File must be rejected with corresponding Error handling",Prod-SubProd-SubProd2,SUBPRODUCT_COMBINATION,FRS,ERROR,6G
+BR-OS-012,securedOutflowReport,O.S,12,Maturity Amount,maturityValue,,Y,valueType,Check if attribute is not Empty [populated],,NOT_EMPTY,XSD,ERROR,6G
+BR-OS-013,securedOutflowReport,O.S,13,Maturity Amount,maturityValue,,Y,valueType,Check if attribute is not Negative [Values can be = ZERO or > ZERO],,NON_NEGATIVE,XSD,ERROR,6G
+BR-OS-014,securedOutflowReport,O.S,14,Maturity Amount,maturityValue,,Y,valueType,"Check if Amount reported exceeds Max value allowed [99,999,999,999,999]'",,MAX_AMOUNT,FRS,WARNING,6G
+BR-OS-015,securedOutflowReport,O.S,15,Maturity Amount,maturityValue,converted,Y,valueType,Check if attribute is not Empty [populated],,NOT_EMPTY,XSD,ERROR,6G
+BR-OS-016,securedOutflowReport,O.S,16,Maturity Amount,maturityValue,converted,Y,valueType,Checks if attribute is a boolean value,,BOOLEAN,XSD,ERROR,6G
+BR-OS-017,securedOutflowReport,O.S,17,Maturity Amount,maturityValue,unit,Y,valueType,Check if attribute is not Empty [populated],,NOT_EMPTY,XSD,ERROR,6G
+BR-OS-018,securedOutflowReport,O.S,18,Maturity Amount,maturityValue,unit,Y,valueType,Enumeration list validation,See Enumerations Tab,ENUMERATION,XSD,ERROR,6G
+BR-OS-019,securedOutflowReport,O.S,19,Maturity Amount,maturityValue,unit,Y,valueType,"Checks if Converted is true, unit is USD",,CONVERTED_USD,FRS,WARNING,6G
+BR-OS-020,securedOutflowReport,O.S,20,Maturity Amount,maturityValue,unitMultiplier,Y,valueType,Check if attribute is not Empty [populated],,NOT_EMPTY,XSD,ERROR,6G
+BR-OS-021,securedOutflowReport,O.S,21,Maturity Amount,maturityValue,unitMultiplier,Y,valueType,Check if value = 6,,UNIT_MULTIPLIER,XSD,ERROR,6G
+BR-OS-022,securedOutflowReport,O.S,22,Maturity Bucket,maturityBucket,maturityStart,Y,maturityBucket,Enumeration list validation,Maturity bucket values,ENUMERATION,XSD,ERROR,6G
+BR-OS-023,securedOutflowReport,O.S,23,Maturity Bucket,maturityBucket,maturityEnd,Y,maturityBucket,Enumeration list validation - see comment,Maturity bucket values,ENUMERATION,XSD,ERROR,6G
+BR-OS-024,securedOutflowReport,O.S,24,Maturity Bucket,maturityBucket,,Y,maturityBucket,Check if Maturity Bucket Range combination is valid,Maturity bucket values,MATURITY_RANGE,FRS,ERROR,6G
+BR-OS-025,securedOutflowReport,O.S,25,Maturity Optionality,maturityOptionality,,N,maturityOptionality,"If value is provided, value must correspond to Enumeration list values, otherwise file must be rejected.",See Enumerations Tab,ENUMERATION,XSD,ERROR,6G
+BR-OS-026,securedOutflowReport,O.S,26,Forward Start Amount,forwardStartValue,,N,valueType,Check if attribute is not Negative [Values can be = ZERO or > ZERO],,NON_NEGATIVE,XSD,ERROR,6G
+BR-OS-027,securedOutflowReport,O.S,27,Forward Start Amount,forwardStartValue,,N,valueType,"Check if Amount reported exceeds Max value allowed [99,999,999,999,999]'",,MAX_AMOUNT,FRS,WARNING,6G
+BR-OS-028,securedOutflowReport,O.S,28,Forward Start Amount,forwardStartValue,converted,N,valueType,Checks if attribute is a boolean value,,BOOLEAN,XSD,ERROR,6G
+BR-OS-029,securedOutflowReport,O.S,29,Forward Start Amount,forwardStartValue,unit,N,valueType,Enumeration list validation,See Enumerations Tab,ENUMERATION,XSD,ERROR,6G
+BR-OS-030,securedOutflowReport,O.S,30,Forward Start Amount,forwardStartValue,unit,N,valueType,"Checks if Converted is true, unit is USD",,CONVERTED_USD,FRS,WARNING,6G
+BR-OS-031,securedOutflowReport,O.S,31,Forward Start Amount,forwardStartValue,unitMultiplier,N,valueType,Check if value = 6,,UNIT_MULTIPLIER,XSD,ERROR,6G
+BR-OS-032,securedOutflowReport,O.S,32,Forward Start Bucket,forwardStartBucket,maturityStart,N,maturityBucket,Enumeration list validation,Maturity bucket values,ENUMERATION,XSD,ERROR,6G
+BR-OS-033,securedOutflowReport,O.S,33,Forward Start Bucket,forwardStartBucket,maturityEnd,N,maturityBucket,Enumeration list validation - see comment,Maturity bucket values,ENUMERATION,XSD,ERROR,6G
+BR-OS-034,securedOutflowReport,O.S,34,Forward Start Bucket,forwardStartBucket,,N,maturityBucket,Check if Maturity Bucket Range combination is valid,Maturity bucket values,MATURITY_RANGE,FRS,ERROR,6G
+BR-OS-035,securedOutflowReport,O.S,35,Forward Start Bucket,,,N/A,,"Check if:
+forwardStartBucket / maturityStart Less or Equal 
+maturityBucket / maturityStart",,FORWARD_MATURITY,FRS,ERROR,6G
+BR-OS-036,securedOutflowReport,O.S,36,Collateral Class,collateralClass,,Y,collateralClass,Check if attribute is not Empty [populated],,NOT_EMPTY,XSD,ERROR,6G
+BR-OS-037,securedOutflowReport,O.S,37,Collateral Class,collateralClass,,Y,collateralClass,Enumeration list validation,See Enumerations Tab,ENUMERATION,XSD,ERROR,6G
+BR-OS-038,securedOutflowReport,O.S,38,Collateral Class,collateralClass,,Y,collateralClass,"For Report type and Product combinations listed in FR 2052a Instructions, Appendix II‐c:
+1. For Required indicator - Collateral class must be provided.
+2. If Collateral class is not provided, File will be rejected with corresponding Error handling",Collateral Class Required,COLLATERAL_REQUIRED,FRS,ERROR,6G
+BR-OS-039,securedOutflowReport,O.S,39,Collateral Value,collateralValue,,Y,valueType,Check if attribute is not Empty [populated],,NOT_EMPTY,XSD,ERROR,6G
+BR-OS-040,securedOutflowReport,O.S,40,Collateral Value,collateralValue,,Y,valueType,Check if attribute is not Negative [Values can be = ZERO or > ZERO],,NON_NEGATIVE,XSD,ERROR,6G
+BR-OS-041,securedOutflowReport,O.S,41,Collateral Value,collateralValue,,Y,valueType,"Check if Amount reported exceeds Max value allowed [99,999,999,999,999]'",,MAX_AMOUNT,FRS,WARNING,6G
+BR-OS-042,securedOutflowReport,O.S,42,Collateral Value,collateralValue,converted,Y,valueType,Check if attribute is not Empty [populated],,NOT_EMPTY,XSD,ERROR,6G
+BR-OS-043,securedOutflowReport,O.S,43,Collateral Value,collateralValue,converted,Y,valueType,Checks if attribute is a boolean value,,BOOLEAN,XSD,ERROR,6G
+BR-OS-044,securedOutflowReport,O.S,44,Collateral Value,collateralValue,unit,Y,valueType,Check if attribute is not Empty [populated],,NOT_EMPTY,XSD,ERROR,6G
+BR-OS-045,securedOutflowReport,O.S,45,Collateral Value,collateralValue,unit,Y,valueType,Enumeration list validation,See Enumerations Tab,ENUMERATION,XSD,ERROR,6G
+BR-OS-046,securedOutflowReport,O.S,46,Collateral Value,collateralValue,unit,Y,valueType,"Checks if Converted is true, unit is USD",,CONVERTED_USD,FRS,WARNING,6G
+BR-OS-047,securedOutflowReport,O.S,47,Collateral Value,collateralValue,unitMultiplier,Y,valueType,Check if attribute is not Empty [populated],,NOT_EMPTY,XSD,ERROR,6G
+BR-OS-048,securedOutflowReport,O.S,48,Collateral Value,collateralValue,unitMultiplier,Y,valueType,Check if value = 6,,UNIT_MULTIPLIER,XSD,ERROR,6G
+BR-OS-049,securedOutflowReport,O.S,49,Treasury Control,treasuryControl,,Y,boolean,Check if attribute is not Empty [populated],,NOT_EMPTY,XSD,ERROR,6G
+BR-OS-050,securedOutflowReport,O.S,50,Treasury Control,treasuryControl,,Y,boolean,Checks if attribute is a boolean value,See Enumerations Tab,BOOLEAN,XSD,ERROR,6G
+BR-OS-051,securedOutflowReport,O.S,51,Internal,internal,,Y,boolean,Check if attribute is not Empty [populated],,NOT_EMPTY,XSD,ERROR,6G
+BR-OS-052,securedOutflowReport,O.S,52,Internal,internal,,Y,boolean,Checks if attribute is a boolean value,See Enumerations Tab,BOOLEAN,XSD,ERROR,6G
+BR-OS-053,securedOutflowReport,O.S,53,Internal Counterparty,internalCounterparty,,N,internalCounterparty,Enumeration list validation,"""internalCounterparty"" from Firm specific Schema include XSD",ENUMERATION,XSD,ERROR,6G
+BR-OS-054,securedOutflowReport,O.S,54,Business Line,businessLine,,N,businessLine,"This field is mandatory for Category 1 Firms only.
+'Business Line', if provided, must be one of the  Enumeration values from the Firm specific Schema include file.","""businessLine"" from Firm specific Schema include XSD",BUSINESS_LINE,FRS,WARNING,6G
+BR-OS-055,securedOutflowReport,O.S,55,Settlement,settlementMechanism,,Y,securedSettlementMechanism,Enumeration list validation,See Enumerations Tab,ENUMERATION,XSD,ERROR,6G
+BR-OS-056,securedOutflowReport,O.S,56,Rehypothecated,rehypothecated,,Y,boolean,Check if attribute is not Empty [populated],,NOT_EMPTY,XSD,ERROR,6G
+BR-OS-057,securedOutflowReport,O.S,57,Rehypothecated,rehypothecated,,Y,boolean,Checks if attribute is a boolean value,See Enumerations Tab,BOOLEAN,XSD,ERROR,6G
+BR-OS-058,securedOutflowReport,O.S,58,Counterparty,counterpartySector,,Y,counterpartySectorWithRetail,"counterpartySectorWithRetail: Union of 
+ - counterpartySectorBase
+ - counterpartySectorRetail
+Enumeration list validation:
+ - counterpartySectorBase
+ - counterpartySectorRetail
+If unexpected Counterparty value is used, File will be rejected with corresponding Error handling",See Enumerations Tab,ENUMERATION,XSD,ERROR,6G
+BR-OS-059,securedOutflowReport,O.S,59,Counterparty,counterpartySector,,Y,counterpartySectorWithRetail,"For Report type and Product combinations listed in the 'Counterparty Required' Tab:
+Counterparty value must be provided, otherwise File will be rejected",Counterparty Required,COUNTERPARTY_REQUIRED,FRS,ERROR,6G
+BR-OS-060,securedOutflowReport,O.S,60,G-SIB,gsib,,N,string,"If G-SIB value is provided, Counterparty value must be populated. Otherwise, reject the File with correspondiong Error message",,GSIB_WITH_COUNTERPARTY,FRS,ERROR,6G
+BR-OS-061,securedOutflowReport,O.S,61,G-SIB,gsib,,N,string,"1. Enumeration list validation
+2. Enumeration list will be periodically updated
+ - Enumeration list is based on Financial Stability Board (FSB) documentation 
+ - 2020 Enumeration list is used for 6G Implementation and located ==> https://www.fsb.org/wp-content/uploads/P111120.pdf
+ - update is expected once a year",See Enumerations Tab,GSIB_LIST,FRS,WARNING,6G
+BR-OS-062,securedOutflowReport,O.S,62,"Maturity Amount
+Collateral Value",,,N/A,,"If 'Maturity Amount' = 'Collateral Value' = ZERO, File must be rejected with corresponding Error message.",,ZERO_REJECTION,FRS,ERROR,6G
+BR-OO-001,otherOutflowReport,O.O,1,Reporting Entity,reportScope,,Y,reportScope,Check if attribute is not Empty [populated],,NOT_EMPTY,XSD,ERROR,6G
+BR-OO-002,otherOutflowReport,O.O,2,Reporting Entity,reportScope,,Y,reportScope,Enumeration list validation,"""reportScope"" from Firm specific Schema include XSD",ENUMERATION,XSD,ERROR,6G
+BR-OO-003,otherOutflowReport,O.O,3,N/A,comment,,N,string,Checks if Comment Text characters are valid,,COMMENT_CHARS,FRS,WARNING,6G
+BR-OO-004,otherOutflowReport,O.O,4,N/A,reportID,,Y,tenDigitPositiveIntegerType,Check if attribute is not Empty [populated],,NOT_EMPTY,XSD,ERROR,6G
+BR-OO-005,otherOutflowReport,O.O,5,N/A,reportID,,Y,tenDigitPositiveIntegerType,Check if attribute is Positive,,POSITIVE,XSD,ERROR,6G
+BR-OO-006,otherOutflowReport,O.O,6,N/A,reportID,,Y,tenDigitPositiveIntegerType,Checks if the number not exceeding max length allowed (10 digits),,MAX_LENGTH,XSD,ERROR,6G
+BR-OO-007,otherOutflowReport,O.O,7,N/A,reportID,,Y,tenDigitPositiveIntegerType,Checks if reportID is unique for specific Report type,,UNIQUE_ID,FRS,ERROR,6G
+BR-OO-008,otherOutflowReport,O.O,8,Product,otherOutflowProduct,,Y,otherOutflowProduct,Check if attribute is not Empty [populated],,NOT_EMPTY,XSD,ERROR,6G
+BR-OO-009,otherOutflowReport,O.O,9,Product,otherOutflowProduct,,Y,otherOutflowProduct,"Validation needs to be performed to make sure that expected Product is used with every Report type.
+If unexpected value is used, File must be rejected with corresponding Error handling",See Enumerations Tab,ENUMERATION,XSD,ERROR,6G
+BR-OO-010,otherOutflowReport,O.O,10,Counterparty,counterpartySector,,N,counterpartySectorWithRetailAndMunicipalities,"counterpartySectorWithRetailAndMunicipalities: Union of 
+ - counterpartySectorBase
+ - counterpartySectorRetail
+ - counterpartySectorMunicipalities
+Enumeration list validation:
+ - counterpartySectorBase
+ - counterpartySectorRetail
+ - counterpartySectorMunicipalities
+If unexpected Counterparty value is used, File will be rejected with corresponding Error handling",See Enumerations Tab,ENUMERATION,XSD,ERROR,6G
+BR-OO-011,otherOutflowReport,O.O,11,Counterparty,counterpartySector,,N,counterpartySectorWithRetailAndMunicipalities,"For Report type and Product combinations listed in the 'Counterparty Required' Tab:
+Counterparty value must be provided, otherwise File will be rejected",Counterparty Required,COUNTERPARTY_REQUIRED,FRS,ERROR,6G
+BR-OO-012,otherOutflowReport,O.O,12,G-SIB,gsib,,N,string,"If G-SIB value is provided, Counterparty value must be populated. Otherwise, reject the File with correspondiong Error message",,GSIB_WITH_COUNTERPARTY,FRS,ERROR,6G
+BR-OO-013,otherOutflowReport,O.O,13,G-SIB,gsib,,N,string,"1. Enumeration list validation
+2. Enumeration list will be periodically updated
+ - Enumeration list is based on Financial Stability Board (FSB) documentation 
+ - 2020 Enumeration list is used for 6G Implementation and located ==> https://www.fsb.org/wp-content/uploads/P111120.pdf
+ - update is expected once a year",See Enumerations Tab,GSIB_LIST,FRS,WARNING,6G
+BR-OO-014,otherOutflowReport,O.O,14,Maturity Amount,maturityValue,,Y,valueType,Check if attribute is not Empty [populated],,NOT_EMPTY,XSD,ERROR,6G
+BR-OO-015,otherOutflowReport,O.O,15,Maturity Amount,maturityValue,,Y,valueType,Check if attribute is not Negative [Values can be = ZERO or > ZERO],,NON_NEGATIVE,XSD,ERROR,6G
+BR-OO-016,otherOutflowReport,O.O,16,Maturity Amount,maturityValue,,Y,valueType,"Check if Amount reported exceeds Max value allowed [99,999,999,999,999]'",,MAX_AMOUNT,FRS,WARNING,6G
+BR-OO-017,otherOutflowReport,O.O,17,Maturity Amount,maturityValue,converted,Y,valueType,Check if attribute is not Empty [populated],,NOT_EMPTY,XSD,ERROR,6G
+BR-OO-018,otherOutflowReport,O.O,18,Maturity Amount,maturityValue,converted,Y,valueType,Checks if attribute is a boolean value,,BOOLEAN,XSD,ERROR,6G
+BR-OO-019,otherOutflowReport,O.O,19,Maturity Amount,maturityValue,unit,Y,valueType,Check if attribute is not Empty [populated],,NOT_EMPTY,XSD,ERROR,6G
+BR-OO-020,otherOutflowReport,O.O,20,Maturity Amount,maturityValue,unit,Y,valueType,Enumeration list validation,See Enumerations Tab,ENUMERATION,XSD,ERROR,6G
+BR-OO-021,otherOutflowReport,O.O,21,Maturity Amount,maturityValue,unit,Y,valueType,"Checks if Converted is true, unit is USD",,CONVERTED_USD,FRS,WARNING,6G
+BR-OO-022,otherOutflowReport,O.O,22,Maturity Amount,maturityValue,unitMultiplier,Y,valueType,Check if attribute is not Empty [populated],,NOT_EMPTY,XSD,ERROR,6G
+BR-OO-023,otherOutflowReport,O.O,23,Maturity Amount,maturityValue,unitMultiplier,Y,valueType,Check if value = 6,,UNIT_MULTIPLIER,XSD,ERROR,6G
+BR-OO-024,otherOutflowReport,O.O,24,Maturity Bucket,maturityBucket,maturityStart,Y,maturityBucket,Enumeration list validation,Maturity bucket values,ENUMERATION,XSD,ERROR,6G
+BR-OO-025,otherOutflowReport,O.O,25,Maturity Bucket,maturityBucket,maturityEnd,Y,maturityBucket,Enumeration list validation - see comment,Maturity bucket values,ENUMERATION,XSD,ERROR,6G
+BR-OO-026,otherOutflowReport,O.O,26,Maturity Bucket,maturityBucket,,Y,maturityBucket,Check if Maturity Bucket Range combination is valid,Maturity bucket values,MATURITY_RANGE,FRS,ERROR,6G
+BR-OO-027,otherOutflowReport,O.O,27,Forward Start Amount,forwardStartValue,,N,valueType,Check if attribute is not Negative [Values can be = ZERO or > ZERO],,NON_NEGATIVE,XSD,ERROR,6G
+BR-OO-028,otherOutflowReport,O.O,28,Forward Start Amount,forwardStartValue,,N,valueType,"Check if Amount reported exceeds Max value allowed [99,999,999,999,999]'",,MAX_AMOUNT,FRS,WARNING,6G
+BR-OO-029,otherOutflowReport,O.O,29,Forward Start Amount,forwardStartValue,converted,N,valueType,Checks if attribute is a boolean value,,BOOLEAN,XSD,ERROR,6G
+BR-OO-030,otherOutflowReport,O.O,30,Forward Start Amount,forwardStartValue,unit,N,valueType,Enumeration list validation,See Enumerations Tab,ENUMERATION,XSD,ERROR,6G
+BR-OO-031,otherOutflowReport,O.O,31,Forward Start Amount,forwardStartValue,unit,N,valueType,"Checks if Converted is true, unit is USD",,CONVERTED_USD,FRS,WARNING,6G
+BR-OO-032,otherOutflowReport,O.O,32,Forward Start Amount,forwardStartValue,unitMultiplier,N,valueType,Check if value = 6,,UNIT_MULTIPLIER,XSD,ERROR,6G
+BR-OO-033,otherOutflowReport,O.O,33,Forward Start Bucket,forwardStartBucket,maturityStart,N,maturityBucket,Enumeration list validation,Maturity bucket values,ENUMERATION,XSD,ERROR,6G
+BR-OO-034,otherOutflowReport,O.O,34,Forward Start Bucket,forwardStartBucket,maturityEnd,N,maturityBucket,Enumeration list validation - see comment,Maturity bucket values,ENUMERATION,XSD,ERROR,6G
+BR-OO-035,otherOutflowReport,O.O,35,Forward Start Bucket,forwardStartBucket,,N,maturityBucket,Check if Maturity Bucket Range combination is valid,Maturity bucket values,MATURITY_RANGE,FRS,ERROR,6G
+BR-OO-036,otherOutflowReport,O.O,36,Forward Start Bucket,,,N/A,,"Check if:
+forwardStartBucket / maturityStart Less or Equal 
+maturityBucket / maturityStart",,FORWARD_MATURITY,FRS,ERROR,6G
+BR-OO-037,otherOutflowReport,O.O,37,Collateral Class,collateralClass,,N,collateralClass,Enumeration list validation,See Enumerations Tab,ENUMERATION,XSD,ERROR,6G
+BR-OO-038,otherOutflowReport,O.O,38,Collateral Class,collateralClass,,N,collateralClass,"For Report type and Product combinations listed in FR 2052a Instructions, Appendix II‐c:
+1. For Required indicator - Collateral class must be provided.
+2. If Collateral class is not provided, File will be rejected with corresponding Error handling",Collateral Class Required,COLLATERAL_REQUIRED,FRS,ERROR,6G
+BR-OO-039,otherOutflowReport,O.O,39,Collateral Value,collateralValue,,N,valueType,Check if attribute is not Negative [Values can be = ZERO or > ZERO],,NON_NEGATIVE,XSD,ERROR,6G
+BR-OO-040,otherOutflowReport,O.O,40,Collateral Value,collateralValue,,N,valueType,"Check if Amount reported exceeds Max value allowed [99,999,999,999,999]'",,MAX_AMOUNT,FRS,WARNING,6G
+BR-OO-041,otherOutflowReport,O.O,41,Collateral Value,collateralValue,converted,N,valueType,Checks if attribute is a boolean value,,BOOLEAN,XSD,ERROR,6G
+BR-OO-042,otherOutflowReport,O.O,42,Collateral Value,collateralValue,unit,N,valueType,Enumeration list validation,See Enumerations Tab,ENUMERATION,XSD,ERROR,6G
+BR-OO-043,otherOutflowReport,O.O,43,Collateral Value,collateralValue,unit,N,valueType,"Checks if Converted is true, unit is USD",,CONVERTED_USD,FRS,WARNING,6G
+BR-OO-044,otherOutflowReport,O.O,44,Collateral Value,collateralValue,unitMultiplier,N,valueType,Check if value = 6,,UNIT_MULTIPLIER,XSD,ERROR,6G
+BR-OO-045,otherOutflowReport,O.O,45,Internal,internal,,Y,boolean,Check if attribute is not Empty [populated],,NOT_EMPTY,XSD,ERROR,6G
+BR-OO-046,otherOutflowReport,O.O,46,Internal,internal,,Y,boolean,Checks if attribute is a boolean value,See Enumerations Tab,BOOLEAN,XSD,ERROR,6G
+BR-OO-047,otherOutflowReport,O.O,47,Internal Counterparty,internalCounterparty,,N,internalCounterparty,Enumeration list validation,"""internalCounterparty"" from Firm specific Schema include XSD",ENUMERATION,XSD,ERROR,6G
+BR-OO-048,otherOutflowReport,O.O,48,Business Line,businessLine,,N,businessLine,"This field is mandatory for Category 1 Firms only.
+'Business Line', if provided, must be one of the  Enumeration values from the Firm specific Schema include file.","""businessLine"" from Firm specific Schema include XSD",BUSINESS_LINE,FRS,WARNING,6G
+BR-OO-049,otherOutflowReport,O.O,49,Maturity Amount,,,N/A,,"If 'Maturity Amount' = ZERO, File must be rejected with corresponding Error message.
+Note: 'Maturity Amount' is the only Required amount field for this Report type.",,ZERO_REJECTION,FRS,ERROR,6G
+BR-SI-001,informationalSupplementalReport,S.I,1,Reporting Entity,reportScope,,Y,reportScope,Check if attribute is not Empty [populated],,NOT_EMPTY,XSD,ERROR,6G
+BR-SI-002,informationalSupplementalReport,S.I,2,Reporting Entity,reportScope,,Y,reportScope,Enumeration list validation,"""reportScope"" from Firm specific Schema include XSD",ENUMERATION,XSD,ERROR,6G
+BR-SI-003,informationalSupplementalReport,S.I,3,N/A,comment,,N,string,Checks if Comment Text characters are valid,,COMMENT_CHARS,FRS,WARNING,6G
+BR-SI-004,informationalSupplementalReport,S.I,4,N/A,reportID,,Y,tenDigitPositiveIntegerType,Check if attribute is not Empty [populated],,NOT_EMPTY,XSD,ERROR,6G
+BR-SI-005,informationalSupplementalReport,S.I,5,N/A,reportID,,Y,tenDigitPositiveIntegerType,Check if attribute is Positive,,POSITIVE,XSD,ERROR,6G
+BR-SI-006,informationalSupplementalReport,S.I,6,N/A,reportID,,Y,tenDigitPositiveIntegerType,Checks if the number not exceeding max length allowed (10 digits),,MAX_LENGTH,XSD,ERROR,6G
+BR-SI-007,informationalSupplementalReport,S.I,7,N/A,reportID,,Y,tenDigitPositiveIntegerType,Checks if reportID is unique for specific Report type,,UNIQUE_ID,FRS,ERROR,6G
+BR-SI-008,informationalSupplementalReport,S.I,8,Product,supplementalInformationProduct,,Y,supplementalInformationProduct,Check if attribute is not Empty [populated],,NOT_EMPTY,XSD,ERROR,6G
+BR-SI-009,informationalSupplementalReport,S.I,9,Product,supplementalInformationProduct,,Y,supplementalInformationProduct,"Validation needs to be performed to make sure that expected Product is used with every Report type.
+If unexpected value is used, File must be rejected with corresponding Error handling",See Enumerations Tab,ENUMERATION,XSD,ERROR,6G
+BR-SI-010,informationalSupplementalReport,S.I,10,Market Value,marketValue,,Y,valueType,Check if attribute is not Empty [populated],,NOT_EMPTY,XSD,ERROR,6G
+BR-SI-011,informationalSupplementalReport,S.I,11,Market Value,marketValue,,Y,valueType,Check if attribute is not Negative [Values can be = ZERO or > ZERO],,NON_NEGATIVE,XSD,ERROR,6G
+BR-SI-012,informationalSupplementalReport,S.I,12,Market Value,marketValue,,Y,valueType,"Check if Amount reported exceeds Max value allowed [99,999,999,999,999]'",,MAX_AMOUNT,FRS,WARNING,6G
+BR-SI-013,informationalSupplementalReport,S.I,13,Market Value,marketValue,converted,Y,valueType,Check if attribute is not Empty [populated],,NOT_EMPTY,XSD,ERROR,6G
+BR-SI-014,informationalSupplementalReport,S.I,14,Market Value,marketValue,converted,Y,valueType,Checks if attribute is a boolean value,,BOOLEAN,XSD,ERROR,6G
+BR-SI-015,informationalSupplementalReport,S.I,15,Market Value,marketValue,unit,Y,valueType,Check if attribute is not Empty [populated],,NOT_EMPTY,XSD,ERROR,6G
+BR-SI-016,informationalSupplementalReport,S.I,16,Market Value,marketValue,unit,Y,valueType,Enumeration list validation,See Enumerations Tab,ENUMERATION,XSD,ERROR,6G
+BR-SI-017,informationalSupplementalReport,S.I,17,Market Value,marketValue,unit,Y,valueType,"Checks if Converted is true, unit is USD",,CONVERTED_USD,FRS,WARNING,6G
+BR-SI-018,informationalSupplementalReport,S.I,18,Market Value,marketValue,unitMultiplier,Y,valueType,Check if attribute is not Empty [populated],,NOT_EMPTY,XSD,ERROR,6G
+BR-SI-019,informationalSupplementalReport,S.I,19,Market Value,marketValue,unitMultiplier,Y,valueType,Check if value = 6,,UNIT_MULTIPLIER,XSD,ERROR,6G
+BR-SI-020,informationalSupplementalReport,S.I,20,Collateral Class,collateralClass,,N,collateralClass,Enumeration list validation,See Enumerations Tab,ENUMERATION,XSD,ERROR,6G
+BR-SI-021,informationalSupplementalReport,S.I,21,Collateral Class,collateralClass,,N,collateralClass,"For Report type and Product combinations listed in FR 2052a Instructions, Appendix II‐c:
+1. For Required indicator - Collateral class must be provided.
+2. If Collateral class is not provided, File will be rejected with corresponding Error handling",Collateral Class Required,COLLATERAL_REQUIRED,FRS,ERROR,6G
+BR-SI-022,informationalSupplementalReport,S.I,22,Internal,internal,,Y,boolean,Check if attribute is not Empty [populated],,NOT_EMPTY,XSD,ERROR,6G
+BR-SI-023,informationalSupplementalReport,S.I,23,Internal,internal,,Y,boolean,Checks if attribute is a boolean value,See Enumerations Tab,BOOLEAN,XSD,ERROR,6G
+BR-SI-024,informationalSupplementalReport,S.I,24,Internal Counterparty,internalCounterparty,,N,internalCounterparty,Enumeration list validation,"""internalCounterparty"" from Firm specific Schema include XSD",ENUMERATION,XSD,ERROR,6G
+BR-SI-025,informationalSupplementalReport,S.I,25,Business Line,businessLine,,N,businessLine,"This field is mandatory for Category 1 Firms only.
+'Business Line', if provided, must be one of the  Enumeration values from the Firm specific Schema include file.","""businessLine"" from Firm specific Schema include XSD",BUSINESS_LINE,FRS,WARNING,6G
+BR-SI-026,informationalSupplementalReport,S.I,26,Market Value,,,N/A,,"If 'Market Value' = ZERO, File must be rejected with corresponding Error message.
+Note: 'Market Value' is the only Required amount field for this Report type.",,ZERO_REJECTION,FRS,ERROR,6G
+BR-SDC-001,derivativesAndCollateralSupReport,S.DC,1,Reporting Entity,reportScope,,Y,reportScope,Check if attribute is not Empty [populated],,NOT_EMPTY,XSD,ERROR,6G
+BR-SDC-002,derivativesAndCollateralSupReport,S.DC,2,Reporting Entity,reportScope,,Y,reportScope,Enumeration list validation,"""reportScope"" from Firm specific Schema include XSD",ENUMERATION,XSD,ERROR,6G
+BR-SDC-003,derivativesAndCollateralSupReport,S.DC,3,N/A,comment,,N,string,Checks if Comment Text characters are valid,,COMMENT_CHARS,FRS,WARNING,6G
+BR-SDC-004,derivativesAndCollateralSupReport,S.DC,4,N/A,reportID,,Y,tenDigitPositiveIntegerType,Check if attribute is not Empty [populated],,NOT_EMPTY,XSD,ERROR,6G
+BR-SDC-005,derivativesAndCollateralSupReport,S.DC,5,N/A,reportID,,Y,tenDigitPositiveIntegerType,Check if attribute is Positive,,POSITIVE,XSD,ERROR,6G
+BR-SDC-006,derivativesAndCollateralSupReport,S.DC,6,N/A,reportID,,Y,tenDigitPositiveIntegerType,Checks if the number not exceeding max length allowed (10 digits),,MAX_LENGTH,XSD,ERROR,6G
+BR-SDC-007,derivativesAndCollateralSupReport,S.DC,7,N/A,reportID,,Y,tenDigitPositiveIntegerType,Checks if reportID is unique for specific Report type,,UNIQUE_ID,FRS,ERROR,6G
+BR-SDC-008,derivativesAndCollateralSupReport,S.DC,8,Product,derivativesAndCollateralSupProduct,,Y,derivativesAndCollateralSupProduct,Check if attribute is not Empty [populated],,NOT_EMPTY,XSD,ERROR,6G
+BR-SDC-009,derivativesAndCollateralSupReport,S.DC,9,Product,derivativesAndCollateralSupProduct,,Y,derivativesAndCollateralSupProduct,"Validation needs to be performed to make sure that expected Product is used with every Report type.
+If unexpected value is used, File must be rejected with corresponding Error handling",See Enumerations Tab,ENUMERATION,XSD,ERROR,6G
+BR-SDC-010,derivativesAndCollateralSupReport,S.DC,10,Sub-Product,segregationCategory,,N,segregationCategory,"Validation needs to be performed to make sure that expected Sub-Product is used with corresponding Report type.
+If unexpected value is used, File must be rejected with corresponding Error handling",See Enumerations Tab,ENUMERATION,XSD,ERROR,6G
+BR-SDC-011,derivativesAndCollateralSupReport,S.DC,11,Sub-Product,segregationCategory,,N,segregationCategory,"For listed Table [Report type] and Product combination:
+If Sub-Product is provided, then Sub-Product should be from the list of expected values, otherwise File must be rejected with corresponding Error handling",Prod-SubProd-SubProd2,SUBPRODUCT_COMBINATION,FRS,ERROR,6G
+BR-SDC-012,derivativesAndCollateralSupReport,S.DC,12,Sub-Product2,executionAndClearingMechanism,,N,executionAndClearingMechanism,"Validation needs to be performed to make sure that expected Sub-Product 2 is used with corresponding Report type.
+If unexpected value is used, File must be rejected with corresponding Error handling",See Enumerations Tab,ENUMERATION,XSD,ERROR,6G
+BR-SDC-013,derivativesAndCollateralSupReport,S.DC,13,Sub-Product2,executionAndClearingMechanism,,N,executionAndClearingMechanism,"For listed Table [Report type] and Product combination:
+If Sub-Product 2 is provided, then Sub-Product 2 should be from the list of expected values, otherwise File must be rejected with corresponding Error handling",Prod-SubProd-SubProd2,SUBPRODUCT_COMBINATION,FRS,ERROR,6G
+BR-SDC-014,derivativesAndCollateralSupReport,S.DC,14,Market Value,marketValue,,Y,valueType,Check if attribute is not Empty [populated],,NOT_EMPTY,XSD,ERROR,6G
+BR-SDC-015,derivativesAndCollateralSupReport,S.DC,15,Market Value,marketValue,,Y,valueType,Check if attribute is not Negative [Values can be = ZERO or > ZERO],,NON_NEGATIVE,XSD,ERROR,6G
+BR-SDC-016,derivativesAndCollateralSupReport,S.DC,16,Market Value,marketValue,,Y,valueType,"Check if Amount reported exceeds Max value allowed [99,999,999,999,999]'",,MAX_AMOUNT,FRS,WARNING,6G
+BR-SDC-017,derivativesAndCollateralSupReport,S.DC,17,Market Value,marketValue,converted,Y,valueType,Check if attribute is not Empty [populated],,NOT_EMPTY,XSD,ERROR,6G
+BR-SDC-018,derivativesAndCollateralSupReport,S.DC,18,Market Value,marketValue,converted,Y,valueType,Checks if attribute is a boolean value,,BOOLEAN,XSD,ERROR,6G
+BR-SDC-019,derivativesAndCollateralSupReport,S.DC,19,Market Value,marketValue,unit,Y,valueType,Check if attribute is not Empty [populated],,NOT_EMPTY,XSD,ERROR,6G
+BR-SDC-020,derivativesAndCollateralSupReport,S.DC,20,Market Value,marketValue,unit,Y,valueType,Enumeration list validation,See Enumerations Tab,ENUMERATION,XSD,ERROR,6G
+BR-SDC-021,derivativesAndCollateralSupReport,S.DC,21,Market Value,marketValue,unit,Y,valueType,"Checks if Converted is true, unit is USD",,CONVERTED_USD,FRS,WARNING,6G
+BR-SDC-022,derivativesAndCollateralSupReport,S.DC,22,Market Value,marketValue,unitMultiplier,Y,valueType,Check if attribute is not Empty [populated],,NOT_EMPTY,XSD,ERROR,6G
+BR-SDC-023,derivativesAndCollateralSupReport,S.DC,23,Market Value,marketValue,unitMultiplier,Y,valueType,Check if value = 6,,UNIT_MULTIPLIER,XSD,ERROR,6G
+BR-SDC-024,derivativesAndCollateralSupReport,S.DC,24,Collateral Class,collateralClass,,N,collateralClass,Enumeration list validation,See Enumerations Tab,ENUMERATION,XSD,ERROR,6G
+BR-SDC-025,derivativesAndCollateralSupReport,S.DC,25,Collateral Class,collateralClass,,N,collateralClass,"For Report type and Product combinations listed in FR 2052a Instructions, Appendix II‐c:
+1. For Required indicator - Collateral class must be provided.
+2. If Collateral class is not provided, File will be rejected with corresponding Error handling",Collateral Class Required,COLLATERAL_REQUIRED,FRS,ERROR,6G
+BR-SDC-026,derivativesAndCollateralSupReport,S.DC,26,Collateral Level,collateralLevel,,N,collateralLevel,Enumeration list validation,See Enumerations Tab,ENUMERATION,XSD,ERROR,6G
+BR-SDC-027,derivativesAndCollateralSupReport,S.DC,27,Counterparty,counterpartySector,,N,counterpartySectorWithRetail,"counterpartySectorWithRetail: Union of 
+ - counterpartySectorBase
+ - counterpartySectorRetail
+Enumeration list validation:
+ - counterpartySectorBase
+ - counterpartySectorRetail
+If unexpected Counterparty value is used, File will be rejected with corresponding Error handling",See Enumerations Tab,ENUMERATION,XSD,ERROR,6G
+BR-SDC-028,derivativesAndCollateralSupReport,S.DC,28,Counterparty,counterpartySector,,N,counterpartySectorWithRetail,"For Report type and Product combinations listed in the 'Counterparty Required' Tab:
+Counterparty value must be provided, otherwise File will be rejected",Counterparty Required,COUNTERPARTY_REQUIRED,FRS,ERROR,6G
+BR-SDC-029,derivativesAndCollateralSupReport,S.DC,29,G-SIB,gsib,,N,string,"If G-SIB value is provided, Counterparty value must be populated. Otherwise, reject the File with correspondiong Error message",,GSIB_WITH_COUNTERPARTY,FRS,ERROR,6G
+BR-SDC-030,derivativesAndCollateralSupReport,S.DC,30,G-SIB,gsib,,N,string,"1. Enumeration list validation
+2. Enumeration list will be periodically updated
+ - Enumeration list is based on Financial Stability Board (FSB) documentation 
+ - 2020 Enumeration list is used for 6G Implementation and located ==> https://www.fsb.org/wp-content/uploads/P111120.pdf
+ - update is expected once a year",See Enumerations Tab,GSIB_LIST,FRS,WARNING,6G
+BR-SDC-031,derivativesAndCollateralSupReport,S.DC,31,Effective Maturity Bucket,effectiveMaturityBucket,maturityStart,N,maturityBucket,Enumeration list validation,Maturity bucket values,ENUMERATION,XSD,ERROR,6G
+BR-SDC-032,derivativesAndCollateralSupReport,S.DC,32,Effective Maturity Bucket,effectiveMaturityBucket,maturityEnd,N,maturityBucket,Enumeration list validation - see comment,Maturity bucket values,ENUMERATION,XSD,ERROR,6G
+BR-SDC-033,derivativesAndCollateralSupReport,S.DC,33,Effective Maturity Bucket,effectiveMaturityBucket,,N,maturityBucket,Check if Maturity Bucket Range combination is valid,Maturity bucket values,MATURITY_RANGE,FRS,ERROR,6G
+BR-SDC-034,derivativesAndCollateralSupReport,S.DC,34,Encumbrance Type,encumbranceType,,N,encumbranceType,Enumeration list validation,See Enumerations Tab,ENUMERATION,XSD,ERROR,6G
+BR-SDC-035,derivativesAndCollateralSupReport,S.DC,35,Netting Eligible,nettingEligible,,N,boolean,Checks if attribute is a boolean value,See Enumerations Tab,BOOLEAN,XSD,ERROR,6G
+BR-SDC-036,derivativesAndCollateralSupReport,S.DC,36,Treasury Control,treasuryControl,,N,boolean,Checks if attribute is a boolean value,,BOOLEAN,XSD,ERROR,6G
+BR-SDC-037,derivativesAndCollateralSupReport,S.DC,37,Internal,internal,,Y,boolean,Check if attribute is not Empty [populated],,NOT_EMPTY,XSD,ERROR,6G
+BR-SDC-038,derivativesAndCollateralSupReport,S.DC,38,Internal,internal,,Y,boolean,Checks if attribute is a boolean value,See Enumerations Tab,BOOLEAN,XSD,ERROR,6G
+BR-SDC-039,derivativesAndCollateralSupReport,S.DC,39,Internal Counterparty,internalCounterparty,,N,internalCounterparty,Enumeration list validation,"""internalCounterparty"" from Firm specific Schema include XSD",ENUMERATION,XSD,ERROR,6G
+BR-SDC-040,derivativesAndCollateralSupReport,S.DC,40,Business Line,businessLine,,N,businessLine,"This field is mandatory for Category 1 Firms only.
+'Business Line', if provided, must be one of the  Enumeration values from the Firm specific Schema include file.","""businessLine"" from Firm specific Schema include XSD",BUSINESS_LINE,FRS,WARNING,6G
+BR-SDC-041,derivativesAndCollateralSupReport,S.DC,41,Market Value,,,N/A,,"If 'Market Value' = ZERO, File must be rejected with corresponding Error message.
+Note: 'Market Value' is the only Required amount field for this Report type.",,ZERO_REJECTION,FRS,ERROR,6G
+BR-SL-001,liquidityRiskMeasurementSupReport,S.L,1,Reporting Entity,reportScope,,Y,reportScope,Check if attribute is not Empty [populated],,NOT_EMPTY,XSD,ERROR,6G
+BR-SL-002,liquidityRiskMeasurementSupReport,S.L,2,Reporting Entity,reportScope,,Y,reportScope,Enumeration list validation,"""reportScope"" from Firm specific Schema include XSD",ENUMERATION,XSD,ERROR,6G
+BR-SL-003,liquidityRiskMeasurementSupReport,S.L,3,N/A,comment,,N,string,Checks if Comment Text characters are valid,,COMMENT_CHARS,FRS,WARNING,6G
+BR-SL-004,liquidityRiskMeasurementSupReport,S.L,4,N/A,reportID,,Y,tenDigitPositiveIntegerType,Check if attribute is not Empty [populated],,NOT_EMPTY,XSD,ERROR,6G
+BR-SL-005,liquidityRiskMeasurementSupReport,S.L,5,N/A,reportID,,Y,tenDigitPositiveIntegerType,Check if attribute is Positive,,POSITIVE,XSD,ERROR,6G
+BR-SL-006,liquidityRiskMeasurementSupReport,S.L,6,N/A,reportID,,Y,tenDigitPositiveIntegerType,Checks if the number not exceeding max length allowed (10 digits),,MAX_LENGTH,XSD,ERROR,6G
+BR-SL-007,liquidityRiskMeasurementSupReport,S.L,7,N/A,reportID,,Y,tenDigitPositiveIntegerType,Checks if reportID is unique for specific Report type,,UNIQUE_ID,FRS,ERROR,6G
+BR-SL-008,liquidityRiskMeasurementSupReport,S.L,8,Product,liquidityRiskMeasurementSupProduct,,Y,liquidityRiskMeasurementSupProduct,Check if attribute is not Empty [populated],,NOT_EMPTY,XSD,ERROR,6G
+BR-SL-009,liquidityRiskMeasurementSupReport,S.L,9,Product,liquidityRiskMeasurementSupProduct,,Y,liquidityRiskMeasurementSupProduct,"Validation needs to be performed to make sure that expected Product is used with every Report type.
+If unexpected value is used, File must be rejected with corresponding Error handling",See Enumerations Tab,ENUMERATION,XSD,ERROR,6G
+BR-SL-010,liquidityRiskMeasurementSupReport,S.L,10,Market Value,marketValue,,Y,valueType,Check if attribute is not Empty [populated],,NOT_EMPTY,XSD,ERROR,6G
+BR-SL-011,liquidityRiskMeasurementSupReport,S.L,11,Market Value,marketValue,,Y,valueType,Check if attribute is not Negative [Values can be = ZERO or > ZERO],,NON_NEGATIVE,XSD,ERROR,6G
+BR-SL-012,liquidityRiskMeasurementSupReport,S.L,12,Market Value,marketValue,,Y,valueType,"Check if Amount reported exceeds Max value allowed [99,999,999,999,999]'",,MAX_AMOUNT,FRS,WARNING,6G
+BR-SL-013,liquidityRiskMeasurementSupReport,S.L,13,Market Value,marketValue,converted,Y,valueType,Check if attribute is not Empty [populated],,NOT_EMPTY,XSD,ERROR,6G
+BR-SL-014,liquidityRiskMeasurementSupReport,S.L,14,Market Value,marketValue,converted,Y,valueType,Checks if attribute is a boolean value,,BOOLEAN,XSD,ERROR,6G
+BR-SL-015,liquidityRiskMeasurementSupReport,S.L,15,Market Value,marketValue,unit,Y,valueType,Check if attribute is not Empty [populated],,NOT_EMPTY,XSD,ERROR,6G
+BR-SL-016,liquidityRiskMeasurementSupReport,S.L,16,Market Value,marketValue,unit,Y,valueType,Enumeration list validation,See Enumerations Tab,ENUMERATION,XSD,ERROR,6G
+BR-SL-017,liquidityRiskMeasurementSupReport,S.L,17,Market Value,marketValue,unit,Y,valueType,"Checks if Converted is true, unit is USD",,CONVERTED_USD,FRS,WARNING,6G
+BR-SL-018,liquidityRiskMeasurementSupReport,S.L,18,Market Value,marketValue,unitMultiplier,Y,valueType,Check if attribute is not Empty [populated],,NOT_EMPTY,XSD,ERROR,6G
+BR-SL-019,liquidityRiskMeasurementSupReport,S.L,19,Market Value,marketValue,unitMultiplier,Y,valueType,Check if value = 6,,UNIT_MULTIPLIER,XSD,ERROR,6G
+BR-SL-020,liquidityRiskMeasurementSupReport,S.L,20,Collateral Class,collateralClass,,N,collateralClass,Enumeration list validation,See Enumerations Tab,ENUMERATION,XSD,ERROR,6G
+BR-SL-021,liquidityRiskMeasurementSupReport,S.L,21,Collateral Class,collateralClass,,N,collateralClass,"For Report type and Product combinations listed in FR 2052a Instructions, Appendix II‐c:
+1. For Required indicator - Collateral class must be provided.
+2. If Collateral class is not provided, File will be rejected with corresponding Error handling",Collateral Class Required,COLLATERAL_REQUIRED,FRS,ERROR,6G
+BR-SL-022,liquidityRiskMeasurementSupReport,S.L,22,Internal,internal,,Y,boolean,Check if attribute is not Empty [populated],,NOT_EMPTY,XSD,ERROR,6G
+BR-SL-023,liquidityRiskMeasurementSupReport,S.L,23,Internal,internal,,Y,boolean,Checks if attribute is a boolean value,See Enumerations Tab,BOOLEAN,XSD,ERROR,6G
+BR-SL-024,liquidityRiskMeasurementSupReport,S.L,24,Internal Counterparty,internalCounterparty,,N,internalCounterparty,Enumeration list validation,"""internalCounterparty"" from Firm specific Schema include XSD",ENUMERATION,XSD,ERROR,6G
+BR-SL-025,liquidityRiskMeasurementSupReport,S.L,25,Market Value,,,N/A,,"If 'Market Value' = ZERO, File must be rejected with corresponding Error message.
+Note: 'Market Value' is the only Required amount field for this Report type.",,ZERO_REJECTION,FRS,ERROR,6G
+BR-SB-001,balanceSheetSupReport,S.B,1,Reporting Entity,reportScope,,Y,reportScope,Check if attribute is not Empty [populated],,NOT_EMPTY,XSD,ERROR,6G
+BR-SB-002,balanceSheetSupReport,S.B,2,Reporting Entity,reportScope,,Y,reportScope,Enumeration list validation,"""reportScope"" from Firm specific Schema include XSD",ENUMERATION,XSD,ERROR,6G
+BR-SB-003,balanceSheetSupReport,S.B,3,N/A,comment,,N,string,Checks if Comment Text characters are valid,,COMMENT_CHARS,FRS,WARNING,6G
+BR-SB-004,balanceSheetSupReport,S.B,4,N/A,reportID,,Y,tenDigitPositiveIntegerType,Check if attribute is not Empty [populated],,NOT_EMPTY,XSD,ERROR,6G
+BR-SB-005,balanceSheetSupReport,S.B,5,N/A,reportID,,Y,tenDigitPositiveIntegerType,Check if attribute is Positive,,POSITIVE,XSD,ERROR,6G
+BR-SB-006,balanceSheetSupReport,S.B,6,N/A,reportID,,Y,tenDigitPositiveIntegerType,Checks if the number not exceeding max length allowed (10 digits),,MAX_LENGTH,XSD,ERROR,6G
+BR-SB-007,balanceSheetSupReport,S.B,7,N/A,reportID,,Y,tenDigitPositiveIntegerType,Checks if reportID is unique for specific Report type,,UNIQUE_ID,FRS,ERROR,6G
+BR-SB-008,balanceSheetSupReport,S.B,8,Collection Reference,collectionReference,,N,collectionReference,Enumeration list validation,See Enumerations Tab,ENUMERATION,XSD,ERROR,6G
+BR-SB-009,balanceSheetSupReport,S.B,9,Product,balanceSheetSupProduct,,Y,balanceSheetSupProduct,Check if attribute is not Empty [populated],,NOT_EMPTY,XSD,ERROR,6G
+BR-SB-010,balanceSheetSupReport,S.B,10,Product,balanceSheetSupProduct,,Y,balanceSheetSupProduct,"Validation needs to be performed to make sure that expected Product is used with every Report type.
+If unexpected value is used, File must be rejected with corresponding Error handling",See Enumerations Tab,ENUMERATION,XSD,ERROR,6G
+BR-SB-011,balanceSheetSupReport,S.B,11,Product Reference,productReference,,N,productReference,"If productReference is populated, but no value has been provided in the 'Collection Reference' field, File must be rejected with corresponding Error message.",,REFERENCE_NEEDS_COLLECTION,FRS,ERROR,6G
+BR-SB-012,balanceSheetSupReport,S.B,12,Product Reference,productReference,,N,productReference,"Conditional Enumeration list validation.
+Product Reference field is expected to contain 'Product' name.
+ - Enumeration list depends on the value populated in the 'Collection Reference' field [Report type].
+ - Validation needs to be performed to make sure that 'Product' name [reported in this field] corresponds to the 'Collection Reference' [Report type].
+ - Only Products correlated to specific Report types [see 'collectionReference' value] are expected to be provided
+ - If unexpected Product Reference values are used for specific Report type, File needs to be rejected with corresponding Error message.",See Enumerations Tab,PRODUCT_REFERENCE,FRS,ERROR,6G
+BR-SB-013,balanceSheetSupReport,S.B,13,Sub-Product Reference,subProductReference,,N,subProductReference,"If subProductReference is populated, but no value has been provided in the 'Collection Reference' field, File must be rejected with corresponding Error message.",,REFERENCE_NEEDS_COLLECTION,FRS,ERROR,6G
+BR-SB-014,balanceSheetSupReport,S.B,14,Sub-Product Reference,subProductReference,,N,subProductReference,"Conditional Enumeration list validation.
+Sub-Product Reference field is expected to contain 'Sub-Product' name.
+
+ - Enumeration list depends on the value populated in the 'Collection Reference' field [Report type].
+ - Validation needs to be performed to make sure that 'Sub-Product' name [reported in this field] corresponds to the 'Collection Reference' [Report type].
+ - If unexpected Sub-Product Reference value is used, File must be rejected with corresponding Error handling",See Enumerations Tab,SUBPRODUCT_REFERENCE,FRS,ERROR,6G
+BR-SB-015,balanceSheetSupReport,S.B,15,Sub-Product Reference,subProductReference,,N,securedOutflowCounterpartyOrCoverage,"Conditional Enumeration list validation.
+
+ - Enumeration list depends on the value populated in the 'Collection Reference' field [Report type].
+ - Validation needs to be performed to make sure that 'Sub-Product' name [reported in this field] corresponds to the 'Collection Reference' [Report type]  and 'Product Reference' combination.
+ - If unexpected Sub-Product Reference value is used, File must be rejected with corresponding Error handling",Prod-SubProd-SubProd2,ENUMERATION,XSD,ERROR,6G
+BR-SB-016,balanceSheetSupReport,S.B,16,Collateral Class,collateralClass,,N,collateralClass,Enumeration list validation,See Enumerations Tab,ENUMERATION,XSD,ERROR,6G
+BR-SB-017,balanceSheetSupReport,S.B,17,Collateral Class,collateralClass,,N,collateralClass,"For Report type and Product combinations listed in FR 2052a Instructions, Appendix II‐c:
+1. For Required indicator - Collateral class must be provided.
+2. If Collateral class is not provided, File will be rejected with corresponding Error handling",Collateral Class Required,COLLATERAL_REQUIRED,FRS,ERROR,6G
+BR-SB-018,balanceSheetSupReport,S.B,18,Maturity Bucket,maturityBucket,maturityStart,Y,maturityBucket,Enumeration list validation,Maturity bucket values,ENUMERATION,XSD,ERROR,6G
+BR-SB-019,balanceSheetSupReport,S.B,19,Maturity Bucket,maturityBucket,maturityEnd,Y,maturityBucket,Enumeration list validation - see comment,Maturity bucket values,ENUMERATION,XSD,ERROR,6G
+BR-SB-020,balanceSheetSupReport,S.B,20,Maturity Bucket,maturityBucket,,Y,maturityBucket,Check if Maturity Bucket Range combination is valid,Maturity bucket values,MATURITY_RANGE,FRS,ERROR,6G
+BR-SB-021,balanceSheetSupReport,S.B,21,Effective Maturity Bucket,effectiveMaturityBucket,maturityStart,N,maturityBucket,Enumeration list validation,Maturity bucket values,ENUMERATION,XSD,ERROR,6G
+BR-SB-022,balanceSheetSupReport,S.B,22,Effective Maturity Bucket,effectiveMaturityBucket,maturityEnd,N,maturityBucket,Enumeration list validation - see comment,Maturity bucket values,ENUMERATION,XSD,ERROR,6G
+BR-SB-023,balanceSheetSupReport,S.B,23,Effective Maturity Bucket,effectiveMaturityBucket,,N,maturityBucket,Check if Maturity Bucket Range combination is valid,Maturity bucket values,MATURITY_RANGE,FRS,ERROR,6G
+BR-SB-024,balanceSheetSupReport,S.B,24,Encumbrance Type,encumbranceType,,N,encumbranceType,Enumeration list validation,See Enumerations Tab,ENUMERATION,XSD,ERROR,6G
+BR-SB-025,balanceSheetSupReport,S.B,25,Market Value,marketValue,,N,valueType,"Product specific requirement [exceptions]: 
+1. S.B.5 - Counterparty Netting - requires a negative value or can be ZERO
+If reported values for this Product are Positive, File should be rejected.
+2. S.B.6 - Carrying Value Adjustment - should accept both positive and negative values 
+Attributes only needs to be validated to insure that Numeric value is provided.
+If reported values for this Product are Not Numeric, File should be rejected.
+
+For all other Products for balanceSheetSupReport type:
+Check if attribute is not Negative [Values can be = ZERO or > ZERO]",,NON_NEGATIVE,XSD,ERROR,6G
+BR-SB-026,balanceSheetSupReport,S.B,26,Market Value,marketValue,,N,valueType,"Check if Amount reported exceeds Max value allowed [99,999,999,999,999]'",,MAX_AMOUNT,FRS,WARNING,6G
+BR-SB-027,balanceSheetSupReport,S.B,27,Market Value,marketValue,converted,N,valueType,Checks if attribute is a boolean value,,BOOLEAN,XSD,ERROR,6G
+BR-SB-028,balanceSheetSupReport,S.B,28,Market Value,marketValue,unit,N,valueType,Enumeration list validation,See Enumerations Tab,ENUMERATION,XSD,ERROR,6G
+BR-SB-029,balanceSheetSupReport,S.B,29,Market Value,marketValue,unit,N,valueType,"Checks if Converted is true, unit is USD",,CONVERTED_USD,FRS,WARNING,6G
+BR-SB-030,balanceSheetSupReport,S.B,30,Market Value,marketValue,unitMultiplier,N,valueType,Check if value = 6,,UNIT_MULTIPLIER,XSD,ERROR,6G
+BR-SB-031,balanceSheetSupReport,S.B,31,Maturity Amount,maturityValue,,N,valueType,"Product specific requirement [exceptions]: 
+1. S.B.5 - Counterparty Netting - requires a negative value or can be ZERO
+If reported values for this Product are Positive, File should be rejected.
+2. S.B.6 - Carrying Value Adjustment - should accept both positive and negative values 
+Attributes only needs to be validated to insure that Numeric value is provided.
+If reported values for this Product are Not Numeric, File should be rejected.
+
+For all other Products for balanceSheetSupReport type:
+Check if attribute is not Negative [Values can be = ZERO or > ZERO]",,NON_NEGATIVE,XSD,ERROR,6G
+BR-SB-032,balanceSheetSupReport,S.B,32,Maturity Amount,maturityValue,,N,valueType,"Check if Amount reported exceeds Max value allowed [99,999,999,999,999]'",,MAX_AMOUNT,FRS,WARNING,6G
+BR-SB-033,balanceSheetSupReport,S.B,33,Maturity Amount,maturityValue,converted,N,valueType,Checks if attribute is a boolean value,,BOOLEAN,XSD,ERROR,6G
+BR-SB-034,balanceSheetSupReport,S.B,34,Maturity Amount,maturityValue,unit,N,valueType,Enumeration list validation,See Enumerations Tab,ENUMERATION,XSD,ERROR,6G
+BR-SB-035,balanceSheetSupReport,S.B,35,Maturity Amount,maturityValue,unit,N,valueType,"Checks if Converted is true, unit is USD",,CONVERTED_USD,FRS,WARNING,6G
+BR-SB-036,balanceSheetSupReport,S.B,36,Maturity Amount,maturityValue,unitMultiplier,N,valueType,Check if value = 6,,UNIT_MULTIPLIER,XSD,ERROR,6G
+BR-SB-037,balanceSheetSupReport,S.B,37,Collateral Value,collateralValue,,N,valueType,"Product specific requirement [exceptions]: 
+1. S.B.5 - Counterparty Netting - requires a negative value or can be ZERO
+If reported values for this Product are Positive, File should be rejected.
+2. S.B.6 - Carrying Value Adjustment - should accept both positive and negative values 
+Attributes only needs to be validated to insure that Numeric value is provided.
+If reported values for this Product are Not Numeric, File should be rejected.
+
+For all other Products for balanceSheetSupReport type:
+Check if attribute is not Negative [Values can be = ZERO or > ZERO]",,NON_NEGATIVE,XSD,ERROR,6G
+BR-SB-038,balanceSheetSupReport,S.B,38,Collateral Value,collateralValue,,N,valueType,"Check if Amount reported exceeds Max value allowed [99,999,999,999,999]'",,MAX_AMOUNT,FRS,WARNING,6G
+BR-SB-039,balanceSheetSupReport,S.B,39,Collateral Value,collateralValue,converted,N,valueType,Checks if attribute is a boolean value,,BOOLEAN,XSD,ERROR,6G
+BR-SB-040,balanceSheetSupReport,S.B,40,Collateral Value,collateralValue,unit,N,valueType,Enumeration list validation,See Enumerations Tab,ENUMERATION,XSD,ERROR,6G
+BR-SB-041,balanceSheetSupReport,S.B,41,Collateral Value,collateralValue,unit,N,valueType,"Checks if Converted is true, unit is USD",,CONVERTED_USD,FRS,WARNING,6G
+BR-SB-042,balanceSheetSupReport,S.B,42,Collateral Value,collateralValue,unitMultiplier,N,valueType,Check if value = 6,,UNIT_MULTIPLIER,XSD,ERROR,6G
+BR-SB-043,balanceSheetSupReport,S.B,43,Counterparty,counterpartySector,,N,counterpartySectorWithRetail,"counterpartySectorWithRetail: Union of 
+ - counterpartySectorBase
+ - counterpartySectorRetail
+Enumeration list validation:
+ - counterpartySectorBase
+ - counterpartySectorRetail
+If unexpected Counterparty value is used, File will be rejected with corresponding Error handling",See Enumerations Tab,ENUMERATION,XSD,ERROR,6G
+BR-SB-044,balanceSheetSupReport,S.B,44,Counterparty,counterpartySector,,N,counterpartySectorWithRetail,"For Report type and Product combinations listed in the 'Counterparty Required' Tab:
+Counterparty value must be provided, otherwise File will be rejected",Counterparty Required,COUNTERPARTY_REQUIRED,FRS,ERROR,6G
+BR-SB-045,balanceSheetSupReport,S.B,45,G-SIB,gsib,,N,string,"If G-SIB value is provided, Counterparty value must be populated. Otherwise, reject the File with correspondiong Error message",,GSIB_WITH_COUNTERPARTY,FRS,ERROR,6G
+BR-SB-046,balanceSheetSupReport,S.B,46,G-SIB,gsib,,N,string,"1. Enumeration list validation
+2. Enumeration list will be periodically updated
+ - Enumeration list is based on Financial Stability Board (FSB) documentation 
+ - 2020 Enumeration list is used for 6G Implementation and located ==> https://www.fsb.org/wp-content/uploads/P111120.pdf
+ - update is expected once a year",See Enumerations Tab,GSIB_LIST,FRS,WARNING,6G
+BR-SB-047,balanceSheetSupReport,S.B,47,Risk Weight,riskWeight,,N,decimalValue,"If value is provided, value must be decimal.
+Validate if 'Risk Weight' value > = 0 and  < = 12.50
+If value provided is outside of the range validated, File must be rejected with corresponding Error message",,RISK_WEIGHT,FRS,ERROR,6G
+BR-SB-048,balanceSheetSupReport,S.B,48,Internal,internal,,Y,boolean,Check if attribute is not Empty [populated],,NOT_EMPTY,XSD,ERROR,6G
+BR-SB-049,balanceSheetSupReport,S.B,49,Internal,internal,,Y,boolean,Checks if attribute is a boolean value,See Enumerations Tab,BOOLEAN,XSD,ERROR,6G
+BR-SB-050,balanceSheetSupReport,S.B,50,Internal Counterparty,internalCounterparty,,N,internalCounterparty,Enumeration list validation,"""internalCounterparty"" from Firm specific Schema include XSD",ENUMERATION,XSD,ERROR,6G
+BR-SB-051,derivativesAndCollateralSupReport,S.B,51,"Market Value
+Maturity Amount
+Collateral Value",,,N/A,,"If 'Market Value' = 'Maturity Amount' = 'Collateral Value' = ZERO, File must be rejected with corresponding Error message.",,ZERO_REJECTION,FRS,ERROR,6G
+BR-SFX-001,foreignExchangeSupplementalReport,S.FX,1,Reporting Entity,reportScope,,Y,reportScope,Check if attribute is not Empty [populated],,NOT_EMPTY,XSD,ERROR,6G
+BR-SFX-002,foreignExchangeSupplementalReport,S.FX,2,Reporting Entity,reportScope,,Y,reportScope,Enumeration list validation,"""reportScope"" from Firm specific Schema include XSD",ENUMERATION,XSD,ERROR,6G
+BR-SFX-003,foreignExchangeSupplementalReport,S.FX,3,N/A,comment,,N,string,Checks if Comment Text characters are valid,,COMMENT_CHARS,FRS,WARNING,6G
+BR-SFX-004,foreignExchangeSupplementalReport,S.FX,4,N/A,reportID,,Y,tenDigitPositiveIntegerType,Check if attribute is not Empty [populated],,NOT_EMPTY,XSD,ERROR,6G
+BR-SFX-005,foreignExchangeSupplementalReport,S.FX,5,N/A,reportID,,Y,tenDigitPositiveIntegerType,Check if attribute is Positive,,POSITIVE,XSD,ERROR,6G
+BR-SFX-006,foreignExchangeSupplementalReport,S.FX,6,N/A,reportID,,Y,tenDigitPositiveIntegerType,Checks if the number not exceeding max length allowed (10 digits),,MAX_LENGTH,XSD,ERROR,6G
+BR-SFX-007,foreignExchangeSupplementalReport,S.FX,7,N/A,reportID,,Y,tenDigitPositiveIntegerType,Checks if reportID is unique for specific Report type,,UNIQUE_ID,FRS,ERROR,6G
+BR-SFX-008,foreignExchangeSupplementalReport,S.FX,8,Product,foreignExchangeProduct,,Y,foreignExchangeProduct,Check if attribute is not Empty [populated],,NOT_EMPTY,XSD,ERROR,6G
+BR-SFX-009,foreignExchangeSupplementalReport,S.FX,9,Product,foreignExchangeProduct,,Y,foreignExchangeProduct,"Validation needs to be performed to make sure that expected Product is used with every Report type.
+If unexpected value is used, File must be rejected with corresponding Error handling",See Enumerations Tab,ENUMERATION,XSD,ERROR,6G
+BR-SFX-010,foreignExchangeSupplementalReport,S.FX,10,Maturity Amount Currency 1,baseMaturityValue,,Y,valueType,Check if attribute is not Empty [populated],,NOT_EMPTY,XSD,ERROR,6G
+BR-SFX-011,foreignExchangeSupplementalReport,S.FX,11,Maturity Amount Currency 1,baseMaturityValue,,Y,valueType,Check if attribute is not Negative [Values can be = ZERO or > ZERO],,NON_NEGATIVE,XSD,ERROR,6G
+BR-SFX-012,foreignExchangeSupplementalReport,S.FX,12,Maturity Amount Currency 1,baseMaturityValue,,Y,valueType,"Check if Amount reported exceeds Max value allowed [99,999,999,999,999]'",,MAX_AMOUNT,FRS,WARNING,6G
+BR-SFX-013,foreignExchangeSupplementalReport,S.FX,13,Maturity Amount Currency 1,baseMaturityValue,converted,Y,valueType,Check if attribute is not Empty [populated],,NOT_EMPTY,XSD,ERROR,6G
+BR-SFX-014,foreignExchangeSupplementalReport,S.FX,14,Maturity Amount Currency 1,baseMaturityValue,converted,Y,valueType,Checks if attribute is a boolean value,,BOOLEAN,XSD,ERROR,6G
+BR-SFX-015,foreignExchangeSupplementalReport,S.FX,15,Maturity Amount Currency 1,baseMaturityValue,unit,Y,valueType,Check if attribute is not Empty [populated],,NOT_EMPTY,XSD,ERROR,6G
+BR-SFX-016,foreignExchangeSupplementalReport,S.FX,16,Maturity Amount Currency 1,baseMaturityValue,unit,Y,valueType,Enumeration list validation,See Enumerations Tab,ENUMERATION,XSD,ERROR,6G
+BR-SFX-017,foreignExchangeSupplementalReport,S.FX,17,Maturity Amount Currency 1,baseMaturityValue,unit,Y,valueType,"Checks if Converted is true, unit is USD",,CONVERTED_USD,FRS,WARNING,6G
+BR-SFX-018,foreignExchangeSupplementalReport,S.FX,18,Maturity Amount Currency 1,baseMaturityValue,unitMultiplier,Y,valueType,Check if attribute is not Empty [populated],,NOT_EMPTY,XSD,ERROR,6G
+BR-SFX-019,foreignExchangeSupplementalReport,S.FX,19,Maturity Amount Currency 1,baseMaturityValue,unitMultiplier,Y,valueType,Check if value = 6,,UNIT_MULTIPLIER,XSD,ERROR,6G
+BR-SFX-020,foreignExchangeSupplementalReport,S.FX,20,Maturity Amount Currency 2,targetMaturityValue,,Y,valueType,Check if attribute is not Empty [populated],,NOT_EMPTY,XSD,ERROR,6G
+BR-SFX-021,foreignExchangeSupplementalReport,S.FX,21,Maturity Amount Currency 2,targetMaturityValue,,Y,valueType,Check if attribute is not Negative [Values can be = ZERO or > ZERO],,NON_NEGATIVE,XSD,ERROR,6G
+BR-SFX-022,foreignExchangeSupplementalReport,S.FX,22,Maturity Amount Currency 2,targetMaturityValue,,Y,valueType,"Check if Amount reported exceeds Max value allowed [99,999,999,999,999]'",,MAX_AMOUNT,FRS,WARNING,6G
+BR-SFX-023,foreignExchangeSupplementalReport,S.FX,23,Maturity Amount Currency 2,targetMaturityValue,converted,Y,valueType,Check if attribute is not Empty [populated],,NOT_EMPTY,XSD,ERROR,6G
+BR-SFX-024,foreignExchangeSupplementalReport,S.FX,24,Maturity Amount Currency 2,targetMaturityValue,converted,Y,valueType,Checks if attribute is a boolean value,,BOOLEAN,XSD,ERROR,6G
+BR-SFX-025,foreignExchangeSupplementalReport,S.FX,25,Maturity Amount Currency 2,targetMaturityValue,unit,Y,valueType,Check if attribute is not Empty [populated],,NOT_EMPTY,XSD,ERROR,6G
+BR-SFX-026,foreignExchangeSupplementalReport,S.FX,26,Maturity Amount Currency 2,targetMaturityValue,unit,Y,valueType,Enumeration list validation,See Enumerations Tab,ENUMERATION,XSD,ERROR,6G
+BR-SFX-027,foreignExchangeSupplementalReport,S.FX,27,Maturity Amount Currency 2,targetMaturityValue,unit,Y,valueType,"Checks if Converted is true, unit is USD",,CONVERTED_USD,FRS,WARNING,6G
+BR-SFX-028,foreignExchangeSupplementalReport,S.FX,28,Maturity Amount Currency 2,targetMaturityValue,unitMultiplier,Y,valueType,Check if attribute is not Empty [populated],,NOT_EMPTY,XSD,ERROR,6G
+BR-SFX-029,foreignExchangeSupplementalReport,S.FX,29,Maturity Amount Currency 2,targetMaturityValue,unitMultiplier,Y,valueType,Check if value = 6,,UNIT_MULTIPLIER,XSD,ERROR,6G
+BR-SFX-030,foreignExchangeSupplementalReport,S.FX,30,Maturity Bucket,maturityBucket,maturityStart,Y,maturityBucket,Enumeration list validation,Maturity bucket values,ENUMERATION,XSD,ERROR,6G
+BR-SFX-031,foreignExchangeSupplementalReport,S.FX,31,Maturity Bucket,maturityBucket,maturityEnd,Y,maturityBucket,Enumeration list validation - see comment,Maturity bucket values,ENUMERATION,XSD,ERROR,6G
+BR-SFX-032,foreignExchangeSupplementalReport,S.FX,32,Maturity Bucket,maturityBucket,,Y,maturityBucket,Check if Maturity Bucket Range combination is valid,Maturity bucket values,MATURITY_RANGE,FRS,ERROR,6G
+BR-SFX-033,foreignExchangeSupplementalReport,S.FX,33,Foreign Exchange Option Direction,foreignExchangeOptionDirection,,N,foreignExchangeOptionDirection,Enumeration list validation,,ENUMERATION,XSD,ERROR,6G
+BR-SFX-034,foreignExchangeSupplementalReport,S.FX,34,Forward Start Amount Currency 1,baseForwardMaturityValue,,N,valueType,Check if attribute is not Negative [Values can be = ZERO or > ZERO],,NON_NEGATIVE,XSD,ERROR,6G
+BR-SFX-035,foreignExchangeSupplementalReport,S.FX,35,Forward Start Amount Currency 1,baseForwardMaturityValue,,N,valueType,"Check if Amount reported exceeds Max value allowed [99,999,999,999,999]'",,MAX_AMOUNT,FRS,WARNING,6G
+BR-SFX-036,foreignExchangeSupplementalReport,S.FX,36,Forward Start Amount Currency 1,baseForwardMaturityValue,converted,N,valueType,Checks if attribute is a boolean value,,BOOLEAN,XSD,ERROR,6G
+BR-SFX-037,foreignExchangeSupplementalReport,S.FX,37,Forward Start Amount Currency 1,baseForwardMaturityValue,unit,N,valueType,Enumeration list validation,See Enumerations Tab,ENUMERATION,XSD,ERROR,6G
+BR-SFX-038,foreignExchangeSupplementalReport,S.FX,38,Forward Start Amount Currency 1,baseForwardMaturityValue,unit,N,valueType,"Checks if Converted is true, unit is USD",,CONVERTED_USD,FRS,WARNING,6G
+BR-SFX-039,foreignExchangeSupplementalReport,S.FX,39,Forward Start Amount Currency 1,baseForwardMaturityValue,unitMultiplier,N,valueType,Check if value = 6,,UNIT_MULTIPLIER,XSD,ERROR,6G
+BR-SFX-040,foreignExchangeSupplementalReport,S.FX,40,Forward Start Amount Currency 2,targetForwardMaturityValue,,N,valueType,Check if attribute is not Negative [Values can be = ZERO or > ZERO],,NON_NEGATIVE,XSD,ERROR,6G
+BR-SFX-041,foreignExchangeSupplementalReport,S.FX,41,Forward Start Amount Currency 2,targetForwardMaturityValue,,N,valueType,"Check if Amount reported exceeds Max value allowed [99,999,999,999,999]'",,MAX_AMOUNT,FRS,WARNING,6G
+BR-SFX-042,foreignExchangeSupplementalReport,S.FX,42,Forward Start Amount Currency 2,targetForwardMaturityValue,converted,N,valueType,Checks if attribute is a boolean value,,BOOLEAN,XSD,ERROR,6G
+BR-SFX-043,foreignExchangeSupplementalReport,S.FX,43,Forward Start Amount Currency 2,targetForwardMaturityValue,unit,N,valueType,Enumeration list validation,See Enumerations Tab,ENUMERATION,XSD,ERROR,6G
+BR-SFX-044,foreignExchangeSupplementalReport,S.FX,44,Forward Start Amount Currency 2,targetForwardMaturityValue,unit,N,valueType,"Checks if Converted is true, unit is USD",,CONVERTED_USD,FRS,WARNING,6G
+BR-SFX-045,foreignExchangeSupplementalReport,S.FX,45,Forward Start Amount Currency 2,targetForwardMaturityValue,unitMultiplier,N,valueType,Check if value = 6,,UNIT_MULTIPLIER,XSD,ERROR,6G
+BR-SFX-046,foreignExchangeSupplementalReport,S.FX,46,Forward Start Bucket,forwardMaturityBucket,maturityStart,N,maturityBucket,Enumeration list validation,Maturity bucket values,ENUMERATION,XSD,ERROR,6G
+BR-SFX-047,foreignExchangeSupplementalReport,S.FX,47,Forward Start Bucket,forwardMaturityBucket,maturityEnd,N,maturityBucket,Enumeration list validation - see comment,Maturity bucket values,ENUMERATION,XSD,ERROR,6G
+BR-SFX-048,foreignExchangeSupplementalReport,S.FX,48,Forward Start Bucket,forwardMaturityBucket,,N,maturityBucket,Check if Maturity Bucket Range combination is valid,Maturity bucket values,MATURITY_RANGE,FRS,ERROR,6G
+BR-SFX-049,foreignExchangeSupplementalReport,S.FX,49,Forward Start Bucket,,,N/A,,"Check if:
+forwardStartBucket / maturityStart Less or Equal 
+maturityBucket / maturityStart",,FORWARD_MATURITY,FRS,ERROR,6G
+BR-SFX-050,foreignExchangeSupplementalReport,S.FX,50,Counterparty,counterpartySector,,Y,counterpartySectorWithRetail,"counterpartySectorWithRetail: Union of 
+ - counterpartySectorBase
+ - counterpartySectorRetail
+Enumeration list validation:
+ - counterpartySectorBase
+ - counterpartySectorRetail
+If unexpected Counterparty value is used, File will be rejected with corresponding Error handling",See Enumerations Tab,ENUMERATION,XSD,ERROR,6G
+BR-SFX-051,foreignExchangeSupplementalReport,S.FX,51,Counterparty,counterpartySector,,Y,counterpartySectorWithRetail,"For Report type and Product combinations listed in the 'Counterparty Required' Tab:
+Counterparty value must be provided, otherwise File will be rejected",Counterparty Required,COUNTERPARTY_REQUIRED,FRS,ERROR,6G
+BR-SFX-052,foreignExchangeSupplementalReport,S.FX,52,G-SIB,gsib,,N,string,"If G-SIB value is provided, Counterparty value must be populated. Otherwise, reject the File with correspondiong Error message",,GSIB_WITH_COUNTERPARTY,FRS,ERROR,6G
+BR-SFX-053,foreignExchangeSupplementalReport,S.FX,53,G-SIB,gsib,,N,string,"1. Enumeration list validation
+2. Enumeration list will be periodically updated
+ - Enumeration list is based on Financial Stability Board (FSB) documentation 
+ - 2020 Enumeration list is used for 6G Implementation and located ==> https://www.fsb.org/wp-content/uploads/P111120.pdf
+ - update is expected once a year",See Enumerations Tab,GSIB_LIST,FRS,WARNING,6G
+BR-SFX-054,foreignExchangeSupplementalReport,S.FX,54,Settlement,settlementMechanism,,Y,foreignExchangeSettlementMechanism,Enumeration list validation,See Enumerations Tab,ENUMERATION,XSD,ERROR,6G
+BR-SFX-055,foreignExchangeSupplementalReport,S.FX,55,Business Line,businessLine,,N,businessLine,"This field is mandatory for Category 1 Firms only.
+'Business Line', if provided, must be one of the  Enumeration values from the Firm specific Schema include file.","""businessLine"" from Firm specific Schema include XSD",BUSINESS_LINE,FRS,WARNING,6G
+BR-SFX-056,foreignExchangeSupplementalReport,S.FX,56,Internal,internal,,Y,boolean,Check if attribute is not Empty [populated],,NOT_EMPTY,XSD,ERROR,6G
+BR-SFX-057,foreignExchangeSupplementalReport,S.FX,57,Internal,internal,,Y,boolean,Checks if attribute is a boolean value,See Enumerations Tab,BOOLEAN,XSD,ERROR,6G
+BR-SFX-058,foreignExchangeSupplementalReport,S.FX,58,Internal Counterparty,internalCounterparty,,N,internalCounterparty,Enumeration list validation,"""internalCounterparty"" from Firm specific Schema include XSD",ENUMERATION,XSD,ERROR,6G
+BR-SFX-059,foreignExchangeSupplementalReport,S.FX,59,"Maturity Amount Currency 1
+Maturity Amount Currency 2",,,N/A,,"If 'Maturity Amount Currency 1' = ZERO OR 'Maturity Amount Currency 2' = ZERO, File must be rejected with corresponding Error message.",,ZERO_REJECTION,FRS,ERROR,6G
+BR-SC-001,sixGComments,S.C,1,Reporting Entity,reportScope,,N,reportScope,Enumeration list validation,"""reportScope"" from Firm specific Schema include XSD",ENUMERATION,XSD,ERROR,6G
+BR-SC-002,sixGComments,S.C,2,Collection,reportTypes,,N,reportTypes,Enumeration list validation,See Enumerations Tab,ENUMERATION,XSD,ERROR,6G
+BR-SC-003,sixGComments,S.C,3,Product,product,,N,productTypes,"Validation needs to be performed to make sure that valid Product is used.
+If unexpected value is used, File must be rejected with corresponding Error handling",See Enumerations Tab,SCHEMA,XSD,ERROR,6G
+BR-SC-004,sixGComments,S.C,4,Product,product,,N,productTypes,The Product reported must correspond to the reported Collection value,See Enumerations Tab,PRODUCT_MATCH,FRS,WARNING,6G
+BR-SC-005,sixGComments,S.C,5,Sub-Product,subProduct,,N,subProductTypes,"Validation needs to be performed to make sure that valid Sub-Product is used.
+If unexpected value is used, File must be rejected with corresponding Error handling",See Enumerations Tab,SCHEMA,XSD,ERROR,6G
+BR-SC-006,sixGComments,S.C,6,Sub-Product,subProduct,,N,subProductTypes,The Sub-Product reported must correspond to the reported Collection and Product values,Prod-SubProd-SubProd2,PRODUCT_MATCH,FRS,WARNING,6G
+BR-SC-007,sixGComments,S.C,7,N/A,reportID,,N,tenDigitPositiveIntegerType,Check if attribute is Positive,,POSITIVE,XSD,ERROR,6G
+BR-SC-008,sixGComments,S.C,8,N/A,reportID,,N,tenDigitPositiveIntegerType,Checks if the number not exceeding max length allowed (10 digits),,MAX_LENGTH,XSD,ERROR,6G
+BR-SC-009,sixGComments,S.C,9,N/A,reportingFrequency,,N,reportingFrequency,Enumeration list validation,See Enumerations Tab,ENUMERATION,XSD,ERROR,6G
+BR-SC-010,sixGComments,S.C,10,Comments,text,,Y,nonEmptyString,Check if attribute is not Empty [populated],,NOT_EMPTY,XSD,ERROR,6G
+BR-SC-011,sixGComments,S.C,11,Comments,text,,Y,nonEmptyString,Checks if Comment Text characters are valid,,COMMENT_CHARS,FRS,WARNING,6G
+BR-HDR-001,All Data Report Types [header],,1,N/A,reporter,reporterList,Y,reporter,Enumeration list validation,"""reporterList"" from Firm specific Schema include XSD",ENUMERATION,XSD,ERROR,6G
+BR-HDR-002,All Data Report Types [header],,2,N/A,reporter,listingExchange,Y,reporter,Enumeration list validation,"""exchangeList"" from Firm specific Schema include XSD",ENUMERATION,XSD,ERROR,6G
+BR-HDR-003,All Data Report Types [header],,3,N/A,reportingDate,,Y,date,,,SCHEMA,XSD,ERROR,6G
+BR-HDR-004,All Data Report Types [header],,4,N/A,version,,Y,positiveInteger,,,SCHEMA,XSD,ERROR,6G
+BR-HDR-005,All Data Report Types [header],,5,N/A,reportingFrequency,,Y,reportingFrequency,Enumeration list validation,See Enumerations Tab,ENUMERATION,XSD,ERROR,6G
+BR-CHDR-001,Comment file header [commentsHeader],,1,N/A,reporter,reporterList,Y,reporter,Enumeration list validation,"""reporterList"" from Firm specific Schema include XSD",ENUMERATION,XSD,ERROR,6G
+BR-CHDR-002,Comment file header [commentsHeader],,2,N/A,reporter,listingExchange,Y,reporter,Enumeration list validation,"""exchangeList"" from Firm specific Schema include XSD",ENUMERATION,XSD,ERROR,6G
+BR-CHDR-003,Comment file header [commentsHeader],,3,N/A,reportingDate,,Y,date,,,SCHEMA,XSD,ERROR,6G
+BR-CHDR-004,Comment file header [commentsHeader],,4,N/A,version,,Y,positiveInteger,,,SCHEMA,XSD,ERROR,6G

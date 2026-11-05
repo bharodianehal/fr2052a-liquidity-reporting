@@ -1,0 +1,92 @@
+collateral_id,description,collateral_class
+SM0001,Cash,A-0-Q
+SM0002,Debt issued by the U.S. Treasury,A-1-Q
+SM0003,U.S. Government Agency-issued debt (excluding the US Treasury) with a US Government guarantee,A-2-Q
+SM0004,"Vanilla debt (including pass-through MBS) guaranteed by a U.S. Government Agency, where the U.S. Government Agency has a",A-3-Q
+SM0005,"Structured debt (excluding pass-through MBS) guaranteed by a U.S. Government Agency, where the U.S. Government Agency ha",A-4-Q
+SM0006,Other debt with a U.S. Government guarantee,A-5-Q
+SM0007,Debt issued by non-U.S. Sovereigns (excluding central banks) with a 0% RW,S-1-Q
+SM0008,Debt issued by multilateral development banks or other supranationals with a 0% RW,S-2-Q
+SM0009,Debt with a non-U.S. sovereign (excluding central banks) or multilateral development bank or other supranational guarant,S-3-Q
+SM0010,"Debt issued or guaranteed by a non-U.S. Sovereign (excluding central banks) that does not have a 0% RW, but supports out",S-4-Q
+SM0011,Securities issued or guaranteed by a central bank with a 0% RW,CB-1-Q
+SM0012,"Securities issued or guaranteed by a non-U.S. central bank that does not have a 0% RW, but supports outflows that are in",CB-2-Q
+SM0013,Senior to preferred debt issued by a U.S. Government Sponsored Entity (GSE),G-1-Q
+SM0014,Vanilla debt (including pass-through MBS) guaranteed by a U.S. GSE,G-2-Q
+SM0015,Structured debt (excluding pass-through MBS) guaranteed by a U.S. GSE,G-3-Q
+SM0016,"Debt issued by non-U.S. Sovereigns (excluding central banks) with a 20% RW, not otherwise included",S-5-Q
+SM0017,"Debt issued by multilateral development banks or other supranationals with a 20% RW, not otherwise included",S-6-Q
+SM0018,Debt with a non-U.S. sovereign (excluding central banks) or multilateral development bank or other supranational guarant,S-7-Q
+SM0019,"Securities issued or guaranteed by a non-U.S. central bank with a 20% RW, not otherwise included",CB-3-Q
+SM0020,U.S. equities - Russell 1000,E-1-Q
+SM0021,"Non-U.S. Equities listed on a foreign index designated to by the local supervisor as qualifying for the LCR, and denomin",E-2-Q
+SM0022,Investment grade corporate debt,IG-1-Q
+SM0023,Investment grade municipal obligations,IG-2-Q
+SM0024,U.S. Government Agency-issued debt (excluding the US Treasury) with a US Government guarantee,A-2
+SM0025,"Vanilla debt (including pass-through MBS) guaranteed by a U.S. Government Agency, where the U.S. Government Agency has a",A-3
+SM0026,"Structured debt (excluding pass-through MBS) guaranteed by a U.S. Government Agency, where the U.S. Government Agency ha",A-4
+SM0027,Other debt with a U.S. Government guarantee,A-5
+SM0028,Debt issued by non-U.S. Sovereigns (excluding central banks) with a 0% RW,S-1
+SM0029,Debt issued by multilateral development banks or other supranationals with a 0% RW,S-2
+SM0030,Debt with a non-U.S. sovereign (excluding central banks) or multilateral development bank or other supranational guarant,S-3
+SM0031,"Debt issued or guaranteed by a non-U.S. Sovereign (excluding central banks) that does not have a 0% RW, but supports out",S-4
+SM0032,Securities issued or guaranteed by a central bank with a 0% RW,CB-1
+SM0033,"Securities issued or guaranteed by a non-U.S. central bank that does not have a 0% RW, but supports outflows that are in",CB-2
+SM0034,Senior to preferred debt issued by a U.S. Government Sponsored Entity (GSE),G-1
+SM0035,Vanilla debt (including pass-through MBS) guaranteed by a U.S. GSE,G-2
+SM0036,Structured debt (excluding pass-through MBS) guaranteed by a U.S. GSE,G-3
+SM0037,"Debt issued by non-U.S. Sovereigns (excluding central banks) with a 20% RW, not otherwise included",S-5
+SM0038,"Debt issued by multilateral development banks or other supranationals with a 20% RW, not otherwise included",S-6
+SM0039,Debt with a non-U.S. sovereign (excluding central banks) or multilateral development bank or other supranational guarant,S-7
+SM0040,"Securities issued or guaranteed by a non-U.S. central bank with a 20% RW, not otherwise included",CB-3
+SM0041,U.S. equities - Russell 1000,E-1
+SM0042,"Non-U.S. Equities listed on a foreign index designated to by the local supervisor as qualifying for the LCR, and denomin",E-2
+SM0043,Investment grade corporate debt,IG-1
+SM0044,Investment grade U.S. municipal general obligations,IG-2
+SM0045,"All other debt issued by sovereigns (excluding central banks) and supranational entities, not otherwise included",S-8
+SM0046,"All other securities issued by central banks, not otherwise included",CB-4
+SM0047,"Debt, other than senior or preferred, issued by a U.S. GSE",G-4
+SM0048,All other U.S.-listed common equity securities,E-3
+SM0049,All other non-US-listed common equity securities,E-4
+SM0050,ETFs listed on US exchanges,E-5
+SM0051,ETFs listed on non-US exchanges,E-6
+SM0052,US mutual fund shares,E-7
+SM0053,Non-US mutual fund shares,E-8
+SM0054,"All other US equity investments (including preferred shares, warrants and options)",E-9
+SM0055,"All other non-US equity investments (including preferred shares, warrants and options)",E-10
+SM0056,Investment grade Vanilla ABS,IG-3
+SM0057,Investment grade Structured ABS,IG-4
+SM0058,Investment grade Private label Pass-thru CMBS/RMBS,IG-5
+SM0059,Investment grade Private label Structured CMBS/RMBS,IG-6
+SM0060,Investment grade covered bonds,IG-7
+SM0061,Investment grade obligations of municipals/PSEs (excluding U.S. general obligations),IG-8
+SM0062,Non-investment grade general obligations issued by U.S. municipals/PSEs,N-1
+SM0063,Non-investment grade corporate debt,N-2
+SM0064,Non-investment grade Vanilla ABS,N-3
+SM0065,Non-investment grade structured ABS,N-4
+SM0066,Non-investment grade Private label Pass-thru CMBS/RMBS,N-5
+SM0067,Non-investment grade Private label Structured CMBS/RMBS,N-6
+SM0068,Non-investment grade covered bonds,N-7
+SM0069,Non-investment grade obligations of municipals/PSEs (excluding U.S. general obligations),N-8
+SM0070,GSE-eligible conforming residential mortgages,L-1
+SM0071,Other GSE-eligible loans,L-2
+SM0072,Other 1-4 family residential mortgages,L-3
+SM0073,Other multi family residential mortgages,L-4
+SM0074,Home equity loans,L-5
+SM0075,Credit card loans,L-6
+SM0076,Auto loans and leases,L-7
+SM0077,Other consumer loans and leases,L-8
+SM0078,Commercial real estate loans,L-9
+SM0079,Commercial and industrial loans,L-10
+SM0080,"All other loans, except loans guaranteed by U.S. government agencies",L-11
+SM0081,Loans guaranteed by U.S. government agencies,L-12
+SM0082,Debt issued by reporting firm - parent,Y-1
+SM0083,Debt issued by reporting firm - bank,Y-2
+SM0084,Debt issued by reporting firm - all other (incl. conduits),Y-3
+SM0085,Equity investment in affiliates,Y-4
+SM0086,Commodities,C-1
+SM0087,Residential property,P-1
+SM0088,All other physical property,P-2
+SM0089,Letters of credit issued by a GSE,LC-1
+SM0090,"All other letters of credit, including bankers' acceptances",LC-2
+SM0091,All other assets,Z-1

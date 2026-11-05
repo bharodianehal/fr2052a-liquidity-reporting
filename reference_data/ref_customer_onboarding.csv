@@ -1,0 +1,39 @@
+customer_id,customer_name,country,naics_code,legal_form,lei,onboarded_on
+C0001,Retail depositors - relationship,US,,Individuals,,2015-06-30
+C0002,Retail depositors - no relationship,US,,Individuals,,2015-06-30
+C0003,Small business - relationship,US,,Sole proprietorships and small companies,,2015-06-30
+C0004,Small business - no relationship,US,,Sole proprietorships and small companies,,2015-06-30
+C0010,Globex Manufacturing Corp,US,332710,Corporation,549300000000000004AC,2015-06-30
+C0011,Initech Holdings Inc,US,541511,Corporation,549300000000000005AC,2015-06-30
+C0020,Republic of Freedonia,FD,921130,Sovereign government,549300000000000006AC,2015-06-30
+C0021,Federal Reserve Bank of New York,US,521110,Central bank,549300000000000007AC,2015-06-30
+C0022,Federal Home Loan Bank of New York,US,522292,Government-sponsored enterprise,549300000000000008AC,2015-06-30
+C0023,Port Authority of Metro City,US,488310,Public authority,549300000000000009AC,2015-06-30
+C0024,Metro City VRDN Program,US,921130,Municipal VRDN issuer,549300000000000010AC,2015-06-30
+C0030,State Teachers Pension Plan,US,525110,Public pension plan,549300000000000011AC,2015-06-30
+C0031,Regional Community Bank,US,522110,Commercial bank,549300000000000012AC,2015-06-30
+C0032,Midwest Securities LLC,US,523120,Registered broker-dealer,549300000000000013AC,2015-06-30
+C0033,Vanguardia Asset Management,US,523920,Registered investment adviser,549300000000000014AC,2015-06-30
+C0034,Depository Clearing Corp,US,522320,Clearing agency,549300000000000015AC,2015-06-30
+C0035,Harbor Receivables Funding LLC,US,525990,Securitization SPV,549300000000000016AC,2015-06-30
+C0036,Blue Ridge Capital Partners Fund,KY,525990,Private fund (hedge fund),549300000000000017AC,2015-06-30
+C0037,Structured Settlement Trusts,US,525920,Trusts,549300000000000018AC,2015-06-30
+C0101,JPMorgan Chase Bank N.A.,US,522110,Commercial bank,549300000000000019AC,2015-06-30
+C0102,Barclays Bank PLC,GB,522110,Commercial bank,549300000000000020AC,2015-06-30
+C0103,Citibank N.A.,US,522110,Commercial bank,549300000000000021AC,2015-06-30
+C0104,Goldman Sachs Bank USA,US,522110,Commercial bank,549300000000000022AC,2015-06-30
+C0105,Wells Fargo Bank N.A.,US,522110,Commercial bank,549300000000000023AC,2015-06-30
+C0106,Bank of America N.A.,US,522110,Commercial bank,549300000000000024AC,2015-06-30
+C0107,Deutsche Bank AG,DE,522110,Commercial bank,549300000000000025AC,2015-06-30
+C0108,HSBC Bank PLC,GB,522110,Commercial bank,549300000000000026AC,2015-06-30
+C0200,Acme Financial Holdings Inc,US,551111,Bank holding company (affiliate),549300000000000027AC,2015-06-30
+C0201,Acme Capital Markets Europe Ltd,GB,523120,Investment firm (affiliate),549300000000000028AC,2015-06-30
+C0202,Acme Securities LLC,US,523120,Registered broker-dealer (affiliate),549300000000000029AC,2015-06-30
+C0203,Acme National Bank N.A.,US,522110,National bank (affiliate),549300000000000030AC,2015-06-30
+C0205,Acme Funding Corp,US,525990,Funding vehicle (affiliate),549300000000000031AC,2015-06-30
+C0301,Northwind Logistics Inc,US,484121,Corporation,549300000000000032AC,2026-01-12
+C0302,Treasury of the Republic of Valdoria,VD,921130,Sovereign government ministry,549300000000000033AC,2026-01-20
+C0303,Harbor Point Government Money Market Fund,US,525910,Registered open-end fund (1940 Act),549300000000000034AC,2026-02-02
+C0304,UBS AG Stamford Branch,US,522110,Foreign bank branch,549300000000000035AC,2026-02-09
+C0305,Lakeside Regional Water Authority,US,221310,Special-purpose public authority,549300000000000036AC,2026-02-24
+C0306,Cedar Creek Credit Opportunities Fund LP,KY,525990,Private credit fund (limited partnership),549300000000000037AC,2026-02-26

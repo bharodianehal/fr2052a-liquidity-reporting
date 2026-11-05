@@ -1,0 +1,95 @@
+# Unity Catalog: the schemas and volumes of the build (the catalog itself must exist - see the catalog variable).
+# prevent_destroy: `bundle destroy` must never drop the data. Notebook 01 still runs CREATE ... IF NOT EXISTS, so a
+# notebook run works on its own too; the bundle is the owner of names, comments and existence.
+resources:
+  schemas:
+    reference:
+      catalog_name: ${var.catalog}
+      name: reference
+      comment: Reference data - FR 2052a specification tables and firm configuration, versioned by reg_version
+      properties: {owner: root}   # the metastore's default schema property
+      lifecycle: {prevent_destroy: true}
+    raw:
+      catalog_name: ${var.catalog}
+      name: raw
+      comment: Bronze - source system extracts ingested by Lakeflow
+      properties: {owner: root}   # the metastore's default schema property
+      lifecycle: {prevent_destroy: true}
+    dq:
+      catalog_name: ${var.catalog}
+      name: dq
+      comment: Data Quality Gate - DQ assessment results and quarantine between Bronze and Silver
+      properties: {owner: root}   # the metastore's default schema property
+      lifecycle: {prevent_destroy: true}
+    conformed:
+      catalog_name: ${var.catalog}
+      name: conformed
+      comment: Silver - harmonized golden source, only DQ-passed records
+      properties: {owner: root}   # the metastore's default schema property
+      lifecycle: {prevent_destroy: true}
+    reg_2052a:
+      catalog_name: ${var.catalog}
+      name: reg_2052a
+      comment: "Gold - FR 2052a filing: the 13 data tables + Comments, validation and XML"
+      properties: {owner: root}   # the metastore's default schema property
+      lifecycle: {prevent_destroy: true}
+    reg_lcr:
+      catalog_name: ${var.catalog}
+      name: reg_lcr
+      comment: Gold - LCR calculation mart (owned by Treasury/ALM)
+      properties: {owner: root}   # the metastore's default schema property
+      lifecycle: {prevent_destroy: true}
+    audit:
+      catalog_name: ${var.catalog}
+      name: audit
+      comment: Control - GL reconciliation, cross-metric consistency, eliminations, PID derivation accuracy, data lineage
+      properties: {owner: root}   # the metastore's default schema property
+      lifecycle: {prevent_destroy: true}
+    ai_assist:
+      catalog_name: ${var.catalog}
+      name: ai_assist
+      comment: Databricks-native AI suggestions and their human decisions
+      properties: {owner: root}   # the metastore's default schema property
+      lifecycle: {prevent_destroy: true}
+    lakebase_src:
+      catalog_name: ${var.catalog}
+      name: lakebase_src
+      comment: Source views for the Lakebase synced tables (one per app table, with a unique _row_key)
+      properties: {owner: root}   # the metastore's default schema property
+      lifecycle: {prevent_destroy: true}
+    app_serving:
+      catalog_name: ${var.catalog}
+      name: app_serving
+      comment: Lakebase synced tables the fr2052a app reads (Postgres schema app_serving)
+      properties: {owner: root}   # the metastore's default schema property
+      lifecycle: {prevent_destroy: true}
+
+  volumes:
+    landing:
+      catalog_name: ${var.catalog}
+      schema_name: ${resources.schemas.raw.name}
+      name: landing
+      volume_type: MANAGED
+      comment: Landing zone for FR 2052a source-system extracts (CSV), ingested by Lakeflow pipeline fr2052a-bronze-ingest
+      lifecycle: {prevent_destroy: true}
+    spec_files:
+      catalog_name: ${var.catalog}
+      schema_name: ${resources.schemas.reference.name}
+      name: spec_files
+      volume_type: MANAGED
+      comment: "FR 2052a specification and firm reference data (CSV). Source: reference_data/ in the fr2052a repo"
+      lifecycle: {prevent_destroy: true}
+    docs:
+      catalog_name: ${var.catalog}
+      schema_name: ${resources.schemas.reference.name}
+      name: docs
+      volume_type: MANAGED
+      comment: Regulatory source documents the AI agents cite
+      lifecycle: {prevent_destroy: true}
+    xml_filings:
+      catalog_name: ${var.catalog}
+      schema_name: ${resources.schemas.reg_2052a.name}
+      name: xml_filings
+      volume_type: MANAGED
+      comment: Generated FR 2052a XML filings
+      lifecycle: {prevent_destroy: true}

@@ -1,0 +1,16 @@
+list_name,value,description
+reporterList,ACME,Ticker the Fed registered for the firm (6G header reporter); issued in the firm include XSD
+exchangeList,XNYS,ISO 10383 MIC of the listing exchange (6G header listingExchange)
+reportScope,ACME - Consolidated,Reporting Entity ENT001 - the consolidated BHC
+reportScope,ACME - Bank,Reporting Entity ENT002 - Acme National Bank N.A. (lead insured depository institution)
+reportScope,ACME - Securities,Reporting Entity ENT003 - Acme Securities LLC (material broker-dealer)
+internalCounterparty,Acme Financial Holdings Inc,LE00 - top-tier holding company
+internalCounterparty,Acme National Bank N.A.,LE02 - lead bank
+internalCounterparty,Acme Securities LLC,LE03 - US broker-dealer
+internalCounterparty,Acme Capital Markets Europe Ltd,LE04 - UK investment firm (subsidiary of LE03)
+internalCounterparty,Acme Funding Corp,LE05 - funding vehicle
+businessLine,Retail Banking,Business line agreed with the supervisory team (Field Definitions p.26)
+businessLine,Commercial Banking,Business line agreed with the supervisory team
+businessLine,Investment Banking,Business line agreed with the supervisory team
+businessLine,Wealth Management,Business line agreed with the supervisory team
+businessLine,Treasury,Business line agreed with the supervisory team

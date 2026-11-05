@@ -1,0 +1,35 @@
+# Lakebase (autoscaling Postgres): the project, its read-write endpoint and the database fr2052a. The default branch
+# "production" comes with the project. The app's own tables are created by notebook 07; the synced tables (Delta -> Postgres)
+# and their source views by deploy/lakebase_synced_tables.py (job fr2052a-pipeline, task lakebase_tables) - they need the data.
+#
+# The first full load of all synced tables needs more than 1 CU: deploy with --var lakebase_max_cu=4 for the first build,
+# then deploy again with the default (1).
+resources:
+  postgres_projects:
+    fr2052a:
+      project_id: fr2052a
+      display_name: fr2052a
+      pg_version: 17
+      history_retention_duration: 604800s
+      default_endpoint_settings:
+        autoscaling_limit_min_cu: 1
+        autoscaling_limit_max_cu: 1
+        suspend_timeout_duration: 86400s
+
+  postgres_endpoints:
+    fr2052a_primary:
+      parent: projects/${resources.postgres_projects.fr2052a.project_id}/branches/production
+      endpoint_id: primary
+      endpoint_type: ENDPOINT_TYPE_READ_WRITE
+      autoscaling_limit_min_cu: 1
+      autoscaling_limit_max_cu: ${var.lakebase_max_cu}
+      suspend_timeout_duration: 86400s
+      lifecycle: {prevent_destroy: true}
+
+  postgres_databases:
+    fr2052a_db:
+      parent: projects/${resources.postgres_projects.fr2052a.project_id}/branches/production
+      database_id: ${var.lakebase_database_id}
+      postgres_database: fr2052a
+      role: projects/${resources.postgres_projects.fr2052a.project_id}/branches/production/roles/${var.lakebase_owner_role}
+      lifecycle: {prevent_destroy: true}

@@ -1,0 +1,148 @@
+product_id,requirement,source
+I.A.1,Required,Appendix II-c p.91-94
+I.A.2,Required,Appendix II-c p.91-94
+I.A.3,Required,Appendix II-c p.91-94
+I.A.4,Required,Appendix II-c p.91-94
+I.A.5,Required,Appendix II-c p.91-94
+I.A.6,Required,Appendix II-c p.91-94
+I.A.7,Required,Appendix II-c p.91-94
+I.U.1,Not Applicable,Appendix II-c p.91-94
+I.U.2,Not Applicable,Appendix II-c p.91-94
+I.U.3,Not Applicable,Appendix II-c p.91-94
+I.U.4,Not Applicable,Appendix II-c p.91-94
+I.U.5,Not Applicable,Appendix II-c p.91-94
+I.U.6,Not Applicable,Appendix II-c p.91-94
+I.U.7,Not Applicable,Appendix II-c p.91-94
+I.U.8,Not Applicable,Appendix II-c p.91-94
+I.S.1,Required,Appendix II-c p.91-94
+I.S.2,Required,Appendix II-c p.91-94
+I.S.3,Required,Appendix II-c p.91-94
+I.S.4,Required,Appendix II-c p.91-94
+I.S.5,Required,Appendix II-c p.91-94
+I.S.6,Required,Appendix II-c p.91-94
+I.S.7,Required,Appendix II-c p.91-94
+I.S.8,Required,Appendix II-c p.91-94
+I.S.9,Required,Appendix II-c p.91-94
+I.S.10,Required,Appendix II-c p.91-94
+I.O.1,Not Applicable,Appendix II-c p.91-94
+I.O.2,Required,Appendix II-c p.91-94
+I.O.3,Required,Appendix II-c p.91-94
+I.O.4,Dependent,Appendix II-c p.91-94
+I.O.5,Not Applicable,Appendix II-c p.91-94
+I.O.6,Required,Appendix II-c p.91-94
+I.O.7,Not Applicable,Appendix II-c p.91-94
+I.O.8,Required,Appendix II-c p.91-94
+I.O.9,Dependent,Appendix II-c p.91-94
+O.W.1,Required,Appendix II-c p.91-94
+O.W.2,Required,Appendix II-c p.91-94
+O.W.3,Required,Appendix II-c p.91-94
+O.W.4,Required,Appendix II-c p.91-94
+O.W.5,Required,Appendix II-c p.91-94
+O.W.6,Required,Appendix II-c p.91-94
+O.W.7,Required,Appendix II-c p.91-94
+O.W.8,Not Applicable,Appendix II-c p.91-94
+O.W.9,Not Applicable,Appendix II-c p.91-94
+O.W.10,Not Applicable,Appendix II-c p.91-94
+O.W.11,Not Applicable,Appendix II-c p.91-94
+O.W.12,Not Applicable,Appendix II-c p.91-94
+O.W.13,Not Applicable,Appendix II-c p.91-94
+O.W.14,Not Applicable,Appendix II-c p.91-94
+O.W.15,Not Applicable,Appendix II-c p.91-94
+O.W.16,Not Applicable,Appendix II-c p.91-94
+O.W.17,Dependent,Appendix II-c p.91-94
+O.W.18,Not Applicable,Appendix II-c p.91-94
+O.W.19,Not Applicable,Appendix II-c p.91-94
+O.S.1,Required,Appendix II-c p.91-94
+O.S.2,Required,Appendix II-c p.91-94
+O.S.3,Required,Appendix II-c p.91-94
+O.S.4,Required,Appendix II-c p.91-94
+O.S.5,Required,Appendix II-c p.91-94
+O.S.6,Required,Appendix II-c p.91-94
+O.S.7,Required,Appendix II-c p.91-94
+O.S.8,Required,Appendix II-c p.91-94
+O.S.9,Required,Appendix II-c p.91-94
+O.S.10,Required,Appendix II-c p.91-94
+O.S.11,Required,Appendix II-c p.91-94
+O.D.1,Dependent,Appendix II-c p.91-94
+O.D.2,Dependent,Appendix II-c p.91-94
+O.D.3,Dependent,Appendix II-c p.91-94
+O.D.4,Dependent,Appendix II-c p.91-94
+O.D.5,Dependent,Appendix II-c p.91-94
+O.D.6,Dependent,Appendix II-c p.91-94
+O.D.7,Dependent,Appendix II-c p.91-94
+O.D.8,Dependent,Appendix II-c p.91-94
+O.D.9,Dependent,Appendix II-c p.91-94
+O.D.10,Dependent,Appendix II-c p.91-94
+O.D.11,Dependent,Appendix II-c p.91-94
+O.D.12,Dependent,Appendix II-c p.91-94
+O.D.13,Dependent,Appendix II-c p.91-94
+O.D.14,Dependent,Appendix II-c p.91-94
+O.D.15,Dependent,Appendix II-c p.91-94
+O.O.1,Not Applicable,Appendix II-c p.91-94
+O.O.2,Required,Appendix II-c p.91-94
+O.O.3,Required,Appendix II-c p.91-94
+O.O.4,Dependent,Appendix II-c p.91-94
+O.O.5,Dependent,Appendix II-c p.91-94
+O.O.6,Dependent,Appendix II-c p.91-94
+O.O.7,Dependent,Appendix II-c p.91-94
+O.O.8,Not Applicable,Appendix II-c p.91-94
+O.O.9,Required,Appendix II-c p.91-94
+O.O.10,Required,Appendix II-c p.91-94
+O.O.11,Required,Appendix II-c p.91-94
+O.O.12,Required,Appendix II-c p.91-94
+O.O.13,Required,Appendix II-c p.91-94
+O.O.14,Required,Appendix II-c p.91-94
+O.O.15,Required,Appendix II-c p.91-94
+O.O.16,Required,Appendix II-c p.91-94
+O.O.17,Dependent,Appendix II-c p.91-94
+O.O.18,Dependent,Appendix II-c p.91-94
+O.O.19,Dependent,Appendix II-c p.91-94
+O.O.20,Not Applicable,Appendix II-c p.91-94
+O.O.21,Not Applicable,Appendix II-c p.91-94
+O.O.22,Dependent,Appendix II-c p.91-94
+S.DC.1,Not Applicable,Appendix II-c p.91-94
+S.DC.2,Not Applicable,Appendix II-c p.91-94
+S.DC.3,Required,Appendix II-c p.91-94
+S.DC.4,Required,Appendix II-c p.91-94
+S.DC.5,Required,Appendix II-c p.91-94
+S.DC.6,Required,Appendix II-c p.91-94
+S.DC.7,Required,Appendix II-c p.91-94
+S.DC.8,Required,Appendix II-c p.91-94
+S.DC.9,Required,Appendix II-c p.91-94
+S.DC.10,Required,Appendix II-c p.91-94
+S.DC.11,Required,Appendix II-c p.91-94
+S.DC.12,Required,Appendix II-c p.91-94
+S.DC.13,Not Applicable,Appendix II-c p.91-94
+S.DC.14,Not Applicable,Appendix II-c p.91-94
+S.DC.15,Required,Appendix II-c p.91-94
+S.DC.16,Required,Appendix II-c p.91-94
+S.DC.17,Required,Appendix II-c p.91-94
+S.DC.18,Not Applicable,Appendix II-c p.91-94
+S.DC.19,Not Applicable,Appendix II-c p.91-94
+S.DC.20,Not Applicable,Appendix II-c p.91-94
+S.DC.21,Not Applicable,Appendix II-c p.91-94
+S.L.1,Required,Appendix II-c p.91-94
+S.L.2,Required,Appendix II-c p.91-94
+S.L.3,Required,Appendix II-c p.91-94
+S.L.4,Not Applicable,Appendix II-c p.91-94
+S.L.5,Not Applicable,Appendix II-c p.91-94
+S.L.6,Not Applicable,Appendix II-c p.91-94
+S.L.7,Not Applicable,Appendix II-c p.91-94
+S.L.8,Not Applicable,Appendix II-c p.91-94
+S.L.9,Required,Appendix II-c p.91-94
+S.L.10,Not Applicable,Appendix II-c p.91-94
+S.B.1,Not Applicable,Appendix II-c p.91-94
+S.B.2,Dependent,Appendix II-c p.91-94
+S.B.3,Required,Appendix II-c p.91-94
+S.B.4,Dependent,Appendix II-c p.91-94
+S.B.5,Required,Appendix II-c p.91-94
+S.B.6,Dependent,Appendix II-c p.91-94
+S.I.1,Required,Appendix II-c p.91-94
+S.I.2,Required,Appendix II-c p.91-94
+S.I.3,Required,Appendix II-c p.91-94
+S.I.4,Required,Appendix II-c p.91-94
+S.I.5,Not Applicable,Appendix II-c p.91-94
+S.I.6,Required,Appendix II-c p.91-94
+S.FX.1,Not Applicable,Appendix II-c p.91-94
+S.FX.2,Not Applicable,Appendix II-c p.91-94
+S.FX.3,Not Applicable,Appendix II-c p.91-94

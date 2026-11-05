@@ -1,0 +1,6 @@
+legal_entity_id,legal_name,entity_type,parent_legal_entity_id,country
+LE00,Acme Financial Holdings Inc,BHC Parent,,US
+LE02,Acme National Bank N.A.,Lead Bank,LE00,US
+LE03,Acme Securities LLC,Broker Dealer,LE00,US
+LE04,Acme Capital Markets Europe Ltd,Foreign Broker Dealer,LE03,GB
+LE05,Acme Funding Corp,Funding Vehicle,LE00,US

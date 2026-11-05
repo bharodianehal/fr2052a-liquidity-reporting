@@ -1,0 +1,220 @@
+table_code,seq,field_name,column_name,xml_element,spec_type,data_type,field_class,source,xml_kind,xsd_type,xsd_required
+I.A,1,Reporting Entity,reporting_entity,reportScope,text,text,Mandatory,Data Tables p.84-85,element,reportScope,true
+I.A,2,Product,product_id,assetProduct,text,text,Mandatory,Data Tables p.84-85,element,assetProduct,true
+I.A,3,Sub-Product,sub_product,assetSource,text,text,Dependent,Data Tables p.84-85,element,assetSource,false
+I.A,4,Market Value,market_value,marketValue,numeric,numeric,Mandatory,Data Tables p.84-85,element,valueType,true
+I.A,5,Lendable Value,lendable_value,lendableValue,numeric,numeric,Mandatory,Data Tables p.84-85,element,valueType,true
+I.A,6,Maturity Bucket,maturity_bucket,maturityBucket,text,text,Mandatory,Data Tables p.84-85,element,maturityBucket,true
+I.A,7,Forward Start Amount,forward_start_amount,forwardStartValue,numeric,numeric,Dependent,Data Tables p.84-85,element,valueType,false
+I.A,8,Forward Start Bucket,forward_start_bucket,forwardStartBucket,text,text,Dependent,Data Tables p.84-85,element,maturityBucket,false
+I.A,9,Collateral Class,collateral_class,collateralClass,text,text,Mandatory,Data Tables p.84-85,element,collateralClass,true
+I.A,10,Treasury Control,treasury_control,treasuryControl,text,flag,Mandatory,Data Tables p.84-85,attribute,xs:boolean,true
+I.A,11,Accounting Designation,accounting_designation,accountingDesignation,text,text,Mandatory,Data Tables p.84-85,element,accountingDesignation,true
+I.A,12,Effective Maturity Bucket,effective_maturity_bucket,effectiveMaturityBucket,text,text,Dependent,Data Tables p.84-85,element,maturityBucket,false
+I.A,13,Encumbrance Type,encumbrance_type,encumbranceType,text,text,Dependent,Data Tables p.84-85,element,encumbranceType,false
+I.A,14,Internal Counterparty,internal_counterparty,internalCounterparty,text,text,Dependent,Data Tables p.84-85,element,internalCounterparty,false
+I.A,15,Business Line,business_line,businessLine,text,text,Mandatory,Data Tables p.84-85,element,businessLine,false
+I.U,1,Reporting Entity,reporting_entity,reportScope,text,text,Mandatory,Data Tables p.84-85,element,reportScope,true
+I.U,2,Product,product_id,unsecuredProduct,text,text,Mandatory,Data Tables p.84-85,element,unsecuredProduct,true
+I.U,3,Counterparty,counterparty,counterpartySector,text,text,Dependent,Data Tables p.84-85,element,counterpartySectorWithRetail,false
+I.U,4,G-SIB,gsib,gsib,text,text,Dependent,Data Tables p.84-85,element,xs:string,false
+I.U,5,Maturity Amount,maturity_amount,maturityValue,numeric,numeric,Mandatory,Data Tables p.84-85,element,valueType,true
+I.U,6,Maturity Bucket,maturity_bucket,maturityBucket,text,text,Mandatory,Data Tables p.84-85,element,maturityBucket,true
+I.U,7,Maturity Optionality,maturity_optionality,maturityOptionality,text,text,Dependent,Data Tables p.84-85,element,maturityOptionality,false
+I.U,8,Effective Maturity Bucket,effective_maturity_bucket,effectiveMaturityBucket,text,text,Dependent,Data Tables p.84-85,element,maturityBucket,false
+I.U,9,Encumbrance Type,encumbrance_type,encumbranceType,text,text,Dependent,Data Tables p.84-85,element,encumbranceType,false
+I.U,10,Forward Start Amount,forward_start_amount,forwardStartValue,numeric,numeric,Dependent,Data Tables p.84-85,element,valueType,false
+I.U,11,Forward Start Bucket,forward_start_bucket,forwardStartBucket,text,text,Dependent,Data Tables p.84-85,element,maturityBucket,false
+I.U,12,Internal,internal,internal,text,flag,Mandatory,Data Tables p.84-85,attribute,xs:boolean,true
+I.U,13,Internal Counterparty,internal_counterparty,internalCounterparty,text,text,Dependent,Data Tables p.84-85,element,internalCounterparty,false
+I.U,14,Risk Weight,risk_weight,riskWeight,percent,percent,Dependent,Data Tables p.84-85,element,decimalValue,false
+I.U,15,Business Line,business_line,businessLine,text,text,Mandatory,Data Tables p.84-85,element,businessLine,false
+I.S,1,Reporting Entity,reporting_entity,reportScope,text,text,Mandatory,Data Tables p.84-85,element,reportScope,true
+I.S,2,Product,product_id,securedInflowProduct,text,text,Mandatory,Data Tables p.84-85,element,securedInflowProduct,true
+I.S,3,Sub-Product,sub_product,pledgeLevelAndLongHedging,text,text,Dependent,Data Tables p.84-85,element,pledgeLevelAndLongHedging,false
+I.S,4,Maturity Amount,maturity_amount,maturityValue,numeric,numeric,Mandatory,Data Tables p.84-85,element,valueType,true
+I.S,5,Maturity Bucket,maturity_bucket,maturityBucket,text,text,Mandatory,Data Tables p.84-85,element,maturityBucket,true
+I.S,6,Maturity Optionality,maturity_optionality,maturityOptionality,text,text,Dependent,Data Tables p.84-85,element,maturityOptionality,false
+I.S,7,Effective Maturity Bucket,effective_maturity_bucket,effectiveMaturityBucket,text,text,Dependent,Data Tables p.84-85,element,maturityBucket,false
+I.S,8,Encumbrance Type,encumbrance_type,encumbranceType,text,text,Dependent,Data Tables p.84-85,element,encumbranceType,false
+I.S,9,Forward Start Amount,forward_start_amount,forwardStartValue,numeric,numeric,Dependent,Data Tables p.84-85,element,valueType,false
+I.S,10,Forward Start Bucket,forward_start_bucket,forwardStartBucket,text,text,Dependent,Data Tables p.84-85,element,maturityBucket,false
+I.S,11,Collateral Class,collateral_class,collateralClass,text,text,Mandatory,Data Tables p.84-85,element,collateralClass,true
+I.S,12,Collateral Value,collateral_value,collateralValue,numeric,numeric,Mandatory,Data Tables p.84-85,element,valueType,true
+I.S,13,Unencumbered,unencumbered,unencumbered,text,flag,Mandatory,Data Tables p.84-85,attribute,xs:boolean,true
+I.S,14,Treasury Control,treasury_control,treasuryControl,text,flag,Mandatory,Data Tables p.84-85,attribute,xs:boolean,true
+I.S,15,Internal,internal,internal,text,flag,Mandatory,Data Tables p.84-85,attribute,xs:boolean,true
+I.S,16,Internal Counterparty,internal_counterparty,internalCounterparty,text,text,Dependent,Data Tables p.84-85,element,internalCounterparty,false
+I.S,17,Risk Weight,risk_weight,riskWeight,percent,percent,Dependent,Data Tables p.84-85,element,decimalValue,false
+I.S,18,Business Line,business_line,businessLine,text,text,Mandatory,Data Tables p.84-85,element,businessLine,false
+I.S,19,Settlement,settlement,settlementMechanism,text,text,Mandatory,Data Tables p.84-85,element,securedSettlementMechanism,true
+I.S,20,Counterparty,counterparty,counterpartySector,text,text,Mandatory,Data Tables p.84-85,element,counterpartySectorWithRetail,true
+I.S,21,G-SIB,gsib,gsib,text,text,Dependent,Data Tables p.84-85,element,xs:string,false
+I.O,1,Reporting Entity,reporting_entity,reportScope,text,text,Mandatory,Data Tables p.84-85,element,reportScope,true
+I.O,2,Product,product_id,otherInflowProduct,text,text,Mandatory,Data Tables p.84-85,element,otherInflowProduct,true
+I.O,3,Maturity Amount,maturity_amount,maturityValue,numeric,numeric,Mandatory,Data Tables p.84-85,element,valueType,true
+I.O,4,Maturity Bucket,maturity_bucket,maturityBucket,text,text,Mandatory,Data Tables p.84-85,element,maturityBucket,true
+I.O,5,Forward Start Amount,forward_start_amount,forwardStartValue,numeric,numeric,Dependent,Data Tables p.84-85,element,valueType,false
+I.O,6,Forward Start Bucket,forward_start_bucket,forwardStartBucket,text,text,Dependent,Data Tables p.84-85,element,maturityBucket,false
+I.O,7,Collateral Class,collateral_class,collateralClass,text,text,Dependent,Data Tables p.84-85,element,collateralClass,false
+I.O,8,Collateral Value,collateral_value,collateralValue,numeric,numeric,Dependent,Data Tables p.84-85,element,valueType,false
+I.O,9,Treasury Control,treasury_control,treasuryControl,text,flag,Mandatory,Data Tables p.84-85,attribute,xs:boolean,true
+I.O,10,Counterparty,counterparty,counterpartySector,text,text,Dependent,Data Tables p.84-85,element,counterpartySectorWithRetail,false
+I.O,11,G-SIB,gsib,gsib,text,text,Dependent,Data Tables p.84-85,element,xs:string,false
+I.O,12,Internal,internal,internal,text,flag,Mandatory,Data Tables p.84-85,attribute,xs:boolean,true
+I.O,13,Internal Counterparty,internal_counterparty,internalCounterparty,text,text,Dependent,Data Tables p.84-85,element,internalCounterparty,false
+I.O,14,Business Line,business_line,businessLine,text,text,Mandatory,Data Tables p.84-85,element,businessLine,false
+O.D,1,Reporting Entity,reporting_entity,reportScope,text,text,Mandatory,Data Tables p.84-85,element,reportScope,true
+O.D,2,Product,product_id,depositsProduct,text,text,Mandatory,Data Tables p.84-85,element,depositProduct,true
+O.D,3,Counterparty,counterparty,counterpartySector,text,text,Mandatory,Data Tables p.84-85,element,counterpartySectorWithRetail,true
+O.D,4,G-SIB,gsib,gsib,text,text,Dependent,Data Tables p.84-85,element,xs:string,false
+O.D,5,Maturity Amount,maturity_amount,maturityValue,numeric,numeric,Mandatory,Data Tables p.84-85,element,valueType,true
+O.D,6,Maturity Bucket,maturity_bucket,maturityBucket,text,text,Mandatory,Data Tables p.84-85,element,maturityBucket,true
+O.D,7,Maturity Optionality,maturity_optionality,maturityOptionality,text,text,Dependent,Data Tables p.84-85,element,maturityOptionality,false
+O.D,8,Collateral Class,collateral_class,collateralClass,text,text,Dependent,Data Tables p.84-85,element,collateralClass,false
+O.D,9,Collateral Value,collateral_value,collateralValue,numeric,numeric,Dependent,Data Tables p.84-85,element,valueType,false
+O.D,10,Insured,insured,insured,text,text,Mandatory,Data Tables p.84-85,attribute,insuredType,true
+O.D,11,Trigger,trigger_flag,trigger,text,flag,Mandatory,Data Tables p.84-85,attribute,xs:boolean,true
+O.D,12,Rehypothecated,rehypothecated,rehypothecated,text,flag,Dependent,Data Tables p.84-85,attribute,xs:boolean,false
+O.D,13,Business Line,business_line,businessLine,text,text,Mandatory,Data Tables p.84-85,element,businessLine,false
+O.D,14,Internal,internal,internal,text,flag,Mandatory,Data Tables p.84-85,attribute,xs:boolean,true
+O.D,15,Internal Counterparty,internal_counterparty,internalCounterparty,text,text,Dependent,Data Tables p.84-85,element,internalCounterparty,false
+O.W,1,Reporting Entity,reporting_entity,reportScope,text,text,Mandatory,Data Tables p.84-85,element,reportScope,true
+O.W,2,Product,product_id,wholesaleOutflowProduct,text,text,Mandatory,Data Tables p.84-85,element,wholesaleOutflowProduct,true
+O.W,3,Counterparty,counterparty,counterpartySector,text,text,Dependent,Data Tables p.84-85,element,counterpartySectorWithRetail,false
+O.W,4,G-SIB,gsib,gsib,text,text,Dependent,Data Tables p.84-85,element,xs:string,false
+O.W,5,Maturity Amount,maturity_amount,maturityValue,numeric,numeric,Mandatory,Data Tables p.84-85,element,valueType,true
+O.W,6,Maturity Bucket,maturity_bucket,maturityBucket,text,text,Mandatory,Data Tables p.84-85,element,maturityBucket,true
+O.W,7,Maturity Optionality,maturity_optionality,maturityOptionality,text,text,Dependent,Data Tables p.84-85,element,maturityOptionality,false
+O.W,8,Collateral Class,collateral_class,collateralClass,text,text,Dependent,Data Tables p.84-85,element,collateralClass,false
+O.W,9,Collateral Value,collateral_value,collateralValue,numeric,numeric,Dependent,Data Tables p.84-85,element,valueType,false
+O.W,10,Forward Start Amount,forward_start_amount,forwardStartValue,numeric,numeric,Dependent,Data Tables p.84-85,element,valueType,false
+O.W,11,Forward Start Bucket,forward_start_bucket,forwardStartBucket,text,text,Dependent,Data Tables p.84-85,element,maturityBucket,false
+O.W,12,Internal,internal,internal,text,flag,Mandatory,Data Tables p.84-85,attribute,xs:boolean,true
+O.W,13,Internal Counterparty,internal_counterparty,internalCounterparty,text,text,Dependent,Data Tables p.84-85,element,internalCounterparty,false
+O.W,14,Loss Absorbency,loss_absorbency,lossAbsorbency,text,text,Dependent,Data Tables p.84-85,element,lossAbsorbency,false
+O.W,15,Business Line,business_line,businessLine,text,text,Mandatory,Data Tables p.84-85,element,businessLine,false
+O.S,1,Reporting Entity,reporting_entity,reportScope,text,text,Mandatory,Data Tables p.84-85,element,reportScope,true
+O.S,2,Product,product_id,securedOutflowProduct,text,text,Mandatory,Data Tables p.84-85,element,securedOutflowProduct,true
+O.S,3,Sub-Product,sub_product,securedOutflowCounterpartyOrCoverage,text,text,Dependent,Data Tables p.84-85,element,securedOutflowCounterpartyOrCoverage,false
+O.S,4,Maturity Amount,maturity_amount,maturityValue,numeric,numeric,Mandatory,Data Tables p.84-85,element,valueType,true
+O.S,5,Maturity Bucket,maturity_bucket,maturityBucket,text,text,Mandatory,Data Tables p.84-85,element,maturityBucket,true
+O.S,6,Maturity Optionality,maturity_optionality,maturityOptionality,text,text,Dependent,Data Tables p.84-85,element,maturityOptionality,false
+O.S,7,Forward Start Amount,forward_start_amount,forwardStartValue,numeric,numeric,Dependent,Data Tables p.84-85,element,valueType,false
+O.S,8,Forward Start Bucket,forward_start_bucket,forwardStartBucket,text,text,Dependent,Data Tables p.84-85,element,maturityBucket,false
+O.S,9,Collateral Class,collateral_class,collateralClass,text,text,Mandatory,Data Tables p.84-85,element,collateralClass,true
+O.S,10,Collateral Value,collateral_value,collateralValue,numeric,numeric,Mandatory,Data Tables p.84-85,element,valueType,true
+O.S,11,Treasury Control,treasury_control,treasuryControl,text,flag,Mandatory,Data Tables p.84-85,attribute,xs:boolean,true
+O.S,12,Internal,internal,internal,text,flag,Mandatory,Data Tables p.84-85,attribute,xs:boolean,true
+O.S,13,Internal Counterparty,internal_counterparty,internalCounterparty,text,text,Dependent,Data Tables p.84-85,element,internalCounterparty,false
+O.S,14,Business Line,business_line,businessLine,text,text,Mandatory,Data Tables p.84-85,element,businessLine,false
+O.S,15,Settlement,settlement,settlementMechanism,text,text,Mandatory,Data Tables p.84-85,element,securedSettlementMechanism,true
+O.S,16,Rehypothecated,rehypothecated,rehypothecated,text,flag,Mandatory,Data Tables p.84-85,attribute,xs:boolean,true
+O.S,17,Counterparty,counterparty,counterpartySector,text,text,Mandatory,Data Tables p.84-85,element,counterpartySectorWithRetail,true
+O.S,18,G-SIB,gsib,gsib,text,text,Dependent,Data Tables p.84-85,element,xs:string,false
+O.O,1,Reporting Entity,reporting_entity,reportScope,text,text,Mandatory,Data Tables p.84-85,element,reportScope,true
+O.O,2,Product,product_id,otherOutflowProduct,text,text,Mandatory,Data Tables p.84-85,element,otherOutflowProduct,true
+O.O,3,Counterparty,counterparty,counterpartySector,text,text,Dependent,Data Tables p.84-85,element,counterpartySectorWithRetailAndMunicipalities,false
+O.O,4,G-SIB,gsib,gsib,text,text,Dependent,Data Tables p.84-85,element,xs:string,false
+O.O,5,Maturity Amount,maturity_amount,maturityValue,numeric,numeric,Mandatory,Data Tables p.84-85,element,valueType,true
+O.O,6,Maturity Bucket,maturity_bucket,maturityBucket,text,text,Mandatory,Data Tables p.84-85,element,maturityBucket,true
+O.O,7,Forward Start Amount,forward_start_amount,forwardStartValue,numeric,numeric,Dependent,Data Tables p.84-85,element,valueType,false
+O.O,8,Forward Start Bucket,forward_start_bucket,forwardStartBucket,text,text,Dependent,Data Tables p.84-85,element,maturityBucket,false
+O.O,9,Collateral Class,collateral_class,collateralClass,text,text,Dependent,Data Tables p.84-85,element,collateralClass,false
+O.O,10,Collateral Value,collateral_value,collateralValue,numeric,numeric,Dependent,Data Tables p.84-85,element,valueType,false
+O.O,11,Internal,internal,internal,text,flag,Mandatory,Data Tables p.84-85,attribute,xs:boolean,true
+O.O,12,Internal Counterparty,internal_counterparty,internalCounterparty,text,text,Dependent,Data Tables p.84-85,element,internalCounterparty,false
+O.O,13,Business Line,business_line,businessLine,text,text,Mandatory,Data Tables p.84-85,element,businessLine,false
+S.DC,1,Reporting Entity,reporting_entity,reportScope,text,text,Mandatory,Data Tables p.84-85,element,reportScope,true
+S.DC,2,Product,product_id,derivativesAndCollateralSupProduct,text,text,Mandatory,Data Tables p.84-85,element,derivativesAndCollateralSupProduct,true
+S.DC,3,Sub-Product,sub_product,segregationCategory,text,text,Dependent,Data Tables p.84-85,element,segregationCategory,false
+S.DC,4,Sub-Product2,sub_product_2,executionAndClearingMechanism,text,text,Dependent,Data Tables p.84-85,element,executionAndClearingMechanism,false
+S.DC,5,Market Value,market_value,marketValue,numeric,numeric,Mandatory,Data Tables p.84-85,element,valueType,true
+S.DC,6,Collateral Class,collateral_class,collateralClass,text,text,Dependent,Data Tables p.84-85,element,collateralClass,false
+S.DC,7,Collateral Level,collateral_level,collateralLevel,text,text,Dependent,Data Tables p.84-85,element,collateralLevel,false
+S.DC,8,Counterparty,counterparty,counterpartySector,text,text,Dependent,Data Tables p.84-85,element,counterpartySectorWithRetail,false
+S.DC,9,G-SIB,gsib,gsib,text,text,Dependent,Data Tables p.84-85,element,xs:string,false
+S.DC,10,Effective Maturity Bucket,effective_maturity_bucket,effectiveMaturityBucket,text,text,Dependent,Data Tables p.84-85,element,maturityBucket,false
+S.DC,11,Encumbrance Type,encumbrance_type,encumbranceType,text,text,Dependent,Data Tables p.84-85,element,encumbranceType,false
+S.DC,12,Netting Eligible,netting_eligible,nettingEligible,text,flag,Dependent,Data Tables p.84-85,attribute,xs:boolean,false
+S.DC,13,Treasury Control,treasury_control,treasuryControl,text,flag,Dependent,Data Tables p.84-85,attribute,xs:boolean,false
+S.DC,14,Internal,internal,internal,text,flag,Mandatory,Data Tables p.84-85,attribute,xs:boolean,true
+S.DC,15,Internal Counterparty,internal_counterparty,internalCounterparty,text,text,Dependent,Data Tables p.84-85,element,internalCounterparty,false
+S.DC,16,Business Line,business_line,businessLine,text,text,Mandatory,Data Tables p.84-85,element,businessLine,false
+S.L,1,Reporting Entity,reporting_entity,reportScope,text,text,Mandatory,Data Tables p.84-85,element,reportScope,true
+S.L,2,Product,product_id,liquidityRiskMeasurementSupProduct,text,text,Mandatory,Data Tables p.84-85,element,liquidityRiskMeasurementSupProduct,true
+S.L,3,Market Value,market_value,marketValue,numeric,numeric,Mandatory,Data Tables p.84-85,element,valueType,true
+S.L,4,Collateral Class,collateral_class,collateralClass,text,text,Dependent,Data Tables p.84-85,element,collateralClass,false
+S.L,5,Internal,internal,internal,text,flag,Mandatory,Data Tables p.84-85,attribute,xs:boolean,true
+S.L,6,Internal Counterparty,internal_counterparty,internalCounterparty,text,text,Dependent,Data Tables p.84-85,element,internalCounterparty,false
+S.B,1,Reporting Entity,reporting_entity,reportScope,text,text,Mandatory,Data Tables p.84-85,element,reportScope,true
+S.B,2,Collection Reference,collection_reference,collectionReference,text,text,Dependent,Data Tables p.84-85,element,collectionReference,false
+S.B,3,Product,product_id,balanceSheetSupProduct,text,text,Mandatory,Data Tables p.84-85,element,balanceSheetSupProduct,true
+S.B,4,Product Reference,product_reference,productReference,text,text,Dependent,Data Tables p.84-85,element,productReference,false
+S.B,5,Sub-Product Reference,sub_product_reference,subProductReference,text,text,Dependent,Data Tables p.84-85,element,subProductReference,false
+S.B,6,Collateral Class,collateral_class,collateralClass,text,text,Dependent,Data Tables p.84-85,element,collateralClass,false
+S.B,7,Maturity Bucket,maturity_bucket,maturityBucket,text,text,Mandatory,Data Tables p.84-85,element,maturityBucket,true
+S.B,8,Effective Maturity Bucket,effective_maturity_bucket,effectiveMaturityBucket,text,text,Dependent,Data Tables p.84-85,element,maturityBucket,false
+S.B,9,Encumbrance Type,encumbrance_type,encumbranceType,text,text,Dependent,Data Tables p.84-85,element,encumbranceType,false
+S.B,10,Market Value,market_value,marketValue,numeric,numeric,Dependent,Data Tables p.84-85,element,anyValueType,false
+S.B,11,Maturity Amount,maturity_amount,maturityValue,numeric,numeric,Dependent,Data Tables p.84-85,element,anyValueType,false
+S.B,12,Collateral Value,collateral_value,collateralValue,numeric,numeric,Dependent,Data Tables p.84-85,element,anyValueType,false
+S.B,13,Counterparty,counterparty,counterpartySector,text,text,Dependent,Data Tables p.84-85,element,counterpartySectorWithRetail,false
+S.B,14,G-SIB,gsib,gsib,text,text,Dependent,Data Tables p.84-85,element,xs:string,false
+S.B,15,Risk Weight,risk_weight,riskWeight,percent,percent,Dependent,Data Tables p.84-85,element,decimalValue,false
+S.B,16,Internal,internal,internal,text,flag,Mandatory,Data Tables p.84-85,attribute,xs:boolean,true
+S.B,17,Internal Counterparty,internal_counterparty,internalCounterparty,text,text,Dependent,Data Tables p.84-85,element,internalCounterparty,false
+S.I,1,Reporting Entity,reporting_entity,reportScope,text,text,Mandatory,Data Tables p.84-85,element,reportScope,true
+S.I,2,Product,product_id,supplementalInformationProduct,text,text,Mandatory,Data Tables p.84-85,element,supplementalInformationProduct,true
+S.I,3,Market Value,market_value,marketValue,numeric,numeric,Mandatory,Data Tables p.84-85,element,valueType,true
+S.I,4,Collateral Class,collateral_class,collateralClass,text,text,Dependent,Data Tables p.84-85,element,collateralClass,false
+S.I,5,Internal,internal,internal,text,flag,Mandatory,Data Tables p.84-85,attribute,xs:boolean,true
+S.I,6,Internal Counterparty,internal_counterparty,internalCounterparty,text,text,Dependent,Data Tables p.84-85,element,internalCounterparty,false
+S.I,7,Business Line,business_line,businessLine,text,text,Mandatory,Data Tables p.84-85,element,businessLine,false
+S.FX,1,Reporting Entity,reporting_entity,reportScope,text,text,Mandatory,Data Tables p.84-85,element,reportScope,true
+S.FX,2,Product,product_id,foreignExchangeProduct,text,text,Mandatory,Data Tables p.84-85,element,foreignExchangeProduct,true
+S.FX,3,Maturity Amount Currency 1,maturity_amount_currency_1,baseMaturityValue,numeric,numeric,Mandatory,Data Tables p.84-85,element,valueType,true
+S.FX,4,Maturity Amount Currency 2,maturity_amount_currency_2,targetMaturityValue,numeric,numeric,Mandatory,Data Tables p.84-85,element,valueType,true
+S.FX,5,Maturity Bucket,maturity_bucket,maturityBucket,text,text,Mandatory,Data Tables p.84-85,element,maturityBucket,true
+S.FX,6,Foreign Exchange Option Direction,fx_option_direction,foreignExchangeOptionDirection,text,text,Dependent,Data Tables p.84-85,element,foreignExchangeOptionDirection,false
+S.FX,7,Forward Start Amount Currency 1,forward_start_amount_currency_1,baseForwardMaturityValue,numeric,numeric,Dependent,Data Tables p.84-85,element,valueType,false
+S.FX,8,Forward Start Amount Currency 2,forward_start_amount_currency_2,targetForwardMaturityValue,numeric,numeric,Dependent,Data Tables p.84-85,element,valueType,false
+S.FX,9,Forward Start Bucket,forward_start_bucket,forwardMaturityBucket,text,text,Dependent,Data Tables p.84-85,element,maturityBucket,false
+S.FX,10,Counterparty,counterparty,counterpartySector,text,text,Mandatory,Data Tables p.84-85,element,counterpartySectorWithRetail,true
+S.FX,11,G-SIB,gsib,gsib,text,text,Dependent,Data Tables p.84-85,element,xs:string,false
+S.FX,12,Settlement,settlement,settlementMechanism,text,text,Mandatory,Data Tables p.84-85,element,foreignExchangeSettlementMechanism,true
+S.FX,13,Business Line,business_line,businessLine,text,text,Mandatory,Data Tables p.84-85,element,businessLine,false
+S.FX,14,Internal,internal,internal,text,flag,Mandatory,Data Tables p.84-85,attribute,xs:boolean,true
+S.FX,15,Internal Counterparty,internal_counterparty,internalCounterparty,text,text,Dependent,Data Tables p.84-85,element,internalCounterparty,false
+S.C,1,Reporting Entity,reporting_entity,reportScope,text,text,Mandatory,Data Tables p.84-85,,,
+S.C,2,Collection,collection,reportTypes,text,text,Mandatory,Data Tables p.84-85,,,
+S.C,3,Product,product_id,product,text,text,Mandatory,Data Tables p.84-85,,,
+S.C,4,Sub-Product,sub_product,subProduct,text,text,Dependent,Data Tables p.84-85,,,
+S.C,5,Comments,comments,text,text,text,Mandatory,Data Tables p.84-85,,,
+I.A,16,Currency,currency,unit,text,text,Mandatory,Footnote 16 p.84 / Field Definitions p.16-17,attribute,currencyUnit,true
+I.A,17,Converted,converted,converted,flag,flag,Mandatory,Footnote 16 p.84 / Field Definitions p.16-17,attribute,xs:boolean,true
+I.U,16,Currency,currency,unit,text,text,Mandatory,Footnote 16 p.84 / Field Definitions p.16-17,attribute,currencyUnit,true
+I.U,17,Converted,converted,converted,flag,flag,Mandatory,Footnote 16 p.84 / Field Definitions p.16-17,attribute,xs:boolean,true
+I.S,22,Currency,currency,unit,text,text,Mandatory,Footnote 16 p.84 / Field Definitions p.16-17,attribute,currencyUnit,true
+I.S,23,Converted,converted,converted,flag,flag,Mandatory,Footnote 16 p.84 / Field Definitions p.16-17,attribute,xs:boolean,true
+I.O,15,Currency,currency,unit,text,text,Mandatory,Footnote 16 p.84 / Field Definitions p.16-17,attribute,currencyUnit,true
+I.O,16,Converted,converted,converted,flag,flag,Mandatory,Footnote 16 p.84 / Field Definitions p.16-17,attribute,xs:boolean,true
+O.D,16,Currency,currency,unit,text,text,Mandatory,Footnote 16 p.84 / Field Definitions p.16-17,attribute,currencyUnit,true
+O.D,17,Converted,converted,converted,flag,flag,Mandatory,Footnote 16 p.84 / Field Definitions p.16-17,attribute,xs:boolean,true
+O.W,16,Currency,currency,unit,text,text,Mandatory,Footnote 16 p.84 / Field Definitions p.16-17,attribute,currencyUnit,true
+O.W,17,Converted,converted,converted,flag,flag,Mandatory,Footnote 16 p.84 / Field Definitions p.16-17,attribute,xs:boolean,true
+O.S,19,Currency,currency,unit,text,text,Mandatory,Footnote 16 p.84 / Field Definitions p.16-17,attribute,currencyUnit,true
+O.S,20,Converted,converted,converted,flag,flag,Mandatory,Footnote 16 p.84 / Field Definitions p.16-17,attribute,xs:boolean,true
+O.O,14,Currency,currency,unit,text,text,Mandatory,Footnote 16 p.84 / Field Definitions p.16-17,attribute,currencyUnit,true
+O.O,15,Converted,converted,converted,flag,flag,Mandatory,Footnote 16 p.84 / Field Definitions p.16-17,attribute,xs:boolean,true
+S.DC,17,Currency,currency,unit,text,text,Mandatory,Footnote 16 p.84 / Field Definitions p.16-17,attribute,currencyUnit,true
+S.DC,18,Converted,converted,converted,flag,flag,Mandatory,Footnote 16 p.84 / Field Definitions p.16-17,attribute,xs:boolean,true
+S.L,7,Currency,currency,unit,text,text,Mandatory,Footnote 16 p.84 / Field Definitions p.16-17,attribute,currencyUnit,true
+S.L,8,Converted,converted,converted,flag,flag,Mandatory,Footnote 16 p.84 / Field Definitions p.16-17,attribute,xs:boolean,true
+S.B,18,Currency,currency,unit,text,text,Mandatory,Footnote 16 p.84 / Field Definitions p.16-17,attribute,currencyUnit,true
+S.B,19,Converted,converted,converted,flag,flag,Mandatory,Footnote 16 p.84 / Field Definitions p.16-17,attribute,xs:boolean,true
+S.I,8,Currency,currency,unit,text,text,Mandatory,Footnote 16 p.84 / Field Definitions p.16-17,attribute,currencyUnit,true
+S.I,9,Converted,converted,converted,flag,flag,Mandatory,Footnote 16 p.84 / Field Definitions p.16-17,attribute,xs:boolean,true
+S.FX,16,Currency 1,currency_1,unit,text,text,Mandatory,Footnote 16 p.84 / Field Definitions p.16-17,attribute,currencyUnit,true
+S.FX,17,Currency 2,currency_2,unit,text,text,Mandatory,Footnote 16 p.84 / Field Definitions p.16-17,attribute,currencyUnit,true
+S.FX,18,Converted,converted,converted,flag,flag,Mandatory,Footnote 16 p.84 / Field Definitions p.16-17,attribute,xs:boolean,true

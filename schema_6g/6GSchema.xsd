@@ -1,0 +1,1016 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:include schemaLocation="XYZBANKIncludesSchema.xsd"/>
+	<!--Components-->
+	<xs:simpleType name="reportingFrequency">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="Primary"/>
+			<xs:enumeration value="Reduced"/>
+		</xs:restriction>
+	</xs:simpleType>	
+	<xs:simpleType name="encumbranceType">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="Securities Financing Transaction"/>
+			<xs:enumeration value="Derivative VM"/>
+			<xs:enumeration value="Derivative IM and DFC"/>
+			<xs:enumeration value="Other IM and DFC"/>
+			<xs:enumeration value="Segregated for Customer Protection"/>
+			<xs:enumeration value="Covered Federal Reserve Facility Funding"/>
+			<xs:enumeration value="Other"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="lossAbsorbency">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="Capital"/>
+			<xs:enumeration value="TLAC"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="maturityOptionality">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="Evergreen"/>
+			<xs:enumeration value="Extendible"/>
+			<xs:enumeration value="Accelerated-Counterparty"/>
+			<xs:enumeration value="Accelerated-Firm"/>
+			<xs:enumeration value="Not Accelerated"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="collateralLevel">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="Uncollateralized"/>
+			<xs:enumeration value="Undercollateralized"/>
+			<xs:enumeration value="Fully Collateralized"/>
+			<xs:enumeration value="Overcollateralized"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="executionAndClearingMechanism">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="OTC - Bilateral"/>
+			<xs:enumeration value="OTC - Centralized (Principal)"/>
+			<xs:enumeration value="OTC - Centralized (Agent)"/>
+			<xs:enumeration value="Exchange-traded (Principal)"/>
+			<xs:enumeration value="Exchange-traded (Agent)"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="accountingDesignation">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="Available for Sale"/>
+			<xs:enumeration value="Held to Maturity"/>
+			<xs:enumeration value="Trading Asset"/>
+			<xs:enumeration value="Not Applicable"/>
+		</xs:restriction>
+	</xs:simpleType>	
+	<xs:simpleType name="collectionReference">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="I.A"/>
+			<xs:enumeration value="I.S"/>
+			<xs:enumeration value="I.U"/>
+			<xs:enumeration value="I.O"/>
+			<xs:enumeration value="O.D"/>
+			<xs:enumeration value="O.S"/>
+			<xs:enumeration value="O.W"/>
+			<xs:enumeration value="O.O"/>
+			<xs:enumeration value="S.DC"/>
+		</xs:restriction>
+	</xs:simpleType>	
+	<xs:simpleType name="decimalValue">
+		<xs:restriction base="xs:decimal">
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="individualCentralBanks">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="Bank of Canada"/>
+			<xs:enumeration value="Bank of England"/>
+			<xs:enumeration value="Bank of Japan"/>
+			<xs:enumeration value="European Central Bank"/>
+			<xs:enumeration value="Reserve Bank of Australia"/>
+			<xs:enumeration value="Swiss National Bank"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="aggregateCentralAndGovernmentBanks">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="Federal Home Loan Bank"/>
+			<xs:enumeration value="Federal Reserve Bank"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="counterpartySectorBase">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="Non-Financial Corporate"/>
+			<xs:enumeration value="Sovereign"/>
+			<xs:enumeration value="Central Bank"/>
+			<xs:enumeration value="Government Sponsored Entity"/>
+			<xs:enumeration value="Public Sector Entity"/>
+			<xs:enumeration value="Multilateral Development Bank"/>
+			<xs:enumeration value="Other Supranational"/>
+			<xs:enumeration value="Bank"/>
+			<xs:enumeration value="Pension Fund"/>
+			<xs:enumeration value="Broker Dealer"/>
+			<xs:enumeration value="Investment Company or Advisor"/>
+			<xs:enumeration value="Financial Market Utlility"/>
+			<xs:enumeration value="Other Supervised Non-Bank Financial Entity"/>
+			<xs:enumeration value="Debt Issuing Special Purpose Entity"/>
+			<xs:enumeration value="Non-regulated Fund"/>
+			<xs:enumeration value="Other"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="counterpartySectorMunicipalities">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="Municipalities for VRDN Structures"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="counterpartySectorRetail">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="Retail"/>
+			<xs:enumeration value="Small Business"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="coverageType">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="External Cash Transactions"/>
+			<xs:enumeration value="External Non-Cash Transactions"/>
+			<xs:enumeration value="Firm Longs"/>
+			<xs:enumeration value="Customer Longs"/>
+			<xs:enumeration value="Unsettled - Regular Way"/>
+			<xs:enumeration value="Unsettled - Forward"/>
+			<xs:enumeration value="Level 1 Received"/>
+			<xs:enumeration value="Level 2a Received"/>
+			<xs:enumeration value="Level 2b Received"/>
+			<xs:enumeration value="Non-HQLA Received"/>
+			<xs:enumeration value="No Collateral Received"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="coveredFederalReserveFunding">
+     <xs:restriction base="xs:string">
+				<xs:enumeration value="Covered Federal Reserve Facility Funding"/>
+     </xs:restriction>
+  </xs:simpleType>
+	<xs:simpleType name="shortHedgingType">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="Firm Short"/>
+			<xs:enumeration value="Synthetic Customer Long"/>
+			<xs:enumeration value="Synthetic Firm Sourcing"/>
+			<xs:enumeration value="Futures"/>
+			<xs:enumeration value="Other"/>
+			<xs:enumeration value="Unhedged"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="currency">
+		<xs:union memberTypes="currencyUnit"/>
+	</xs:simpleType>
+	<xs:simpleType name="currencyUnit">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="AUD"/>
+			<xs:enumeration value="CAD"/>
+			<xs:enumeration value="CHF"/>
+			<xs:enumeration value="EUR"/>
+			<xs:enumeration value="GBP"/>
+			<xs:enumeration value="JPY"/>
+			<xs:enumeration value="USD"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="federalReserve">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="Federal Reserve Bank"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="insuredType">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="FDIC"/>
+			<xs:enumeration value="Other"/>
+			<xs:enumeration value="Uninsured"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="maturityBucketDay">
+		<xs:restriction base="xs:duration">
+			<xs:minInclusive value="P0D"/>
+			<xs:maxInclusive value="P60D"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="maturityBucketStartRange">
+		<xs:restriction base="xs:duration">
+			<xs:enumeration value="P61D"/>
+			<xs:enumeration value="P68D"/>
+			<xs:enumeration value="P75D"/>
+			<xs:enumeration value="P83D"/>
+			<xs:enumeration value="P91D"/>
+			<xs:enumeration value="P121D"/>
+			<xs:enumeration value="P151D"/>
+			<xs:enumeration value="P180D"/>
+			<xs:enumeration value="P271D"/>
+			<xs:enumeration value="P365D"/>
+			<xs:enumeration value="P731D"/>
+			<xs:enumeration value="P1096D"/>
+			<xs:enumeration value="P1461D"/>
+			<xs:enumeration value="P1827D"/><!-- More than 5 years -->
+			<xs:enumeration value="P99999D"/><!-- Perpetual -->
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="maturityBucketEndRange">
+		<xs:restriction base="xs:duration">
+			<xs:enumeration value="P67D"/>
+			<xs:enumeration value="P74D"/>
+			<xs:enumeration value="P82D"/>
+			<xs:enumeration value="P90D"/>
+			<xs:enumeration value="P120D"/>
+			<xs:enumeration value="P150D"/>
+			<xs:enumeration value="P179D"/>
+			<xs:enumeration value="P270D"/>
+			<xs:enumeration value="P364D"/>
+			<xs:enumeration value="P730D"/>
+			<xs:enumeration value="P1095D"/>
+			<xs:enumeration value="P1460D"/>
+			<xs:enumeration value="P1826D"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="maturityBucketStart">
+		<xs:union memberTypes="maturityBucketDay maturityBucketStartRange"/>
+	</xs:simpleType>
+	<xs:simpleType name="maturityBucketEnd">
+		<xs:union memberTypes="maturityBucketDay maturityBucketEndRange"/>
+	</xs:simpleType>
+	<xs:complexType name="maturityBucket">
+		<xs:sequence>
+			<xs:element name="maturityStart" type="maturityBucketStart" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="maturityEnd" type="maturityBucketEnd" minOccurs="0" maxOccurs="1"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:simpleType name="publicCounterpartyType">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="Central Bank"/>
+			<xs:enumeration value="Public Sector Entity"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="unidentifiedCentralAndGovernmentBankSource">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="Other Central Bank"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="unidentifiedGovernmentSponsoredSource">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="Other Government Sponsored Entity"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="unspecifiedSource">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="Currency and Coin"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="valueBase">
+		<xs:restriction base="xs:decimal">
+			<xs:minInclusive value="0"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="tenDigitPositiveIntegerType">
+		<xs:restriction base="xs:integer">
+			<xs:minExclusive value="0"/>
+			<xs:maxInclusive value="9999999999"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<!--Report Products-->
+	<xs:simpleType name="derivativesAndCollateralSupProduct">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="Gross Derivative Asset Values"/>
+			<xs:enumeration value="Gross Derivative Liability Values"/>
+			<xs:enumeration value="Derivative Settlement Payments Delivered"/>
+			<xs:enumeration value="Derivative Settlement Payments Received"/>
+			<xs:enumeration value="Initial Margin Posted - House"/>
+			<xs:enumeration value="Initial Margin Posted - Customer"/>
+			<xs:enumeration value="Initial Margin Received"/>
+			<xs:enumeration value="Variation Margin Posted - House"/>
+			<xs:enumeration value="Variation Margin Posted - Customer"/>
+			<xs:enumeration value="Variation Margin Received"/>
+			<xs:enumeration value="Derivative CCP Default Fund Contribution"/>
+			<xs:enumeration value="Other CCP Pledges and Contributions"/>
+			<xs:enumeration value="Collateral Disputes Deliverables"/>
+			<xs:enumeration value="Collateral Disputes Receivables"/>
+			<xs:enumeration value="Sleeper Collateral Deliverables"/>
+			<xs:enumeration value="Required Collateral Deliverables"/>
+			<xs:enumeration value="Sleeper Collateral Receivables"/>
+			<xs:enumeration value="Derivative Collateral Substitution Risk"/>
+			<xs:enumeration value="Derivative Collateral Substitution Capacity"/>
+			<xs:enumeration value="Other Collateral Substitution Risk"/>
+			<xs:enumeration value="Other Collateral Substitution Capacity"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="liquidityRiskMeasurementSupProduct">
+		<xs:restriction base="xs:string">
+			<!-- LCR Products -->
+			<xs:enumeration value="Subsidiary Liquidity That Cannot be Transferred"/>
+			<xs:enumeration value="Subsidiary Liquidity Available for Transfer"/>
+			<xs:enumeration value="Unencumbered Asset Hedges - Early Termination Outflows"/>
+			<xs:enumeration value="Non-Structured Debt Maturing in Greater than 30-days - Primary Market Maker"/>
+			<xs:enumeration value="Structured Debt Maturing in Greater than 30-days - Primary Market Maker"/>
+			<xs:enumeration value="Liquidity Coverage Ratio"/>
+			<!-- NSFR Products -->
+			<xs:enumeration value="Subsidiary Funding That Cannot be Transferred"/>
+			<xs:enumeration value="Subsidiary Funding Available for Transfer"/>
+			<xs:enumeration value="Additional Funding Requirement for Off-Balance Sheet Rehypothecated Assets"/>
+			<xs:enumeration value="Net Stable Funding Ratio"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="balanceSheetSupProduct">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="Regulatory Capital Element"/>
+			<xs:enumeration value="Other Liabilities"/>
+			<xs:enumeration value="Non-Performing Assets"/>
+			<xs:enumeration value="Other Assets"/>
+			<xs:enumeration value="Counterparty Netting"/>
+			<xs:enumeration value="Carrying Value Adjustment"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="productReference">
+		<xs:union memberTypes="assetProduct securedInflowProduct unsecuredProduct otherInflowProduct depositProduct wholesaleOutflowProduct  securedOutflowProduct otherOutflowProduct derivativesAndCollateralSupProduct"/>
+	</xs:simpleType>
+	<xs:simpleType name="subProductReference">
+		<xs:union memberTypes="assetSource pledgeLevelAndLongHedging securedOutflowCounterpartyOrCoverage segregationCategory"/>
+	</xs:simpleType>
+	<xs:simpleType name="assetProduct">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="Unencumbered Assets"/>
+			<xs:enumeration value="Capacity"/>
+			<xs:enumeration value="Unrestricted Reserve Balances"/>
+			<xs:enumeration value="Restricted Reserve Balances"/>
+			<xs:enumeration value="Unsettled Asset Purchases"/>
+			<xs:enumeration value="Forward Asset Purchases"/>
+			<xs:enumeration value="Encumbered Assets"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="depositProduct">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="Transactional Accounts"/>
+			<xs:enumeration value="Non-Transactional Relationship Accounts"/>
+			<xs:enumeration value="Non-Transactional Non-Relationship Accounts"/>
+			<xs:enumeration value="Operational Account Balances"/>
+			<xs:enumeration value="Excess Balances in Operational Accounts"/>
+			<xs:enumeration value="Non-Operational Account Balances"/>
+			<xs:enumeration value="Operational Escrow Accounts"/>
+			<xs:enumeration value="Non-Reciprocal Brokered Deposits"/>
+			<xs:enumeration value="Stable Affiliated Sweep Account Balances"/>
+			<xs:enumeration value="Less Stable Affiliated Sweep Account Balances"/>
+			<xs:enumeration value="Non-Affiliated Sweep Accounts"/>
+			<xs:enumeration value="Other Product Sweep Accounts"/>
+			<xs:enumeration value="Reciprocal Accounts"/>
+			<xs:enumeration value="Other Third-Party Deposits"/>
+			<xs:enumeration value="Other Accounts"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="foreignExchangeProduct">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="Spot"/>
+			<xs:enumeration value="Forwards and Futures"/>
+			<xs:enumeration value="Swaps"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="otherInflowProduct">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="Derivative Receivables"/>
+			<xs:enumeration value="Collateral Called for Receipt"/>
+			<xs:enumeration value="TBA Sales"/>
+			<xs:enumeration value="Undrawn Committed Facilities Purchased"/>
+			<xs:enumeration value="Lock-up Balance"/>
+			<xs:enumeration value="Interest and Dividends Receivable"/>
+			<xs:enumeration value="Net 30-Day Derivative Receivables"/>
+			<xs:enumeration value="Principal Payments Receivable on Unencumbered Investment Securities"/>
+			<xs:enumeration value="Other Cash Inflows"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="otherOutflowProduct">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="Derivative Payables"/>
+			<xs:enumeration value="Collateral Called for Delivery"/>
+			<xs:enumeration value="TBA Purchases"/>
+			<xs:enumeration value="Credit Facilities"/>
+			<xs:enumeration value="Liquidity Facilities"/>
+			<xs:enumeration value="Retail Mortgage Commitments"/>
+			<xs:enumeration value="Trade Finance Instruments"/>
+			<xs:enumeration value="MTM Impact on Derivative Positions"/>
+			<xs:enumeration value="Loss of Rehypothecation Rights Due to a 1 Notch Downgrade"/>
+			<xs:enumeration value="Loss of Rehypothecation Rights Due to a 2 Notch Downgrade"/>
+			<xs:enumeration value="Loss of Rehypothecation Rights Due to a 3 Notch Downgrade"/>
+			<xs:enumeration value="Loss of Rehypothecation Rights Due to a Change in Financial Condition"/>
+			<xs:enumeration value="Total Collateral Required Due to a 1 Notch Downgrade"/>
+			<xs:enumeration value="Total Collateral Required Due to a 2 Notch Downgrade"/>
+			<xs:enumeration value="Total Collateral Required Due to a 3 Notch Downgrade"/>
+			<xs:enumeration value="Total Collateral Required Due to a Change in Financial Condition"/>
+			<xs:enumeration value="Excess Margin"/>
+			<xs:enumeration value="Unfunded Term Margin"/>
+			<xs:enumeration value="Interest and Dividends Payable"/>
+			<xs:enumeration value="Net 30-Day Derivative Payables"/>
+			<xs:enumeration value="Other Outflows Related to Structured Transactions"/>
+			<xs:enumeration value="Other Cash Outflows"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="securedInflowProduct">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="Reverse Repo"/>
+			<xs:enumeration value="Securities Borrowing"/>
+			<xs:enumeration value="Dollar Rolls"/>
+			<xs:enumeration value="Collateral Swaps"/>
+			<xs:enumeration value="Margin Loans"/>
+			<xs:enumeration value="Other Secured Loans - Rehypothecatable"/>
+			<xs:enumeration value="Outstanding Draws on Secured Revolving Facilities"/>
+			<xs:enumeration value="Other Secured Loans - Non-Rehypothecatable"/>			
+			<xs:enumeration value="Synthetic Customer Longs"/>
+			<xs:enumeration value="Synthetic Firm Sourcing"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="securedOutflowProduct">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="Repo"/>
+			<xs:enumeration value="Securities Lending"/>
+			<xs:enumeration value="Dollar Rolls"/>
+			<xs:enumeration value="Collateral Swaps"/>
+			<xs:enumeration value="FHLB Advances"/>
+			<xs:enumeration value="Exceptional Central Bank Operations"/>
+			<xs:enumeration value="Customer Shorts"/>
+			<xs:enumeration value="Firm Shorts"/>
+			<xs:enumeration value="Synthetic Customer Shorts"/>
+			<xs:enumeration value="Synthetic Firm Financing"/>
+			<xs:enumeration value="Other Secured Financing Transactions"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="supplementalInformationProduct">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="Long Market Value Client Assets"/>
+			<xs:enumeration value="Short Market Value Client Assets"/>
+			<xs:enumeration value="Gross Client Wires Received"/>
+			<xs:enumeration value="Gross Client Wires Paid"/>
+			<xs:enumeration value="FRB 23A Capacity"/>
+			<xs:enumeration value="Subsidiary Liquidity Not Transferrable"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="unsecuredProduct">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="Onshore Placements"/>
+			<xs:enumeration value="Offshore Placements"/>
+			<xs:enumeration value="Required Operational Balances"/>
+			<xs:enumeration value="Excess Operational Balances"/>
+			<xs:enumeration value="Outstanding Draws on Unsecured Revolving Facilities"/>
+			<xs:enumeration value="Other Loans"/>
+			<xs:enumeration value="Cash Items in the Process of Collection"/>
+			<xs:enumeration value="Short-Term Investments"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="wholesaleOutflowProduct">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="Asset-Backed Commercial Paper: Single-Seller"/>
+			<xs:enumeration value="Asset-Backed Commercial Paper: Multi-Seller"/>
+			<xs:enumeration value="Collateralized Commercial Paper"/>
+			<xs:enumeration value="Asset-Backed Securities"/>
+			<xs:enumeration value="Covered Bonds"/>
+			<xs:enumeration value="Tender Option Bonds"/>
+			<xs:enumeration value="Other Asset-Backed Financing"/>
+			<xs:enumeration value="Commercial Paper"/>
+			<xs:enumeration value="Onshore Borrowing"/>
+			<xs:enumeration value="Offshore Borrowing"/>
+			<xs:enumeration value="Unstructured Long Term Debt"/>
+			<xs:enumeration value="Structured Long Term Debt"/>
+			<xs:enumeration value="Government Supported Debt"/>
+			<xs:enumeration value="Unsecured Notes"/>
+			<xs:enumeration value="Structured Notes"/>
+			<xs:enumeration value="Wholesale CDs"/>
+			<xs:enumeration value="Draws on Committed Lines"/>
+			<xs:enumeration value="Free Credits"/>
+			<xs:enumeration value="Other Unsecured Financing"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<!--Report Domains and Sources-->
+	<!--(which the BDD calls "sub-products")-->
+	<xs:simpleType name="assetSource">
+		<xs:union memberTypes="individualCentralBanks aggregateCentralAndGovernmentBanks unidentifiedCentralAndGovernmentBankSource unidentifiedGovernmentSponsoredSource unspecifiedSource"/>
+	</xs:simpleType>
+	<xs:simpleType name="foreignExchangeOptionDirection">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="Purchased"/>
+			<xs:enumeration value="Sold"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="counterpartySectorWithRetailAndMunicipalities">
+		<xs:union memberTypes="counterpartySectorBase counterpartySectorRetail counterpartySectorMunicipalities"/>
+	</xs:simpleType>
+	<xs:simpleType name="counterpartySectorWithRetail">
+		<xs:union memberTypes="counterpartySectorBase counterpartySectorRetail"/>
+	</xs:simpleType>
+	<xs:simpleType name="pledgeLevelAndLongHedging">
+		<xs:union memberTypes="pledgeLevel longHedging"/>
+	</xs:simpleType>
+	<xs:simpleType name="pledgeLevel">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="Level 1 Pledged"/>
+			<xs:enumeration value="Level 2a Pledged"/>
+			<xs:enumeration value="Level 2b Pledged"/>
+			<xs:enumeration value="Non-HQLA Pledged"/>
+			<xs:enumeration value="No Collateral Pledged"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="longHedging">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="Physical Long Position"/>
+			<xs:enumeration value="Synthetic Customer Short"/>
+			<xs:enumeration value="Synthetic Firm Financing"/>
+			<xs:enumeration value="Futures"/>
+			<xs:enumeration value="Other"/>
+			<xs:enumeration value="Unhedged"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="securedOutflowCounterpartyOrCoverage">
+		<xs:union memberTypes="individualCentralBanks federalReserve unidentifiedCentralAndGovernmentBankSource coverageType coveredFederalReserveFunding shortHedgingType"/>
+	</xs:simpleType>
+	<xs:simpleType name="segregationCategory">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="Rehypothecateable Collateral Unencumbered"/>
+			<xs:enumeration value="Rehypothecateable Collateral Encumbered"/>
+			<xs:enumeration value="Non-Rehypothecateable Collateral"/>
+			<xs:enumeration value="Segregated Cash"/>
+			<xs:enumeration value="Non-Segregated Cash"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<!--Report Elements Other than Subjects, Domains, and Sources-->
+	<xs:simpleType name="collateralClass">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="A-0-Q"/>
+			<xs:enumeration value="A-1-Q"/>
+			<xs:enumeration value="A-2-Q"/>
+			<xs:enumeration value="A-3-Q"/>
+			<xs:enumeration value="A-4-Q"/>
+			<xs:enumeration value="A-5-Q"/>
+			<xs:enumeration value="S-1-Q"/>
+			<xs:enumeration value="S-2-Q"/>
+			<xs:enumeration value="S-3-Q"/>
+			<xs:enumeration value="S-4-Q"/>
+			<xs:enumeration value="CB-1-Q"/>
+			<xs:enumeration value="CB-2-Q"/>
+			<xs:enumeration value="G-1-Q"/>
+			<xs:enumeration value="G-2-Q"/>
+			<xs:enumeration value="G-3-Q"/>
+			<xs:enumeration value="S-5-Q"/>
+			<xs:enumeration value="S-6-Q"/>
+			<xs:enumeration value="S-7-Q"/>
+			<xs:enumeration value="CB-3-Q"/>
+			<xs:enumeration value="E-1-Q"/>
+			<xs:enumeration value="E-2-Q"/>
+			<xs:enumeration value="IG-1-Q"/>
+			<xs:enumeration value="IG-2-Q"/>
+			<xs:enumeration value="A-2"/>
+			<xs:enumeration value="A-3"/>
+			<xs:enumeration value="A-4"/>
+			<xs:enumeration value="A-5"/>
+			<xs:enumeration value="S-1"/>
+			<xs:enumeration value="S-2"/>
+			<xs:enumeration value="S-3"/>
+			<xs:enumeration value="S-4"/>
+			<xs:enumeration value="CB-1"/>
+			<xs:enumeration value="CB-2"/>
+			<xs:enumeration value="G-1"/>
+			<xs:enumeration value="G-2"/>
+			<xs:enumeration value="G-3"/>
+			<xs:enumeration value="S-5"/>
+			<xs:enumeration value="S-6"/>
+			<xs:enumeration value="S-7"/>
+			<xs:enumeration value="CB-3"/>
+			<xs:enumeration value="E-1"/>
+			<xs:enumeration value="E-2"/>
+			<xs:enumeration value="IG-1"/>
+			<xs:enumeration value="IG-2"/>
+			<xs:enumeration value="S-8"/>
+			<xs:enumeration value="CB-4"/>
+			<xs:enumeration value="G-4"/>
+			<xs:enumeration value="E-3"/>
+			<xs:enumeration value="E-4"/>
+			<xs:enumeration value="E-5"/>
+			<xs:enumeration value="E-6"/>
+			<xs:enumeration value="E-7"/>
+			<xs:enumeration value="E-8"/>
+			<xs:enumeration value="E-9"/>
+			<xs:enumeration value="E-10"/>
+			<xs:enumeration value="IG-3"/>
+			<xs:enumeration value="IG-4"/>
+			<xs:enumeration value="IG-5"/>
+			<xs:enumeration value="IG-6"/>
+			<xs:enumeration value="IG-7"/>
+			<xs:enumeration value="IG-8"/>
+			<xs:enumeration value="N-1"/>
+			<xs:enumeration value="N-2"/>
+			<xs:enumeration value="N-3"/>
+			<xs:enumeration value="N-4"/>
+			<xs:enumeration value="N-5"/>
+			<xs:enumeration value="N-6"/>
+			<xs:enumeration value="N-7"/>
+			<xs:enumeration value="N-8"/>
+			<xs:enumeration value="L-1"/>
+			<xs:enumeration value="L-2"/>
+			<xs:enumeration value="L-3"/>
+			<xs:enumeration value="L-4"/>
+			<xs:enumeration value="L-5"/>
+			<xs:enumeration value="L-6"/>
+			<xs:enumeration value="L-7"/>
+			<xs:enumeration value="L-8"/>
+			<xs:enumeration value="L-9"/>
+			<xs:enumeration value="L-10"/>
+			<xs:enumeration value="L-11"/>
+			<xs:enumeration value="L-12"/>
+			<xs:enumeration value="Y-1"/>
+			<xs:enumeration value="Y-2"/>
+			<xs:enumeration value="Y-3"/>
+			<xs:enumeration value="Y-4"/>
+			<xs:enumeration value="C-1"/>
+			<xs:enumeration value="P-1"/>
+			<xs:enumeration value="P-2"/>
+			<xs:enumeration value="LC-1"/>
+			<xs:enumeration value="LC-2"/>
+			<xs:enumeration value="Z-1"/>		
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="supplementalInformationSettlementMechanism">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="Bilateral"/>
+			<xs:enumeration value="Centralized"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="foreignExchangeSettlementMechanism">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="Bilateral"/>
+			<xs:enumeration value="CLS"/>
+			<xs:enumeration value="Other"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="securedSettlementMechanism">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="Bilateral"/>
+			<xs:enumeration value="Other"/>
+			<xs:enumeration value="Triparty"/>
+			<xs:enumeration value="FICC"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:complexType name="valueType">
+		<xs:simpleContent>
+			<xs:extension base="valueBase">
+				<xs:attribute name="converted" type="xs:boolean" use="required"/>
+				<xs:attribute name="unit" type="currencyUnit" use="required"/>
+				<xs:attribute name="unitMultiplier" type="xs:integer" use="required" fixed="6"/>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+	<xs:complexType name="anyValueType">
+		<xs:simpleContent>
+			<xs:extension base="decimalValue">
+				<xs:attribute name="converted" type="xs:boolean" use="required"/>
+				<xs:attribute name="unit" type="currencyUnit" use="required"/>
+				<xs:attribute name="unitMultiplier" type="xs:integer" use="required" fixed="6"/>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+	<!--Reports-->
+	<xs:element name="derivativesAndCollateralSupReport">
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="reportBase">
+					<xs:sequence>
+						<xs:element name="derivativesAndCollateralSupProduct" type="derivativesAndCollateralSupProduct" minOccurs="1" maxOccurs="1"/>
+						<xs:element name="segregationCategory" type="segregationCategory" minOccurs="0" maxOccurs="1"/>
+						<xs:element name="executionAndClearingMechanism" type="executionAndClearingMechanism" minOccurs="0" maxOccurs="1"/>
+						<xs:element name="marketValue" type="valueType" minOccurs="1" maxOccurs="1"/>
+						<xs:element name="collateralClass" type="collateralClass" minOccurs="0" maxOccurs="1"/>
+						<xs:element name="collateralLevel" type="collateralLevel" minOccurs="0" maxOccurs="1"/>
+						<xs:element name="counterpartySector" type="counterpartySectorWithRetail" minOccurs="0" maxOccurs="1"/>
+						<xs:element name="gsib" type="xs:string" minOccurs="0" maxOccurs="1"/>
+						<xs:element name="effectiveMaturityBucket" type="maturityBucket" minOccurs="0" maxOccurs="1"/>
+						<xs:element name="encumbranceType" type="encumbranceType" minOccurs="0" maxOccurs="1"/>
+						<xs:element name="internalCounterparty" type="internalCounterparty" minOccurs="0" maxOccurs="1"/>
+						<xs:element name="businessLine" type="businessLine" minOccurs="0" maxOccurs="1"/>
+					</xs:sequence>
+					<xs:attribute name="nettingEligible" type="xs:boolean"/>
+					<xs:attribute name="treasuryControl" type="xs:boolean"/>
+					<xs:attribute name="internal" type="xs:boolean" use="required"/>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="balanceSheetSupReport">
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="reportBase">
+					<xs:sequence>
+						<xs:element name="collectionReference" type="collectionReference" minOccurs="0" maxOccurs="1"/>
+						<xs:element name="balanceSheetSupProduct" type="balanceSheetSupProduct" minOccurs="1" maxOccurs="1"/>
+						<xs:element name="productReference" type="productReference" minOccurs="0" maxOccurs="1"/>
+						<xs:element name="subProductReference" type="subProductReference" minOccurs="0" maxOccurs="1"/>
+						<xs:element name="collateralClass" type="collateralClass" minOccurs="0" maxOccurs="1"/>
+						<xs:element name="maturityBucket" type="maturityBucket" minOccurs="1" maxOccurs="1"/>
+						<xs:element name="effectiveMaturityBucket" type="maturityBucket" minOccurs="0" maxOccurs="1"/>
+						<xs:element name="encumbranceType" type="encumbranceType" minOccurs="0" maxOccurs="1"/>
+						<xs:element name="marketValue" type="anyValueType" minOccurs="0" maxOccurs="1"/>
+						<xs:element name="maturityValue" type="anyValueType" minOccurs="0" maxOccurs="1"/>
+						<xs:element name="collateralValue" type="anyValueType" minOccurs="0" maxOccurs="1"/>
+						<xs:element name="counterpartySector" type="counterpartySectorWithRetail" minOccurs="0" maxOccurs="1"/>
+						<xs:element name="gsib" type="xs:string" minOccurs="0" maxOccurs="1"/>
+						<xs:element name="riskWeight" type="decimalValue" minOccurs="0" maxOccurs="1"/>
+						<xs:element name="internalCounterparty" type="internalCounterparty" minOccurs="0" maxOccurs="1"/>
+					</xs:sequence>
+					<xs:attribute name="internal" type="xs:boolean" use="required"/>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="liquidityRiskMeasurementSupReport">
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="reportBase">
+					<xs:sequence>
+						<xs:element name="liquidityRiskMeasurementSupProduct" type="liquidityRiskMeasurementSupProduct" minOccurs="1" maxOccurs="1"/>
+						<xs:element name="marketValue" type="valueType" minOccurs="1" maxOccurs="1"/>
+						<xs:element name="collateralClass" type="collateralClass" minOccurs="0" maxOccurs="1"/>
+						<xs:element name="internalCounterparty" type="internalCounterparty" minOccurs="0" maxOccurs="1"/>
+					</xs:sequence>
+					<xs:attribute name="internal" type="xs:boolean" use="required"/>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="assetInflowReport">
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="reportBase">
+					<xs:sequence>
+						<xs:element name="assetProduct" type="assetProduct" minOccurs="1" maxOccurs="1"/>
+						<xs:element name="assetSource" type="assetSource" minOccurs="0" maxOccurs="1"/>
+						<xs:element name="marketValue" type="valueType" minOccurs="1" maxOccurs="1"/>
+						<xs:element name="lendableValue" type="valueType" minOccurs="1" maxOccurs="1"/>
+						<xs:element name="maturityBucket" type="maturityBucket" minOccurs="1" maxOccurs="1"/>
+						<xs:element name="forwardStartValue" type="valueType" minOccurs="0" maxOccurs="1"/>
+						<xs:element name="forwardStartBucket" type="maturityBucket" minOccurs="0" maxOccurs="1"/>
+						<xs:element name="collateralClass" type="collateralClass" minOccurs="1" maxOccurs="1"/>
+						<xs:element name="accountingDesignation" type="accountingDesignation" minOccurs="1" maxOccurs="1"/>
+						<xs:element name="effectiveMaturityBucket" type="maturityBucket" minOccurs="0" maxOccurs="1"/>
+						<xs:element name="encumbranceType" type="encumbranceType" minOccurs="0" maxOccurs="1"/>
+						<xs:element name="internalCounterparty" type="internalCounterparty" minOccurs="0" maxOccurs="1"/>
+						<xs:element name="businessLine" type="businessLine" minOccurs="0" maxOccurs="1"/>
+					</xs:sequence>
+					<xs:attribute name="treasuryControl" type="xs:boolean" use="required"/>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="depositsOutflowReport">
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="reportBase">
+					<xs:sequence>
+						<xs:element name="depositsProduct" type="depositProduct" minOccurs="1" maxOccurs="1"/>
+						<xs:element name="counterpartySector" type="counterpartySectorWithRetail" minOccurs="1" maxOccurs="1"/>
+						<xs:element name="gsib" type="xs:string" minOccurs="0" maxOccurs="1"/>
+						<xs:element name="maturityValue" type="valueType" minOccurs="1" maxOccurs="1"/>
+						<xs:element name="maturityBucket" type="maturityBucket" minOccurs="1" maxOccurs="1"/>
+						<xs:element name="maturityOptionality" type="maturityOptionality" minOccurs="0" maxOccurs="1"/>
+						<xs:element name="collateralClass" type="collateralClass" minOccurs="0" maxOccurs="1"/>
+						<xs:element name="collateralValue" type="valueType" minOccurs="0" maxOccurs="1"/>
+						<xs:element name="businessLine" type="businessLine" minOccurs="0" maxOccurs="1"/>
+						<xs:element name="internalCounterparty" type="internalCounterparty" minOccurs="0" maxOccurs="1"/>
+					</xs:sequence>
+					<xs:attribute name="insured" type="insuredType" use="required"/>
+					<xs:attribute name="trigger" type="xs:boolean" use="required"/>
+					<xs:attribute name="rehypothecated" type="xs:boolean"/>
+					<xs:attribute name="internal" type="xs:boolean" use="required"/>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="foreignExchangeSupplementalReport">
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="reportBase">
+					<xs:sequence>
+						<xs:element name="foreignExchangeProduct" type="foreignExchangeProduct" minOccurs="1" maxOccurs="1"/>
+						<xs:element name="baseMaturityValue" type="valueType" minOccurs="1" maxOccurs="1"/>
+						<xs:element name="targetMaturityValue" type="valueType" minOccurs="1" maxOccurs="1"/>
+						<xs:element name="maturityBucket" type="maturityBucket" minOccurs="1" maxOccurs="1"/>
+						<xs:element name="foreignExchangeOptionDirection" type="foreignExchangeOptionDirection" minOccurs="0" maxOccurs="1"/>
+						<xs:element name="baseForwardMaturityValue" type="valueType" minOccurs="0" maxOccurs="1"/>
+						<xs:element name="targetForwardMaturityValue" type="valueType" minOccurs="0" maxOccurs="1"/>
+						<xs:element name="forwardMaturityBucket" type="maturityBucket" minOccurs="0" maxOccurs="1"/>
+						<xs:element name="counterpartySector" type="counterpartySectorWithRetail" minOccurs="1" maxOccurs="1"/>
+						<xs:element name="gsib" type="xs:string" minOccurs="0" maxOccurs="1"/>
+						<xs:element name="settlementMechanism" type="foreignExchangeSettlementMechanism" minOccurs="1" maxOccurs="1"/>
+						<xs:element name="businessLine" type="businessLine" minOccurs="0" maxOccurs="1"/>
+						<xs:element name="internalCounterparty" type="internalCounterparty" minOccurs="0" maxOccurs="1"/>
+					</xs:sequence>
+					<xs:attribute name="internal" type="xs:boolean" use="required"/>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="informationalSupplementalReport">
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="reportBase">
+					<xs:sequence>
+						<xs:element name="supplementalInformationProduct" type="supplementalInformationProduct" minOccurs="1" maxOccurs="1"/>
+						<xs:element name="marketValue" type="valueType" minOccurs="1" maxOccurs="1"/>
+						<xs:element name="collateralClass" type="collateralClass" minOccurs="0" maxOccurs="1"/>
+						<xs:element name="internalCounterparty" type="internalCounterparty" minOccurs="0" maxOccurs="1"/>
+						<xs:element name="businessLine" type="businessLine" minOccurs="0" maxOccurs="1"/>  
+					</xs:sequence>
+					<xs:attribute name="internal" type="xs:boolean" use="required"/>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="otherInflowReport">
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="reportBase">
+					<xs:sequence>
+						<xs:element name="otherInflowProduct" type="otherInflowProduct" minOccurs="1" maxOccurs="1"/>
+						<xs:element name="maturityValue" type="valueType" minOccurs="1" maxOccurs="1"/>
+						<xs:element name="maturityBucket" type="maturityBucket" minOccurs="1" maxOccurs="1"/>
+						<xs:element name="forwardStartValue" type="valueType" minOccurs="0" maxOccurs="1"/>
+						<xs:element name="forwardStartBucket" type="maturityBucket" minOccurs="0" maxOccurs="1"/>
+						<xs:element name="collateralClass" type="collateralClass" minOccurs="0" maxOccurs="1"/>
+						<xs:element name="collateralValue" type="valueType" minOccurs="0" maxOccurs="1"/>
+						<xs:element name="counterpartySector" type="counterpartySectorWithRetail" minOccurs="0" maxOccurs="1"/>
+						<xs:element name="gsib" type="xs:string" minOccurs="0" maxOccurs="1"/>
+						<xs:element name="internalCounterparty" type="internalCounterparty" minOccurs="0" maxOccurs="1"/>
+						<xs:element name="businessLine" type="businessLine" minOccurs="0" maxOccurs="1"/>  
+					</xs:sequence>
+					<xs:attribute name="internal" type="xs:boolean" use="required"/>
+					<xs:attribute name="treasuryControl" type="xs:boolean" use="required"/>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="otherOutflowReport">
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="reportBase">
+					<xs:sequence>
+						<xs:element name="otherOutflowProduct" type="otherOutflowProduct" minOccurs="1" maxOccurs="1"/>
+						<xs:element name="counterpartySector" type="counterpartySectorWithRetailAndMunicipalities" minOccurs="0" maxOccurs="1"/>
+						<xs:element name="gsib" type="xs:string" minOccurs="0" maxOccurs="1"/>
+						<xs:element name="maturityValue" type="valueType" minOccurs="1" maxOccurs="1"/>
+						<xs:element name="maturityBucket" type="maturityBucket" minOccurs="1" maxOccurs="1"/>
+						<xs:element name="forwardStartValue" type="valueType" minOccurs="0" maxOccurs="1"/>
+						<xs:element name="forwardStartBucket" type="maturityBucket" minOccurs="0" maxOccurs="1"/>
+						<xs:element name="collateralClass" type="collateralClass" minOccurs="0" maxOccurs="1"/>
+						<xs:element name="collateralValue" type="valueType" minOccurs="0" maxOccurs="1"/>
+						<xs:element name="internalCounterparty" type="internalCounterparty" minOccurs="0" maxOccurs="1"/>
+						<xs:element name="businessLine" type="businessLine" minOccurs="0" maxOccurs="1"/>
+					</xs:sequence>
+					<xs:attribute name="internal" type="xs:boolean" use="required"/>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="securedInflowReport">
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="reportBase">
+					<xs:sequence>
+						<xs:element name="securedInflowProduct" type="securedInflowProduct" minOccurs="1" maxOccurs="1"/>
+						<xs:element name="pledgeLevelAndLongHedging" type="pledgeLevelAndLongHedging" minOccurs="0" maxOccurs="1"/>
+						<xs:element name="maturityValue" type="valueType" minOccurs="1" maxOccurs="1"/>
+						<xs:element name="maturityBucket" type="maturityBucket" minOccurs="1" maxOccurs="1"/>
+						<xs:element name="maturityOptionality" type="maturityOptionality" minOccurs="0" maxOccurs="1"/>
+						<xs:element name="effectiveMaturityBucket" type="maturityBucket" minOccurs="0" maxOccurs="1"/>
+						<xs:element name="encumbranceType" type="encumbranceType" minOccurs="0" maxOccurs="1"/>
+						<xs:element name="forwardStartValue" type="valueType" minOccurs="0" maxOccurs="1"/>
+						<xs:element name="forwardStartBucket" type="maturityBucket" minOccurs="0" maxOccurs="1"/>
+						<xs:element name="collateralClass" type="collateralClass" minOccurs="1" maxOccurs="1"/>
+						<xs:element name="collateralValue" type="valueType" minOccurs="1" maxOccurs="1"/>
+						<xs:element name="internalCounterparty" type="internalCounterparty" minOccurs="0" maxOccurs="1"/>
+						<xs:element name="riskWeight" type="decimalValue" minOccurs="0" maxOccurs="1"/>
+						<xs:element name="businessLine" type="businessLine" minOccurs="0" maxOccurs="1"/>
+						<xs:element name="settlementMechanism" type="securedSettlementMechanism" minOccurs="1" maxOccurs="1"/>
+						<xs:element name="counterpartySector" type="counterpartySectorWithRetail" minOccurs="1" maxOccurs="1"/>
+						<xs:element name="gsib" type="xs:string" minOccurs="0" maxOccurs="1"/>
+					</xs:sequence>
+					<xs:attribute name="treasuryControl" type="xs:boolean" use="required"/>
+					<xs:attribute name="internal" type="xs:boolean" use="required"/>
+					<xs:attribute name="unencumbered" type="xs:boolean" use="required"/>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="securedOutflowReport">
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="reportBase">
+					<xs:sequence>
+						<xs:element name="securedOutflowProduct" type="securedOutflowProduct" minOccurs="1" maxOccurs="1"/>
+						<xs:element name="securedOutflowCounterpartyOrCoverage" type="securedOutflowCounterpartyOrCoverage" minOccurs="0" maxOccurs="1"/>
+						<xs:element name="maturityValue" type="valueType" minOccurs="1" maxOccurs="1"/>
+						<xs:element name="maturityBucket" type="maturityBucket" minOccurs="1" maxOccurs="1"/>
+						<xs:element name="maturityOptionality" type="maturityOptionality" minOccurs="0" maxOccurs="1"/>
+						<xs:element name="forwardStartValue" type="valueType" minOccurs="0" maxOccurs="1"/>
+						<xs:element name="forwardStartBucket" type="maturityBucket" minOccurs="0" maxOccurs="1"/>
+						<xs:element name="collateralClass" type="collateralClass" minOccurs="1" maxOccurs="1"/>
+						<xs:element name="collateralValue" type="valueType" minOccurs="1" maxOccurs="1"/>
+						<xs:element name="internalCounterparty" type="internalCounterparty" minOccurs="0" maxOccurs="1"/>
+						<xs:element name="businessLine" type="businessLine" minOccurs="0" maxOccurs="1"/>
+						<xs:element name="settlementMechanism" type="securedSettlementMechanism" minOccurs="1" maxOccurs="1"/>
+						<xs:element name="counterpartySector" type="counterpartySectorWithRetail" minOccurs="1" maxOccurs="1"/>
+						<xs:element name="gsib" type="xs:string" minOccurs="0" maxOccurs="1"/>
+					</xs:sequence>
+					<xs:attribute name="treasuryControl" type="xs:boolean" use="required"/>
+					<xs:attribute name="internal" type="xs:boolean" use="required"/>
+					<xs:attribute name="rehypothecated" type="xs:boolean" use="required"/>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="unsecuredInflowReport">
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="reportBase">
+					<xs:sequence>
+						<xs:element name="unsecuredProduct" type="unsecuredProduct" minOccurs="1" maxOccurs="1"/>
+						<xs:element name="counterpartySector" type="counterpartySectorWithRetail" minOccurs="0" maxOccurs="1"/>
+						<xs:element name="gsib" type="xs:string" minOccurs="0" maxOccurs="1"/>
+						<xs:element name="maturityValue" type="valueType" minOccurs="1" maxOccurs="1"/>
+						<xs:element name="maturityBucket" type="maturityBucket" minOccurs="1" maxOccurs="1"/>
+						<xs:element name="maturityOptionality" type="maturityOptionality" minOccurs="0" maxOccurs="1"/>
+						<xs:element name="effectiveMaturityBucket" type="maturityBucket" minOccurs="0" maxOccurs="1"/>
+						<xs:element name="encumbranceType" type="encumbranceType" minOccurs="0" maxOccurs="1"/>
+						<xs:element name="forwardStartValue" type="valueType" minOccurs="0" maxOccurs="1"/>
+						<xs:element name="forwardStartBucket" type="maturityBucket" minOccurs="0" maxOccurs="1"/>
+						<xs:element name="internalCounterparty" type="internalCounterparty" minOccurs="0" maxOccurs="1"/>
+						<xs:element name="riskWeight" type="decimalValue" minOccurs="0" maxOccurs="1"/>
+						<xs:element name="businessLine" type="businessLine" minOccurs="0" maxOccurs="1"/>
+					</xs:sequence>
+					<xs:attribute name="internal" type="xs:boolean" use="required"/>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="wholesaleOutflowReport">
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="reportBase">
+					<xs:sequence>
+						<xs:element name="wholesaleOutflowProduct" type="wholesaleOutflowProduct" minOccurs="1" maxOccurs="1"/>
+						<xs:element name="counterpartySector" type="counterpartySectorWithRetail" minOccurs="0" maxOccurs="1"/>
+						<xs:element name="gsib" type="xs:string" minOccurs="0" maxOccurs="1"/>
+						<xs:element name="maturityValue" type="valueType" minOccurs="1" maxOccurs="1"/>
+						<xs:element name="maturityBucket" type="maturityBucket" minOccurs="1" maxOccurs="1"/>
+						<xs:element name="maturityOptionality" type="maturityOptionality" minOccurs="0" maxOccurs="1"/>
+						<xs:element name="collateralClass" type="collateralClass" minOccurs="0" maxOccurs="1"/>
+						<xs:element name="collateralValue" type="valueType" minOccurs="0" maxOccurs="1"/>
+						<xs:element name="forwardStartValue" type="valueType" minOccurs="0" maxOccurs="1"/>
+						<xs:element name="forwardStartBucket" type="maturityBucket" minOccurs="0" maxOccurs="1"/>
+						<xs:element name="internalCounterparty" type="internalCounterparty" minOccurs="0" maxOccurs="1"/>
+						<xs:element name="lossAbsorbency" type="lossAbsorbency" minOccurs="0" maxOccurs="1"/>
+						<xs:element name="businessLine" type="businessLine" minOccurs="0" maxOccurs="1"/>
+					</xs:sequence>
+					<xs:attribute name="internal" type="xs:boolean" use="required"/>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	<!--Header and Its Elements-->
+	<xs:element name="header">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="reporter" type="reporter" minOccurs="1" maxOccurs="1"/>
+				<xs:element name="reportingDate" type="xs:date"/>
+			</xs:sequence>
+			<xs:attribute name="version" type="xs:positiveInteger" use="required"/>
+			<xs:attribute name="reportingFrequency" type="reportingFrequency" use="required"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:complexType name="reporter">
+		<xs:simpleContent>
+			<xs:extension base="reporterList">
+				<xs:attribute name="listingExchange" type="exchangeList" use="required"/>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+	<!--Report Base-->
+	<xs:complexType name="reportBase">
+		<xs:sequence>
+			<xs:element name="reportScope" type="reportScope" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="comment" type="xs:string" minOccurs="0" maxOccurs="1"/>
+		</xs:sequence>
+		<xs:attribute name="reportID" type="tenDigitPositiveIntegerType" use="required"/>
+	</xs:complexType>
+	<!--Root Element-->
+	<xs:element name="sixGSubmission">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="header"/>
+				<xs:choice minOccurs="1" maxOccurs="unbounded">
+					<xs:element ref="assetInflowReport"/>
+					<xs:element ref="unsecuredInflowReport"/>
+					<xs:element ref="securedInflowReport"/>
+					<xs:element ref="otherInflowReport"/>
+					<xs:element ref="depositsOutflowReport"/>
+					<xs:element ref="wholesaleOutflowReport"/>
+					<xs:element ref="securedOutflowReport"/>
+					<xs:element ref="otherOutflowReport"/>
+					<xs:element ref="foreignExchangeSupplementalReport"/>
+					<xs:element ref="informationalSupplementalReport"/>
+					<xs:element ref="derivativesAndCollateralSupReport"/>
+					<xs:element ref="liquidityRiskMeasurementSupReport"/>
+					<xs:element ref="balanceSheetSupReport"/>
+				</xs:choice>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

@@ -1,0 +1,1141 @@
+product_id,counterparty,applicability,source
+O.O.5,Retail,Applicable,Appendix II-b p.88
+O.O.5,Small Business,Applicable,Appendix II-b p.88
+O.O.5,Non-Financial Corporate,Applicable,Appendix II-b p.88
+O.O.5,Sovereign,Applicable,Appendix II-b p.88
+O.O.5,Central Bank,Applicable,Appendix II-b p.88
+O.O.5,Government Sponsored Entity,Applicable,Appendix II-b p.88
+O.O.5,Public Sector Entity,Applicable,Appendix II-b p.88
+O.O.5,Multilateral Development Bank,Applicable,Appendix II-b p.88
+O.O.5,Other Supranational,Applicable,Appendix II-b p.88
+O.O.5,Pension Fund,Applicable,Appendix II-b p.88
+O.O.5,Bank,Applicable,Appendix II-b p.88
+O.O.5,Broker Dealer,Applicable,Appendix II-b p.88
+O.O.5,Investment Company or Advisor,Applicable,Appendix II-b p.88
+O.O.5,Financial Market Utlility,Applicable,Appendix II-b p.88
+O.O.5,Other Supervised Non-Bank Financial Entity,Applicable,Appendix II-b p.88
+O.O.5,Debt Issuing Special Purpose Entity,Applicable,Appendix II-b p.88
+O.O.5,Non-regulated Fund,Applicable,Appendix II-b p.88
+O.O.5,Municipalities for VRDN Structures,Applicable,Appendix II-b p.88
+O.O.5,Other,Applicable,Appendix II-b p.88
+I.U.5,Retail,Applicable,Appendix II-b p.88
+I.U.5,Small Business,Applicable,Appendix II-b p.88
+I.U.5,Non-Financial Corporate,Applicable,Appendix II-b p.88
+I.U.5,Sovereign,Applicable,Appendix II-b p.88
+I.U.5,Central Bank,Applicable,Appendix II-b p.88
+I.U.5,Government Sponsored Entity,Applicable,Appendix II-b p.88
+I.U.5,Public Sector Entity,Applicable,Appendix II-b p.88
+I.U.5,Multilateral Development Bank,Applicable,Appendix II-b p.88
+I.U.5,Other Supranational,Applicable,Appendix II-b p.88
+I.U.5,Pension Fund,Applicable,Appendix II-b p.88
+I.U.5,Bank,Applicable,Appendix II-b p.88
+I.U.5,Broker Dealer,Applicable,Appendix II-b p.88
+I.U.5,Investment Company or Advisor,Applicable,Appendix II-b p.88
+I.U.5,Financial Market Utlility,Applicable,Appendix II-b p.88
+I.U.5,Other Supervised Non-Bank Financial Entity,Applicable,Appendix II-b p.88
+I.U.5,Debt Issuing Special Purpose Entity,Applicable,Appendix II-b p.88
+I.U.5,Non-regulated Fund,Applicable,Appendix II-b p.88
+I.U.5,Municipalities for VRDN Structures,Not Applicable,Appendix II-b p.88
+I.U.5,Other,Applicable,Appendix II-b p.88
+I.U.6,Retail,Applicable,Appendix II-b p.88
+I.U.6,Small Business,Applicable,Appendix II-b p.88
+I.U.6,Non-Financial Corporate,Applicable,Appendix II-b p.88
+I.U.6,Sovereign,Applicable,Appendix II-b p.88
+I.U.6,Central Bank,Applicable,Appendix II-b p.88
+I.U.6,Government Sponsored Entity,Applicable,Appendix II-b p.88
+I.U.6,Public Sector Entity,Applicable,Appendix II-b p.88
+I.U.6,Multilateral Development Bank,Applicable,Appendix II-b p.88
+I.U.6,Other Supranational,Applicable,Appendix II-b p.88
+I.U.6,Pension Fund,Applicable,Appendix II-b p.88
+I.U.6,Bank,Applicable,Appendix II-b p.88
+I.U.6,Broker Dealer,Applicable,Appendix II-b p.88
+I.U.6,Investment Company or Advisor,Applicable,Appendix II-b p.88
+I.U.6,Financial Market Utlility,Applicable,Appendix II-b p.88
+I.U.6,Other Supervised Non-Bank Financial Entity,Applicable,Appendix II-b p.88
+I.U.6,Debt Issuing Special Purpose Entity,Applicable,Appendix II-b p.88
+I.U.6,Non-regulated Fund,Applicable,Appendix II-b p.88
+I.U.6,Municipalities for VRDN Structures,Not Applicable,Appendix II-b p.88
+I.U.6,Other,Applicable,Appendix II-b p.88
+I.S.5,Retail,Applicable,Appendix II-b p.88
+I.S.5,Small Business,Applicable,Appendix II-b p.88
+I.S.5,Non-Financial Corporate,Applicable,Appendix II-b p.88
+I.S.5,Sovereign,Applicable,Appendix II-b p.88
+I.S.5,Central Bank,Applicable,Appendix II-b p.88
+I.S.5,Government Sponsored Entity,Applicable,Appendix II-b p.88
+I.S.5,Public Sector Entity,Applicable,Appendix II-b p.88
+I.S.5,Multilateral Development Bank,Applicable,Appendix II-b p.88
+I.S.5,Other Supranational,Applicable,Appendix II-b p.88
+I.S.5,Pension Fund,Applicable,Appendix II-b p.88
+I.S.5,Bank,Applicable,Appendix II-b p.88
+I.S.5,Broker Dealer,Applicable,Appendix II-b p.88
+I.S.5,Investment Company or Advisor,Applicable,Appendix II-b p.88
+I.S.5,Financial Market Utlility,Applicable,Appendix II-b p.88
+I.S.5,Other Supervised Non-Bank Financial Entity,Applicable,Appendix II-b p.88
+I.S.5,Debt Issuing Special Purpose Entity,Applicable,Appendix II-b p.88
+I.S.5,Non-regulated Fund,Applicable,Appendix II-b p.88
+I.S.5,Municipalities for VRDN Structures,Not Applicable,Appendix II-b p.88
+I.S.5,Other,Applicable,Appendix II-b p.88
+I.S.6,Retail,Applicable,Appendix II-b p.88
+I.S.6,Small Business,Applicable,Appendix II-b p.88
+I.S.6,Non-Financial Corporate,Applicable,Appendix II-b p.88
+I.S.6,Sovereign,Applicable,Appendix II-b p.88
+I.S.6,Central Bank,Applicable,Appendix II-b p.88
+I.S.6,Government Sponsored Entity,Applicable,Appendix II-b p.88
+I.S.6,Public Sector Entity,Applicable,Appendix II-b p.88
+I.S.6,Multilateral Development Bank,Applicable,Appendix II-b p.88
+I.S.6,Other Supranational,Applicable,Appendix II-b p.88
+I.S.6,Pension Fund,Applicable,Appendix II-b p.88
+I.S.6,Bank,Applicable,Appendix II-b p.88
+I.S.6,Broker Dealer,Applicable,Appendix II-b p.88
+I.S.6,Investment Company or Advisor,Applicable,Appendix II-b p.88
+I.S.6,Financial Market Utlility,Applicable,Appendix II-b p.88
+I.S.6,Other Supervised Non-Bank Financial Entity,Applicable,Appendix II-b p.88
+I.S.6,Debt Issuing Special Purpose Entity,Applicable,Appendix II-b p.88
+I.S.6,Non-regulated Fund,Applicable,Appendix II-b p.88
+I.S.6,Municipalities for VRDN Structures,Not Applicable,Appendix II-b p.88
+I.S.6,Other,Applicable,Appendix II-b p.88
+I.S.7,Retail,Applicable,Appendix II-b p.88
+I.S.7,Small Business,Applicable,Appendix II-b p.88
+I.S.7,Non-Financial Corporate,Applicable,Appendix II-b p.88
+I.S.7,Sovereign,Applicable,Appendix II-b p.88
+I.S.7,Central Bank,Applicable,Appendix II-b p.88
+I.S.7,Government Sponsored Entity,Applicable,Appendix II-b p.88
+I.S.7,Public Sector Entity,Applicable,Appendix II-b p.88
+I.S.7,Multilateral Development Bank,Applicable,Appendix II-b p.88
+I.S.7,Other Supranational,Applicable,Appendix II-b p.88
+I.S.7,Pension Fund,Applicable,Appendix II-b p.88
+I.S.7,Bank,Applicable,Appendix II-b p.88
+I.S.7,Broker Dealer,Applicable,Appendix II-b p.88
+I.S.7,Investment Company or Advisor,Applicable,Appendix II-b p.88
+I.S.7,Financial Market Utlility,Applicable,Appendix II-b p.88
+I.S.7,Other Supervised Non-Bank Financial Entity,Applicable,Appendix II-b p.88
+I.S.7,Debt Issuing Special Purpose Entity,Applicable,Appendix II-b p.88
+I.S.7,Non-regulated Fund,Applicable,Appendix II-b p.88
+I.S.7,Municipalities for VRDN Structures,Not Applicable,Appendix II-b p.88
+I.S.7,Other,Applicable,Appendix II-b p.88
+I.S.8,Retail,Applicable,Appendix II-b p.88
+I.S.8,Small Business,Applicable,Appendix II-b p.88
+I.S.8,Non-Financial Corporate,Applicable,Appendix II-b p.88
+I.S.8,Sovereign,Applicable,Appendix II-b p.88
+I.S.8,Central Bank,Applicable,Appendix II-b p.88
+I.S.8,Government Sponsored Entity,Applicable,Appendix II-b p.88
+I.S.8,Public Sector Entity,Applicable,Appendix II-b p.88
+I.S.8,Multilateral Development Bank,Applicable,Appendix II-b p.88
+I.S.8,Other Supranational,Applicable,Appendix II-b p.88
+I.S.8,Pension Fund,Applicable,Appendix II-b p.88
+I.S.8,Bank,Applicable,Appendix II-b p.88
+I.S.8,Broker Dealer,Applicable,Appendix II-b p.88
+I.S.8,Investment Company or Advisor,Applicable,Appendix II-b p.88
+I.S.8,Financial Market Utlility,Applicable,Appendix II-b p.88
+I.S.8,Other Supervised Non-Bank Financial Entity,Applicable,Appendix II-b p.88
+I.S.8,Debt Issuing Special Purpose Entity,Applicable,Appendix II-b p.88
+I.S.8,Non-regulated Fund,Applicable,Appendix II-b p.88
+I.S.8,Municipalities for VRDN Structures,Not Applicable,Appendix II-b p.88
+I.S.8,Other,Applicable,Appendix II-b p.88
+O.D.7,Retail,Applicable,Appendix II-b p.88
+O.D.7,Small Business,Applicable,Appendix II-b p.88
+O.D.7,Non-Financial Corporate,Applicable,Appendix II-b p.88
+O.D.7,Sovereign,Applicable,Appendix II-b p.88
+O.D.7,Central Bank,Applicable,Appendix II-b p.88
+O.D.7,Government Sponsored Entity,Applicable,Appendix II-b p.88
+O.D.7,Public Sector Entity,Applicable,Appendix II-b p.88
+O.D.7,Multilateral Development Bank,Applicable,Appendix II-b p.88
+O.D.7,Other Supranational,Applicable,Appendix II-b p.88
+O.D.7,Pension Fund,Applicable,Appendix II-b p.88
+O.D.7,Bank,Applicable,Appendix II-b p.88
+O.D.7,Broker Dealer,Applicable,Appendix II-b p.88
+O.D.7,Investment Company or Advisor,Applicable,Appendix II-b p.88
+O.D.7,Financial Market Utlility,Applicable,Appendix II-b p.88
+O.D.7,Other Supervised Non-Bank Financial Entity,Applicable,Appendix II-b p.88
+O.D.7,Debt Issuing Special Purpose Entity,Applicable,Appendix II-b p.88
+O.D.7,Non-regulated Fund,Applicable,Appendix II-b p.88
+O.D.7,Municipalities for VRDN Structures,Not Applicable,Appendix II-b p.88
+O.D.7,Other,Applicable,Appendix II-b p.88
+O.D.8,Retail,Applicable,Appendix II-b p.88
+O.D.8,Small Business,Applicable,Appendix II-b p.88
+O.D.8,Non-Financial Corporate,Applicable,Appendix II-b p.88
+O.D.8,Sovereign,Applicable,Appendix II-b p.88
+O.D.8,Central Bank,Applicable,Appendix II-b p.88
+O.D.8,Government Sponsored Entity,Applicable,Appendix II-b p.88
+O.D.8,Public Sector Entity,Applicable,Appendix II-b p.88
+O.D.8,Multilateral Development Bank,Applicable,Appendix II-b p.88
+O.D.8,Other Supranational,Applicable,Appendix II-b p.88
+O.D.8,Pension Fund,Applicable,Appendix II-b p.88
+O.D.8,Bank,Applicable,Appendix II-b p.88
+O.D.8,Broker Dealer,Applicable,Appendix II-b p.88
+O.D.8,Investment Company or Advisor,Applicable,Appendix II-b p.88
+O.D.8,Financial Market Utlility,Applicable,Appendix II-b p.88
+O.D.8,Other Supervised Non-Bank Financial Entity,Applicable,Appendix II-b p.88
+O.D.8,Debt Issuing Special Purpose Entity,Applicable,Appendix II-b p.88
+O.D.8,Non-regulated Fund,Applicable,Appendix II-b p.88
+O.D.8,Municipalities for VRDN Structures,Not Applicable,Appendix II-b p.88
+O.D.8,Other,Applicable,Appendix II-b p.88
+O.D.9,Retail,Applicable,Appendix II-b p.88
+O.D.9,Small Business,Applicable,Appendix II-b p.88
+O.D.9,Non-Financial Corporate,Applicable,Appendix II-b p.88
+O.D.9,Sovereign,Applicable,Appendix II-b p.88
+O.D.9,Central Bank,Applicable,Appendix II-b p.88
+O.D.9,Government Sponsored Entity,Applicable,Appendix II-b p.88
+O.D.9,Public Sector Entity,Applicable,Appendix II-b p.88
+O.D.9,Multilateral Development Bank,Applicable,Appendix II-b p.88
+O.D.9,Other Supranational,Applicable,Appendix II-b p.88
+O.D.9,Pension Fund,Applicable,Appendix II-b p.88
+O.D.9,Bank,Applicable,Appendix II-b p.88
+O.D.9,Broker Dealer,Applicable,Appendix II-b p.88
+O.D.9,Investment Company or Advisor,Applicable,Appendix II-b p.88
+O.D.9,Financial Market Utlility,Applicable,Appendix II-b p.88
+O.D.9,Other Supervised Non-Bank Financial Entity,Applicable,Appendix II-b p.88
+O.D.9,Debt Issuing Special Purpose Entity,Applicable,Appendix II-b p.88
+O.D.9,Non-regulated Fund,Applicable,Appendix II-b p.88
+O.D.9,Municipalities for VRDN Structures,Not Applicable,Appendix II-b p.88
+O.D.9,Other,Applicable,Appendix II-b p.88
+O.D.10,Retail,Applicable,Appendix II-b p.88
+O.D.10,Small Business,Applicable,Appendix II-b p.88
+O.D.10,Non-Financial Corporate,Applicable,Appendix II-b p.88
+O.D.10,Sovereign,Applicable,Appendix II-b p.88
+O.D.10,Central Bank,Applicable,Appendix II-b p.88
+O.D.10,Government Sponsored Entity,Applicable,Appendix II-b p.88
+O.D.10,Public Sector Entity,Applicable,Appendix II-b p.88
+O.D.10,Multilateral Development Bank,Applicable,Appendix II-b p.88
+O.D.10,Other Supranational,Applicable,Appendix II-b p.88
+O.D.10,Pension Fund,Applicable,Appendix II-b p.88
+O.D.10,Bank,Applicable,Appendix II-b p.88
+O.D.10,Broker Dealer,Applicable,Appendix II-b p.88
+O.D.10,Investment Company or Advisor,Applicable,Appendix II-b p.88
+O.D.10,Financial Market Utlility,Applicable,Appendix II-b p.88
+O.D.10,Other Supervised Non-Bank Financial Entity,Applicable,Appendix II-b p.88
+O.D.10,Debt Issuing Special Purpose Entity,Applicable,Appendix II-b p.88
+O.D.10,Non-regulated Fund,Applicable,Appendix II-b p.88
+O.D.10,Municipalities for VRDN Structures,Not Applicable,Appendix II-b p.88
+O.D.10,Other,Applicable,Appendix II-b p.88
+O.D.11,Retail,Applicable,Appendix II-b p.88
+O.D.11,Small Business,Applicable,Appendix II-b p.88
+O.D.11,Non-Financial Corporate,Applicable,Appendix II-b p.88
+O.D.11,Sovereign,Applicable,Appendix II-b p.88
+O.D.11,Central Bank,Applicable,Appendix II-b p.88
+O.D.11,Government Sponsored Entity,Applicable,Appendix II-b p.88
+O.D.11,Public Sector Entity,Applicable,Appendix II-b p.88
+O.D.11,Multilateral Development Bank,Applicable,Appendix II-b p.88
+O.D.11,Other Supranational,Applicable,Appendix II-b p.88
+O.D.11,Pension Fund,Applicable,Appendix II-b p.88
+O.D.11,Bank,Applicable,Appendix II-b p.88
+O.D.11,Broker Dealer,Applicable,Appendix II-b p.88
+O.D.11,Investment Company or Advisor,Applicable,Appendix II-b p.88
+O.D.11,Financial Market Utlility,Applicable,Appendix II-b p.88
+O.D.11,Other Supervised Non-Bank Financial Entity,Applicable,Appendix II-b p.88
+O.D.11,Debt Issuing Special Purpose Entity,Applicable,Appendix II-b p.88
+O.D.11,Non-regulated Fund,Applicable,Appendix II-b p.88
+O.D.11,Municipalities for VRDN Structures,Not Applicable,Appendix II-b p.88
+O.D.11,Other,Applicable,Appendix II-b p.88
+O.D.12,Retail,Applicable,Appendix II-b p.88
+O.D.12,Small Business,Applicable,Appendix II-b p.88
+O.D.12,Non-Financial Corporate,Applicable,Appendix II-b p.88
+O.D.12,Sovereign,Applicable,Appendix II-b p.88
+O.D.12,Central Bank,Applicable,Appendix II-b p.88
+O.D.12,Government Sponsored Entity,Applicable,Appendix II-b p.88
+O.D.12,Public Sector Entity,Applicable,Appendix II-b p.88
+O.D.12,Multilateral Development Bank,Applicable,Appendix II-b p.88
+O.D.12,Other Supranational,Applicable,Appendix II-b p.88
+O.D.12,Pension Fund,Applicable,Appendix II-b p.88
+O.D.12,Bank,Applicable,Appendix II-b p.88
+O.D.12,Broker Dealer,Applicable,Appendix II-b p.88
+O.D.12,Investment Company or Advisor,Applicable,Appendix II-b p.88
+O.D.12,Financial Market Utlility,Applicable,Appendix II-b p.88
+O.D.12,Other Supervised Non-Bank Financial Entity,Applicable,Appendix II-b p.88
+O.D.12,Debt Issuing Special Purpose Entity,Applicable,Appendix II-b p.88
+O.D.12,Non-regulated Fund,Applicable,Appendix II-b p.88
+O.D.12,Municipalities for VRDN Structures,Not Applicable,Appendix II-b p.88
+O.D.12,Other,Applicable,Appendix II-b p.88
+O.D.13,Retail,Applicable,Appendix II-b p.88
+O.D.13,Small Business,Applicable,Appendix II-b p.88
+O.D.13,Non-Financial Corporate,Applicable,Appendix II-b p.88
+O.D.13,Sovereign,Applicable,Appendix II-b p.88
+O.D.13,Central Bank,Applicable,Appendix II-b p.88
+O.D.13,Government Sponsored Entity,Applicable,Appendix II-b p.88
+O.D.13,Public Sector Entity,Applicable,Appendix II-b p.88
+O.D.13,Multilateral Development Bank,Applicable,Appendix II-b p.88
+O.D.13,Other Supranational,Applicable,Appendix II-b p.88
+O.D.13,Pension Fund,Applicable,Appendix II-b p.88
+O.D.13,Bank,Applicable,Appendix II-b p.88
+O.D.13,Broker Dealer,Applicable,Appendix II-b p.88
+O.D.13,Investment Company or Advisor,Applicable,Appendix II-b p.88
+O.D.13,Financial Market Utlility,Applicable,Appendix II-b p.88
+O.D.13,Other Supervised Non-Bank Financial Entity,Applicable,Appendix II-b p.88
+O.D.13,Debt Issuing Special Purpose Entity,Applicable,Appendix II-b p.88
+O.D.13,Non-regulated Fund,Applicable,Appendix II-b p.88
+O.D.13,Municipalities for VRDN Structures,Not Applicable,Appendix II-b p.88
+O.D.13,Other,Applicable,Appendix II-b p.88
+O.D.14,Retail,Applicable,Appendix II-b p.88
+O.D.14,Small Business,Applicable,Appendix II-b p.88
+O.D.14,Non-Financial Corporate,Applicable,Appendix II-b p.88
+O.D.14,Sovereign,Applicable,Appendix II-b p.88
+O.D.14,Central Bank,Applicable,Appendix II-b p.88
+O.D.14,Government Sponsored Entity,Applicable,Appendix II-b p.88
+O.D.14,Public Sector Entity,Applicable,Appendix II-b p.88
+O.D.14,Multilateral Development Bank,Applicable,Appendix II-b p.88
+O.D.14,Other Supranational,Applicable,Appendix II-b p.88
+O.D.14,Pension Fund,Applicable,Appendix II-b p.88
+O.D.14,Bank,Applicable,Appendix II-b p.88
+O.D.14,Broker Dealer,Applicable,Appendix II-b p.88
+O.D.14,Investment Company or Advisor,Applicable,Appendix II-b p.88
+O.D.14,Financial Market Utlility,Applicable,Appendix II-b p.88
+O.D.14,Other Supervised Non-Bank Financial Entity,Applicable,Appendix II-b p.88
+O.D.14,Debt Issuing Special Purpose Entity,Applicable,Appendix II-b p.88
+O.D.14,Non-regulated Fund,Applicable,Appendix II-b p.88
+O.D.14,Municipalities for VRDN Structures,Not Applicable,Appendix II-b p.88
+O.D.14,Other,Applicable,Appendix II-b p.88
+O.D.15,Retail,Applicable,Appendix II-b p.88
+O.D.15,Small Business,Applicable,Appendix II-b p.88
+O.D.15,Non-Financial Corporate,Applicable,Appendix II-b p.88
+O.D.15,Sovereign,Applicable,Appendix II-b p.88
+O.D.15,Central Bank,Applicable,Appendix II-b p.88
+O.D.15,Government Sponsored Entity,Applicable,Appendix II-b p.88
+O.D.15,Public Sector Entity,Applicable,Appendix II-b p.88
+O.D.15,Multilateral Development Bank,Applicable,Appendix II-b p.88
+O.D.15,Other Supranational,Applicable,Appendix II-b p.88
+O.D.15,Pension Fund,Applicable,Appendix II-b p.88
+O.D.15,Bank,Applicable,Appendix II-b p.88
+O.D.15,Broker Dealer,Applicable,Appendix II-b p.88
+O.D.15,Investment Company or Advisor,Applicable,Appendix II-b p.88
+O.D.15,Financial Market Utlility,Applicable,Appendix II-b p.88
+O.D.15,Other Supervised Non-Bank Financial Entity,Applicable,Appendix II-b p.88
+O.D.15,Debt Issuing Special Purpose Entity,Applicable,Appendix II-b p.88
+O.D.15,Non-regulated Fund,Applicable,Appendix II-b p.88
+O.D.15,Municipalities for VRDN Structures,Not Applicable,Appendix II-b p.88
+O.D.15,Other,Applicable,Appendix II-b p.88
+O.S.7,Retail,Applicable,Appendix II-b p.88
+O.S.7,Small Business,Applicable,Appendix II-b p.88
+O.S.7,Non-Financial Corporate,Applicable,Appendix II-b p.88
+O.S.7,Sovereign,Applicable,Appendix II-b p.88
+O.S.7,Central Bank,Applicable,Appendix II-b p.88
+O.S.7,Government Sponsored Entity,Applicable,Appendix II-b p.88
+O.S.7,Public Sector Entity,Applicable,Appendix II-b p.88
+O.S.7,Multilateral Development Bank,Applicable,Appendix II-b p.88
+O.S.7,Other Supranational,Applicable,Appendix II-b p.88
+O.S.7,Pension Fund,Applicable,Appendix II-b p.88
+O.S.7,Bank,Applicable,Appendix II-b p.88
+O.S.7,Broker Dealer,Applicable,Appendix II-b p.88
+O.S.7,Investment Company or Advisor,Applicable,Appendix II-b p.88
+O.S.7,Financial Market Utlility,Applicable,Appendix II-b p.88
+O.S.7,Other Supervised Non-Bank Financial Entity,Applicable,Appendix II-b p.88
+O.S.7,Debt Issuing Special Purpose Entity,Applicable,Appendix II-b p.88
+O.S.7,Non-regulated Fund,Applicable,Appendix II-b p.88
+O.S.7,Municipalities for VRDN Structures,Not Applicable,Appendix II-b p.88
+O.S.7,Other,Applicable,Appendix II-b p.88
+O.W.18,Retail,Applicable,Appendix II-b p.88
+O.W.18,Small Business,Applicable,Appendix II-b p.88
+O.W.18,Non-Financial Corporate,Applicable,Appendix II-b p.88
+O.W.18,Sovereign,Applicable,Appendix II-b p.88
+O.W.18,Central Bank,Applicable,Appendix II-b p.88
+O.W.18,Government Sponsored Entity,Applicable,Appendix II-b p.88
+O.W.18,Public Sector Entity,Applicable,Appendix II-b p.88
+O.W.18,Multilateral Development Bank,Applicable,Appendix II-b p.88
+O.W.18,Other Supranational,Applicable,Appendix II-b p.88
+O.W.18,Pension Fund,Applicable,Appendix II-b p.88
+O.W.18,Bank,Applicable,Appendix II-b p.88
+O.W.18,Broker Dealer,Applicable,Appendix II-b p.88
+O.W.18,Investment Company or Advisor,Applicable,Appendix II-b p.88
+O.W.18,Financial Market Utlility,Applicable,Appendix II-b p.88
+O.W.18,Other Supervised Non-Bank Financial Entity,Applicable,Appendix II-b p.88
+O.W.18,Debt Issuing Special Purpose Entity,Applicable,Appendix II-b p.88
+O.W.18,Non-regulated Fund,Applicable,Appendix II-b p.88
+O.W.18,Municipalities for VRDN Structures,Not Applicable,Appendix II-b p.88
+O.W.18,Other,Applicable,Appendix II-b p.88
+O.O.4,Retail,Applicable,Appendix II-b p.88
+O.O.4,Small Business,Applicable,Appendix II-b p.88
+O.O.4,Non-Financial Corporate,Applicable,Appendix II-b p.88
+O.O.4,Sovereign,Applicable,Appendix II-b p.88
+O.O.4,Central Bank,Applicable,Appendix II-b p.88
+O.O.4,Government Sponsored Entity,Applicable,Appendix II-b p.88
+O.O.4,Public Sector Entity,Applicable,Appendix II-b p.88
+O.O.4,Multilateral Development Bank,Applicable,Appendix II-b p.88
+O.O.4,Other Supranational,Applicable,Appendix II-b p.88
+O.O.4,Pension Fund,Applicable,Appendix II-b p.88
+O.O.4,Bank,Applicable,Appendix II-b p.88
+O.O.4,Broker Dealer,Applicable,Appendix II-b p.88
+O.O.4,Investment Company or Advisor,Applicable,Appendix II-b p.88
+O.O.4,Financial Market Utlility,Applicable,Appendix II-b p.88
+O.O.4,Other Supervised Non-Bank Financial Entity,Applicable,Appendix II-b p.88
+O.O.4,Debt Issuing Special Purpose Entity,Applicable,Appendix II-b p.88
+O.O.4,Non-regulated Fund,Applicable,Appendix II-b p.88
+O.O.4,Municipalities for VRDN Structures,Not Applicable,Appendix II-b p.88
+O.O.4,Other,Applicable,Appendix II-b p.88
+S.DC.1,Retail,Applicable,Appendix II-b p.88
+S.DC.1,Small Business,Applicable,Appendix II-b p.88
+S.DC.1,Non-Financial Corporate,Applicable,Appendix II-b p.88
+S.DC.1,Sovereign,Applicable,Appendix II-b p.88
+S.DC.1,Central Bank,Applicable,Appendix II-b p.88
+S.DC.1,Government Sponsored Entity,Applicable,Appendix II-b p.88
+S.DC.1,Public Sector Entity,Applicable,Appendix II-b p.88
+S.DC.1,Multilateral Development Bank,Applicable,Appendix II-b p.88
+S.DC.1,Other Supranational,Applicable,Appendix II-b p.88
+S.DC.1,Pension Fund,Applicable,Appendix II-b p.88
+S.DC.1,Bank,Applicable,Appendix II-b p.88
+S.DC.1,Broker Dealer,Applicable,Appendix II-b p.88
+S.DC.1,Investment Company or Advisor,Applicable,Appendix II-b p.88
+S.DC.1,Financial Market Utlility,Applicable,Appendix II-b p.88
+S.DC.1,Other Supervised Non-Bank Financial Entity,Applicable,Appendix II-b p.88
+S.DC.1,Debt Issuing Special Purpose Entity,Applicable,Appendix II-b p.88
+S.DC.1,Non-regulated Fund,Applicable,Appendix II-b p.88
+S.DC.1,Municipalities for VRDN Structures,Not Applicable,Appendix II-b p.88
+S.DC.1,Other,Applicable,Appendix II-b p.88
+S.DC.2,Retail,Applicable,Appendix II-b p.88
+S.DC.2,Small Business,Applicable,Appendix II-b p.88
+S.DC.2,Non-Financial Corporate,Applicable,Appendix II-b p.88
+S.DC.2,Sovereign,Applicable,Appendix II-b p.88
+S.DC.2,Central Bank,Applicable,Appendix II-b p.88
+S.DC.2,Government Sponsored Entity,Applicable,Appendix II-b p.88
+S.DC.2,Public Sector Entity,Applicable,Appendix II-b p.88
+S.DC.2,Multilateral Development Bank,Applicable,Appendix II-b p.88
+S.DC.2,Other Supranational,Applicable,Appendix II-b p.88
+S.DC.2,Pension Fund,Applicable,Appendix II-b p.88
+S.DC.2,Bank,Applicable,Appendix II-b p.88
+S.DC.2,Broker Dealer,Applicable,Appendix II-b p.88
+S.DC.2,Investment Company or Advisor,Applicable,Appendix II-b p.88
+S.DC.2,Financial Market Utlility,Applicable,Appendix II-b p.88
+S.DC.2,Other Supervised Non-Bank Financial Entity,Applicable,Appendix II-b p.88
+S.DC.2,Debt Issuing Special Purpose Entity,Applicable,Appendix II-b p.88
+S.DC.2,Non-regulated Fund,Applicable,Appendix II-b p.88
+S.DC.2,Municipalities for VRDN Structures,Not Applicable,Appendix II-b p.88
+S.DC.2,Other,Applicable,Appendix II-b p.88
+S.DC.5,Retail,Applicable,Appendix II-b p.88
+S.DC.5,Small Business,Applicable,Appendix II-b p.88
+S.DC.5,Non-Financial Corporate,Applicable,Appendix II-b p.88
+S.DC.5,Sovereign,Applicable,Appendix II-b p.88
+S.DC.5,Central Bank,Applicable,Appendix II-b p.88
+S.DC.5,Government Sponsored Entity,Applicable,Appendix II-b p.88
+S.DC.5,Public Sector Entity,Applicable,Appendix II-b p.88
+S.DC.5,Multilateral Development Bank,Applicable,Appendix II-b p.88
+S.DC.5,Other Supranational,Applicable,Appendix II-b p.88
+S.DC.5,Pension Fund,Applicable,Appendix II-b p.88
+S.DC.5,Bank,Applicable,Appendix II-b p.88
+S.DC.5,Broker Dealer,Applicable,Appendix II-b p.88
+S.DC.5,Investment Company or Advisor,Applicable,Appendix II-b p.88
+S.DC.5,Financial Market Utlility,Applicable,Appendix II-b p.88
+S.DC.5,Other Supervised Non-Bank Financial Entity,Applicable,Appendix II-b p.88
+S.DC.5,Debt Issuing Special Purpose Entity,Applicable,Appendix II-b p.88
+S.DC.5,Non-regulated Fund,Applicable,Appendix II-b p.88
+S.DC.5,Municipalities for VRDN Structures,Not Applicable,Appendix II-b p.88
+S.DC.5,Other,Applicable,Appendix II-b p.88
+S.DC.6,Retail,Applicable,Appendix II-b p.88
+S.DC.6,Small Business,Applicable,Appendix II-b p.88
+S.DC.6,Non-Financial Corporate,Applicable,Appendix II-b p.88
+S.DC.6,Sovereign,Applicable,Appendix II-b p.88
+S.DC.6,Central Bank,Applicable,Appendix II-b p.88
+S.DC.6,Government Sponsored Entity,Applicable,Appendix II-b p.88
+S.DC.6,Public Sector Entity,Applicable,Appendix II-b p.88
+S.DC.6,Multilateral Development Bank,Applicable,Appendix II-b p.88
+S.DC.6,Other Supranational,Applicable,Appendix II-b p.88
+S.DC.6,Pension Fund,Applicable,Appendix II-b p.88
+S.DC.6,Bank,Applicable,Appendix II-b p.88
+S.DC.6,Broker Dealer,Applicable,Appendix II-b p.88
+S.DC.6,Investment Company or Advisor,Applicable,Appendix II-b p.88
+S.DC.6,Financial Market Utlility,Applicable,Appendix II-b p.88
+S.DC.6,Other Supervised Non-Bank Financial Entity,Applicable,Appendix II-b p.88
+S.DC.6,Debt Issuing Special Purpose Entity,Applicable,Appendix II-b p.88
+S.DC.6,Non-regulated Fund,Applicable,Appendix II-b p.88
+S.DC.6,Municipalities for VRDN Structures,Not Applicable,Appendix II-b p.88
+S.DC.6,Other,Applicable,Appendix II-b p.88
+S.DC.7,Retail,Applicable,Appendix II-b p.88
+S.DC.7,Small Business,Applicable,Appendix II-b p.88
+S.DC.7,Non-Financial Corporate,Applicable,Appendix II-b p.88
+S.DC.7,Sovereign,Applicable,Appendix II-b p.88
+S.DC.7,Central Bank,Applicable,Appendix II-b p.88
+S.DC.7,Government Sponsored Entity,Applicable,Appendix II-b p.88
+S.DC.7,Public Sector Entity,Applicable,Appendix II-b p.88
+S.DC.7,Multilateral Development Bank,Applicable,Appendix II-b p.88
+S.DC.7,Other Supranational,Applicable,Appendix II-b p.88
+S.DC.7,Pension Fund,Applicable,Appendix II-b p.88
+S.DC.7,Bank,Applicable,Appendix II-b p.88
+S.DC.7,Broker Dealer,Applicable,Appendix II-b p.88
+S.DC.7,Investment Company or Advisor,Applicable,Appendix II-b p.88
+S.DC.7,Financial Market Utlility,Applicable,Appendix II-b p.88
+S.DC.7,Other Supervised Non-Bank Financial Entity,Applicable,Appendix II-b p.88
+S.DC.7,Debt Issuing Special Purpose Entity,Applicable,Appendix II-b p.88
+S.DC.7,Non-regulated Fund,Applicable,Appendix II-b p.88
+S.DC.7,Municipalities for VRDN Structures,Not Applicable,Appendix II-b p.88
+S.DC.7,Other,Applicable,Appendix II-b p.88
+S.DC.8,Retail,Applicable,Appendix II-b p.88
+S.DC.8,Small Business,Applicable,Appendix II-b p.88
+S.DC.8,Non-Financial Corporate,Applicable,Appendix II-b p.88
+S.DC.8,Sovereign,Applicable,Appendix II-b p.88
+S.DC.8,Central Bank,Applicable,Appendix II-b p.88
+S.DC.8,Government Sponsored Entity,Applicable,Appendix II-b p.88
+S.DC.8,Public Sector Entity,Applicable,Appendix II-b p.88
+S.DC.8,Multilateral Development Bank,Applicable,Appendix II-b p.88
+S.DC.8,Other Supranational,Applicable,Appendix II-b p.88
+S.DC.8,Pension Fund,Applicable,Appendix II-b p.88
+S.DC.8,Bank,Applicable,Appendix II-b p.88
+S.DC.8,Broker Dealer,Applicable,Appendix II-b p.88
+S.DC.8,Investment Company or Advisor,Applicable,Appendix II-b p.88
+S.DC.8,Financial Market Utlility,Applicable,Appendix II-b p.88
+S.DC.8,Other Supervised Non-Bank Financial Entity,Applicable,Appendix II-b p.88
+S.DC.8,Debt Issuing Special Purpose Entity,Applicable,Appendix II-b p.88
+S.DC.8,Non-regulated Fund,Applicable,Appendix II-b p.88
+S.DC.8,Municipalities for VRDN Structures,Not Applicable,Appendix II-b p.88
+S.DC.8,Other,Applicable,Appendix II-b p.88
+S.DC.9,Retail,Applicable,Appendix II-b p.88
+S.DC.9,Small Business,Applicable,Appendix II-b p.88
+S.DC.9,Non-Financial Corporate,Applicable,Appendix II-b p.88
+S.DC.9,Sovereign,Applicable,Appendix II-b p.88
+S.DC.9,Central Bank,Applicable,Appendix II-b p.88
+S.DC.9,Government Sponsored Entity,Applicable,Appendix II-b p.88
+S.DC.9,Public Sector Entity,Applicable,Appendix II-b p.88
+S.DC.9,Multilateral Development Bank,Applicable,Appendix II-b p.88
+S.DC.9,Other Supranational,Applicable,Appendix II-b p.88
+S.DC.9,Pension Fund,Applicable,Appendix II-b p.88
+S.DC.9,Bank,Applicable,Appendix II-b p.88
+S.DC.9,Broker Dealer,Applicable,Appendix II-b p.88
+S.DC.9,Investment Company or Advisor,Applicable,Appendix II-b p.88
+S.DC.9,Financial Market Utlility,Applicable,Appendix II-b p.88
+S.DC.9,Other Supervised Non-Bank Financial Entity,Applicable,Appendix II-b p.88
+S.DC.9,Debt Issuing Special Purpose Entity,Applicable,Appendix II-b p.88
+S.DC.9,Non-regulated Fund,Applicable,Appendix II-b p.88
+S.DC.9,Municipalities for VRDN Structures,Not Applicable,Appendix II-b p.88
+S.DC.9,Other,Applicable,Appendix II-b p.88
+S.DC.10,Retail,Applicable,Appendix II-b p.88
+S.DC.10,Small Business,Applicable,Appendix II-b p.88
+S.DC.10,Non-Financial Corporate,Applicable,Appendix II-b p.88
+S.DC.10,Sovereign,Applicable,Appendix II-b p.88
+S.DC.10,Central Bank,Applicable,Appendix II-b p.88
+S.DC.10,Government Sponsored Entity,Applicable,Appendix II-b p.88
+S.DC.10,Public Sector Entity,Applicable,Appendix II-b p.88
+S.DC.10,Multilateral Development Bank,Applicable,Appendix II-b p.88
+S.DC.10,Other Supranational,Applicable,Appendix II-b p.88
+S.DC.10,Pension Fund,Applicable,Appendix II-b p.88
+S.DC.10,Bank,Applicable,Appendix II-b p.88
+S.DC.10,Broker Dealer,Applicable,Appendix II-b p.88
+S.DC.10,Investment Company or Advisor,Applicable,Appendix II-b p.88
+S.DC.10,Financial Market Utlility,Applicable,Appendix II-b p.88
+S.DC.10,Other Supervised Non-Bank Financial Entity,Applicable,Appendix II-b p.88
+S.DC.10,Debt Issuing Special Purpose Entity,Applicable,Appendix II-b p.88
+S.DC.10,Non-regulated Fund,Applicable,Appendix II-b p.88
+S.DC.10,Municipalities for VRDN Structures,Not Applicable,Appendix II-b p.88
+S.DC.10,Other,Applicable,Appendix II-b p.88
+S.B.5,Retail,Applicable,Appendix II-b p.88
+S.B.5,Small Business,Applicable,Appendix II-b p.88
+S.B.5,Non-Financial Corporate,Applicable,Appendix II-b p.88
+S.B.5,Sovereign,Applicable,Appendix II-b p.88
+S.B.5,Central Bank,Applicable,Appendix II-b p.88
+S.B.5,Government Sponsored Entity,Applicable,Appendix II-b p.88
+S.B.5,Public Sector Entity,Applicable,Appendix II-b p.88
+S.B.5,Multilateral Development Bank,Applicable,Appendix II-b p.88
+S.B.5,Other Supranational,Applicable,Appendix II-b p.88
+S.B.5,Pension Fund,Applicable,Appendix II-b p.88
+S.B.5,Bank,Applicable,Appendix II-b p.88
+S.B.5,Broker Dealer,Applicable,Appendix II-b p.88
+S.B.5,Investment Company or Advisor,Applicable,Appendix II-b p.88
+S.B.5,Financial Market Utlility,Applicable,Appendix II-b p.88
+S.B.5,Other Supervised Non-Bank Financial Entity,Applicable,Appendix II-b p.88
+S.B.5,Debt Issuing Special Purpose Entity,Applicable,Appendix II-b p.88
+S.B.5,Non-regulated Fund,Applicable,Appendix II-b p.88
+S.B.5,Municipalities for VRDN Structures,Not Applicable,Appendix II-b p.88
+S.B.5,Other,Applicable,Appendix II-b p.88
+I.S.1,Retail,Not Applicable,Appendix II-b p.89
+I.S.1,Small Business,Not Applicable,Appendix II-b p.89
+I.S.1,Non-Financial Corporate,Applicable,Appendix II-b p.89
+I.S.1,Sovereign,Applicable,Appendix II-b p.89
+I.S.1,Central Bank,Applicable,Appendix II-b p.89
+I.S.1,Government Sponsored Entity,Applicable,Appendix II-b p.89
+I.S.1,Public Sector Entity,Applicable,Appendix II-b p.89
+I.S.1,Multilateral Development Bank,Applicable,Appendix II-b p.89
+I.S.1,Other Supranational,Applicable,Appendix II-b p.89
+I.S.1,Pension Fund,Applicable,Appendix II-b p.89
+I.S.1,Bank,Applicable,Appendix II-b p.89
+I.S.1,Broker Dealer,Applicable,Appendix II-b p.89
+I.S.1,Investment Company or Advisor,Applicable,Appendix II-b p.89
+I.S.1,Financial Market Utlility,Applicable,Appendix II-b p.89
+I.S.1,Other Supervised Non-Bank Financial Entity,Applicable,Appendix II-b p.89
+I.S.1,Debt Issuing Special Purpose Entity,Applicable,Appendix II-b p.89
+I.S.1,Non-regulated Fund,Applicable,Appendix II-b p.89
+I.S.1,Municipalities for VRDN Structures,Not Applicable,Appendix II-b p.89
+I.S.1,Other,Applicable,Appendix II-b p.89
+I.S.2,Retail,Not Applicable,Appendix II-b p.89
+I.S.2,Small Business,Not Applicable,Appendix II-b p.89
+I.S.2,Non-Financial Corporate,Applicable,Appendix II-b p.89
+I.S.2,Sovereign,Applicable,Appendix II-b p.89
+I.S.2,Central Bank,Applicable,Appendix II-b p.89
+I.S.2,Government Sponsored Entity,Applicable,Appendix II-b p.89
+I.S.2,Public Sector Entity,Applicable,Appendix II-b p.89
+I.S.2,Multilateral Development Bank,Applicable,Appendix II-b p.89
+I.S.2,Other Supranational,Applicable,Appendix II-b p.89
+I.S.2,Pension Fund,Applicable,Appendix II-b p.89
+I.S.2,Bank,Applicable,Appendix II-b p.89
+I.S.2,Broker Dealer,Applicable,Appendix II-b p.89
+I.S.2,Investment Company or Advisor,Applicable,Appendix II-b p.89
+I.S.2,Financial Market Utlility,Applicable,Appendix II-b p.89
+I.S.2,Other Supervised Non-Bank Financial Entity,Applicable,Appendix II-b p.89
+I.S.2,Debt Issuing Special Purpose Entity,Applicable,Appendix II-b p.89
+I.S.2,Non-regulated Fund,Applicable,Appendix II-b p.89
+I.S.2,Municipalities for VRDN Structures,Not Applicable,Appendix II-b p.89
+I.S.2,Other,Applicable,Appendix II-b p.89
+I.S.3,Retail,Not Applicable,Appendix II-b p.89
+I.S.3,Small Business,Not Applicable,Appendix II-b p.89
+I.S.3,Non-Financial Corporate,Applicable,Appendix II-b p.89
+I.S.3,Sovereign,Applicable,Appendix II-b p.89
+I.S.3,Central Bank,Applicable,Appendix II-b p.89
+I.S.3,Government Sponsored Entity,Applicable,Appendix II-b p.89
+I.S.3,Public Sector Entity,Applicable,Appendix II-b p.89
+I.S.3,Multilateral Development Bank,Applicable,Appendix II-b p.89
+I.S.3,Other Supranational,Applicable,Appendix II-b p.89
+I.S.3,Pension Fund,Applicable,Appendix II-b p.89
+I.S.3,Bank,Applicable,Appendix II-b p.89
+I.S.3,Broker Dealer,Applicable,Appendix II-b p.89
+I.S.3,Investment Company or Advisor,Applicable,Appendix II-b p.89
+I.S.3,Financial Market Utlility,Applicable,Appendix II-b p.89
+I.S.3,Other Supervised Non-Bank Financial Entity,Applicable,Appendix II-b p.89
+I.S.3,Debt Issuing Special Purpose Entity,Applicable,Appendix II-b p.89
+I.S.3,Non-regulated Fund,Applicable,Appendix II-b p.89
+I.S.3,Municipalities for VRDN Structures,Not Applicable,Appendix II-b p.89
+I.S.3,Other,Applicable,Appendix II-b p.89
+I.S.4,Retail,Not Applicable,Appendix II-b p.89
+I.S.4,Small Business,Not Applicable,Appendix II-b p.89
+I.S.4,Non-Financial Corporate,Applicable,Appendix II-b p.89
+I.S.4,Sovereign,Applicable,Appendix II-b p.89
+I.S.4,Central Bank,Applicable,Appendix II-b p.89
+I.S.4,Government Sponsored Entity,Applicable,Appendix II-b p.89
+I.S.4,Public Sector Entity,Applicable,Appendix II-b p.89
+I.S.4,Multilateral Development Bank,Applicable,Appendix II-b p.89
+I.S.4,Other Supranational,Applicable,Appendix II-b p.89
+I.S.4,Pension Fund,Applicable,Appendix II-b p.89
+I.S.4,Bank,Applicable,Appendix II-b p.89
+I.S.4,Broker Dealer,Applicable,Appendix II-b p.89
+I.S.4,Investment Company or Advisor,Applicable,Appendix II-b p.89
+I.S.4,Financial Market Utlility,Applicable,Appendix II-b p.89
+I.S.4,Other Supervised Non-Bank Financial Entity,Applicable,Appendix II-b p.89
+I.S.4,Debt Issuing Special Purpose Entity,Applicable,Appendix II-b p.89
+I.S.4,Non-regulated Fund,Applicable,Appendix II-b p.89
+I.S.4,Municipalities for VRDN Structures,Not Applicable,Appendix II-b p.89
+I.S.4,Other,Applicable,Appendix II-b p.89
+I.S.9,Retail,Not Applicable,Appendix II-b p.89
+I.S.9,Small Business,Not Applicable,Appendix II-b p.89
+I.S.9,Non-Financial Corporate,Applicable,Appendix II-b p.89
+I.S.9,Sovereign,Applicable,Appendix II-b p.89
+I.S.9,Central Bank,Applicable,Appendix II-b p.89
+I.S.9,Government Sponsored Entity,Applicable,Appendix II-b p.89
+I.S.9,Public Sector Entity,Applicable,Appendix II-b p.89
+I.S.9,Multilateral Development Bank,Applicable,Appendix II-b p.89
+I.S.9,Other Supranational,Applicable,Appendix II-b p.89
+I.S.9,Pension Fund,Applicable,Appendix II-b p.89
+I.S.9,Bank,Applicable,Appendix II-b p.89
+I.S.9,Broker Dealer,Applicable,Appendix II-b p.89
+I.S.9,Investment Company or Advisor,Applicable,Appendix II-b p.89
+I.S.9,Financial Market Utlility,Applicable,Appendix II-b p.89
+I.S.9,Other Supervised Non-Bank Financial Entity,Applicable,Appendix II-b p.89
+I.S.9,Debt Issuing Special Purpose Entity,Applicable,Appendix II-b p.89
+I.S.9,Non-regulated Fund,Applicable,Appendix II-b p.89
+I.S.9,Municipalities for VRDN Structures,Not Applicable,Appendix II-b p.89
+I.S.9,Other,Applicable,Appendix II-b p.89
+I.S.10,Retail,Not Applicable,Appendix II-b p.89
+I.S.10,Small Business,Not Applicable,Appendix II-b p.89
+I.S.10,Non-Financial Corporate,Applicable,Appendix II-b p.89
+I.S.10,Sovereign,Applicable,Appendix II-b p.89
+I.S.10,Central Bank,Applicable,Appendix II-b p.89
+I.S.10,Government Sponsored Entity,Applicable,Appendix II-b p.89
+I.S.10,Public Sector Entity,Applicable,Appendix II-b p.89
+I.S.10,Multilateral Development Bank,Applicable,Appendix II-b p.89
+I.S.10,Other Supranational,Applicable,Appendix II-b p.89
+I.S.10,Pension Fund,Applicable,Appendix II-b p.89
+I.S.10,Bank,Applicable,Appendix II-b p.89
+I.S.10,Broker Dealer,Applicable,Appendix II-b p.89
+I.S.10,Investment Company or Advisor,Applicable,Appendix II-b p.89
+I.S.10,Financial Market Utlility,Applicable,Appendix II-b p.89
+I.S.10,Other Supervised Non-Bank Financial Entity,Applicable,Appendix II-b p.89
+I.S.10,Debt Issuing Special Purpose Entity,Applicable,Appendix II-b p.89
+I.S.10,Non-regulated Fund,Applicable,Appendix II-b p.89
+I.S.10,Municipalities for VRDN Structures,Not Applicable,Appendix II-b p.89
+I.S.10,Other,Applicable,Appendix II-b p.89
+I.U.1,Retail,Not Applicable,Appendix II-b p.89
+I.U.1,Small Business,Not Applicable,Appendix II-b p.89
+I.U.1,Non-Financial Corporate,Applicable,Appendix II-b p.89
+I.U.1,Sovereign,Applicable,Appendix II-b p.89
+I.U.1,Central Bank,Applicable,Appendix II-b p.89
+I.U.1,Government Sponsored Entity,Applicable,Appendix II-b p.89
+I.U.1,Public Sector Entity,Applicable,Appendix II-b p.89
+I.U.1,Multilateral Development Bank,Applicable,Appendix II-b p.89
+I.U.1,Other Supranational,Applicable,Appendix II-b p.89
+I.U.1,Pension Fund,Applicable,Appendix II-b p.89
+I.U.1,Bank,Applicable,Appendix II-b p.89
+I.U.1,Broker Dealer,Applicable,Appendix II-b p.89
+I.U.1,Investment Company or Advisor,Applicable,Appendix II-b p.89
+I.U.1,Financial Market Utlility,Applicable,Appendix II-b p.89
+I.U.1,Other Supervised Non-Bank Financial Entity,Applicable,Appendix II-b p.89
+I.U.1,Debt Issuing Special Purpose Entity,Applicable,Appendix II-b p.89
+I.U.1,Non-regulated Fund,Applicable,Appendix II-b p.89
+I.U.1,Municipalities for VRDN Structures,Not Applicable,Appendix II-b p.89
+I.U.1,Other,Applicable,Appendix II-b p.89
+I.U.2,Retail,Not Applicable,Appendix II-b p.89
+I.U.2,Small Business,Not Applicable,Appendix II-b p.89
+I.U.2,Non-Financial Corporate,Applicable,Appendix II-b p.89
+I.U.2,Sovereign,Applicable,Appendix II-b p.89
+I.U.2,Central Bank,Applicable,Appendix II-b p.89
+I.U.2,Government Sponsored Entity,Applicable,Appendix II-b p.89
+I.U.2,Public Sector Entity,Applicable,Appendix II-b p.89
+I.U.2,Multilateral Development Bank,Applicable,Appendix II-b p.89
+I.U.2,Other Supranational,Applicable,Appendix II-b p.89
+I.U.2,Pension Fund,Applicable,Appendix II-b p.89
+I.U.2,Bank,Applicable,Appendix II-b p.89
+I.U.2,Broker Dealer,Applicable,Appendix II-b p.89
+I.U.2,Investment Company or Advisor,Applicable,Appendix II-b p.89
+I.U.2,Financial Market Utlility,Applicable,Appendix II-b p.89
+I.U.2,Other Supervised Non-Bank Financial Entity,Applicable,Appendix II-b p.89
+I.U.2,Debt Issuing Special Purpose Entity,Applicable,Appendix II-b p.89
+I.U.2,Non-regulated Fund,Applicable,Appendix II-b p.89
+I.U.2,Municipalities for VRDN Structures,Not Applicable,Appendix II-b p.89
+I.U.2,Other,Applicable,Appendix II-b p.89
+I.U.3,Retail,Not Applicable,Appendix II-b p.89
+I.U.3,Small Business,Not Applicable,Appendix II-b p.89
+I.U.3,Non-Financial Corporate,Applicable,Appendix II-b p.89
+I.U.3,Sovereign,Applicable,Appendix II-b p.89
+I.U.3,Central Bank,Applicable,Appendix II-b p.89
+I.U.3,Government Sponsored Entity,Applicable,Appendix II-b p.89
+I.U.3,Public Sector Entity,Applicable,Appendix II-b p.89
+I.U.3,Multilateral Development Bank,Applicable,Appendix II-b p.89
+I.U.3,Other Supranational,Applicable,Appendix II-b p.89
+I.U.3,Pension Fund,Applicable,Appendix II-b p.89
+I.U.3,Bank,Applicable,Appendix II-b p.89
+I.U.3,Broker Dealer,Applicable,Appendix II-b p.89
+I.U.3,Investment Company or Advisor,Applicable,Appendix II-b p.89
+I.U.3,Financial Market Utlility,Applicable,Appendix II-b p.89
+I.U.3,Other Supervised Non-Bank Financial Entity,Applicable,Appendix II-b p.89
+I.U.3,Debt Issuing Special Purpose Entity,Applicable,Appendix II-b p.89
+I.U.3,Non-regulated Fund,Applicable,Appendix II-b p.89
+I.U.3,Municipalities for VRDN Structures,Not Applicable,Appendix II-b p.89
+I.U.3,Other,Applicable,Appendix II-b p.89
+I.U.4,Retail,Not Applicable,Appendix II-b p.89
+I.U.4,Small Business,Not Applicable,Appendix II-b p.89
+I.U.4,Non-Financial Corporate,Applicable,Appendix II-b p.89
+I.U.4,Sovereign,Applicable,Appendix II-b p.89
+I.U.4,Central Bank,Applicable,Appendix II-b p.89
+I.U.4,Government Sponsored Entity,Applicable,Appendix II-b p.89
+I.U.4,Public Sector Entity,Applicable,Appendix II-b p.89
+I.U.4,Multilateral Development Bank,Applicable,Appendix II-b p.89
+I.U.4,Other Supranational,Applicable,Appendix II-b p.89
+I.U.4,Pension Fund,Applicable,Appendix II-b p.89
+I.U.4,Bank,Applicable,Appendix II-b p.89
+I.U.4,Broker Dealer,Applicable,Appendix II-b p.89
+I.U.4,Investment Company or Advisor,Applicable,Appendix II-b p.89
+I.U.4,Financial Market Utlility,Applicable,Appendix II-b p.89
+I.U.4,Other Supervised Non-Bank Financial Entity,Applicable,Appendix II-b p.89
+I.U.4,Debt Issuing Special Purpose Entity,Applicable,Appendix II-b p.89
+I.U.4,Non-regulated Fund,Applicable,Appendix II-b p.89
+I.U.4,Municipalities for VRDN Structures,Not Applicable,Appendix II-b p.89
+I.U.4,Other,Applicable,Appendix II-b p.89
+I.U.7,Retail,Not Applicable,Appendix II-b p.89
+I.U.7,Small Business,Not Applicable,Appendix II-b p.89
+I.U.7,Non-Financial Corporate,Applicable,Appendix II-b p.89
+I.U.7,Sovereign,Applicable,Appendix II-b p.89
+I.U.7,Central Bank,Applicable,Appendix II-b p.89
+I.U.7,Government Sponsored Entity,Applicable,Appendix II-b p.89
+I.U.7,Public Sector Entity,Applicable,Appendix II-b p.89
+I.U.7,Multilateral Development Bank,Applicable,Appendix II-b p.89
+I.U.7,Other Supranational,Applicable,Appendix II-b p.89
+I.U.7,Pension Fund,Applicable,Appendix II-b p.89
+I.U.7,Bank,Applicable,Appendix II-b p.89
+I.U.7,Broker Dealer,Applicable,Appendix II-b p.89
+I.U.7,Investment Company or Advisor,Applicable,Appendix II-b p.89
+I.U.7,Financial Market Utlility,Applicable,Appendix II-b p.89
+I.U.7,Other Supervised Non-Bank Financial Entity,Applicable,Appendix II-b p.89
+I.U.7,Debt Issuing Special Purpose Entity,Applicable,Appendix II-b p.89
+I.U.7,Non-regulated Fund,Applicable,Appendix II-b p.89
+I.U.7,Municipalities for VRDN Structures,Not Applicable,Appendix II-b p.89
+I.U.7,Other,Applicable,Appendix II-b p.89
+I.U.8,Retail,Not Applicable,Appendix II-b p.89
+I.U.8,Small Business,Not Applicable,Appendix II-b p.89
+I.U.8,Non-Financial Corporate,Applicable,Appendix II-b p.89
+I.U.8,Sovereign,Applicable,Appendix II-b p.89
+I.U.8,Central Bank,Applicable,Appendix II-b p.89
+I.U.8,Government Sponsored Entity,Applicable,Appendix II-b p.89
+I.U.8,Public Sector Entity,Applicable,Appendix II-b p.89
+I.U.8,Multilateral Development Bank,Applicable,Appendix II-b p.89
+I.U.8,Other Supranational,Applicable,Appendix II-b p.89
+I.U.8,Pension Fund,Applicable,Appendix II-b p.89
+I.U.8,Bank,Applicable,Appendix II-b p.89
+I.U.8,Broker Dealer,Applicable,Appendix II-b p.89
+I.U.8,Investment Company or Advisor,Applicable,Appendix II-b p.89
+I.U.8,Financial Market Utlility,Applicable,Appendix II-b p.89
+I.U.8,Other Supervised Non-Bank Financial Entity,Applicable,Appendix II-b p.89
+I.U.8,Debt Issuing Special Purpose Entity,Applicable,Appendix II-b p.89
+I.U.8,Non-regulated Fund,Applicable,Appendix II-b p.89
+I.U.8,Municipalities for VRDN Structures,Not Applicable,Appendix II-b p.89
+I.U.8,Other,Applicable,Appendix II-b p.89
+O.D.4,Retail,Not Applicable,Appendix II-b p.89
+O.D.4,Small Business,Not Applicable,Appendix II-b p.89
+O.D.4,Non-Financial Corporate,Applicable,Appendix II-b p.89
+O.D.4,Sovereign,Applicable,Appendix II-b p.89
+O.D.4,Central Bank,Applicable,Appendix II-b p.89
+O.D.4,Government Sponsored Entity,Applicable,Appendix II-b p.89
+O.D.4,Public Sector Entity,Applicable,Appendix II-b p.89
+O.D.4,Multilateral Development Bank,Applicable,Appendix II-b p.89
+O.D.4,Other Supranational,Applicable,Appendix II-b p.89
+O.D.4,Pension Fund,Applicable,Appendix II-b p.89
+O.D.4,Bank,Applicable,Appendix II-b p.89
+O.D.4,Broker Dealer,Applicable,Appendix II-b p.89
+O.D.4,Investment Company or Advisor,Applicable,Appendix II-b p.89
+O.D.4,Financial Market Utlility,Applicable,Appendix II-b p.89
+O.D.4,Other Supervised Non-Bank Financial Entity,Applicable,Appendix II-b p.89
+O.D.4,Debt Issuing Special Purpose Entity,Applicable,Appendix II-b p.89
+O.D.4,Non-regulated Fund,Applicable,Appendix II-b p.89
+O.D.4,Municipalities for VRDN Structures,Not Applicable,Appendix II-b p.89
+O.D.4,Other,Applicable,Appendix II-b p.89
+O.D.5,Retail,Not Applicable,Appendix II-b p.89
+O.D.5,Small Business,Not Applicable,Appendix II-b p.89
+O.D.5,Non-Financial Corporate,Applicable,Appendix II-b p.89
+O.D.5,Sovereign,Applicable,Appendix II-b p.89
+O.D.5,Central Bank,Applicable,Appendix II-b p.89
+O.D.5,Government Sponsored Entity,Applicable,Appendix II-b p.89
+O.D.5,Public Sector Entity,Applicable,Appendix II-b p.89
+O.D.5,Multilateral Development Bank,Applicable,Appendix II-b p.89
+O.D.5,Other Supranational,Applicable,Appendix II-b p.89
+O.D.5,Pension Fund,Applicable,Appendix II-b p.89
+O.D.5,Bank,Applicable,Appendix II-b p.89
+O.D.5,Broker Dealer,Applicable,Appendix II-b p.89
+O.D.5,Investment Company or Advisor,Applicable,Appendix II-b p.89
+O.D.5,Financial Market Utlility,Applicable,Appendix II-b p.89
+O.D.5,Other Supervised Non-Bank Financial Entity,Applicable,Appendix II-b p.89
+O.D.5,Debt Issuing Special Purpose Entity,Applicable,Appendix II-b p.89
+O.D.5,Non-regulated Fund,Applicable,Appendix II-b p.89
+O.D.5,Municipalities for VRDN Structures,Not Applicable,Appendix II-b p.89
+O.D.5,Other,Applicable,Appendix II-b p.89
+O.D.6,Retail,Not Applicable,Appendix II-b p.89
+O.D.6,Small Business,Not Applicable,Appendix II-b p.89
+O.D.6,Non-Financial Corporate,Applicable,Appendix II-b p.89
+O.D.6,Sovereign,Applicable,Appendix II-b p.89
+O.D.6,Central Bank,Applicable,Appendix II-b p.89
+O.D.6,Government Sponsored Entity,Applicable,Appendix II-b p.89
+O.D.6,Public Sector Entity,Applicable,Appendix II-b p.89
+O.D.6,Multilateral Development Bank,Applicable,Appendix II-b p.89
+O.D.6,Other Supranational,Applicable,Appendix II-b p.89
+O.D.6,Pension Fund,Applicable,Appendix II-b p.89
+O.D.6,Bank,Applicable,Appendix II-b p.89
+O.D.6,Broker Dealer,Applicable,Appendix II-b p.89
+O.D.6,Investment Company or Advisor,Applicable,Appendix II-b p.89
+O.D.6,Financial Market Utlility,Applicable,Appendix II-b p.89
+O.D.6,Other Supervised Non-Bank Financial Entity,Applicable,Appendix II-b p.89
+O.D.6,Debt Issuing Special Purpose Entity,Applicable,Appendix II-b p.89
+O.D.6,Non-regulated Fund,Applicable,Appendix II-b p.89
+O.D.6,Municipalities for VRDN Structures,Not Applicable,Appendix II-b p.89
+O.D.6,Other,Applicable,Appendix II-b p.89
+O.S.1,Retail,Not Applicable,Appendix II-b p.89
+O.S.1,Small Business,Not Applicable,Appendix II-b p.89
+O.S.1,Non-Financial Corporate,Applicable,Appendix II-b p.89
+O.S.1,Sovereign,Applicable,Appendix II-b p.89
+O.S.1,Central Bank,Applicable,Appendix II-b p.89
+O.S.1,Government Sponsored Entity,Applicable,Appendix II-b p.89
+O.S.1,Public Sector Entity,Applicable,Appendix II-b p.89
+O.S.1,Multilateral Development Bank,Applicable,Appendix II-b p.89
+O.S.1,Other Supranational,Applicable,Appendix II-b p.89
+O.S.1,Pension Fund,Applicable,Appendix II-b p.89
+O.S.1,Bank,Applicable,Appendix II-b p.89
+O.S.1,Broker Dealer,Applicable,Appendix II-b p.89
+O.S.1,Investment Company or Advisor,Applicable,Appendix II-b p.89
+O.S.1,Financial Market Utlility,Applicable,Appendix II-b p.89
+O.S.1,Other Supervised Non-Bank Financial Entity,Applicable,Appendix II-b p.89
+O.S.1,Debt Issuing Special Purpose Entity,Applicable,Appendix II-b p.89
+O.S.1,Non-regulated Fund,Applicable,Appendix II-b p.89
+O.S.1,Municipalities for VRDN Structures,Not Applicable,Appendix II-b p.89
+O.S.1,Other,Applicable,Appendix II-b p.89
+O.S.2,Retail,Not Applicable,Appendix II-b p.89
+O.S.2,Small Business,Not Applicable,Appendix II-b p.89
+O.S.2,Non-Financial Corporate,Applicable,Appendix II-b p.89
+O.S.2,Sovereign,Applicable,Appendix II-b p.89
+O.S.2,Central Bank,Applicable,Appendix II-b p.89
+O.S.2,Government Sponsored Entity,Applicable,Appendix II-b p.89
+O.S.2,Public Sector Entity,Applicable,Appendix II-b p.89
+O.S.2,Multilateral Development Bank,Applicable,Appendix II-b p.89
+O.S.2,Other Supranational,Applicable,Appendix II-b p.89
+O.S.2,Pension Fund,Applicable,Appendix II-b p.89
+O.S.2,Bank,Applicable,Appendix II-b p.89
+O.S.2,Broker Dealer,Applicable,Appendix II-b p.89
+O.S.2,Investment Company or Advisor,Applicable,Appendix II-b p.89
+O.S.2,Financial Market Utlility,Applicable,Appendix II-b p.89
+O.S.2,Other Supervised Non-Bank Financial Entity,Applicable,Appendix II-b p.89
+O.S.2,Debt Issuing Special Purpose Entity,Applicable,Appendix II-b p.89
+O.S.2,Non-regulated Fund,Applicable,Appendix II-b p.89
+O.S.2,Municipalities for VRDN Structures,Not Applicable,Appendix II-b p.89
+O.S.2,Other,Applicable,Appendix II-b p.89
+O.S.3,Retail,Not Applicable,Appendix II-b p.89
+O.S.3,Small Business,Not Applicable,Appendix II-b p.89
+O.S.3,Non-Financial Corporate,Applicable,Appendix II-b p.89
+O.S.3,Sovereign,Applicable,Appendix II-b p.89
+O.S.3,Central Bank,Applicable,Appendix II-b p.89
+O.S.3,Government Sponsored Entity,Applicable,Appendix II-b p.89
+O.S.3,Public Sector Entity,Applicable,Appendix II-b p.89
+O.S.3,Multilateral Development Bank,Applicable,Appendix II-b p.89
+O.S.3,Other Supranational,Applicable,Appendix II-b p.89
+O.S.3,Pension Fund,Applicable,Appendix II-b p.89
+O.S.3,Bank,Applicable,Appendix II-b p.89
+O.S.3,Broker Dealer,Applicable,Appendix II-b p.89
+O.S.3,Investment Company or Advisor,Applicable,Appendix II-b p.89
+O.S.3,Financial Market Utlility,Applicable,Appendix II-b p.89
+O.S.3,Other Supervised Non-Bank Financial Entity,Applicable,Appendix II-b p.89
+O.S.3,Debt Issuing Special Purpose Entity,Applicable,Appendix II-b p.89
+O.S.3,Non-regulated Fund,Applicable,Appendix II-b p.89
+O.S.3,Municipalities for VRDN Structures,Not Applicable,Appendix II-b p.89
+O.S.3,Other,Applicable,Appendix II-b p.89
+O.S.4,Retail,Not Applicable,Appendix II-b p.89
+O.S.4,Small Business,Not Applicable,Appendix II-b p.89
+O.S.4,Non-Financial Corporate,Applicable,Appendix II-b p.89
+O.S.4,Sovereign,Applicable,Appendix II-b p.89
+O.S.4,Central Bank,Applicable,Appendix II-b p.89
+O.S.4,Government Sponsored Entity,Applicable,Appendix II-b p.89
+O.S.4,Public Sector Entity,Applicable,Appendix II-b p.89
+O.S.4,Multilateral Development Bank,Applicable,Appendix II-b p.89
+O.S.4,Other Supranational,Applicable,Appendix II-b p.89
+O.S.4,Pension Fund,Applicable,Appendix II-b p.89
+O.S.4,Bank,Applicable,Appendix II-b p.89
+O.S.4,Broker Dealer,Applicable,Appendix II-b p.89
+O.S.4,Investment Company or Advisor,Applicable,Appendix II-b p.89
+O.S.4,Financial Market Utlility,Applicable,Appendix II-b p.89
+O.S.4,Other Supervised Non-Bank Financial Entity,Applicable,Appendix II-b p.89
+O.S.4,Debt Issuing Special Purpose Entity,Applicable,Appendix II-b p.89
+O.S.4,Non-regulated Fund,Applicable,Appendix II-b p.89
+O.S.4,Municipalities for VRDN Structures,Not Applicable,Appendix II-b p.89
+O.S.4,Other,Applicable,Appendix II-b p.89
+O.S.9,Retail,Not Applicable,Appendix II-b p.89
+O.S.9,Small Business,Not Applicable,Appendix II-b p.89
+O.S.9,Non-Financial Corporate,Applicable,Appendix II-b p.89
+O.S.9,Sovereign,Applicable,Appendix II-b p.89
+O.S.9,Central Bank,Applicable,Appendix II-b p.89
+O.S.9,Government Sponsored Entity,Applicable,Appendix II-b p.89
+O.S.9,Public Sector Entity,Applicable,Appendix II-b p.89
+O.S.9,Multilateral Development Bank,Applicable,Appendix II-b p.89
+O.S.9,Other Supranational,Applicable,Appendix II-b p.89
+O.S.9,Pension Fund,Applicable,Appendix II-b p.89
+O.S.9,Bank,Applicable,Appendix II-b p.89
+O.S.9,Broker Dealer,Applicable,Appendix II-b p.89
+O.S.9,Investment Company or Advisor,Applicable,Appendix II-b p.89
+O.S.9,Financial Market Utlility,Applicable,Appendix II-b p.89
+O.S.9,Other Supervised Non-Bank Financial Entity,Applicable,Appendix II-b p.89
+O.S.9,Debt Issuing Special Purpose Entity,Applicable,Appendix II-b p.89
+O.S.9,Non-regulated Fund,Applicable,Appendix II-b p.89
+O.S.9,Municipalities for VRDN Structures,Not Applicable,Appendix II-b p.89
+O.S.9,Other,Applicable,Appendix II-b p.89
+O.S.10,Retail,Not Applicable,Appendix II-b p.89
+O.S.10,Small Business,Not Applicable,Appendix II-b p.89
+O.S.10,Non-Financial Corporate,Applicable,Appendix II-b p.89
+O.S.10,Sovereign,Applicable,Appendix II-b p.89
+O.S.10,Central Bank,Applicable,Appendix II-b p.89
+O.S.10,Government Sponsored Entity,Applicable,Appendix II-b p.89
+O.S.10,Public Sector Entity,Applicable,Appendix II-b p.89
+O.S.10,Multilateral Development Bank,Applicable,Appendix II-b p.89
+O.S.10,Other Supranational,Applicable,Appendix II-b p.89
+O.S.10,Pension Fund,Applicable,Appendix II-b p.89
+O.S.10,Bank,Applicable,Appendix II-b p.89
+O.S.10,Broker Dealer,Applicable,Appendix II-b p.89
+O.S.10,Investment Company or Advisor,Applicable,Appendix II-b p.89
+O.S.10,Financial Market Utlility,Applicable,Appendix II-b p.89
+O.S.10,Other Supervised Non-Bank Financial Entity,Applicable,Appendix II-b p.89
+O.S.10,Debt Issuing Special Purpose Entity,Applicable,Appendix II-b p.89
+O.S.10,Non-regulated Fund,Applicable,Appendix II-b p.89
+O.S.10,Municipalities for VRDN Structures,Not Applicable,Appendix II-b p.89
+O.S.10,Other,Applicable,Appendix II-b p.89
+O.S.11,Retail,Not Applicable,Appendix II-b p.89
+O.S.11,Small Business,Not Applicable,Appendix II-b p.89
+O.S.11,Non-Financial Corporate,Applicable,Appendix II-b p.89
+O.S.11,Sovereign,Applicable,Appendix II-b p.89
+O.S.11,Central Bank,Applicable,Appendix II-b p.89
+O.S.11,Government Sponsored Entity,Applicable,Appendix II-b p.89
+O.S.11,Public Sector Entity,Applicable,Appendix II-b p.89
+O.S.11,Multilateral Development Bank,Applicable,Appendix II-b p.89
+O.S.11,Other Supranational,Applicable,Appendix II-b p.89
+O.S.11,Pension Fund,Applicable,Appendix II-b p.89
+O.S.11,Bank,Applicable,Appendix II-b p.89
+O.S.11,Broker Dealer,Applicable,Appendix II-b p.89
+O.S.11,Investment Company or Advisor,Applicable,Appendix II-b p.89
+O.S.11,Financial Market Utlility,Applicable,Appendix II-b p.89
+O.S.11,Other Supervised Non-Bank Financial Entity,Applicable,Appendix II-b p.89
+O.S.11,Debt Issuing Special Purpose Entity,Applicable,Appendix II-b p.89
+O.S.11,Non-regulated Fund,Applicable,Appendix II-b p.89
+O.S.11,Municipalities for VRDN Structures,Not Applicable,Appendix II-b p.89
+O.S.11,Other,Applicable,Appendix II-b p.89
+O.W.9,Retail,Not Applicable,Appendix II-b p.89
+O.W.9,Small Business,Not Applicable,Appendix II-b p.89
+O.W.9,Non-Financial Corporate,Applicable,Appendix II-b p.89
+O.W.9,Sovereign,Applicable,Appendix II-b p.89
+O.W.9,Central Bank,Applicable,Appendix II-b p.89
+O.W.9,Government Sponsored Entity,Applicable,Appendix II-b p.89
+O.W.9,Public Sector Entity,Applicable,Appendix II-b p.89
+O.W.9,Multilateral Development Bank,Applicable,Appendix II-b p.89
+O.W.9,Other Supranational,Applicable,Appendix II-b p.89
+O.W.9,Pension Fund,Applicable,Appendix II-b p.89
+O.W.9,Bank,Applicable,Appendix II-b p.89
+O.W.9,Broker Dealer,Applicable,Appendix II-b p.89
+O.W.9,Investment Company or Advisor,Applicable,Appendix II-b p.89
+O.W.9,Financial Market Utlility,Applicable,Appendix II-b p.89
+O.W.9,Other Supervised Non-Bank Financial Entity,Applicable,Appendix II-b p.89
+O.W.9,Debt Issuing Special Purpose Entity,Applicable,Appendix II-b p.89
+O.W.9,Non-regulated Fund,Applicable,Appendix II-b p.89
+O.W.9,Municipalities for VRDN Structures,Not Applicable,Appendix II-b p.89
+O.W.9,Other,Applicable,Appendix II-b p.89
+O.W.10,Retail,Not Applicable,Appendix II-b p.89
+O.W.10,Small Business,Not Applicable,Appendix II-b p.89
+O.W.10,Non-Financial Corporate,Applicable,Appendix II-b p.89
+O.W.10,Sovereign,Applicable,Appendix II-b p.89
+O.W.10,Central Bank,Applicable,Appendix II-b p.89
+O.W.10,Government Sponsored Entity,Applicable,Appendix II-b p.89
+O.W.10,Public Sector Entity,Applicable,Appendix II-b p.89
+O.W.10,Multilateral Development Bank,Applicable,Appendix II-b p.89
+O.W.10,Other Supranational,Applicable,Appendix II-b p.89
+O.W.10,Pension Fund,Applicable,Appendix II-b p.89
+O.W.10,Bank,Applicable,Appendix II-b p.89
+O.W.10,Broker Dealer,Applicable,Appendix II-b p.89
+O.W.10,Investment Company or Advisor,Applicable,Appendix II-b p.89
+O.W.10,Financial Market Utlility,Applicable,Appendix II-b p.89
+O.W.10,Other Supervised Non-Bank Financial Entity,Applicable,Appendix II-b p.89
+O.W.10,Debt Issuing Special Purpose Entity,Applicable,Appendix II-b p.89
+O.W.10,Non-regulated Fund,Applicable,Appendix II-b p.89
+O.W.10,Municipalities for VRDN Structures,Not Applicable,Appendix II-b p.89
+O.W.10,Other,Applicable,Appendix II-b p.89
+S.FX.1,Retail,Not Applicable,Appendix II-b p.89
+S.FX.1,Small Business,Not Applicable,Appendix II-b p.89
+S.FX.1,Non-Financial Corporate,Applicable,Appendix II-b p.89
+S.FX.1,Sovereign,Applicable,Appendix II-b p.89
+S.FX.1,Central Bank,Applicable,Appendix II-b p.89
+S.FX.1,Government Sponsored Entity,Applicable,Appendix II-b p.89
+S.FX.1,Public Sector Entity,Applicable,Appendix II-b p.89
+S.FX.1,Multilateral Development Bank,Applicable,Appendix II-b p.89
+S.FX.1,Other Supranational,Applicable,Appendix II-b p.89
+S.FX.1,Pension Fund,Applicable,Appendix II-b p.89
+S.FX.1,Bank,Applicable,Appendix II-b p.89
+S.FX.1,Broker Dealer,Applicable,Appendix II-b p.89
+S.FX.1,Investment Company or Advisor,Applicable,Appendix II-b p.89
+S.FX.1,Financial Market Utlility,Applicable,Appendix II-b p.89
+S.FX.1,Other Supervised Non-Bank Financial Entity,Applicable,Appendix II-b p.89
+S.FX.1,Debt Issuing Special Purpose Entity,Applicable,Appendix II-b p.89
+S.FX.1,Non-regulated Fund,Applicable,Appendix II-b p.89
+S.FX.1,Municipalities for VRDN Structures,Not Applicable,Appendix II-b p.89
+S.FX.1,Other,Applicable,Appendix II-b p.89
+S.FX.2,Retail,Not Applicable,Appendix II-b p.89
+S.FX.2,Small Business,Not Applicable,Appendix II-b p.89
+S.FX.2,Non-Financial Corporate,Applicable,Appendix II-b p.89
+S.FX.2,Sovereign,Applicable,Appendix II-b p.89
+S.FX.2,Central Bank,Applicable,Appendix II-b p.89
+S.FX.2,Government Sponsored Entity,Applicable,Appendix II-b p.89
+S.FX.2,Public Sector Entity,Applicable,Appendix II-b p.89
+S.FX.2,Multilateral Development Bank,Applicable,Appendix II-b p.89
+S.FX.2,Other Supranational,Applicable,Appendix II-b p.89
+S.FX.2,Pension Fund,Applicable,Appendix II-b p.89
+S.FX.2,Bank,Applicable,Appendix II-b p.89
+S.FX.2,Broker Dealer,Applicable,Appendix II-b p.89
+S.FX.2,Investment Company or Advisor,Applicable,Appendix II-b p.89
+S.FX.2,Financial Market Utlility,Applicable,Appendix II-b p.89
+S.FX.2,Other Supervised Non-Bank Financial Entity,Applicable,Appendix II-b p.89
+S.FX.2,Debt Issuing Special Purpose Entity,Applicable,Appendix II-b p.89
+S.FX.2,Non-regulated Fund,Applicable,Appendix II-b p.89
+S.FX.2,Municipalities for VRDN Structures,Not Applicable,Appendix II-b p.89
+S.FX.2,Other,Applicable,Appendix II-b p.89
+S.FX.3,Retail,Not Applicable,Appendix II-b p.89
+S.FX.3,Small Business,Not Applicable,Appendix II-b p.89
+S.FX.3,Non-Financial Corporate,Applicable,Appendix II-b p.89
+S.FX.3,Sovereign,Applicable,Appendix II-b p.89
+S.FX.3,Central Bank,Applicable,Appendix II-b p.89
+S.FX.3,Government Sponsored Entity,Applicable,Appendix II-b p.89
+S.FX.3,Public Sector Entity,Applicable,Appendix II-b p.89
+S.FX.3,Multilateral Development Bank,Applicable,Appendix II-b p.89
+S.FX.3,Other Supranational,Applicable,Appendix II-b p.89
+S.FX.3,Pension Fund,Applicable,Appendix II-b p.89
+S.FX.3,Bank,Applicable,Appendix II-b p.89
+S.FX.3,Broker Dealer,Applicable,Appendix II-b p.89
+S.FX.3,Investment Company or Advisor,Applicable,Appendix II-b p.89
+S.FX.3,Financial Market Utlility,Applicable,Appendix II-b p.89
+S.FX.3,Other Supervised Non-Bank Financial Entity,Applicable,Appendix II-b p.89
+S.FX.3,Debt Issuing Special Purpose Entity,Applicable,Appendix II-b p.89
+S.FX.3,Non-regulated Fund,Applicable,Appendix II-b p.89
+S.FX.3,Municipalities for VRDN Structures,Not Applicable,Appendix II-b p.89
+S.FX.3,Other,Applicable,Appendix II-b p.89
+O.D.1,Retail,Applicable,Appendix II-b p.89
+O.D.1,Small Business,Applicable,Appendix II-b p.89
+O.D.1,Non-Financial Corporate,Not Applicable,Appendix II-b p.89
+O.D.1,Sovereign,Not Applicable,Appendix II-b p.89
+O.D.1,Central Bank,Not Applicable,Appendix II-b p.89
+O.D.1,Government Sponsored Entity,Not Applicable,Appendix II-b p.89
+O.D.1,Public Sector Entity,Not Applicable,Appendix II-b p.89
+O.D.1,Multilateral Development Bank,Not Applicable,Appendix II-b p.89
+O.D.1,Other Supranational,Not Applicable,Appendix II-b p.89
+O.D.1,Pension Fund,Not Applicable,Appendix II-b p.89
+O.D.1,Bank,Not Applicable,Appendix II-b p.89
+O.D.1,Broker Dealer,Not Applicable,Appendix II-b p.89
+O.D.1,Investment Company or Advisor,Not Applicable,Appendix II-b p.89
+O.D.1,Financial Market Utlility,Not Applicable,Appendix II-b p.89
+O.D.1,Other Supervised Non-Bank Financial Entity,Not Applicable,Appendix II-b p.89
+O.D.1,Debt Issuing Special Purpose Entity,Not Applicable,Appendix II-b p.89
+O.D.1,Non-regulated Fund,Not Applicable,Appendix II-b p.89
+O.D.1,Municipalities for VRDN Structures,Not Applicable,Appendix II-b p.89
+O.D.1,Other,Not Applicable,Appendix II-b p.89
+O.D.2,Retail,Applicable,Appendix II-b p.89
+O.D.2,Small Business,Applicable,Appendix II-b p.89
+O.D.2,Non-Financial Corporate,Not Applicable,Appendix II-b p.89
+O.D.2,Sovereign,Not Applicable,Appendix II-b p.89
+O.D.2,Central Bank,Not Applicable,Appendix II-b p.89
+O.D.2,Government Sponsored Entity,Not Applicable,Appendix II-b p.89
+O.D.2,Public Sector Entity,Not Applicable,Appendix II-b p.89
+O.D.2,Multilateral Development Bank,Not Applicable,Appendix II-b p.89
+O.D.2,Other Supranational,Not Applicable,Appendix II-b p.89
+O.D.2,Pension Fund,Not Applicable,Appendix II-b p.89
+O.D.2,Bank,Not Applicable,Appendix II-b p.89
+O.D.2,Broker Dealer,Not Applicable,Appendix II-b p.89
+O.D.2,Investment Company or Advisor,Not Applicable,Appendix II-b p.89
+O.D.2,Financial Market Utlility,Not Applicable,Appendix II-b p.89
+O.D.2,Other Supervised Non-Bank Financial Entity,Not Applicable,Appendix II-b p.89
+O.D.2,Debt Issuing Special Purpose Entity,Not Applicable,Appendix II-b p.89
+O.D.2,Non-regulated Fund,Not Applicable,Appendix II-b p.89
+O.D.2,Municipalities for VRDN Structures,Not Applicable,Appendix II-b p.89
+O.D.2,Other,Not Applicable,Appendix II-b p.89
+O.D.3,Retail,Applicable,Appendix II-b p.89
+O.D.3,Small Business,Applicable,Appendix II-b p.89
+O.D.3,Non-Financial Corporate,Not Applicable,Appendix II-b p.89
+O.D.3,Sovereign,Not Applicable,Appendix II-b p.89
+O.D.3,Central Bank,Not Applicable,Appendix II-b p.89
+O.D.3,Government Sponsored Entity,Not Applicable,Appendix II-b p.89
+O.D.3,Public Sector Entity,Not Applicable,Appendix II-b p.89
+O.D.3,Multilateral Development Bank,Not Applicable,Appendix II-b p.89
+O.D.3,Other Supranational,Not Applicable,Appendix II-b p.89
+O.D.3,Pension Fund,Not Applicable,Appendix II-b p.89
+O.D.3,Bank,Not Applicable,Appendix II-b p.89
+O.D.3,Broker Dealer,Not Applicable,Appendix II-b p.89
+O.D.3,Investment Company or Advisor,Not Applicable,Appendix II-b p.89
+O.D.3,Financial Market Utlility,Not Applicable,Appendix II-b p.89
+O.D.3,Other Supervised Non-Bank Financial Entity,Not Applicable,Appendix II-b p.89
+O.D.3,Debt Issuing Special Purpose Entity,Not Applicable,Appendix II-b p.89
+O.D.3,Non-regulated Fund,Not Applicable,Appendix II-b p.89
+O.D.3,Municipalities for VRDN Structures,Not Applicable,Appendix II-b p.89
+O.D.3,Other,Not Applicable,Appendix II-b p.89
+O.S.5,Retail,Not Applicable,Appendix II-b p.89
+O.S.5,Small Business,Not Applicable,Appendix II-b p.89
+O.S.5,Non-Financial Corporate,Not Applicable,Appendix II-b p.89
+O.S.5,Sovereign,Not Applicable,Appendix II-b p.89
+O.S.5,Central Bank,Not Applicable,Appendix II-b p.89
+O.S.5,Government Sponsored Entity,Applicable,Appendix II-b p.89
+O.S.5,Public Sector Entity,Not Applicable,Appendix II-b p.89
+O.S.5,Multilateral Development Bank,Not Applicable,Appendix II-b p.89
+O.S.5,Other Supranational,Not Applicable,Appendix II-b p.89
+O.S.5,Pension Fund,Not Applicable,Appendix II-b p.89
+O.S.5,Bank,Not Applicable,Appendix II-b p.89
+O.S.5,Broker Dealer,Not Applicable,Appendix II-b p.89
+O.S.5,Investment Company or Advisor,Not Applicable,Appendix II-b p.89
+O.S.5,Financial Market Utlility,Not Applicable,Appendix II-b p.89
+O.S.5,Other Supervised Non-Bank Financial Entity,Not Applicable,Appendix II-b p.89
+O.S.5,Debt Issuing Special Purpose Entity,Not Applicable,Appendix II-b p.89
+O.S.5,Non-regulated Fund,Not Applicable,Appendix II-b p.89
+O.S.5,Municipalities for VRDN Structures,Not Applicable,Appendix II-b p.89
+O.S.5,Other,Not Applicable,Appendix II-b p.89
+O.S.6,Retail,Not Applicable,Appendix II-b p.90
+O.S.6,Small Business,Not Applicable,Appendix II-b p.90
+O.S.6,Non-Financial Corporate,Not Applicable,Appendix II-b p.90
+O.S.6,Sovereign,Not Applicable,Appendix II-b p.90
+O.S.6,Central Bank,Applicable,Appendix II-b p.90
+O.S.6,Government Sponsored Entity,Not Applicable,Appendix II-b p.90
+O.S.6,Public Sector Entity,Not Applicable,Appendix II-b p.90
+O.S.6,Multilateral Development Bank,Not Applicable,Appendix II-b p.90
+O.S.6,Other Supranational,Not Applicable,Appendix II-b p.90
+O.S.6,Pension Fund,Not Applicable,Appendix II-b p.90
+O.S.6,Bank,Not Applicable,Appendix II-b p.90
+O.S.6,Broker Dealer,Not Applicable,Appendix II-b p.90
+O.S.6,Investment Company or Advisor,Not Applicable,Appendix II-b p.90
+O.S.6,Financial Market Utlility,Not Applicable,Appendix II-b p.90
+O.S.6,Other Supervised Non-Bank Financial Entity,Not Applicable,Appendix II-b p.90
+O.S.6,Debt Issuing Special Purpose Entity,Not Applicable,Appendix II-b p.90
+O.S.6,Non-regulated Fund,Not Applicable,Appendix II-b p.90
+O.S.6,Municipalities for VRDN Structures,Not Applicable,Appendix II-b p.90
+O.S.6,Other,Not Applicable,Appendix II-b p.90

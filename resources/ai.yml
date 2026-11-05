@@ -1,0 +1,16 @@
+# AI platform pieces needed before the first build:
+# - secret scope fr2052a: the agents' service principal's OAuth secret (agents-client-id / agents-client-secret), written by
+#   deploy/agents_identity.py (job fr2052a-register-agents, task agents_identity); the serving endpoint reads it
+# - Vector Search endpoint fr2052a-vs: hosts reference.reg_text_index (the index itself is in the app bundle - it needs the
+#   chunk table that the pipeline's regulatory_text task loads)
+resources:
+  secret_scopes:
+    fr2052a_secrets:
+      name: fr2052a
+      backend_type: DATABRICKS
+      lifecycle: {prevent_destroy: true}
+
+  vector_search_endpoints:
+    fr2052a_vs:
+      name: fr2052a-vs
+      endpoint_type: STANDARD

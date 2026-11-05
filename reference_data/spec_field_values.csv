@@ -1,0 +1,314 @@
+field_name,table_scope,allowed_value,source
+Accounting Designation,I.A,Available for Sale,6GSchema.xsd accountingDesignation
+Accounting Designation,I.A,Held to Maturity,6GSchema.xsd accountingDesignation
+Accounting Designation,I.A,Trading Asset,6GSchema.xsd accountingDesignation
+Accounting Designation,I.A,Not Applicable,6GSchema.xsd accountingDesignation
+Encumbrance Type,I.A,Securities Financing Transaction,6GSchema.xsd encumbranceType
+Encumbrance Type,I.A,Derivative VM,6GSchema.xsd encumbranceType
+Encumbrance Type,I.A,Derivative IM and DFC,6GSchema.xsd encumbranceType
+Encumbrance Type,I.A,Other IM and DFC,6GSchema.xsd encumbranceType
+Encumbrance Type,I.A,Segregated for Customer Protection,6GSchema.xsd encumbranceType
+Encumbrance Type,I.A,Covered Federal Reserve Facility Funding,6GSchema.xsd encumbranceType
+Encumbrance Type,I.A,Other,6GSchema.xsd encumbranceType
+Counterparty,I.U,Non-Financial Corporate,6GSchema.xsd counterpartySectorWithRetail
+Counterparty,I.U,Sovereign,6GSchema.xsd counterpartySectorWithRetail
+Counterparty,I.U,Central Bank,6GSchema.xsd counterpartySectorWithRetail
+Counterparty,I.U,Government Sponsored Entity,6GSchema.xsd counterpartySectorWithRetail
+Counterparty,I.U,Public Sector Entity,6GSchema.xsd counterpartySectorWithRetail
+Counterparty,I.U,Multilateral Development Bank,6GSchema.xsd counterpartySectorWithRetail
+Counterparty,I.U,Other Supranational,6GSchema.xsd counterpartySectorWithRetail
+Counterparty,I.U,Bank,6GSchema.xsd counterpartySectorWithRetail
+Counterparty,I.U,Pension Fund,6GSchema.xsd counterpartySectorWithRetail
+Counterparty,I.U,Broker Dealer,6GSchema.xsd counterpartySectorWithRetail
+Counterparty,I.U,Investment Company or Advisor,6GSchema.xsd counterpartySectorWithRetail
+Counterparty,I.U,Financial Market Utlility,6GSchema.xsd counterpartySectorWithRetail
+Counterparty,I.U,Other Supervised Non-Bank Financial Entity,6GSchema.xsd counterpartySectorWithRetail
+Counterparty,I.U,Debt Issuing Special Purpose Entity,6GSchema.xsd counterpartySectorWithRetail
+Counterparty,I.U,Non-regulated Fund,6GSchema.xsd counterpartySectorWithRetail
+Counterparty,I.U,Other,6GSchema.xsd counterpartySectorWithRetail
+Counterparty,I.U,Retail,6GSchema.xsd counterpartySectorWithRetail
+Counterparty,I.U,Small Business,6GSchema.xsd counterpartySectorWithRetail
+Maturity Optionality,I.U,Evergreen,6GSchema.xsd maturityOptionality
+Maturity Optionality,I.U,Extendible,6GSchema.xsd maturityOptionality
+Maturity Optionality,I.U,Accelerated-Counterparty,6GSchema.xsd maturityOptionality
+Maturity Optionality,I.U,Accelerated-Firm,6GSchema.xsd maturityOptionality
+Maturity Optionality,I.U,Not Accelerated,6GSchema.xsd maturityOptionality
+Encumbrance Type,I.U,Securities Financing Transaction,6GSchema.xsd encumbranceType
+Encumbrance Type,I.U,Derivative VM,6GSchema.xsd encumbranceType
+Encumbrance Type,I.U,Derivative IM and DFC,6GSchema.xsd encumbranceType
+Encumbrance Type,I.U,Other IM and DFC,6GSchema.xsd encumbranceType
+Encumbrance Type,I.U,Segregated for Customer Protection,6GSchema.xsd encumbranceType
+Encumbrance Type,I.U,Covered Federal Reserve Facility Funding,6GSchema.xsd encumbranceType
+Encumbrance Type,I.U,Other,6GSchema.xsd encumbranceType
+Maturity Optionality,I.S,Evergreen,6GSchema.xsd maturityOptionality
+Maturity Optionality,I.S,Extendible,6GSchema.xsd maturityOptionality
+Maturity Optionality,I.S,Accelerated-Counterparty,6GSchema.xsd maturityOptionality
+Maturity Optionality,I.S,Accelerated-Firm,6GSchema.xsd maturityOptionality
+Maturity Optionality,I.S,Not Accelerated,6GSchema.xsd maturityOptionality
+Encumbrance Type,I.S,Securities Financing Transaction,6GSchema.xsd encumbranceType
+Encumbrance Type,I.S,Derivative VM,6GSchema.xsd encumbranceType
+Encumbrance Type,I.S,Derivative IM and DFC,6GSchema.xsd encumbranceType
+Encumbrance Type,I.S,Other IM and DFC,6GSchema.xsd encumbranceType
+Encumbrance Type,I.S,Segregated for Customer Protection,6GSchema.xsd encumbranceType
+Encumbrance Type,I.S,Covered Federal Reserve Facility Funding,6GSchema.xsd encumbranceType
+Encumbrance Type,I.S,Other,6GSchema.xsd encumbranceType
+Settlement,I.S,Bilateral,6GSchema.xsd securedSettlementMechanism
+Settlement,I.S,Other,6GSchema.xsd securedSettlementMechanism
+Settlement,I.S,Triparty,6GSchema.xsd securedSettlementMechanism
+Settlement,I.S,FICC,6GSchema.xsd securedSettlementMechanism
+Counterparty,I.S,Non-Financial Corporate,6GSchema.xsd counterpartySectorWithRetail
+Counterparty,I.S,Sovereign,6GSchema.xsd counterpartySectorWithRetail
+Counterparty,I.S,Central Bank,6GSchema.xsd counterpartySectorWithRetail
+Counterparty,I.S,Government Sponsored Entity,6GSchema.xsd counterpartySectorWithRetail
+Counterparty,I.S,Public Sector Entity,6GSchema.xsd counterpartySectorWithRetail
+Counterparty,I.S,Multilateral Development Bank,6GSchema.xsd counterpartySectorWithRetail
+Counterparty,I.S,Other Supranational,6GSchema.xsd counterpartySectorWithRetail
+Counterparty,I.S,Bank,6GSchema.xsd counterpartySectorWithRetail
+Counterparty,I.S,Pension Fund,6GSchema.xsd counterpartySectorWithRetail
+Counterparty,I.S,Broker Dealer,6GSchema.xsd counterpartySectorWithRetail
+Counterparty,I.S,Investment Company or Advisor,6GSchema.xsd counterpartySectorWithRetail
+Counterparty,I.S,Financial Market Utlility,6GSchema.xsd counterpartySectorWithRetail
+Counterparty,I.S,Other Supervised Non-Bank Financial Entity,6GSchema.xsd counterpartySectorWithRetail
+Counterparty,I.S,Debt Issuing Special Purpose Entity,6GSchema.xsd counterpartySectorWithRetail
+Counterparty,I.S,Non-regulated Fund,6GSchema.xsd counterpartySectorWithRetail
+Counterparty,I.S,Other,6GSchema.xsd counterpartySectorWithRetail
+Counterparty,I.S,Retail,6GSchema.xsd counterpartySectorWithRetail
+Counterparty,I.S,Small Business,6GSchema.xsd counterpartySectorWithRetail
+Counterparty,I.O,Non-Financial Corporate,6GSchema.xsd counterpartySectorWithRetail
+Counterparty,I.O,Sovereign,6GSchema.xsd counterpartySectorWithRetail
+Counterparty,I.O,Central Bank,6GSchema.xsd counterpartySectorWithRetail
+Counterparty,I.O,Government Sponsored Entity,6GSchema.xsd counterpartySectorWithRetail
+Counterparty,I.O,Public Sector Entity,6GSchema.xsd counterpartySectorWithRetail
+Counterparty,I.O,Multilateral Development Bank,6GSchema.xsd counterpartySectorWithRetail
+Counterparty,I.O,Other Supranational,6GSchema.xsd counterpartySectorWithRetail
+Counterparty,I.O,Bank,6GSchema.xsd counterpartySectorWithRetail
+Counterparty,I.O,Pension Fund,6GSchema.xsd counterpartySectorWithRetail
+Counterparty,I.O,Broker Dealer,6GSchema.xsd counterpartySectorWithRetail
+Counterparty,I.O,Investment Company or Advisor,6GSchema.xsd counterpartySectorWithRetail
+Counterparty,I.O,Financial Market Utlility,6GSchema.xsd counterpartySectorWithRetail
+Counterparty,I.O,Other Supervised Non-Bank Financial Entity,6GSchema.xsd counterpartySectorWithRetail
+Counterparty,I.O,Debt Issuing Special Purpose Entity,6GSchema.xsd counterpartySectorWithRetail
+Counterparty,I.O,Non-regulated Fund,6GSchema.xsd counterpartySectorWithRetail
+Counterparty,I.O,Other,6GSchema.xsd counterpartySectorWithRetail
+Counterparty,I.O,Retail,6GSchema.xsd counterpartySectorWithRetail
+Counterparty,I.O,Small Business,6GSchema.xsd counterpartySectorWithRetail
+Counterparty,O.D,Non-Financial Corporate,6GSchema.xsd counterpartySectorWithRetail
+Counterparty,O.D,Sovereign,6GSchema.xsd counterpartySectorWithRetail
+Counterparty,O.D,Central Bank,6GSchema.xsd counterpartySectorWithRetail
+Counterparty,O.D,Government Sponsored Entity,6GSchema.xsd counterpartySectorWithRetail
+Counterparty,O.D,Public Sector Entity,6GSchema.xsd counterpartySectorWithRetail
+Counterparty,O.D,Multilateral Development Bank,6GSchema.xsd counterpartySectorWithRetail
+Counterparty,O.D,Other Supranational,6GSchema.xsd counterpartySectorWithRetail
+Counterparty,O.D,Bank,6GSchema.xsd counterpartySectorWithRetail
+Counterparty,O.D,Pension Fund,6GSchema.xsd counterpartySectorWithRetail
+Counterparty,O.D,Broker Dealer,6GSchema.xsd counterpartySectorWithRetail
+Counterparty,O.D,Investment Company or Advisor,6GSchema.xsd counterpartySectorWithRetail
+Counterparty,O.D,Financial Market Utlility,6GSchema.xsd counterpartySectorWithRetail
+Counterparty,O.D,Other Supervised Non-Bank Financial Entity,6GSchema.xsd counterpartySectorWithRetail
+Counterparty,O.D,Debt Issuing Special Purpose Entity,6GSchema.xsd counterpartySectorWithRetail
+Counterparty,O.D,Non-regulated Fund,6GSchema.xsd counterpartySectorWithRetail
+Counterparty,O.D,Other,6GSchema.xsd counterpartySectorWithRetail
+Counterparty,O.D,Retail,6GSchema.xsd counterpartySectorWithRetail
+Counterparty,O.D,Small Business,6GSchema.xsd counterpartySectorWithRetail
+Maturity Optionality,O.D,Evergreen,6GSchema.xsd maturityOptionality
+Maturity Optionality,O.D,Extendible,6GSchema.xsd maturityOptionality
+Maturity Optionality,O.D,Accelerated-Counterparty,6GSchema.xsd maturityOptionality
+Maturity Optionality,O.D,Accelerated-Firm,6GSchema.xsd maturityOptionality
+Maturity Optionality,O.D,Not Accelerated,6GSchema.xsd maturityOptionality
+Insured,O.D,FDIC,6GSchema.xsd insuredType
+Insured,O.D,Other,6GSchema.xsd insuredType
+Insured,O.D,Uninsured,6GSchema.xsd insuredType
+Counterparty,O.W,Non-Financial Corporate,6GSchema.xsd counterpartySectorWithRetail
+Counterparty,O.W,Sovereign,6GSchema.xsd counterpartySectorWithRetail
+Counterparty,O.W,Central Bank,6GSchema.xsd counterpartySectorWithRetail
+Counterparty,O.W,Government Sponsored Entity,6GSchema.xsd counterpartySectorWithRetail
+Counterparty,O.W,Public Sector Entity,6GSchema.xsd counterpartySectorWithRetail
+Counterparty,O.W,Multilateral Development Bank,6GSchema.xsd counterpartySectorWithRetail
+Counterparty,O.W,Other Supranational,6GSchema.xsd counterpartySectorWithRetail
+Counterparty,O.W,Bank,6GSchema.xsd counterpartySectorWithRetail
+Counterparty,O.W,Pension Fund,6GSchema.xsd counterpartySectorWithRetail
+Counterparty,O.W,Broker Dealer,6GSchema.xsd counterpartySectorWithRetail
+Counterparty,O.W,Investment Company or Advisor,6GSchema.xsd counterpartySectorWithRetail
+Counterparty,O.W,Financial Market Utlility,6GSchema.xsd counterpartySectorWithRetail
+Counterparty,O.W,Other Supervised Non-Bank Financial Entity,6GSchema.xsd counterpartySectorWithRetail
+Counterparty,O.W,Debt Issuing Special Purpose Entity,6GSchema.xsd counterpartySectorWithRetail
+Counterparty,O.W,Non-regulated Fund,6GSchema.xsd counterpartySectorWithRetail
+Counterparty,O.W,Other,6GSchema.xsd counterpartySectorWithRetail
+Counterparty,O.W,Retail,6GSchema.xsd counterpartySectorWithRetail
+Counterparty,O.W,Small Business,6GSchema.xsd counterpartySectorWithRetail
+Maturity Optionality,O.W,Evergreen,6GSchema.xsd maturityOptionality
+Maturity Optionality,O.W,Extendible,6GSchema.xsd maturityOptionality
+Maturity Optionality,O.W,Accelerated-Counterparty,6GSchema.xsd maturityOptionality
+Maturity Optionality,O.W,Accelerated-Firm,6GSchema.xsd maturityOptionality
+Maturity Optionality,O.W,Not Accelerated,6GSchema.xsd maturityOptionality
+Loss Absorbency,O.W,Capital,6GSchema.xsd lossAbsorbency
+Loss Absorbency,O.W,TLAC,6GSchema.xsd lossAbsorbency
+Maturity Optionality,O.S,Evergreen,6GSchema.xsd maturityOptionality
+Maturity Optionality,O.S,Extendible,6GSchema.xsd maturityOptionality
+Maturity Optionality,O.S,Accelerated-Counterparty,6GSchema.xsd maturityOptionality
+Maturity Optionality,O.S,Accelerated-Firm,6GSchema.xsd maturityOptionality
+Maturity Optionality,O.S,Not Accelerated,6GSchema.xsd maturityOptionality
+Settlement,O.S,Bilateral,6GSchema.xsd securedSettlementMechanism
+Settlement,O.S,Other,6GSchema.xsd securedSettlementMechanism
+Settlement,O.S,Triparty,6GSchema.xsd securedSettlementMechanism
+Settlement,O.S,FICC,6GSchema.xsd securedSettlementMechanism
+Counterparty,O.S,Non-Financial Corporate,6GSchema.xsd counterpartySectorWithRetail
+Counterparty,O.S,Sovereign,6GSchema.xsd counterpartySectorWithRetail
+Counterparty,O.S,Central Bank,6GSchema.xsd counterpartySectorWithRetail
+Counterparty,O.S,Government Sponsored Entity,6GSchema.xsd counterpartySectorWithRetail
+Counterparty,O.S,Public Sector Entity,6GSchema.xsd counterpartySectorWithRetail
+Counterparty,O.S,Multilateral Development Bank,6GSchema.xsd counterpartySectorWithRetail
+Counterparty,O.S,Other Supranational,6GSchema.xsd counterpartySectorWithRetail
+Counterparty,O.S,Bank,6GSchema.xsd counterpartySectorWithRetail
+Counterparty,O.S,Pension Fund,6GSchema.xsd counterpartySectorWithRetail
+Counterparty,O.S,Broker Dealer,6GSchema.xsd counterpartySectorWithRetail
+Counterparty,O.S,Investment Company or Advisor,6GSchema.xsd counterpartySectorWithRetail
+Counterparty,O.S,Financial Market Utlility,6GSchema.xsd counterpartySectorWithRetail
+Counterparty,O.S,Other Supervised Non-Bank Financial Entity,6GSchema.xsd counterpartySectorWithRetail
+Counterparty,O.S,Debt Issuing Special Purpose Entity,6GSchema.xsd counterpartySectorWithRetail
+Counterparty,O.S,Non-regulated Fund,6GSchema.xsd counterpartySectorWithRetail
+Counterparty,O.S,Other,6GSchema.xsd counterpartySectorWithRetail
+Counterparty,O.S,Retail,6GSchema.xsd counterpartySectorWithRetail
+Counterparty,O.S,Small Business,6GSchema.xsd counterpartySectorWithRetail
+Counterparty,O.O,Non-Financial Corporate,6GSchema.xsd counterpartySectorWithRetailAndMunicipalities
+Counterparty,O.O,Sovereign,6GSchema.xsd counterpartySectorWithRetailAndMunicipalities
+Counterparty,O.O,Central Bank,6GSchema.xsd counterpartySectorWithRetailAndMunicipalities
+Counterparty,O.O,Government Sponsored Entity,6GSchema.xsd counterpartySectorWithRetailAndMunicipalities
+Counterparty,O.O,Public Sector Entity,6GSchema.xsd counterpartySectorWithRetailAndMunicipalities
+Counterparty,O.O,Multilateral Development Bank,6GSchema.xsd counterpartySectorWithRetailAndMunicipalities
+Counterparty,O.O,Other Supranational,6GSchema.xsd counterpartySectorWithRetailAndMunicipalities
+Counterparty,O.O,Bank,6GSchema.xsd counterpartySectorWithRetailAndMunicipalities
+Counterparty,O.O,Pension Fund,6GSchema.xsd counterpartySectorWithRetailAndMunicipalities
+Counterparty,O.O,Broker Dealer,6GSchema.xsd counterpartySectorWithRetailAndMunicipalities
+Counterparty,O.O,Investment Company or Advisor,6GSchema.xsd counterpartySectorWithRetailAndMunicipalities
+Counterparty,O.O,Financial Market Utlility,6GSchema.xsd counterpartySectorWithRetailAndMunicipalities
+Counterparty,O.O,Other Supervised Non-Bank Financial Entity,6GSchema.xsd counterpartySectorWithRetailAndMunicipalities
+Counterparty,O.O,Debt Issuing Special Purpose Entity,6GSchema.xsd counterpartySectorWithRetailAndMunicipalities
+Counterparty,O.O,Non-regulated Fund,6GSchema.xsd counterpartySectorWithRetailAndMunicipalities
+Counterparty,O.O,Other,6GSchema.xsd counterpartySectorWithRetailAndMunicipalities
+Counterparty,O.O,Retail,6GSchema.xsd counterpartySectorWithRetailAndMunicipalities
+Counterparty,O.O,Small Business,6GSchema.xsd counterpartySectorWithRetailAndMunicipalities
+Counterparty,O.O,Municipalities for VRDN Structures,6GSchema.xsd counterpartySectorWithRetailAndMunicipalities
+Collateral Level,S.DC,Uncollateralized,6GSchema.xsd collateralLevel
+Collateral Level,S.DC,Undercollateralized,6GSchema.xsd collateralLevel
+Collateral Level,S.DC,Fully Collateralized,6GSchema.xsd collateralLevel
+Collateral Level,S.DC,Overcollateralized,6GSchema.xsd collateralLevel
+Counterparty,S.DC,Non-Financial Corporate,6GSchema.xsd counterpartySectorWithRetail
+Counterparty,S.DC,Sovereign,6GSchema.xsd counterpartySectorWithRetail
+Counterparty,S.DC,Central Bank,6GSchema.xsd counterpartySectorWithRetail
+Counterparty,S.DC,Government Sponsored Entity,6GSchema.xsd counterpartySectorWithRetail
+Counterparty,S.DC,Public Sector Entity,6GSchema.xsd counterpartySectorWithRetail
+Counterparty,S.DC,Multilateral Development Bank,6GSchema.xsd counterpartySectorWithRetail
+Counterparty,S.DC,Other Supranational,6GSchema.xsd counterpartySectorWithRetail
+Counterparty,S.DC,Bank,6GSchema.xsd counterpartySectorWithRetail
+Counterparty,S.DC,Pension Fund,6GSchema.xsd counterpartySectorWithRetail
+Counterparty,S.DC,Broker Dealer,6GSchema.xsd counterpartySectorWithRetail
+Counterparty,S.DC,Investment Company or Advisor,6GSchema.xsd counterpartySectorWithRetail
+Counterparty,S.DC,Financial Market Utlility,6GSchema.xsd counterpartySectorWithRetail
+Counterparty,S.DC,Other Supervised Non-Bank Financial Entity,6GSchema.xsd counterpartySectorWithRetail
+Counterparty,S.DC,Debt Issuing Special Purpose Entity,6GSchema.xsd counterpartySectorWithRetail
+Counterparty,S.DC,Non-regulated Fund,6GSchema.xsd counterpartySectorWithRetail
+Counterparty,S.DC,Other,6GSchema.xsd counterpartySectorWithRetail
+Counterparty,S.DC,Retail,6GSchema.xsd counterpartySectorWithRetail
+Counterparty,S.DC,Small Business,6GSchema.xsd counterpartySectorWithRetail
+Encumbrance Type,S.DC,Securities Financing Transaction,6GSchema.xsd encumbranceType
+Encumbrance Type,S.DC,Derivative VM,6GSchema.xsd encumbranceType
+Encumbrance Type,S.DC,Derivative IM and DFC,6GSchema.xsd encumbranceType
+Encumbrance Type,S.DC,Other IM and DFC,6GSchema.xsd encumbranceType
+Encumbrance Type,S.DC,Segregated for Customer Protection,6GSchema.xsd encumbranceType
+Encumbrance Type,S.DC,Covered Federal Reserve Facility Funding,6GSchema.xsd encumbranceType
+Encumbrance Type,S.DC,Other,6GSchema.xsd encumbranceType
+Collection Reference,S.B,I.A,6GSchema.xsd collectionReference
+Collection Reference,S.B,I.S,6GSchema.xsd collectionReference
+Collection Reference,S.B,I.U,6GSchema.xsd collectionReference
+Collection Reference,S.B,I.O,6GSchema.xsd collectionReference
+Collection Reference,S.B,O.D,6GSchema.xsd collectionReference
+Collection Reference,S.B,O.S,6GSchema.xsd collectionReference
+Collection Reference,S.B,O.W,6GSchema.xsd collectionReference
+Collection Reference,S.B,O.O,6GSchema.xsd collectionReference
+Collection Reference,S.B,S.DC,6GSchema.xsd collectionReference
+Encumbrance Type,S.B,Securities Financing Transaction,6GSchema.xsd encumbranceType
+Encumbrance Type,S.B,Derivative VM,6GSchema.xsd encumbranceType
+Encumbrance Type,S.B,Derivative IM and DFC,6GSchema.xsd encumbranceType
+Encumbrance Type,S.B,Other IM and DFC,6GSchema.xsd encumbranceType
+Encumbrance Type,S.B,Segregated for Customer Protection,6GSchema.xsd encumbranceType
+Encumbrance Type,S.B,Covered Federal Reserve Facility Funding,6GSchema.xsd encumbranceType
+Encumbrance Type,S.B,Other,6GSchema.xsd encumbranceType
+Counterparty,S.B,Non-Financial Corporate,6GSchema.xsd counterpartySectorWithRetail
+Counterparty,S.B,Sovereign,6GSchema.xsd counterpartySectorWithRetail
+Counterparty,S.B,Central Bank,6GSchema.xsd counterpartySectorWithRetail
+Counterparty,S.B,Government Sponsored Entity,6GSchema.xsd counterpartySectorWithRetail
+Counterparty,S.B,Public Sector Entity,6GSchema.xsd counterpartySectorWithRetail
+Counterparty,S.B,Multilateral Development Bank,6GSchema.xsd counterpartySectorWithRetail
+Counterparty,S.B,Other Supranational,6GSchema.xsd counterpartySectorWithRetail
+Counterparty,S.B,Bank,6GSchema.xsd counterpartySectorWithRetail
+Counterparty,S.B,Pension Fund,6GSchema.xsd counterpartySectorWithRetail
+Counterparty,S.B,Broker Dealer,6GSchema.xsd counterpartySectorWithRetail
+Counterparty,S.B,Investment Company or Advisor,6GSchema.xsd counterpartySectorWithRetail
+Counterparty,S.B,Financial Market Utlility,6GSchema.xsd counterpartySectorWithRetail
+Counterparty,S.B,Other Supervised Non-Bank Financial Entity,6GSchema.xsd counterpartySectorWithRetail
+Counterparty,S.B,Debt Issuing Special Purpose Entity,6GSchema.xsd counterpartySectorWithRetail
+Counterparty,S.B,Non-regulated Fund,6GSchema.xsd counterpartySectorWithRetail
+Counterparty,S.B,Other,6GSchema.xsd counterpartySectorWithRetail
+Counterparty,S.B,Retail,6GSchema.xsd counterpartySectorWithRetail
+Counterparty,S.B,Small Business,6GSchema.xsd counterpartySectorWithRetail
+Foreign Exchange Option Direction,S.FX,Purchased,6GSchema.xsd foreignExchangeOptionDirection
+Foreign Exchange Option Direction,S.FX,Sold,6GSchema.xsd foreignExchangeOptionDirection
+Counterparty,S.FX,Non-Financial Corporate,6GSchema.xsd counterpartySectorWithRetail
+Counterparty,S.FX,Sovereign,6GSchema.xsd counterpartySectorWithRetail
+Counterparty,S.FX,Central Bank,6GSchema.xsd counterpartySectorWithRetail
+Counterparty,S.FX,Government Sponsored Entity,6GSchema.xsd counterpartySectorWithRetail
+Counterparty,S.FX,Public Sector Entity,6GSchema.xsd counterpartySectorWithRetail
+Counterparty,S.FX,Multilateral Development Bank,6GSchema.xsd counterpartySectorWithRetail
+Counterparty,S.FX,Other Supranational,6GSchema.xsd counterpartySectorWithRetail
+Counterparty,S.FX,Bank,6GSchema.xsd counterpartySectorWithRetail
+Counterparty,S.FX,Pension Fund,6GSchema.xsd counterpartySectorWithRetail
+Counterparty,S.FX,Broker Dealer,6GSchema.xsd counterpartySectorWithRetail
+Counterparty,S.FX,Investment Company or Advisor,6GSchema.xsd counterpartySectorWithRetail
+Counterparty,S.FX,Financial Market Utlility,6GSchema.xsd counterpartySectorWithRetail
+Counterparty,S.FX,Other Supervised Non-Bank Financial Entity,6GSchema.xsd counterpartySectorWithRetail
+Counterparty,S.FX,Debt Issuing Special Purpose Entity,6GSchema.xsd counterpartySectorWithRetail
+Counterparty,S.FX,Non-regulated Fund,6GSchema.xsd counterpartySectorWithRetail
+Counterparty,S.FX,Other,6GSchema.xsd counterpartySectorWithRetail
+Counterparty,S.FX,Retail,6GSchema.xsd counterpartySectorWithRetail
+Counterparty,S.FX,Small Business,6GSchema.xsd counterpartySectorWithRetail
+Settlement,S.FX,Bilateral,6GSchema.xsd foreignExchangeSettlementMechanism
+Settlement,S.FX,CLS,6GSchema.xsd foreignExchangeSettlementMechanism
+Settlement,S.FX,Other,6GSchema.xsd foreignExchangeSettlementMechanism
+Currency,ALL,AUD,6GSchema.xsd currencyUnit - other currencies are converted to USD with Converted = true (p.16)
+Currency,ALL,CAD,6GSchema.xsd currencyUnit - other currencies are converted to USD with Converted = true (p.16)
+Currency,ALL,CHF,6GSchema.xsd currencyUnit - other currencies are converted to USD with Converted = true (p.16)
+Currency,ALL,EUR,6GSchema.xsd currencyUnit - other currencies are converted to USD with Converted = true (p.16)
+Currency,ALL,GBP,6GSchema.xsd currencyUnit - other currencies are converted to USD with Converted = true (p.16)
+Currency,ALL,JPY,6GSchema.xsd currencyUnit - other currencies are converted to USD with Converted = true (p.16)
+Currency,ALL,USD,6GSchema.xsd currencyUnit - other currencies are converted to USD with Converted = true (p.16)
+G-SIB,ALL,Citigroup,"6G BR Enumerations - FSB 2020 G-SIB list (enforced by FRS, not the XSD)"
+G-SIB,ALL,HSBC,"6G BR Enumerations - FSB 2020 G-SIB list (enforced by FRS, not the XSD)"
+G-SIB,ALL,JP Morgan Chase,"6G BR Enumerations - FSB 2020 G-SIB list (enforced by FRS, not the XSD)"
+G-SIB,ALL,Bank of America,"6G BR Enumerations - FSB 2020 G-SIB list (enforced by FRS, not the XSD)"
+G-SIB,ALL,Bank of China,"6G BR Enumerations - FSB 2020 G-SIB list (enforced by FRS, not the XSD)"
+G-SIB,ALL,Barclays,"6G BR Enumerations - FSB 2020 G-SIB list (enforced by FRS, not the XSD)"
+G-SIB,ALL,BNP Paribas,"6G BR Enumerations - FSB 2020 G-SIB list (enforced by FRS, not the XSD)"
+G-SIB,ALL,China Construction Bank,"6G BR Enumerations - FSB 2020 G-SIB list (enforced by FRS, not the XSD)"
+G-SIB,ALL,Deutsche Bank,"6G BR Enumerations - FSB 2020 G-SIB list (enforced by FRS, not the XSD)"
+G-SIB,ALL,Industrial and Commercial Bank of China,"6G BR Enumerations - FSB 2020 G-SIB list (enforced by FRS, not the XSD)"
+G-SIB,ALL,Mitsubishi UFJ FG,"6G BR Enumerations - FSB 2020 G-SIB list (enforced by FRS, not the XSD)"
+G-SIB,ALL,Agricultural Bank of China,"6G BR Enumerations - FSB 2020 G-SIB list (enforced by FRS, not the XSD)"
+G-SIB,ALL,Bank of New York Mellon,"6G BR Enumerations - FSB 2020 G-SIB list (enforced by FRS, not the XSD)"
+G-SIB,ALL,Credit Suisse,"6G BR Enumerations - FSB 2020 G-SIB list (enforced by FRS, not the XSD)"
+G-SIB,ALL,Goldman Sachs,"6G BR Enumerations - FSB 2020 G-SIB list (enforced by FRS, not the XSD)"
+G-SIB,ALL,Groupe BPCE,"6G BR Enumerations - FSB 2020 G-SIB list (enforced by FRS, not the XSD)"
+G-SIB,ALL,Groupe Credit Agricole,"6G BR Enumerations - FSB 2020 G-SIB list (enforced by FRS, not the XSD)"
+G-SIB,ALL,ING Bank,"6G BR Enumerations - FSB 2020 G-SIB list (enforced by FRS, not the XSD)"
+G-SIB,ALL,Mizuho FG,"6G BR Enumerations - FSB 2020 G-SIB list (enforced by FRS, not the XSD)"
+G-SIB,ALL,Morgan Stanley,"6G BR Enumerations - FSB 2020 G-SIB list (enforced by FRS, not the XSD)"
+G-SIB,ALL,Royal Bank of Canada,"6G BR Enumerations - FSB 2020 G-SIB list (enforced by FRS, not the XSD)"
+G-SIB,ALL,Santander,"6G BR Enumerations - FSB 2020 G-SIB list (enforced by FRS, not the XSD)"
+G-SIB,ALL,Societe Generale,"6G BR Enumerations - FSB 2020 G-SIB list (enforced by FRS, not the XSD)"
+G-SIB,ALL,Standard Chartered,"6G BR Enumerations - FSB 2020 G-SIB list (enforced by FRS, not the XSD)"
+G-SIB,ALL,State Street,"6G BR Enumerations - FSB 2020 G-SIB list (enforced by FRS, not the XSD)"
+G-SIB,ALL,Sumitomo Mitsui FG,"6G BR Enumerations - FSB 2020 G-SIB list (enforced by FRS, not the XSD)"
+G-SIB,ALL,Toronto Dominion,"6G BR Enumerations - FSB 2020 G-SIB list (enforced by FRS, not the XSD)"
+G-SIB,ALL,UBS,"6G BR Enumerations - FSB 2020 G-SIB list (enforced by FRS, not the XSD)"
+G-SIB,ALL,UniCredit,"6G BR Enumerations - FSB 2020 G-SIB list (enforced by FRS, not the XSD)"
+G-SIB,ALL,Wells Fargo,"6G BR Enumerations - FSB 2020 G-SIB list (enforced by FRS, not the XSD)"

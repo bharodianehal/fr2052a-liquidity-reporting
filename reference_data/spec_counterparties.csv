@@ -1,0 +1,20 @@
+counterparty,counterparty_category,is_financial,source
+Retail,Retail,false,Field Definitions p.17-21; 6GSchema.xsd counterpartySector
+Small Business,Retail,false,Field Definitions p.17-21; 6GSchema.xsd counterpartySector
+Non-Financial Corporate,Wholesale Non-Financial,false,Field Definitions p.17-21; 6GSchema.xsd counterpartySector
+Sovereign,Wholesale Non-Financial,false,Field Definitions p.17-21; 6GSchema.xsd counterpartySector
+Central Bank,Wholesale Non-Financial,false,Field Definitions p.17-21; 6GSchema.xsd counterpartySector
+Government Sponsored Entity,Wholesale Non-Financial,false,Field Definitions p.17-21; 6GSchema.xsd counterpartySector
+Public Sector Entity,Wholesale Non-Financial,false,Field Definitions p.17-21; 6GSchema.xsd counterpartySector
+Multilateral Development Bank,Wholesale Non-Financial,false,Field Definitions p.17-21; 6GSchema.xsd counterpartySector
+Other Supranational,Wholesale Non-Financial,false,Field Definitions p.17-21; 6GSchema.xsd counterpartySector
+Pension Fund,Financial,true,Field Definitions p.17-21; 6GSchema.xsd counterpartySector
+Bank,Financial,true,Field Definitions p.17-21; 6GSchema.xsd counterpartySector
+Broker Dealer,Financial,true,Field Definitions p.17-21; 6GSchema.xsd counterpartySector
+Investment Company or Advisor,Financial,true,Field Definitions p.17-21; 6GSchema.xsd counterpartySector
+Financial Market Utlility,Financial,true,Field Definitions p.17-21; 6GSchema.xsd counterpartySector
+Other Supervised Non-Bank Financial Entity,Financial,true,Field Definitions p.17-21; 6GSchema.xsd counterpartySector
+Debt Issuing Special Purpose Entity,Financial,true,Field Definitions p.17-21; 6GSchema.xsd counterpartySector
+Non-regulated Fund,Financial,true,Field Definitions p.17-21; 6GSchema.xsd counterpartySector
+Municipalities for VRDN Structures,Wholesale Non-Financial,false,Field Definitions p.17-21; 6GSchema.xsd counterpartySector; footnote 8: O.O.5 only
+Other,Other,false,Field Definitions p.17-21; 6GSchema.xsd counterpartySector

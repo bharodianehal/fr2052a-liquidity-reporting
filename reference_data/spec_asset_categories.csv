@@ -1,0 +1,92 @@
+collateral_class,description,hqla_level,category_group,lcr_haircut_pct,is_hqla
+A-0-Q,Cash,Level 1,HQLA Level 1,0.0000,true
+A-1-Q,Debt issued by the U.S. Treasury,Level 1,HQLA Level 1,0.0000,true
+A-2-Q,U.S. Government Agency-issued debt (excluding the US Treasury) with a US Government guarantee,Level 1,HQLA Level 1,0.0000,true
+A-3-Q,"Vanilla debt (including pass-through MBS) guaranteed by a U.S. Government Agency, where the U.S. Government Agency has a full U.S. Government guarantee",Level 1,HQLA Level 1,0.0000,true
+A-4-Q,"Structured debt (excluding pass-through MBS) guaranteed by a U.S. Government Agency, where the U.S. Government Agency has a full U.S. Government guarantee",Level 1,HQLA Level 1,0.0000,true
+A-5-Q,Other debt with a U.S. Government guarantee,Level 1,HQLA Level 1,0.0000,true
+S-1-Q,Debt issued by non-U.S. Sovereigns (excluding central banks) with a 0% RW,Level 1,HQLA Level 1,0.0000,true
+S-2-Q,Debt issued by multilateral development banks or other supranationals with a 0% RW,Level 1,HQLA Level 1,0.0000,true
+S-3-Q,"Debt with a non-U.S. sovereign (excluding central banks) or multilateral development bank or other supranational guarantee, where guaranteeing entity has a 0% RW",Level 1,HQLA Level 1,0.0000,true
+S-4-Q,"Debt issued or guaranteed by a non-U.S. Sovereign (excluding central banks) that does not have a 0% RW, but supports outflows that are in the same jurisdiction of the sovereign and are denominated in the home currency of the sovereign",Level 1,HQLA Level 1,0.0000,true
+CB-1-Q,Securities issued or guaranteed by a central bank with a 0% RW,Level 1,HQLA Level 1,0.0000,true
+CB-2-Q,"Securities issued or guaranteed by a non-U.S. central bank that does not have a 0% RW, but supports outflows that are in the same jurisdiction of the central bank and are denominated in the home currency of the central bank",Level 1,HQLA Level 1,0.0000,true
+G-1-Q,Senior to preferred debt issued by a U.S. Government Sponsored Entity (GSE),Level 2A,HQLA Level 2A,0.1500,true
+G-2-Q,Vanilla debt (including pass-through MBS) guaranteed by a U.S. GSE,Level 2A,HQLA Level 2A,0.1500,true
+G-3-Q,Structured debt (excluding pass-through MBS) guaranteed by a U.S. GSE,Level 2A,HQLA Level 2A,0.1500,true
+S-5-Q,"Debt issued by non-U.S. Sovereigns (excluding central banks) with a 20% RW, not otherwise included",Level 2A,HQLA Level 2A,0.1500,true
+S-6-Q,"Debt issued by multilateral development banks or other supranationals with a 20% RW, not otherwise included",Level 2A,HQLA Level 2A,0.1500,true
+S-7-Q,"Debt with a non-U.S. sovereign (excluding central banks) or multilateral development bank or other supranational guarantee, where guaranteeing entity has a 20% RW, not otherwise included",Level 2A,HQLA Level 2A,0.1500,true
+CB-3-Q,"Securities issued or guaranteed by a non-U.S. central bank with a 20% RW, not otherwise included",Level 2A,HQLA Level 2A,0.1500,true
+E-1-Q,U.S. equities - Russell 1000,Level 2B,HQLA Level 2B,0.5000,true
+E-2-Q,"Non-U.S. Equities listed on a foreign index designated to by the local supervisor as qualifying for the LCR, and denominated in USD or the currency of outflows that the foreign entity is supporting",Level 2B,HQLA Level 2B,0.5000,true
+IG-1-Q,Investment grade corporate debt,Level 2B,HQLA Level 2B,0.5000,true
+IG-2-Q,Investment grade municipal obligations,Level 2B,HQLA Level 2B,0.5000,true
+A-2,U.S. Government Agency-issued debt (excluding the US Treasury) with a US Government guarantee,Non-HQLA,Non-HQLA (fails asset-specific tests of Reg WW section 20),,false
+A-3,"Vanilla debt (including pass-through MBS) guaranteed by a U.S. Government Agency, where the U.S. Government Agency has a full U.S. Government guarantee",Non-HQLA,Non-HQLA (fails asset-specific tests of Reg WW section 20),,false
+A-4,"Structured debt (excluding pass-through MBS) guaranteed by a U.S. Government Agency, where the U.S. Government Agency has a full U.S. Government guarantee",Non-HQLA,Non-HQLA (fails asset-specific tests of Reg WW section 20),,false
+A-5,Other debt with a U.S. Government guarantee,Non-HQLA,Non-HQLA (fails asset-specific tests of Reg WW section 20),,false
+S-1,Debt issued by non-U.S. Sovereigns (excluding central banks) with a 0% RW,Non-HQLA,Non-HQLA (fails asset-specific tests of Reg WW section 20),,false
+S-2,Debt issued by multilateral development banks or other supranationals with a 0% RW,Non-HQLA,Non-HQLA (fails asset-specific tests of Reg WW section 20),,false
+S-3,"Debt with a non-U.S. sovereign (excluding central banks) or multilateral development bank or other supranational guarantee, where guaranteeing entity has a 0% RW",Non-HQLA,Non-HQLA (fails asset-specific tests of Reg WW section 20),,false
+S-4,"Debt issued or guaranteed by a non-U.S. Sovereign (excluding central banks) that does not have a 0% RW, but supports outflows that are in the same jurisdiction of the sovereign and are denominated in the home currency of the sovereign",Non-HQLA,Non-HQLA (fails asset-specific tests of Reg WW section 20),,false
+CB-1,Securities issued or guaranteed by a central bank with a 0% RW,Non-HQLA,Non-HQLA (fails asset-specific tests of Reg WW section 20),,false
+CB-2,"Securities issued or guaranteed by a non-U.S. central bank that does not have a 0% RW, but supports outflows that are in the same jurisdiction of the central bank and are denominated in the home currency of the central bank",Non-HQLA,Non-HQLA (fails asset-specific tests of Reg WW section 20),,false
+G-1,Senior to preferred debt issued by a U.S. Government Sponsored Entity (GSE),Non-HQLA,Non-HQLA (fails asset-specific tests of Reg WW section 20),,false
+G-2,Vanilla debt (including pass-through MBS) guaranteed by a U.S. GSE,Non-HQLA,Non-HQLA (fails asset-specific tests of Reg WW section 20),,false
+G-3,Structured debt (excluding pass-through MBS) guaranteed by a U.S. GSE,Non-HQLA,Non-HQLA (fails asset-specific tests of Reg WW section 20),,false
+S-5,"Debt issued by non-U.S. Sovereigns (excluding central banks) with a 20% RW, not otherwise included",Non-HQLA,Non-HQLA (fails asset-specific tests of Reg WW section 20),,false
+S-6,"Debt issued by multilateral development banks or other supranationals with a 20% RW, not otherwise included",Non-HQLA,Non-HQLA (fails asset-specific tests of Reg WW section 20),,false
+S-7,"Debt with a non-U.S. sovereign (excluding central banks) or multilateral development bank or other supranational guarantee, where guaranteeing entity has a 20% RW, not otherwise included",Non-HQLA,Non-HQLA (fails asset-specific tests of Reg WW section 20),,false
+CB-3,"Securities issued or guaranteed by a non-U.S. central bank with a 20% RW, not otherwise included",Non-HQLA,Non-HQLA (fails asset-specific tests of Reg WW section 20),,false
+E-1,U.S. equities - Russell 1000,Non-HQLA,Non-HQLA (fails asset-specific tests of Reg WW section 20),,false
+E-2,"Non-U.S. Equities listed on a foreign index designated to by the local supervisor as qualifying for the LCR, and denominated in USD or the currency of outflows that the foreign entity is supporting",Non-HQLA,Non-HQLA (fails asset-specific tests of Reg WW section 20),,false
+IG-1,Investment grade corporate debt,Non-HQLA,Non-HQLA (fails asset-specific tests of Reg WW section 20),,false
+IG-2,Investment grade U.S. municipal general obligations,Non-HQLA,Non-HQLA (fails asset-specific tests of Reg WW section 20),,false
+S-8,"All other debt issued by sovereigns (excluding central banks) and supranational entities, not otherwise included",Non-HQLA,Non-HQLA other,,false
+CB-4,"All other securities issued by central banks, not otherwise included",Non-HQLA,Non-HQLA other,,false
+G-4,"Debt, other than senior or preferred, issued by a U.S. GSE",Non-HQLA,Non-HQLA other,,false
+E-3,All other U.S.-listed common equity securities,Non-HQLA,Non-HQLA other,,false
+E-4,All other non-US-listed common equity securities,Non-HQLA,Non-HQLA other,,false
+E-5,ETFs listed on US exchanges,Non-HQLA,Non-HQLA other,,false
+E-6,ETFs listed on non-US exchanges,Non-HQLA,Non-HQLA other,,false
+E-7,US mutual fund shares,Non-HQLA,Non-HQLA other,,false
+E-8,Non-US mutual fund shares,Non-HQLA,Non-HQLA other,,false
+E-9,"All other US equity investments (including preferred shares, warrants and options)",Non-HQLA,Non-HQLA other,,false
+E-10,"All other non-US equity investments (including preferred shares, warrants and options)",Non-HQLA,Non-HQLA other,,false
+IG-3,Investment grade Vanilla ABS,Non-HQLA,Non-HQLA other,,false
+IG-4,Investment grade Structured ABS,Non-HQLA,Non-HQLA other,,false
+IG-5,Investment grade Private label Pass-thru CMBS/RMBS,Non-HQLA,Non-HQLA other,,false
+IG-6,Investment grade Private label Structured CMBS/RMBS,Non-HQLA,Non-HQLA other,,false
+IG-7,Investment grade covered bonds,Non-HQLA,Non-HQLA other,,false
+IG-8,Investment grade obligations of municipals/PSEs (excluding U.S. general obligations),Non-HQLA,Non-HQLA other,,false
+N-1,Non-investment grade general obligations issued by U.S. municipals/PSEs,Non-HQLA,Non-HQLA other,,false
+N-2,Non-investment grade corporate debt,Non-HQLA,Non-HQLA other,,false
+N-3,Non-investment grade Vanilla ABS,Non-HQLA,Non-HQLA other,,false
+N-4,Non-investment grade structured ABS,Non-HQLA,Non-HQLA other,,false
+N-5,Non-investment grade Private label Pass-thru CMBS/RMBS,Non-HQLA,Non-HQLA other,,false
+N-6,Non-investment grade Private label Structured CMBS/RMBS,Non-HQLA,Non-HQLA other,,false
+N-7,Non-investment grade covered bonds,Non-HQLA,Non-HQLA other,,false
+N-8,Non-investment grade obligations of municipals/PSEs (excluding U.S. general obligations),Non-HQLA,Non-HQLA other,,false
+L-1,GSE-eligible conforming residential mortgages,Non-HQLA,Non-HQLA other,,false
+L-2,Other GSE-eligible loans,Non-HQLA,Non-HQLA other,,false
+L-3,Other 1-4 family residential mortgages,Non-HQLA,Non-HQLA other,,false
+L-4,Other multi family residential mortgages,Non-HQLA,Non-HQLA other,,false
+L-5,Home equity loans,Non-HQLA,Non-HQLA other,,false
+L-6,Credit card loans,Non-HQLA,Non-HQLA other,,false
+L-7,Auto loans and leases,Non-HQLA,Non-HQLA other,,false
+L-8,Other consumer loans and leases,Non-HQLA,Non-HQLA other,,false
+L-9,Commercial real estate loans,Non-HQLA,Non-HQLA other,,false
+L-10,Commercial and industrial loans,Non-HQLA,Non-HQLA other,,false
+L-11,"All other loans, except loans guaranteed by U.S. government agencies",Non-HQLA,Non-HQLA other,,false
+L-12,Loans guaranteed by U.S. government agencies,Non-HQLA,Non-HQLA other,,false
+Y-1,Debt issued by reporting firm - parent,Non-HQLA,Non-HQLA other,,false
+Y-2,Debt issued by reporting firm - bank,Non-HQLA,Non-HQLA other,,false
+Y-3,Debt issued by reporting firm - all other (incl. conduits),Non-HQLA,Non-HQLA other,,false
+Y-4,Equity investment in affiliates,Non-HQLA,Non-HQLA other,,false
+C-1,Commodities,Non-HQLA,Non-HQLA other,,false
+P-1,Residential property,Non-HQLA,Non-HQLA other,,false
+P-2,All other physical property,Non-HQLA,Non-HQLA other,,false
+LC-1,Letters of credit issued by a GSE,Non-HQLA,Non-HQLA other,,false
+LC-2,"All other letters of credit, including bankers' acceptances",Non-HQLA,Non-HQLA other,,false
+Z-1,All other assets,Non-HQLA,Non-HQLA other,,false

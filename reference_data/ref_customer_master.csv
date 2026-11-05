@@ -1,0 +1,37 @@
+customer_id,customer_name,counterparty,gsib_parent,affiliate_legal_entity_id,has_relationship,approved_on,approved_by
+C0001,Retail depositors - relationship,Retail,,,true,2015-06-30,initial load
+C0002,Retail depositors - no relationship,Retail,,,false,2015-06-30,initial load
+C0003,Small business - relationship,Small Business,,,true,2015-06-30,initial load
+C0004,Small business - no relationship,Small Business,,,false,2015-06-30,initial load
+C0010,Globex Manufacturing Corp,Non-Financial Corporate,,,true,2015-06-30,initial load
+C0011,Initech Holdings Inc,Non-Financial Corporate,,,true,2015-06-30,initial load
+C0020,Republic of Freedonia,Sovereign,,,false,2015-06-30,initial load
+C0021,Federal Reserve Bank of New York,Central Bank,,,false,2015-06-30,initial load
+C0022,Federal Home Loan Bank of New York,Government Sponsored Entity,,,false,2015-06-30,initial load
+C0023,Port Authority of Metro City,Public Sector Entity,,,false,2015-06-30,initial load
+C0024,Metro City VRDN Program,Municipalities for VRDN Structures,,,false,2015-06-30,initial load
+C0030,State Teachers Pension Plan,Pension Fund,,,true,2015-06-30,initial load
+C0031,Regional Community Bank,Bank,,,true,2015-06-30,initial load
+C0032,Midwest Securities LLC,Broker Dealer,,,true,2015-06-30,initial load
+C0033,Vanguardia Asset Management,Investment Company or Advisor,,,true,2015-06-30,initial load
+C0034,Depository Clearing Corp,Financial Market Utlility,,,false,2015-06-30,initial load
+C0035,Harbor Receivables Funding LLC,Debt Issuing Special Purpose Entity,,,false,2015-06-30,initial load
+C0036,Blue Ridge Capital Partners Fund,Non-regulated Fund,,,true,2015-06-30,initial load
+C0037,Structured Settlement Trusts,Other,,,false,2015-06-30,initial load
+C0101,JPMorgan Chase Bank N.A.,Bank,JP Morgan Chase,,true,2015-06-30,initial load
+C0102,Barclays Bank PLC,Bank,Barclays,,true,2015-06-30,initial load
+C0103,Citibank N.A.,Bank,Citigroup,,true,2015-06-30,initial load
+C0104,Goldman Sachs Bank USA,Bank,Goldman Sachs,,true,2015-06-30,initial load
+C0105,Wells Fargo Bank N.A.,Bank,Wells Fargo,,true,2015-06-30,initial load
+C0106,Bank of America N.A.,Bank,Bank of America,,true,2015-06-30,initial load
+C0107,Deutsche Bank AG,Bank,Deutsche Bank,,true,2015-06-30,initial load
+C0108,HSBC Bank PLC,Bank,HSBC,,true,2015-06-30,initial load
+C0200,Acme Financial Holdings Inc,Other,,LE00,true,2015-06-30,initial load
+C0201,Acme Capital Markets Europe Ltd,Broker Dealer,,LE04,true,2015-06-30,initial load
+C0202,Acme Securities LLC,Broker Dealer,,LE03,true,2015-06-30,initial load
+C0203,Acme National Bank N.A.,Bank,,LE02,true,2015-06-30,initial load
+C0205,Acme Funding Corp,Debt Issuing Special Purpose Entity,,LE05,true,2015-06-30,initial load
+C0301,Northwind Logistics Inc,Non-Financial Corporate,,,true,2026-01-13,data steward
+C0302,Treasury of the Republic of Valdoria,Sovereign,,,false,2026-01-21,data steward
+C0303,Harbor Point Government Money Market Fund,Investment Company or Advisor,,,true,2026-02-03,data steward
+C0304,UBS AG Stamford Branch,Bank,UBS,,true,2026-02-10,data steward

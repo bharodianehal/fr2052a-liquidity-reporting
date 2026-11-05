@@ -1,0 +1,4 @@
+entity_id,entity_name,report_scope,scope_type,root_legal_entity_id,entity_type,parent_bhc,fed_category,is_gsib,wstwf_usd_bn,tailoring_profile,reports_native_currency,lcr_standalone,nsfr_standalone,broker_dealer_material_entity,report_type,report_version,submission_frequency,reporter_ticker,listing_exchange,primary_timing,reduced_timing
+ENT001,Acme Financial Holdings (Consolidated),ACME - Consolidated,CONSOLIDATED,LE00,BHC,Acme Financial Holdings,Category I,true,185,CAT_I_II,true,true,true,false,FR 2052a,6G,Daily,ACME,XNYS,T+2 business days,T+15 calendar days
+ENT002,Acme National Bank N.A.,ACME - Bank,SOLO,LE02,Lead Bank,Acme Financial Holdings,Category I,false,0,CAT_I_II,true,true,true,false,FR 2052a,6G,Daily,ACME,XNYS,T+2 business days,T+15 calendar days
+ENT003,Acme Securities LLC,ACME - Securities,SOLO,LE03,Broker Dealer,Acme Financial Holdings,Category I,false,0,CAT_I_II,true,false,false,true,FR 2052a,6G,Daily,ACME,XNYS,T+2 business days,T+15 calendar days

@@ -1,0 +1,184 @@
+product_id,field_name,allowed_value,required_by_instructions,source
+I.A.2,Sub-Product,Federal Reserve Bank,true,6G BR Prod-SubProd-SubProd2; Appendix II-a p.86-87
+I.A.2,Sub-Product,Swiss National Bank,true,6G BR Prod-SubProd-SubProd2; Appendix II-a p.86-87
+I.A.2,Sub-Product,Bank of England,true,6G BR Prod-SubProd-SubProd2; Appendix II-a p.86-87
+I.A.2,Sub-Product,European Central Bank,true,6G BR Prod-SubProd-SubProd2; Appendix II-a p.86-87
+I.A.2,Sub-Product,Bank of Japan,true,6G BR Prod-SubProd-SubProd2; Appendix II-a p.86-87
+I.A.2,Sub-Product,Reserve Bank of Australia,true,6G BR Prod-SubProd-SubProd2; Appendix II-a p.86-87
+I.A.2,Sub-Product,Bank of Canada,true,6G BR Prod-SubProd-SubProd2; Appendix II-a p.86-87
+I.A.2,Sub-Product,Other Central Bank,true,6G BR Prod-SubProd-SubProd2; Appendix II-a p.86-87
+I.A.2,Sub-Product,Federal Home Loan Bank,true,6G BR Prod-SubProd-SubProd2; Appendix II-a p.86-87
+I.A.2,Sub-Product,Other Government Sponsored Entity,true,6G BR Prod-SubProd-SubProd2; Appendix II-a p.86-87
+I.A.3,Sub-Product,Federal Reserve Bank,true,6G BR Prod-SubProd-SubProd2; Appendix II-a p.86-87
+I.A.3,Sub-Product,Swiss National Bank,true,6G BR Prod-SubProd-SubProd2; Appendix II-a p.86-87
+I.A.3,Sub-Product,Bank of England,true,6G BR Prod-SubProd-SubProd2; Appendix II-a p.86-87
+I.A.3,Sub-Product,European Central Bank,true,6G BR Prod-SubProd-SubProd2; Appendix II-a p.86-87
+I.A.3,Sub-Product,Bank of Japan,true,6G BR Prod-SubProd-SubProd2; Appendix II-a p.86-87
+I.A.3,Sub-Product,Reserve Bank of Australia,true,6G BR Prod-SubProd-SubProd2; Appendix II-a p.86-87
+I.A.3,Sub-Product,Bank of Canada,true,6G BR Prod-SubProd-SubProd2; Appendix II-a p.86-87
+I.A.3,Sub-Product,Other Central Bank,true,6G BR Prod-SubProd-SubProd2; Appendix II-a p.86-87
+I.A.3,Sub-Product,Currency and Coin,true,6G BR Prod-SubProd-SubProd2; Appendix II-a p.86-87
+I.A.4,Sub-Product,Federal Reserve Bank,true,6G BR Prod-SubProd-SubProd2; Appendix II-a p.86-87
+I.A.4,Sub-Product,Swiss National Bank,true,6G BR Prod-SubProd-SubProd2; Appendix II-a p.86-87
+I.A.4,Sub-Product,Bank of England,true,6G BR Prod-SubProd-SubProd2; Appendix II-a p.86-87
+I.A.4,Sub-Product,European Central Bank,true,6G BR Prod-SubProd-SubProd2; Appendix II-a p.86-87
+I.A.4,Sub-Product,Bank of Japan,true,6G BR Prod-SubProd-SubProd2; Appendix II-a p.86-87
+I.A.4,Sub-Product,Reserve Bank of Australia,true,6G BR Prod-SubProd-SubProd2; Appendix II-a p.86-87
+I.A.4,Sub-Product,Bank of Canada,true,6G BR Prod-SubProd-SubProd2; Appendix II-a p.86-87
+I.A.4,Sub-Product,Other Central Bank,true,6G BR Prod-SubProd-SubProd2; Appendix II-a p.86-87
+I.A.4,Sub-Product,Currency and Coin,true,6G BR Prod-SubProd-SubProd2; Appendix II-a p.86-87
+I.S.4,Sub-Product,Level 1 Pledged,true,6G BR Prod-SubProd-SubProd2; Appendix II-a p.86-87
+I.S.4,Sub-Product,Level 2a Pledged,true,6G BR Prod-SubProd-SubProd2; Appendix II-a p.86-87
+I.S.4,Sub-Product,Level 2b Pledged,true,6G BR Prod-SubProd-SubProd2; Appendix II-a p.86-87
+I.S.4,Sub-Product,Non-HQLA Pledged,true,6G BR Prod-SubProd-SubProd2; Appendix II-a p.86-87
+I.S.4,Sub-Product,No Collateral Pledged,true,6G BR Prod-SubProd-SubProd2; Appendix II-a p.86-87
+O.S.4,Sub-Product,Level 1 Received,true,6G BR Prod-SubProd-SubProd2; Appendix II-a p.86-87
+O.S.4,Sub-Product,Level 2a Received,true,6G BR Prod-SubProd-SubProd2; Appendix II-a p.86-87
+O.S.4,Sub-Product,Level 2b Received,true,6G BR Prod-SubProd-SubProd2; Appendix II-a p.86-87
+O.S.4,Sub-Product,Non-HQLA Received,true,6G BR Prod-SubProd-SubProd2; Appendix II-a p.86-87
+O.S.4,Sub-Product,No Collateral Received,true,6G BR Prod-SubProd-SubProd2; Appendix II-a p.86-87
+O.S.6,Sub-Product,Federal Reserve Bank,true,6G BR Prod-SubProd-SubProd2; Appendix II-a p.86-87
+O.S.6,Sub-Product,Swiss National Bank,true,6G BR Prod-SubProd-SubProd2; Appendix II-a p.86-87
+O.S.6,Sub-Product,Bank of England,true,6G BR Prod-SubProd-SubProd2; Appendix II-a p.86-87
+O.S.6,Sub-Product,European Central Bank,true,6G BR Prod-SubProd-SubProd2; Appendix II-a p.86-87
+O.S.6,Sub-Product,Bank of Japan,true,6G BR Prod-SubProd-SubProd2; Appendix II-a p.86-87
+O.S.6,Sub-Product,Reserve Bank of Australia,true,6G BR Prod-SubProd-SubProd2; Appendix II-a p.86-87
+O.S.6,Sub-Product,Bank of Canada,true,6G BR Prod-SubProd-SubProd2; Appendix II-a p.86-87
+O.S.6,Sub-Product,Other Central Bank,true,6G BR Prod-SubProd-SubProd2; Appendix II-a p.86-87
+O.S.6,Sub-Product,Covered Federal Reserve Facility Funding,true,6G BR Prod-SubProd-SubProd2; Appendix II-a p.86-87
+O.S.7,Sub-Product,External Cash Transactions,true,6G BR Prod-SubProd-SubProd2; Appendix II-a p.86-87
+O.S.7,Sub-Product,External Non-Cash Transactions,true,6G BR Prod-SubProd-SubProd2; Appendix II-a p.86-87
+O.S.7,Sub-Product,Firm Longs,true,6G BR Prod-SubProd-SubProd2; Appendix II-a p.86-87
+O.S.7,Sub-Product,Customer Longs,true,6G BR Prod-SubProd-SubProd2; Appendix II-a p.86-87
+O.S.7,Sub-Product,Unsettled - Regular Way,true,6G BR Prod-SubProd-SubProd2; Appendix II-a p.86-87
+O.S.7,Sub-Product,Unsettled - Forward,true,6G BR Prod-SubProd-SubProd2; Appendix II-a p.86-87
+O.S.8,Sub-Product,External Cash Transactions,true,6G BR Prod-SubProd-SubProd2; Appendix II-a p.86-87
+O.S.8,Sub-Product,External Non-Cash Transactions,true,6G BR Prod-SubProd-SubProd2; Appendix II-a p.86-87
+O.S.8,Sub-Product,Firm Longs,true,6G BR Prod-SubProd-SubProd2; Appendix II-a p.86-87
+O.S.8,Sub-Product,Customer Longs,true,6G BR Prod-SubProd-SubProd2; Appendix II-a p.86-87
+O.S.8,Sub-Product,Unsettled - Regular Way,true,6G BR Prod-SubProd-SubProd2; Appendix II-a p.86-87
+O.S.8,Sub-Product,Unsettled - Forward,true,6G BR Prod-SubProd-SubProd2; Appendix II-a p.86-87
+O.S.9,Sub-Product,Firm Short,true,6G BR Prod-SubProd-SubProd2; Appendix II-a p.86-87
+O.S.9,Sub-Product,Synthetic Customer Long,true,6G BR Prod-SubProd-SubProd2; Appendix II-a p.86-87
+O.S.9,Sub-Product,Synthetic Firm Sourcing,true,6G BR Prod-SubProd-SubProd2; Appendix II-a p.86-87
+O.S.9,Sub-Product,Futures,true,6G BR Prod-SubProd-SubProd2; Appendix II-a p.86-87
+O.S.9,Sub-Product,Other,true,6G BR Prod-SubProd-SubProd2; Appendix II-a p.86-87
+O.S.9,Sub-Product,Unhedged,true,6G BR Prod-SubProd-SubProd2; Appendix II-a p.86-87
+O.S.10,Sub-Product,Firm Short,true,6G BR Prod-SubProd-SubProd2; Appendix II-a p.86-87
+O.S.10,Sub-Product,Synthetic Customer Long,true,6G BR Prod-SubProd-SubProd2; Appendix II-a p.86-87
+O.S.10,Sub-Product,Synthetic Firm Sourcing,true,6G BR Prod-SubProd-SubProd2; Appendix II-a p.86-87
+O.S.10,Sub-Product,Futures,true,6G BR Prod-SubProd-SubProd2; Appendix II-a p.86-87
+O.S.10,Sub-Product,Other,true,6G BR Prod-SubProd-SubProd2; Appendix II-a p.86-87
+O.S.10,Sub-Product,Unhedged,true,6G BR Prod-SubProd-SubProd2; Appendix II-a p.86-87
+I.S.9,Sub-Product,Physical Long Position,true,6G BR Prod-SubProd-SubProd2; Appendix II-a p.86-87
+I.S.9,Sub-Product,Synthetic Customer Short,true,6G BR Prod-SubProd-SubProd2; Appendix II-a p.86-87
+I.S.9,Sub-Product,Synthetic Firm Financing,true,6G BR Prod-SubProd-SubProd2; Appendix II-a p.86-87
+I.S.9,Sub-Product,Futures,true,6G BR Prod-SubProd-SubProd2; Appendix II-a p.86-87
+I.S.9,Sub-Product,Other,true,6G BR Prod-SubProd-SubProd2; Appendix II-a p.86-87
+I.S.9,Sub-Product,Unhedged,true,6G BR Prod-SubProd-SubProd2; Appendix II-a p.86-87
+I.S.10,Sub-Product,Physical Long Position,true,6G BR Prod-SubProd-SubProd2; Appendix II-a p.86-87
+I.S.10,Sub-Product,Synthetic Customer Short,true,6G BR Prod-SubProd-SubProd2; Appendix II-a p.86-87
+I.S.10,Sub-Product,Synthetic Firm Financing,true,6G BR Prod-SubProd-SubProd2; Appendix II-a p.86-87
+I.S.10,Sub-Product,Futures,true,6G BR Prod-SubProd-SubProd2; Appendix II-a p.86-87
+I.S.10,Sub-Product,Other,true,6G BR Prod-SubProd-SubProd2; Appendix II-a p.86-87
+I.S.10,Sub-Product,Unhedged,true,6G BR Prod-SubProd-SubProd2; Appendix II-a p.86-87
+S.DC.1,Sub-Product,Rehypothecateable Collateral Unencumbered,false,6G BR Prod-SubProd-SubProd2; Appendix II-a p.86-87
+S.DC.1,Sub-Product,Rehypothecateable Collateral Encumbered,false,6G BR Prod-SubProd-SubProd2; Appendix II-a p.86-87
+S.DC.1,Sub-Product,Non-Rehypothecateable Collateral,false,6G BR Prod-SubProd-SubProd2; Appendix II-a p.86-87
+S.DC.1,Sub-Product,Segregated Cash,false,6G BR Prod-SubProd-SubProd2; Appendix II-a p.86-87
+S.DC.1,Sub-Product,Non-Segregated Cash,false,6G BR Prod-SubProd-SubProd2; Appendix II-a p.86-87
+S.DC.2,Sub-Product,Rehypothecateable Collateral Unencumbered,false,6G BR Prod-SubProd-SubProd2; Appendix II-a p.86-87
+S.DC.2,Sub-Product,Rehypothecateable Collateral Encumbered,false,6G BR Prod-SubProd-SubProd2; Appendix II-a p.86-87
+S.DC.2,Sub-Product,Non-Rehypothecateable Collateral,false,6G BR Prod-SubProd-SubProd2; Appendix II-a p.86-87
+S.DC.2,Sub-Product,Segregated Cash,false,6G BR Prod-SubProd-SubProd2; Appendix II-a p.86-87
+S.DC.2,Sub-Product,Non-Segregated Cash,false,6G BR Prod-SubProd-SubProd2; Appendix II-a p.86-87
+S.DC.3,Sub-Product,Rehypothecateable Collateral Unencumbered,false,6G BR Prod-SubProd-SubProd2; Appendix II-a p.86-87
+S.DC.3,Sub-Product,Rehypothecateable Collateral Encumbered,false,6G BR Prod-SubProd-SubProd2; Appendix II-a p.86-87
+S.DC.3,Sub-Product,Non-Rehypothecateable Collateral,false,6G BR Prod-SubProd-SubProd2; Appendix II-a p.86-87
+S.DC.3,Sub-Product,Segregated Cash,false,6G BR Prod-SubProd-SubProd2; Appendix II-a p.86-87
+S.DC.3,Sub-Product,Non-Segregated Cash,false,6G BR Prod-SubProd-SubProd2; Appendix II-a p.86-87
+S.DC.4,Sub-Product,Rehypothecateable Collateral Unencumbered,false,6G BR Prod-SubProd-SubProd2; Appendix II-a p.86-87
+S.DC.4,Sub-Product,Rehypothecateable Collateral Encumbered,false,6G BR Prod-SubProd-SubProd2; Appendix II-a p.86-87
+S.DC.4,Sub-Product,Non-Rehypothecateable Collateral,false,6G BR Prod-SubProd-SubProd2; Appendix II-a p.86-87
+S.DC.4,Sub-Product,Segregated Cash,false,6G BR Prod-SubProd-SubProd2; Appendix II-a p.86-87
+S.DC.4,Sub-Product,Non-Segregated Cash,false,6G BR Prod-SubProd-SubProd2; Appendix II-a p.86-87
+S.DC.5,Sub-Product,Rehypothecateable Collateral Unencumbered,false,6G BR Prod-SubProd-SubProd2; Appendix II-a p.86-87
+S.DC.5,Sub-Product,Rehypothecateable Collateral Encumbered,false,6G BR Prod-SubProd-SubProd2; Appendix II-a p.86-87
+S.DC.5,Sub-Product,Non-Rehypothecateable Collateral,false,6G BR Prod-SubProd-SubProd2; Appendix II-a p.86-87
+S.DC.5,Sub-Product,Segregated Cash,false,6G BR Prod-SubProd-SubProd2; Appendix II-a p.86-87
+S.DC.5,Sub-Product,Non-Segregated Cash,false,6G BR Prod-SubProd-SubProd2; Appendix II-a p.86-87
+S.DC.6,Sub-Product,Rehypothecateable Collateral Unencumbered,false,6G BR Prod-SubProd-SubProd2; Appendix II-a p.86-87
+S.DC.6,Sub-Product,Rehypothecateable Collateral Encumbered,false,6G BR Prod-SubProd-SubProd2; Appendix II-a p.86-87
+S.DC.6,Sub-Product,Non-Rehypothecateable Collateral,false,6G BR Prod-SubProd-SubProd2; Appendix II-a p.86-87
+S.DC.6,Sub-Product,Segregated Cash,false,6G BR Prod-SubProd-SubProd2; Appendix II-a p.86-87
+S.DC.6,Sub-Product,Non-Segregated Cash,false,6G BR Prod-SubProd-SubProd2; Appendix II-a p.86-87
+S.DC.7,Sub-Product,Rehypothecateable Collateral Unencumbered,false,6G BR Prod-SubProd-SubProd2; Appendix II-a p.86-87
+S.DC.7,Sub-Product,Rehypothecateable Collateral Encumbered,false,6G BR Prod-SubProd-SubProd2; Appendix II-a p.86-87
+S.DC.7,Sub-Product,Non-Rehypothecateable Collateral,false,6G BR Prod-SubProd-SubProd2; Appendix II-a p.86-87
+S.DC.7,Sub-Product,Segregated Cash,false,6G BR Prod-SubProd-SubProd2; Appendix II-a p.86-87
+S.DC.7,Sub-Product,Non-Segregated Cash,false,6G BR Prod-SubProd-SubProd2; Appendix II-a p.86-87
+S.DC.8,Sub-Product,Rehypothecateable Collateral Unencumbered,false,6G BR Prod-SubProd-SubProd2; Appendix II-a p.86-87
+S.DC.8,Sub-Product,Rehypothecateable Collateral Encumbered,false,6G BR Prod-SubProd-SubProd2; Appendix II-a p.86-87
+S.DC.8,Sub-Product,Non-Rehypothecateable Collateral,false,6G BR Prod-SubProd-SubProd2; Appendix II-a p.86-87
+S.DC.8,Sub-Product,Segregated Cash,false,6G BR Prod-SubProd-SubProd2; Appendix II-a p.86-87
+S.DC.8,Sub-Product,Non-Segregated Cash,false,6G BR Prod-SubProd-SubProd2; Appendix II-a p.86-87
+S.DC.9,Sub-Product,Rehypothecateable Collateral Unencumbered,false,6G BR Prod-SubProd-SubProd2; Appendix II-a p.86-87
+S.DC.9,Sub-Product,Rehypothecateable Collateral Encumbered,false,6G BR Prod-SubProd-SubProd2; Appendix II-a p.86-87
+S.DC.9,Sub-Product,Non-Rehypothecateable Collateral,false,6G BR Prod-SubProd-SubProd2; Appendix II-a p.86-87
+S.DC.9,Sub-Product,Segregated Cash,false,6G BR Prod-SubProd-SubProd2; Appendix II-a p.86-87
+S.DC.9,Sub-Product,Non-Segregated Cash,false,6G BR Prod-SubProd-SubProd2; Appendix II-a p.86-87
+S.DC.10,Sub-Product,Rehypothecateable Collateral Unencumbered,false,6G BR Prod-SubProd-SubProd2; Appendix II-a p.86-87
+S.DC.10,Sub-Product,Rehypothecateable Collateral Encumbered,false,6G BR Prod-SubProd-SubProd2; Appendix II-a p.86-87
+S.DC.10,Sub-Product,Non-Rehypothecateable Collateral,false,6G BR Prod-SubProd-SubProd2; Appendix II-a p.86-87
+S.DC.10,Sub-Product,Segregated Cash,false,6G BR Prod-SubProd-SubProd2; Appendix II-a p.86-87
+S.DC.10,Sub-Product,Non-Segregated Cash,false,6G BR Prod-SubProd-SubProd2; Appendix II-a p.86-87
+S.DC.1,Sub-Product2,OTC - Bilateral,false,6G BR Prod-SubProd-SubProd2; Appendix II-a p.86-87
+S.DC.1,Sub-Product2,OTC - Centralized (Principal),false,6G BR Prod-SubProd-SubProd2; Appendix II-a p.86-87
+S.DC.1,Sub-Product2,OTC - Centralized (Agent),false,6G BR Prod-SubProd-SubProd2; Appendix II-a p.86-87
+S.DC.1,Sub-Product2,Exchange-traded (Principal),false,6G BR Prod-SubProd-SubProd2; Appendix II-a p.86-87
+S.DC.1,Sub-Product2,Exchange-traded (Agent),false,6G BR Prod-SubProd-SubProd2; Appendix II-a p.86-87
+S.DC.2,Sub-Product2,OTC - Bilateral,false,6G BR Prod-SubProd-SubProd2; Appendix II-a p.86-87
+S.DC.2,Sub-Product2,OTC - Centralized (Principal),false,6G BR Prod-SubProd-SubProd2; Appendix II-a p.86-87
+S.DC.2,Sub-Product2,OTC - Centralized (Agent),false,6G BR Prod-SubProd-SubProd2; Appendix II-a p.86-87
+S.DC.2,Sub-Product2,Exchange-traded (Principal),false,6G BR Prod-SubProd-SubProd2; Appendix II-a p.86-87
+S.DC.2,Sub-Product2,Exchange-traded (Agent),false,6G BR Prod-SubProd-SubProd2; Appendix II-a p.86-87
+S.DC.3,Sub-Product2,OTC - Bilateral,false,6G BR Prod-SubProd-SubProd2; Appendix II-a p.86-87
+S.DC.3,Sub-Product2,OTC - Centralized (Principal),false,6G BR Prod-SubProd-SubProd2; Appendix II-a p.86-87
+S.DC.3,Sub-Product2,OTC - Centralized (Agent),false,6G BR Prod-SubProd-SubProd2; Appendix II-a p.86-87
+S.DC.3,Sub-Product2,Exchange-traded (Principal),false,6G BR Prod-SubProd-SubProd2; Appendix II-a p.86-87
+S.DC.3,Sub-Product2,Exchange-traded (Agent),false,6G BR Prod-SubProd-SubProd2; Appendix II-a p.86-87
+S.DC.4,Sub-Product2,OTC - Bilateral,false,6G BR Prod-SubProd-SubProd2; Appendix II-a p.86-87
+S.DC.4,Sub-Product2,OTC - Centralized (Principal),false,6G BR Prod-SubProd-SubProd2; Appendix II-a p.86-87
+S.DC.4,Sub-Product2,OTC - Centralized (Agent),false,6G BR Prod-SubProd-SubProd2; Appendix II-a p.86-87
+S.DC.4,Sub-Product2,Exchange-traded (Principal),false,6G BR Prod-SubProd-SubProd2; Appendix II-a p.86-87
+S.DC.4,Sub-Product2,Exchange-traded (Agent),false,6G BR Prod-SubProd-SubProd2; Appendix II-a p.86-87
+S.DC.5,Sub-Product2,OTC - Bilateral,false,6G BR Prod-SubProd-SubProd2; Appendix II-a p.86-87
+S.DC.5,Sub-Product2,OTC - Centralized (Principal),false,6G BR Prod-SubProd-SubProd2; Appendix II-a p.86-87
+S.DC.5,Sub-Product2,OTC - Centralized (Agent),false,6G BR Prod-SubProd-SubProd2; Appendix II-a p.86-87
+S.DC.5,Sub-Product2,Exchange-traded (Principal),false,6G BR Prod-SubProd-SubProd2; Appendix II-a p.86-87
+S.DC.5,Sub-Product2,Exchange-traded (Agent),false,6G BR Prod-SubProd-SubProd2; Appendix II-a p.86-87
+S.DC.6,Sub-Product2,OTC - Bilateral,false,6G BR Prod-SubProd-SubProd2; Appendix II-a p.86-87
+S.DC.6,Sub-Product2,OTC - Centralized (Principal),false,6G BR Prod-SubProd-SubProd2; Appendix II-a p.86-87
+S.DC.6,Sub-Product2,OTC - Centralized (Agent),false,6G BR Prod-SubProd-SubProd2; Appendix II-a p.86-87
+S.DC.6,Sub-Product2,Exchange-traded (Principal),false,6G BR Prod-SubProd-SubProd2; Appendix II-a p.86-87
+S.DC.6,Sub-Product2,Exchange-traded (Agent),false,6G BR Prod-SubProd-SubProd2; Appendix II-a p.86-87
+S.DC.7,Sub-Product2,OTC - Bilateral,false,6G BR Prod-SubProd-SubProd2; Appendix II-a p.86-87
+S.DC.7,Sub-Product2,OTC - Centralized (Principal),false,6G BR Prod-SubProd-SubProd2; Appendix II-a p.86-87
+S.DC.7,Sub-Product2,OTC - Centralized (Agent),false,6G BR Prod-SubProd-SubProd2; Appendix II-a p.86-87
+S.DC.7,Sub-Product2,Exchange-traded (Principal),false,6G BR Prod-SubProd-SubProd2; Appendix II-a p.86-87
+S.DC.7,Sub-Product2,Exchange-traded (Agent),false,6G BR Prod-SubProd-SubProd2; Appendix II-a p.86-87
+S.DC.8,Sub-Product2,OTC - Bilateral,false,6G BR Prod-SubProd-SubProd2; Appendix II-a p.86-87
+S.DC.8,Sub-Product2,OTC - Centralized (Principal),false,6G BR Prod-SubProd-SubProd2; Appendix II-a p.86-87
+S.DC.8,Sub-Product2,OTC - Centralized (Agent),false,6G BR Prod-SubProd-SubProd2; Appendix II-a p.86-87
+S.DC.8,Sub-Product2,Exchange-traded (Principal),false,6G BR Prod-SubProd-SubProd2; Appendix II-a p.86-87
+S.DC.8,Sub-Product2,Exchange-traded (Agent),false,6G BR Prod-SubProd-SubProd2; Appendix II-a p.86-87
+S.DC.9,Sub-Product2,OTC - Bilateral,false,6G BR Prod-SubProd-SubProd2; Appendix II-a p.86-87
+S.DC.9,Sub-Product2,OTC - Centralized (Principal),false,6G BR Prod-SubProd-SubProd2; Appendix II-a p.86-87
+S.DC.9,Sub-Product2,OTC - Centralized (Agent),false,6G BR Prod-SubProd-SubProd2; Appendix II-a p.86-87
+S.DC.9,Sub-Product2,Exchange-traded (Principal),false,6G BR Prod-SubProd-SubProd2; Appendix II-a p.86-87
+S.DC.9,Sub-Product2,Exchange-traded (Agent),false,6G BR Prod-SubProd-SubProd2; Appendix II-a p.86-87
+S.DC.10,Sub-Product2,OTC - Bilateral,false,6G BR Prod-SubProd-SubProd2; Appendix II-a p.86-87
+S.DC.10,Sub-Product2,OTC - Centralized (Principal),false,6G BR Prod-SubProd-SubProd2; Appendix II-a p.86-87
+S.DC.10,Sub-Product2,OTC - Centralized (Agent),false,6G BR Prod-SubProd-SubProd2; Appendix II-a p.86-87
+S.DC.10,Sub-Product2,Exchange-traded (Principal),false,6G BR Prod-SubProd-SubProd2; Appendix II-a p.86-87
+S.DC.10,Sub-Product2,Exchange-traded (Agent),false,6G BR Prod-SubProd-SubProd2; Appendix II-a p.86-87
